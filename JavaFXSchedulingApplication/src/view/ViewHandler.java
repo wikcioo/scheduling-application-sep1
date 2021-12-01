@@ -34,7 +34,7 @@ public class ViewHandler {
         }
 
         currentScene.setRoot(root);
-        currentScene.getStylesheets().add("styles.css");
+        currentScene.getStylesheets().add("styles/styles.css");
         String title = "";
         if (root.getUserData() != null) {
             title += root.getUserData();
@@ -70,5 +70,9 @@ public class ViewHandler {
 
     public void closeView() {
         primaryStage.close();
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 }

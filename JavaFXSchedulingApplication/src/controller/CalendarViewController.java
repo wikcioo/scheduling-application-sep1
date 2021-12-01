@@ -5,11 +5,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import model.*;
 import utilities.Util;
 import view.CalendarView;
 import view.ViewHandler;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -86,6 +88,13 @@ public class CalendarViewController {
         int _end = Integer.parseInt(end.getText());
         addLesson(new Lesson(course.getText(), LocalTime.of(_start, 0), LocalTime.of(_end, 0)), Integer.parseInt(day.getText()));
         initCalendar();
+    }
+
+    @FXML
+    public void onChooseFileButton() {
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(viewHandler.getPrimaryStage());
+        StudentList.readStudentFromTXTFile(file);
     }
 
     public void initCalendar() {
