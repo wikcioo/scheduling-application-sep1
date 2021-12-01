@@ -34,6 +34,7 @@ public class ViewHandler {
         }
 
         currentScene.setRoot(root);
+        currentScene.getStylesheets().add("styles.css");
         String title = "";
         if (root.getUserData() != null) {
             title += root.getUserData();
@@ -52,7 +53,7 @@ public class ViewHandler {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("CalendarView.fxml"));
                 Region root = loader.load();
                 calendarViewController = loader.getController();
-                 calendarViewController.init(this, model, root);
+                calendarViewController.init(this, model, root);
             } catch (Exception e) {
                 e.printStackTrace();
             }

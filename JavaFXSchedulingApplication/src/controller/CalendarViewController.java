@@ -1,15 +1,34 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
-import model.Model;
+import javafx.scene.text.Text;
+import model.*;
+import utilities.Util;
+import view.CalendarView;
 import view.ViewHandler;
 
-import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class CalendarViewController {
     @FXML
-    private TextField inputField;
+    private ScrollPane scrollpane;
+    @FXML
+    private Text date1;
+    @FXML
+    private Text date2;
+    @FXML
+    private TextField course;
+    @FXML
+    private TextField day;
+    @FXML
+    private TextField start;
+    @FXML
+    private TextField end;
 
     private Region root;
     private Model model;
@@ -23,18 +42,58 @@ public class CalendarViewController {
         this.model = model;
         this.viewHandler = viewHandler;
         this.root = root;
+        this.addLesson(new Lesson("SDJ", LocalTime.of(8, 0), LocalTime.of(10, 0)), 0);
+        initDates();
+        initCalendar();
     }
 
     public void reset() {
-        inputField.setText("");
     }
 
     public Region getRoot() {
         return root;
     }
 
-    @FXML
-    private void onButtonClick() {
+    public LocalDate currentDayOfWeek = Util.getMonday();
+    public LocalDate endDayOfWeek = currentDayOfWeek.plusDays(6);
 
+    public void initDates() {
+        date1.setText(currentDayOfWeek.format(DateTimeFormatter.ofPattern("dd-MMM-yy")));
+        date2.setText(endDayOfWeek.format(DateTimeFormatter.ofPattern("dd-MMM-yy")));
+    }
+
+    @FXML
+    public void onNextWeekClick() {
+        currentDayOfWeek = currentDayOfWeek.plusDays(7);
+        endDayOfWeek = endDayOfWeek.plusDays(7);
+        model.goNextWeek();
+        initDates();
+        initCalendar();
+    }
+
+    @FXML
+    public void onPreviousWeekClick() {
+        currentDayOfWeek = currentDayOfWeek.minusDays(7);
+        endDayOfWeek = endDayOfWeek.minusDays(7);
+        model.goPreviousWeek();
+        initDates();
+        initCalendar();
+    }
+
+    @FXML
+    public void onAddLessonClick() {
+        int _start = Integer.parseInt(start.getText());
+        int _end = Integer.parseInt(end.getText());
+        addLesson(new Lesson(course.getText(), LocalTime.of(_start, 0), LocalTime.of(_end, 0)), Integer.parseInt(day.getText()));
+        initCalendar();
+    }
+
+    public void initCalendar() {
+        scrollpane.setFitToWidth(true);
+        scrollpane.setContent(new CalendarView(this.model.getCurrentWeek()).getFinalView());
+    }
+
+    public void addLesson(Lesson lesson, int index) {
+        this.model.getCurrentWeek().addLesson(lesson, index);
     }
 }

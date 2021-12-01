@@ -1,0 +1,13 @@
+.SDJ {
+    -fx-background-color: #FCFFA6;
+    }
+.RWD {
+    -fx-background-color: #B5DEFF;
+}
+.SEP {
+    -fx-background-color: #FF9292;
+}
+
+.mygridStyle Line {
+  -fx-stroke: grey;
+}
