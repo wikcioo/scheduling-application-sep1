@@ -1,13 +1,18 @@
 .SDJ {
     -fx-background-color: #FCFFA6;
-    }
+}
 .RWD {
     -fx-background-color: #B5DEFF;
 }
 .SEP {
     -fx-background-color: #FF9292;
 }
-
+.linearStripes {
+    -fx-background-color: linear-gradient(from 0px 0px to 0px 30px, repeat,  white 99%, black 1%);
+}
+.transparent {
+    -fx-background-color: transparent;
+}
 .mygridStyle Line {
-  -fx-stroke: grey;
+    -fx-stroke: grey;
 }
