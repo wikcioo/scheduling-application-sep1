@@ -2,6 +2,7 @@ package model;
 
 import utilities.Util;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -67,6 +68,53 @@ public class Semester {
     public void initializeAllWeeks() {
         for (int i = 0; i < this.numberOfWeeksInSemester; i++) {
             weekList.add(new Week(semesterStart.plusWeeks(i), semesterStart.plusWeeks(i).plusDays(6)));
+        }
+    }
+
+    public void readData() {
+        String filename = "weekList.bin";
+        ObjectInputStream in = null;
+        try {
+            File file = new File(filename);
+            FileInputStream fis = new FileInputStream(file);
+            in = new ObjectInputStream(fis);
+            Week week1;
+            while((week1 = (Week) in.readObject())!=null){
+                this.weekList.add(week1);
+                System.out.println(week1);
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            //e.printStackTrace();
+        } finally {
+            try {
+                in.close();
+            } catch (IOException e) {
+                //e.printStackTrace();
+            }
+        }
+    }
+
+    //Saves data about weeks to binary file
+    public void saveData() {
+        String filename = "weekList.bin";
+
+        ObjectOutputStream out = null;
+        try {
+            File file = new File(filename);
+            FileOutputStream fos = new FileOutputStream(file);
+            out = new ObjectOutputStream(fos);
+            for(Week week : this.weekList){
+                out.writeObject(week);
+            }
+        } catch (IOException e) {
+            System.out.println("Exception: " + filename);
+        } finally {
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

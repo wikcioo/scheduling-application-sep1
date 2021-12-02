@@ -24,6 +24,10 @@ public class StudentList {
         studentsList.add(student);
     }
 
+    public void removeStudent(Student student) {
+        studentsList.remove(student);
+    }
+
     public static void readStudentFromBinFile() {
 
     }

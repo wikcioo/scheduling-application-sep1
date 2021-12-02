@@ -1,8 +1,6 @@
 package model;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.Objects;
 
 public class Student {
     private int id;
@@ -17,27 +15,16 @@ public class Student {
         this.semester = semester;
     }
 
-    //Reads data from the head of department
-    public static void readDataHOD() {
-        String filename = "C:\\Users\\Aivaras\\Desktop\\Fun\\Data\\Students.txt";
-        File file = new File(filename);
-        Scanner in = null;
-        try {
-            in = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        while (in.hasNext()){
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return id == student.id && semester == student.semester && Objects.equals(_class, student._class) && Objects.equals(name, student.name);
+    }
 
-            String line = in.nextLine();
-            String[] token = line.split(",");
-            for (String s : token) {
-                System.out.print(s.trim()+" ");
-
-            }
-            System.out.println();
-        }
-        in.close();
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, semester, _class, name);
     }
 }
