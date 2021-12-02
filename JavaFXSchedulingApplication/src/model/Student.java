@@ -10,6 +10,13 @@ public class Student {
     private String _class;
     private String name;
 
+    public Student(String name, int id, String _class, int semester) {
+        this.name = name;
+        this.id = id;
+        this._class = _class;
+        this.semester = semester;
+    }
+
     //Reads data from the head of department
     public static void readDataHOD() {
         String filename = "C:\\Users\\Aivaras\\Desktop\\Fun\\Data\\Students.txt";

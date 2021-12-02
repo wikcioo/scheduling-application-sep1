@@ -1,7 +1,5 @@
 package model;
 
-import javafx.stage.FileChooser;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -12,6 +10,14 @@ public class StudentList {
 
     public StudentList() {
         studentsList = new ArrayList<>();
+    }
+
+    public void setStudentsList(ArrayList<Student> studentsList) {
+        this.studentsList = studentsList;
+    }
+
+    public ArrayList<Student> getStudentsList() {
+        return studentsList;
     }
 
     public void addStudent(Student student) {
@@ -30,16 +36,23 @@ public class StudentList {
             e.printStackTrace();
         }
         while (in.hasNext()){
-
             String line = in.nextLine();
             String[] token = line.split(",");
-            for (String s : token) {
-                System.out.print(s.trim()+" ");
+            try {
+                int semester = Integer.parseInt(token[0]);
+                String _class = token[1];
+                int id = Integer.parseInt(token[2]);
+                String name = token[3];
+                if (!name.matches("[A-Za-z\s]+")) {
+                    throw new NumberFormatException();
+                }
 
+//                System.out.println("name: " + name + ", id: " + id + ", class: " + _class + ", semester: " + semester);
+            } catch (NumberFormatException e) {
+                System.out.println("Wrong format, skipping...");
+                e.printStackTrace();
             }
-            System.out.println();
         }
         in.close();
-
     }
 }
