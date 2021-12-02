@@ -78,6 +78,7 @@ public class StudentList {
         }
     }
 
+
     public static void readStudentFromTXTFile(File file) {
         Scanner in = null;
         try {
@@ -97,7 +98,7 @@ public class StudentList {
                     throw new NumberFormatException();
                 }
 
-//                System.out.println("name: " + name + ", id: " + id + ", class: " + _class + ", semester: " + semester);
+                //                System.out.println("name: " + name + ", id: " + id + ", class: " + _class + ", semester: " + semester);
             } catch (NumberFormatException e) {
                 System.out.println("Wrong format, skipping...");
                 e.printStackTrace();
@@ -109,7 +110,7 @@ public class StudentList {
     @Override
     public String toString() {
         return "StudentList{" +
-                "studentList=" + studentList +
-                '}';
+            "studentList=" + studentList +
+            '}';
     }
 }

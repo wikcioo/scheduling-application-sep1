@@ -48,10 +48,10 @@ public class Student implements Serializable {
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + id +
-                ", semester=" + semester +
-                ", _class='" + _class + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+            "id=" + id +
+            ", semester=" + semester +
+            ", _class='" + _class + '\'' +
+            ", name='" + name + '\'' +
+            '}';
     }
 }
