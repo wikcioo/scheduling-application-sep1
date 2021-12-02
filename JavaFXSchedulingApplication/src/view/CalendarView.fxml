@@ -93,33 +93,19 @@
                   <Font name="Century Gothic" size="45.0" />
                </font>
             </Text>
-            <Accordion layoutY="500.0" prefHeight="232.0" prefWidth="276.0">
+            <AnchorPane fx:id="navCalendar" layoutX="18.0" layoutY="179.0" prefHeight="250.0" prefWidth="240.0" style="-fx-background-color: black;" />
+            <Button layoutX="159.0" layoutY="166.0" mnemonicParsing="false" onAction="#navViewPrevWeek" style="-fx-background-color: black;" text="&lt;&lt;" textFill="#dcdcdc" />
+            <Button layoutX="209.0" layoutY="166.0" mnemonicParsing="false" onAction="#navViewNextWeek" style="-fx-background-color: black;" text="&gt;&gt;" textFill="WHITE" />
+            <Accordion layoutX="7.0" layoutY="468.0" prefHeight="53.0" prefWidth="264.0">
               <panes>
-                <TitledPane animated="false" prefHeight="151.0" prefWidth="276.0" text="Import" textFill="WHITE">
-                     <font>
-                        <Font name="Copperplate Gothic Light" size="24.0" />
-                     </font>
+                <TitledPane animated="false" text="Edit" textFill="WHITE" />
+                <TitledPane animated="false" prefHeight="54.0" prefWidth="214.0" text="Import" textFill="WHITE">
                      <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;">
-                           <children>
-                              <Button layoutX="80.0" layoutY="28.0" mnemonicParsing="false" onAction="#onChooseFileButton" text="Choose files" />
-                           </children>
-                        </AnchorPane>
-                     </content>
-                </TitledPane>
-                  <TitledPane animated="false" prefHeight="0.0" prefWidth="276.0" text="Edit lesson" textFill="WHITE">
-                     <font>
-                        <Font name="Calibri" size="24.0" />
-                     </font>
-                     <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" />
+                        <Button mnemonicParsing="false" onAction="#onChooseFileButton" text="Choose files" />
                      </content>
                   </TitledPane>
               </panes>
             </Accordion>
-            <AnchorPane fx:id="navCalendar" layoutX="18.0" layoutY="179.0" prefHeight="250.0" prefWidth="240.0" style="-fx-background-color: black;" />
-            <Button layoutX="159.0" layoutY="166.0" mnemonicParsing="false" onAction="#navViewPrevWeek" style="-fx-background-color: black;" text="&lt;&lt;" textFill="#dcdcdc" />
-            <Button layoutX="209.0" layoutY="166.0" mnemonicParsing="false" onAction="#navViewNextWeek" style="-fx-background-color: black;" text="&gt;&gt;" textFill="WHITE" />
          </children>
       </Pane>
       <Text layoutX="808.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="24.7874755859375">

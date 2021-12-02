@@ -63,6 +63,7 @@ public class CalendarView extends Node {
         }
     }
 
+    //FIXME this needs refactoring and testing
     private void putLessonDayOnCalendar(Day day) {
         ArrayList<Lesson> currentDayLessons = day.getLessons();
 
@@ -104,9 +105,12 @@ public class CalendarView extends Node {
         description.setFill(Color.WHITE);
         ap.getChildren().add(text);
         ap.getChildren().add(description);
-        text.setTextAlignment(TextAlignment.CENTER);
+        text.setLayoutX(10);
+        text.setLayoutY(20);
+        description.setLayoutX(10);
+        description.setLayoutY(20);
         AnchorPane.setTopAnchor(text, 5.0);
-        AnchorPane.setTopAnchor(description, 25.0);
+        AnchorPane.setTopAnchor(description, 50.0);
         return ap;
     }
 

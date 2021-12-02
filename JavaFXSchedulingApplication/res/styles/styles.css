@@ -37,9 +37,10 @@
 }
 
 .accordion .titled-pane > *.content{
-    -fx-background-color: black;
+    -fx-background-color: null;
 }
 
 .accordion .titled-pane .title {
     -fx-background-color: transparent ;
 }
+
