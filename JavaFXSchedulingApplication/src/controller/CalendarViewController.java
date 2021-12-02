@@ -94,7 +94,7 @@ public class CalendarViewController {
     public void onChooseFileButton() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(viewHandler.getPrimaryStage());
-        StudentList.readStudentFromTXTFile(file);
+        this.model.readStudentFromTXTFile(file);
     }
 
     public void initCalendar() {
