@@ -16,3 +16,30 @@
 .mygridStyle Line {
     -fx-stroke: grey;
 }
+
+
+.nav:hover {
+-fx-background-color:white;
+-fx-text-fill:black;
+-fx-background-radius: 30;
+}
+.nav {
+    -fx-background-color: black;
+    -fx-text-fill:white;
+}
+
+.grey {
+    -fx-text-fill:grey;
+}
+
+.white {
+    -fx-text-fill:white;
+}
+
+.accordion .titled-pane > *.content{
+    -fx-background-color: black;
+}
+
+.accordion .titled-pane .title {
+    -fx-background-color: transparent ;
+}

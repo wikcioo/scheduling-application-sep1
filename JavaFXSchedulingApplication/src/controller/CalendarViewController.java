@@ -3,12 +3,14 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import model.*;
 import utilities.Util;
 import view.CalendarView;
+import view.NavCalendarView;
 import view.ViewHandler;
 
 import java.io.File;
@@ -31,10 +33,13 @@ public class CalendarViewController {
     private TextField start;
     @FXML
     private TextField end;
+    @FXML
+    private AnchorPane navCalendar;
 
     private Region root;
     private Model model;
     private ViewHandler viewHandler;
+    private NavCalendarView navCalendarView = new NavCalendarView();
 
     public void CreateCalendarViewController() {
 
@@ -47,6 +52,7 @@ public class CalendarViewController {
         this.addLesson(new Lesson("SDJ", LocalTime.of(8, 0), LocalTime.of(10, 0)), 0);
         initDates();
         initCalendar();
+        initNavCallendar();
     }
 
     public void reset() {
@@ -105,4 +111,20 @@ public class CalendarViewController {
     public void addLesson(Lesson lesson, int index) {
         this.model.getCurrentWeek().addLesson(lesson, index);
     }
+
+    //NAV CALENDAR
+    public void initNavCallendar() {
+        navCalendar.getChildren().add(navCalendarView.getFinalView());
+    }
+
+    public void navViewNextWeek() {
+        navCalendarView.navNextWeek();
+
+    }
+
+    public void navViewPrevWeek() {
+        navCalendarView.navPrevWeek();
+
+    }
+
 }
