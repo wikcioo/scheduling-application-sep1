@@ -139,7 +139,7 @@ public class StudentList {
                     throw new NumberFormatException();
                 }
 
-                //                System.out.println("name: " + name + ", id: " + id + ", class: " + _class + ", semester: " + semester);
+                studentList.add(student);
             } catch (NumberFormatException e) {
                 System.out.println("Wrong format, skipping...");
                 e.printStackTrace();
