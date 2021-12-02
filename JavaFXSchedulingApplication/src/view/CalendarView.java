@@ -12,9 +12,10 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-
+//TODO:ADD hours dynamicaly , separate mvc model ,refactoring, set font to course ,fix jump nav cal, add on click functionality ,
 public class CalendarView extends Node {
     private VBox finalView;
     private VBox[] daysView = new VBox[7];
@@ -34,7 +35,7 @@ public class CalendarView extends Node {
 
 //        Day today = new Day();
 //        today.setDate(LocalDate.now());
-//        LocalTime time1 = LocalTime.of(8, 0);
+//        LocalTime time1 = LocalTime.of(9, 0);
 //        LocalTime time2 = LocalTime.of(10, 0);
 //        week.addLesson(new Lesson("SDJ", time1, time2), today.getIndexForDay());
 //
@@ -53,7 +54,7 @@ public class CalendarView extends Node {
 //        LocalTime time8 = LocalTime.of(17, 0);
 //
 //        week.addLesson(new Lesson("SDJ", time7, time8), today.getIndexForDay());
-        putLessonWeekOnCalendar(week);
+//        putLessonWeekOnCalendar(week);
         finalView = new VBox(calendar);
     }
 
@@ -73,7 +74,8 @@ public class CalendarView extends Node {
             Lesson lesson = currentDayLessons.get(i);
             if (i == 0) {
                 LocalTime fixedStart = LocalTime.of(8, 0);
-                if (isDiference(fixedStart, lesson.getEnd()))
+                Duration dif = Duration.between(fixedStart,lesson.getStart());
+                if ((dif.toHoursPart() > 0) || (dif.toMinutesPart() > 0))
                     daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart, lesson.getStart()));
             }
             AnchorPaneNode lessonBlock = getBlockForLesson(lesson.getStart(), lesson.getEnd());
@@ -81,18 +83,13 @@ public class CalendarView extends Node {
             //Check for break
             if (i + 1 < currentDayLessons.size()) {
                 Lesson nextLesson = currentDayLessons.get(i + 1);
-                if (isDiference(lesson.getEnd(), lesson.getEnd()))
-                    daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(lesson.getEnd(), lesson.getStart()));
+                Duration dif = Duration.between(lesson.getEnd(), nextLesson.getStart());
+                if ((dif.toHoursPart() > 0) || (dif.toMinutesPart() > 0))
+                    daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(lesson.getEnd(), nextLesson.getStart()));
             }
         }
     }
-
-    private boolean isDiference(LocalTime start, LocalTime finish) {
-        Duration dif = Duration.between(start, finish);
-        return (dif.toHoursPart() > 0) || (dif.toMinutesPart() > 0);
-    }
-
-
+    
     private AnchorPaneNode getBlockForLesson(LocalTime start, LocalTime finish) {
         AnchorPaneNode ap = new AnchorPaneNode();
         ap.setPrefWidth(200);
