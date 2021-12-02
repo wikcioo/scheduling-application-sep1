@@ -16,6 +16,22 @@ public class Student implements Serializable {
         this.semester = semester;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
+    public void set_class(String _class) {
+        this._class = _class;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

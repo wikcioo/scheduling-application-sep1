@@ -19,6 +19,10 @@ public class StudentList {
         return studentList;
     }
 
+    public Student getStudent(int index) {
+        return studentList.get(index);
+    }
+
     public void addStudent(Student student) {
         studentList.add(student);
     }
