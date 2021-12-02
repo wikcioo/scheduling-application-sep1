@@ -98,7 +98,7 @@
             <Button layoutX="209.0" layoutY="166.0" mnemonicParsing="false" onAction="#navViewNextWeek" style="-fx-background-color: black;" text="&gt;&gt;" textFill="WHITE" />
             <Accordion layoutX="7.0" layoutY="468.0" prefHeight="53.0" prefWidth="264.0">
               <panes>
-                <TitledPane animated="false" text="Edit" textFill="WHITE" />
+                <TitledPane animated="false" text="untitled 2" textFill="WHITE" />
                 <TitledPane animated="false" prefHeight="54.0" prefWidth="214.0" text="Import" textFill="WHITE">
                      <content>
                         <Button mnemonicParsing="false" onAction="#onChooseFileButton" text="Choose files" />
