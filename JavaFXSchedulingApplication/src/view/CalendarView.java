@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class CalendarView extends Node {
     private VBox finalView;
     private VBox[] daysView = new VBox[7];
+
     public CalendarView(Week week) {
         int hour = 7;
         HBox calendar = new HBox();
@@ -56,32 +57,40 @@ public class CalendarView extends Node {
         finalView = new VBox(calendar);
     }
 
-    private void putLessonWeekOnCalendar(Week week)
-    {
-        for(Day day: week.getDays())
-        {
+    private void putLessonWeekOnCalendar(Week week) {
+        for (Day day : week.getDays()) {
             putLessonDayOnCalendar(day);
         }
     }
 
-    private void putLessonDayOnCalendar(Day day)
-    {
+    private void putLessonDayOnCalendar(Day day) {
         ArrayList<Lesson> currentDayLessons = day.getLessons();
+
         for (int i = 0; i < currentDayLessons.size(); i++) {
+
             //Put currrent lesson on the calendar
             Lesson lesson = currentDayLessons.get(i);
+            if (i == 0) {
+                LocalTime fixedStart = LocalTime.of(8, 0);
+                if (isDiference(fixedStart, lesson.getEnd()))
+                    daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart, lesson.getStart()));
+            }
             AnchorPaneNode lessonBlock = getBlockForLesson(lesson.getStart(), lesson.getEnd());
             daysView[day.getIndexForDay()].getChildren().add(lessonBlock);
-
             //Check for break
             if (i + 1 < currentDayLessons.size()) {
                 Lesson nextLesson = currentDayLessons.get(i + 1);
-                Duration dif = Duration.between(lesson.getEnd(), nextLesson.getStart());
-                if ((dif.toHoursPart() > 0) || (dif.toMinutesPart() > 0))
-                    daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(lesson.getEnd(), nextLesson.getStart()));
+                if (isDiference(lesson.getEnd(), lesson.getEnd()))
+                    daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(lesson.getEnd(), lesson.getStart()));
             }
         }
     }
+
+    private boolean isDiference(LocalTime start, LocalTime finish) {
+        Duration dif = Duration.between(start, finish);
+        return (dif.toHoursPart() > 0) || (dif.toMinutesPart() > 0);
+    }
+
 
     private AnchorPaneNode getBlockForLesson(LocalTime start, LocalTime finish) {
         AnchorPaneNode ap = new AnchorPaneNode();
@@ -91,25 +100,24 @@ public class CalendarView extends Node {
         Text text = new Text("SDJ-1Z");
         ap.setCourse("SDJ");
         Text description = new Text(start + " -- " + finish);
-        text.setFill(Color.BLACK);
+        text.setFill(Color.WHITE);
+        description.setFill(Color.WHITE);
         ap.getChildren().add(text);
         ap.getChildren().add(description);
         text.setTextAlignment(TextAlignment.CENTER);
         AnchorPane.setTopAnchor(text, 5.0);
         AnchorPane.setTopAnchor(description, 25.0);
-        ap.setStyle("-fx-border-color: grey");
         return ap;
     }
 
     private AnchorPaneNode getBlockForEmpty(LocalTime start, LocalTime finish) {
         AnchorPaneNode ap = new AnchorPaneNode();
         ap.setPrefWidth(200);
-        ap.setPrefHeight(calculateHeightForBlock(start,finish));
+        ap.setPrefHeight(calculateHeightForBlock(start, finish));
         System.out.println(start);
         System.out.println(finish);
-        ap.setPrefHeight(calculateHeightForBlock(start,finish));
+        ap.setPrefHeight(calculateHeightForBlock(start, finish));
         ap.setCourse("Break");
-        //ap.setStyle("-fx-border-color: grey");
         return ap;
     }
 

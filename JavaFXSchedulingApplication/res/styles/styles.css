@@ -1,14 +1,14 @@
 .SDJ {
-    -fx-background-color: #FCFFA6;
+    -fx-background-color: #570307;
 }
 .RWD {
-    -fx-background-color: #B5DEFF;
+    -fx-background-color: #3C3D5C;
 }
 .SEP {
-    -fx-background-color: #FF9292;
+    -fx-background-color: #370E25;
 }
 .linearStripes {
-    -fx-background-color: linear-gradient(from 0px 0px to 0px 30px, repeat,  white 99%, black 1%);
+    /* -fx-background-color: linear-gradient(from 0px 0px to 0px 30px, repeat,  white 99%, black 1%); FIXME:This line doesnt work */
 }
 .transparent {
     -fx-background-color: transparent;
