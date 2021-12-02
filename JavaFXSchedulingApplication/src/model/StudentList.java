@@ -43,7 +43,7 @@ public class StudentList {
                 String _class = token[1];
                 int id = Integer.parseInt(token[2]);
                 String name = token[3];
-                if (!name.matches("[A-Za-z\s]+")) {
+                if (!name.matches("[A-Za-z ]+")) {
                     throw new NumberFormatException();
                 }
 
