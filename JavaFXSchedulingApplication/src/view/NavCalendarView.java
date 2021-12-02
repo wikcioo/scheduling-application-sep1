@@ -93,17 +93,20 @@ public class NavCalendarView {
         int maxPrevDays = prevCalendar.getActualMaximum(Calendar.DAY_OF_MONTH); //Get max number of days of previous month
         int count = startDay - 2;
         for (int i = 0; i < startDay - 1; i++) {
+            gridPaneItems.get(i).setOnMouseClicked(null);
             gridPaneItems.get(i).getStyleClass().remove("white"); //Removing color so it doesn't stay when you update
             gridPaneItems.get(i).getStyleClass().remove("grey");
             gridPaneItems.get(i).getStyleClass().add("grey");
             gridPaneItems.get(i).setText(maxPrevDays - count + "");
             count--;
+            gridPaneItems.get(i).setOnMouseClicked(event -> navPrevWeek());
         }
 
         int dayCount = 0;
         //Set current week
         for (int i = startDay - 1; i < maxNumberOfDays + startDay - 1; i++) {
             dayCount++;
+            gridPaneItems.get(i).setOnMouseClicked(null);
             gridPaneItems.get(i).getStyleClass().remove("white");
             gridPaneItems.get(i).getStyleClass().remove("grey");
             gridPaneItems.get(i).setText(dayCount + "");
@@ -114,10 +117,12 @@ public class NavCalendarView {
         dayCount = 0;
         for (int i = maxNumberOfDays + startDay - 1; i < 42; i++) {
             dayCount++;
+            gridPaneItems.get(i).setOnMouseClicked(null);
             gridPaneItems.get(i).getStyleClass().remove("white");
             gridPaneItems.get(i).getStyleClass().remove("grey");
             gridPaneItems.get(i).getStyleClass().add("grey");
             gridPaneItems.get(i).setText(dayCount + "");
+            gridPaneItems.get(i).setOnMouseClicked(event -> navNextWeek());
         }
     }
 
@@ -132,6 +137,7 @@ public class NavCalendarView {
         updateMonthHeader();
         initDays();
     }
+
 
     public Calendar getCalendar() {
         return calendar;

@@ -153,7 +153,6 @@ public class CalendarViewController {
 
     public void navViewNextWeek() {
         navCalendarView.navNextWeek();
-
     }
 
     public void navViewPrevWeek() {
