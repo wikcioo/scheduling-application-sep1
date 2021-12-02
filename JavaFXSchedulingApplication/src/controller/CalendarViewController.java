@@ -26,6 +26,20 @@ public class CalendarViewController {
     @FXML
     private Text date2;
     @FXML
+    private Text day1;
+    @FXML
+    private Text day2;
+    @FXML
+    private Text day3;
+    @FXML
+    private Text day4;
+    @FXML
+    private Text day5;
+    @FXML
+    private Text day6;
+    @FXML
+    private Text day7;
+    @FXML
     private TextField course;
     @FXML
     private TextField day;
@@ -53,6 +67,7 @@ public class CalendarViewController {
         initDates();
         initCalendar();
         initNavCallendar();
+        initDayForAll();
     }
 
     public void reset() {
@@ -77,6 +92,7 @@ public class CalendarViewController {
         model.goNextWeek();
         initDates();
         initCalendar();
+        initDayForAll();
     }
 
     @FXML
@@ -86,6 +102,7 @@ public class CalendarViewController {
         model.goPreviousWeek();
         initDates();
         initCalendar();
+        initDayForAll();
     }
 
     @FXML
@@ -108,6 +125,18 @@ public class CalendarViewController {
         scrollpane.setContent(new CalendarView(this.model.getCurrentWeek()).getFinalView());
     }
 
+    public void initDayText(Text day,int forward) {
+        day.setText(String.valueOf(currentDayOfWeek.plusDays(forward).getDayOfMonth()));
+    }
+    public void initDayForAll() {
+        initDayText(day1,0);
+        initDayText(day2,1);
+        initDayText(day3,2);
+        initDayText(day4,3);
+        initDayText(day5,4);
+        initDayText(day6,5);
+        initDayText(day7,6);
+    }
     public void addLesson(Lesson lesson, int index) {
         this.model.getCurrentWeek().addLesson(lesson, index);
     }
@@ -124,7 +153,6 @@ public class CalendarViewController {
 
     public void navViewPrevWeek() {
         navCalendarView.navPrevWeek();
-
     }
 
 }

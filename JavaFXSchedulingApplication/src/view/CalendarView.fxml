@@ -66,22 +66,22 @@
             </AnchorPane>
         </children>
     </GridPane>
-      <Text fx:id="date1" layoutX="608.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date 1" wrappingWidth="216.78759765625">
+      <Text fx:id="date1" layoutX="577.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date 1" wrappingWidth="216.78759765625">
           <font>
               <Font name="Berlin Sans FB" size="48.0" />
           </font>
       </Text>
-      <Text fx:id="date2" layoutX="923.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date 2" wrappingWidth="216.78759765625">
+      <Text fx:id="date2" layoutX="881.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date 2" wrappingWidth="216.78759765625">
           <font>
               <Font name="Berlin Sans FB" size="48.0" />
           </font>
       </Text>
-      <Button layoutX="548.0" layoutY="31.0" mnemonicParsing="false" onAction="#onPreviousWeekClick" style="-fx-background-color: black; -fx-text-fill: white;" text="&lt;&lt;" textFill="WHITE">
+      <Button layoutX="508.0" layoutY="13.0" mnemonicParsing="false" onAction="#onPreviousWeekClick" style="-fx-background-color: black; -fx-text-fill: white;" text="&lt;&lt;" textFill="WHITE">
           <font>
               <Font name="System Bold" size="16.0" />
           </font>
       </Button>
-      <Button layoutX="1147.0" layoutY="33.0" mnemonicParsing="false" onAction="#onNextWeekClick" style="-fx-background-color: black; -fx-text-fill: white;" text="&gt;&gt;" textFill="WHITE">
+      <Button layoutX="1098.0" layoutY="13.0" mnemonicParsing="false" onAction="#onNextWeekClick" style="-fx-background-color: black; -fx-text-fill: white;" text="&gt;&gt;" textFill="WHITE">
           <font>
               <Font name="System Bold" size="16.0" />
           </font>
@@ -122,42 +122,42 @@
             <Button layoutX="209.0" layoutY="166.0" mnemonicParsing="false" onAction="#navViewNextWeek" style="-fx-background-color: black;" text="&gt;&gt;" textFill="WHITE" />
          </children>
       </Pane>
-      <Text layoutX="844.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="24.7874755859375">
+      <Text layoutX="808.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="24.7874755859375">
           <font>
               <Font name="Berlin Sans FB" size="48.0" />
           </font>
       </Text>
-      <Text fx:id="day1" layoutX="341.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="16.78759765625">
+      <Text fx:id="day1" layoutX="325.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="52.79998779296875">
          <font>
             <Font name="Berlin Sans FB" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="day2" layoutX="487.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" wrappingWidth="16.78759765625">
+      <Text fx:id="day2" layoutX="477.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" wrappingWidth="52.79998779296875">
          <font>
             <Font name="Berlin Sans FB" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="day3" layoutX="641.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" wrappingWidth="16.78759765625">
+      <Text fx:id="day3" layoutX="622.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" wrappingWidth="52.79998779296875">
          <font>
             <Font name="Berlin Sans FB" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="day4" layoutX="786.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" wrappingWidth="16.78759765625">
+      <Text fx:id="day4" layoutX="768.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" textAlignment="CENTER" wrappingWidth="52.79998779296875">
          <font>
             <Font name="Berlin Sans FB" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="day5" layoutX="934.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" wrappingWidth="16.78759765625">
+      <Text fx:id="day5" layoutX="923.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" textAlignment="CENTER" wrappingWidth="52.79998779296875">
          <font>
             <Font name="Berlin Sans FB" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="day6" layoutX="1084.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6" wrappingWidth="16.78759765625">
+      <Text fx:id="day6" layoutX="1067.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6" textAlignment="CENTER" wrappingWidth="52.79998779296875">
          <font>
             <Font name="Berlin Sans FB" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="day7" layoutX="1231.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7" wrappingWidth="16.78759765625">
+      <Text fx:id="day7" layoutX="1217.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7" textAlignment="CENTER" wrappingWidth="52.79998779296875">
          <font>
             <Font name="Berlin Sans FB" size="48.0" />
          </font>
