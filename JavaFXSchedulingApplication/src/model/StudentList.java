@@ -4,19 +4,22 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StudentList {
+public class StudentList implements Serializable{
     private ArrayList<Student> studentList;
 
     public StudentList() {
         studentList = new ArrayList<>();
     }
 
-    public StudentList(StudentList copy) {
-        studentList = copy.getStudentList();
+    public StudentList(ArrayList<Student> studentList) {
+        this.studentList = new ArrayList<>();
+        for(Student student : studentList) {
+            this.studentList.add(student);
+        }
     }
 
     public StudentList copy() {
-        return new StudentList(this);
+        return new StudentList(this.studentList);
     }
 
     public void setStudentList(ArrayList<Student> studentList) {

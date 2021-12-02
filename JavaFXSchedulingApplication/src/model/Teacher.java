@@ -1,6 +1,8 @@
 package model;
 
-public class Teacher
+import java.io.Serializable;
+
+public class Teacher implements Serializable
 {
 
 }

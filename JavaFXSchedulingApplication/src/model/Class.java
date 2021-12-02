@@ -1,8 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Class {
+public class Class implements Serializable
+{
     private String name;
     private StudentList studentList;
 
@@ -19,5 +21,21 @@ public class Class {
 
     public StudentList getStudentList() {
         return studentList;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    @Override public String toString()
+    {
+        return "Class{" + "name='" + name + '\'' + ", studentList="
+            + studentList + '}';
     }
 }

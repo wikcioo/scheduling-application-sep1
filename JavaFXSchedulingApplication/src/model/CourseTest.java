@@ -15,7 +15,17 @@ public class CourseTest
     Teacher teacher = new Teacher();
     Course course = new Course("sdj",teacher,classofStudents);
     course.getParticipants().removeStudent(student1);
-    System.out.println(course.getClassOfStudents());
-    System.out.println(course.getParticipants());
+//    System.out.println(course.getClassOfStudents());
+//    System.out.println(course.getParticipants());
+
+    CourseList courses = new CourseList();
+    for(int i = 0; i < 10 ; i++) {
+      courses.addCourse(course);
+    }
+    courses.readCourseListFromBinFile();
+
+
+
+
   }
 }

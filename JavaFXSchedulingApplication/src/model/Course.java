@@ -1,22 +1,22 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class Course
+public class Course implements Serializable
 {
   private String title;
-  private ArrayList<Teacher> teachers;
+  private TeacherList teacherList;
   private Class classOfStudents;
   private StudentList participants;
 
   public Course(String title, Teacher teacher, Class classOfStudents)
   {
     this.title = title;
-    this.teachers = new ArrayList<>();
-    this.teachers.add(teacher);
-    this.participants = null;
+    this.teacherList = new TeacherList();
+    this.teacherList.addTeacher(teacher);
     this.classOfStudents = classOfStudents;
+    initStudents();
   }
 
   public Course(String title, Teacher teacher)
@@ -24,21 +24,9 @@ public class Course
     this(title, teacher, null);
   }
 
-
-
   public void setTitle(String title)
   {
     this.title = title;
-  }
-
-  public void addTeacher(Teacher teacher)
-  {
-    this.teachers.add(teacher);
-  }
-
-  public void removeTeacher(Teacher teacher)
-  {
-      teachers.remove(teacher);
   }
 
   public void setClassOfStudents(Class classOfStudents)
@@ -65,14 +53,14 @@ public class Course
     return title;
   }
 
-  public ArrayList<Teacher> getTeachers()
+  public TeacherList getTeacherList()
   {
-    return teachers;
+    return teacherList;
   }
 
-  public void setTeachers(ArrayList<Teacher> teachers)
+  public void setTeacherList(ArrayList<Teacher> teacherList)
   {
-    this.teachers = teachers;
+    this.teacherList = new TeacherList(teacherList);
   }
 
   public Class getClassOfStudents()
@@ -88,5 +76,12 @@ public class Course
   public void setParticipants(StudentList participants)
   {
     this.participants = participants;
+  }
+
+  @Override public String toString()
+  {
+    return "Course{" + "title='" + title + '\'' + ", teacherList=" + teacherList
+        + ", classOfStudents=" + classOfStudents + ", participants="
+        + participants + '}';
   }
 }
