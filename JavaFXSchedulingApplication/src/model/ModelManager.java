@@ -1,13 +1,19 @@
 package model;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ModelManager implements Model {
     private Semester semester;
+    private StudentList studentList;
 
     public ModelManager() {
         this.semester = new Semester(LocalDate.of(2021, 8, 30), LocalDate.of(2021, 12, 17));
+    }
+
+    public void readStudentFromTXTFile(File file) {
+        studentList.readStudentFromTXTFile(file);
     }
 
     public void setSemester(LocalDate semesterStart, LocalDate semesterEnd) {

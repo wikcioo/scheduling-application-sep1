@@ -8,6 +8,7 @@ public class Student implements Serializable {
     private int semester;
     private String _class;
     private String name;
+    private boolean isExchange;
 
     public Student(String name, int id, String _class, int semester) {
         this.name = name;
@@ -30,6 +31,30 @@ public class Student implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setExchange(boolean exchange) {
+        isExchange = exchange;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public String get_class() {
+        return _class;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isExchange() {
+        return isExchange;
     }
 
     @Override

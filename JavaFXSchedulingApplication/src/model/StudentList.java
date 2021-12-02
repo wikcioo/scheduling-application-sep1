@@ -11,6 +11,14 @@ public class StudentList {
         studentList = new ArrayList<>();
     }
 
+    public StudentList(StudentList copy) {
+        studentList = copy.getStudentList();
+    }
+
+    public StudentList copy() {
+        return new StudentList(this);
+    }
+
     public void setStudentList(ArrayList<Student> studentList) {
         this.studentList = studentList;
     }
@@ -29,6 +37,39 @@ public class StudentList {
 
     public void removeStudent(Student student) {
         studentList.remove(student);
+    }
+
+    public ArrayList<Student> getStudentsByClass(String _class) {
+        ArrayList<Student> s = new ArrayList<>();
+        for (Student student : this.studentList) {
+            if (student.get_class().equalsIgnoreCase(_class)) {
+                s.add(student);
+            }
+        }
+
+        return s;
+    }
+
+    public ArrayList<Student> getStudentsByName(String name) {
+        ArrayList<Student> s = new ArrayList<>();
+        for (Student student : this.studentList) {
+            if (student.getName().contains(name)) {
+                s.add(student);
+            }
+        }
+
+        return s;
+    }
+
+    public ArrayList<Student> getExchangeStudents() {
+        ArrayList<Student> s = new ArrayList<>();
+        for (Student student : this.studentList) {
+            if (student.isExchange()) {
+                s.add(student);
+            }
+        }
+
+        return s;
     }
 
     public void readStudentListFromBinFile() {
@@ -78,7 +119,7 @@ public class StudentList {
         }
     }
 
-    public static void readStudentFromTXTFile(File file) {
+    public void readStudentFromTXTFile(File file) {
         Scanner in = null;
         try {
             in = new Scanner(file);
@@ -90,10 +131,11 @@ public class StudentList {
             String[] token = line.split(",");
             try {
                 int semester = Integer.parseInt(token[0]);
-                String _class = token[1];
+                String _class = token[1].trim();
                 int id = Integer.parseInt(token[2]);
-                String name = token[3];
-                if (!name.matches("[A-Za-z ]+")) {
+                String name = token[3].trim();
+                Student student = new Student(name, id, _class, semester);
+                if (!isValidStudent(student)) {
                     throw new NumberFormatException();
                 }
 
@@ -104,6 +146,16 @@ public class StudentList {
             }
         }
         in.close();
+    }
+
+    private boolean isValidStudent(Student student) {
+        if (!student.getName().matches("[A-Za-z ]+")) return false;
+        if (!student.get_class().matches("[A-Za-z]")) return false;
+        for (Student s : this.studentList) {
+            if (s.getId() == student.getId()) return false;
+        }
+
+        return true;
     }
 
     @Override
