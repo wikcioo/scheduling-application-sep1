@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Student {
+public class Student implements Serializable {
     private int id;
     private int semester;
     private String _class;
@@ -26,5 +27,15 @@ public class Student {
     @Override
     public int hashCode() {
         return Objects.hash(id, semester, _class, name);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", semester=" + semester +
+                ", _class='" + _class + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

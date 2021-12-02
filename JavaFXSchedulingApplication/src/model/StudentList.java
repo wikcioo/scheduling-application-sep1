@@ -1,35 +1,77 @@
 package model;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentList {
-    private ArrayList<Student> studentsList;
+    private ArrayList<Student> studentList;
 
     public StudentList() {
-        studentsList = new ArrayList<>();
+        studentList = new ArrayList<>();
     }
 
-    public void setStudentsList(ArrayList<Student> studentsList) {
-        this.studentsList = studentsList;
+    public void setStudentList(ArrayList<Student> studentList) {
+        this.studentList = studentList;
     }
 
-    public ArrayList<Student> getStudentsList() {
-        return studentsList;
+    public ArrayList<Student> getStudentList() {
+        return studentList;
     }
 
     public void addStudent(Student student) {
-        studentsList.add(student);
+        studentList.add(student);
     }
 
     public void removeStudent(Student student) {
-        studentsList.remove(student);
+        studentList.remove(student);
     }
 
-    public static void readStudentFromBinFile() {
+    public void readStudentListFromBinFile() {
+        String filename = "res/saved-data/studentList.bin";
+        ObjectInputStream in = null;
+        try {
+            File file = new File(filename);
+            FileInputStream fis = new FileInputStream(file);
+            in = new ObjectInputStream(fis);
+            Student student;
+            while((student = (Student) in.readObject()) != null){
+                this.studentList.add(student);
+                System.out.println(student);
+            }
 
+        } catch (IOException | ClassNotFoundException e) {
+            //e.printStackTrace();
+        } finally {
+            try {
+                in.close();
+            } catch (IOException e) {
+                //e.printStackTrace();
+            }
+        }
+    }
+
+    public void writeStudentListToBinFile() {
+        String filename = "res/saved-data/studentList.bin";
+
+        ObjectOutputStream out = null;
+        try {
+            File file = new File(filename);
+            FileOutputStream fos = new FileOutputStream(file);
+            out = new ObjectOutputStream(fos);
+            for(Student student : this.studentList){
+                out.writeObject(student);
+            }
+        } catch (IOException e) {
+            System.out.println("Exception: " + filename);
+            e.printStackTrace();
+        } finally {
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void readStudentFromTXTFile(File file) {
@@ -58,5 +100,12 @@ public class StudentList {
             }
         }
         in.close();
+    }
+
+    @Override
+    public String toString() {
+        return "StudentList{" +
+                "studentList=" + studentList +
+                '}';
     }
 }

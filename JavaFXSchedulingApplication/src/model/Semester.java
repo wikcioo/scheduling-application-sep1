@@ -72,7 +72,7 @@ public class Semester {
     }
 
     public void readData() {
-        String filename = "weekList.bin";
+        String filename = "res/saved-data/weekList.bin";
         ObjectInputStream in = null;
         try {
             File file = new File(filename);
@@ -97,7 +97,7 @@ public class Semester {
 
     //Saves data about weeks to binary file
     public void saveData() {
-        String filename = "weekList.bin";
+        String filename = "res/saved-data/weekList.bin";
 
         ObjectOutputStream out = null;
         try {
