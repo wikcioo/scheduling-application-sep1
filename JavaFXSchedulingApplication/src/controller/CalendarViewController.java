@@ -81,8 +81,13 @@ public class CalendarViewController {
     public LocalDate endDayOfWeek = currentDayOfWeek.plusDays(6);
 
     public void initDates() {
-        date1.setText(currentDayOfWeek.format(DateTimeFormatter.ofPattern("dd-MMM-yy")));
-        date2.setText(endDayOfWeek.format(DateTimeFormatter.ofPattern("dd-MMM-yy")));
+        if (currentDayOfWeek.getMonth() == endDayOfWeek.getMonth()) {
+            date1.setText(currentDayOfWeek.format(DateTimeFormatter.ofPattern("MMM")));
+            date2.setText("- " + currentDayOfWeek.format(DateTimeFormatter.ofPattern("yyyy")));
+        } else {
+            date1.setText(currentDayOfWeek.format(DateTimeFormatter.ofPattern("MMM")));
+            date2.setText(" - " + endDayOfWeek.format(DateTimeFormatter.ofPattern("MMM")) + " " + endDayOfWeek.format(DateTimeFormatter.ofPattern("yyyy")));
+        }
     }
 
     @FXML

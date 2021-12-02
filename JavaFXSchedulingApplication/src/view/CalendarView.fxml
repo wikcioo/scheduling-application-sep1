@@ -66,24 +66,24 @@
             </AnchorPane>
         </children>
     </GridPane>
-      <Text fx:id="date1" layoutX="577.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date 1" wrappingWidth="216.78759765625">
+      <Text fx:id="date1" layoutX="456.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date 1" wrappingWidth="216.78759765625">
           <font>
               <Font name="Berlin Sans FB" size="48.0" />
           </font>
       </Text>
-      <Text fx:id="date2" layoutX="881.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date 2" wrappingWidth="216.78759765625">
+      <Text fx:id="date2" layoutX="539.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date 2" wrappingWidth="288.78759765625">
           <font>
               <Font name="Berlin Sans FB" size="48.0" />
           </font>
       </Text>
-      <Button layoutX="508.0" layoutY="13.0" mnemonicParsing="false" onAction="#onPreviousWeekClick" style="-fx-background-color: black; -fx-text-fill: white;" text="&lt;&lt;" textFill="WHITE">
+      <Button layoutX="325.0" layoutY="13.0" mnemonicParsing="false" onAction="#onPreviousWeekClick" style="-fx-background-color: black; -fx-text-fill: white;" text="&lt;" textFill="WHITE">
           <font>
-              <Font name="System Bold" size="16.0" />
+              <Font name="System Bold" size="23.0" />
           </font>
       </Button>
-      <Button layoutX="1098.0" layoutY="13.0" mnemonicParsing="false" onAction="#onNextWeekClick" style="-fx-background-color: black; -fx-text-fill: white;" text="&gt;&gt;" textFill="WHITE">
+      <Button layoutX="378.0" layoutY="13.0" mnemonicParsing="false" onAction="#onNextWeekClick" style="-fx-background-color: black; -fx-text-fill: white;" text="&gt;" textFill="WHITE">
           <font>
-              <Font name="System Bold" size="16.0" />
+              <Font name="System Bold" size="23.0" />
           </font>
       </Button>
       <Pane layoutY="-20.0" prefHeight="970.0" prefWidth="276.0" style="-fx-background-color: black;">
@@ -108,11 +108,6 @@
             </Accordion>
          </children>
       </Pane>
-      <Text layoutX="808.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="24.7874755859375">
-          <font>
-              <Font name="Berlin Sans FB" size="48.0" />
-          </font>
-      </Text>
       <Text fx:id="day1" layoutX="325.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="52.79998779296875">
          <font>
             <Font name="Berlin Sans FB" size="48.0" />
