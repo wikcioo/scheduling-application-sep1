@@ -21,6 +21,12 @@ public class Semester {
         initializeAllWeeks();
         initializeCurrentWeekIndex();
     }
+    public boolean hasNextWeek(){
+        return weekList.size()-1>currentWeekIndex;
+    }
+    public boolean hasPreviousWeek(){
+        return currentWeekIndex>0;
+    }
 
     public Week getCurrentWeek() {
         return weekList.get(currentWeekIndex);

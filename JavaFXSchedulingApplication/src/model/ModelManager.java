@@ -32,8 +32,18 @@ public class ModelManager implements Model {
         semester.goNextWeek();
     }
 
+    @Override
+    public boolean hasNextWeek() {
+        return semester.hasNextWeek();
+    }
+
     public void goPreviousWeek() {
         semester.goPreviousWeek();
+    }
+
+    @Override
+    public boolean hasPreviousWeek() {
+        return semester.hasPreviousWeek();
     }
 
     public ArrayList<Week> getWeekList() {

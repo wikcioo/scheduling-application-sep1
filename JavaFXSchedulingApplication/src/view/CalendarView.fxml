@@ -76,12 +76,12 @@
               <Font name="Berlin Sans FB" size="48.0" />
           </font>
       </Text>
-      <Button layoutX="325.0" layoutY="13.0" mnemonicParsing="false" onAction="#onPreviousWeekClick" style="-fx-background-color: black; -fx-text-fill: white;" text="&lt;" textFill="WHITE">
+      <Button fx:id="previousWeekButton" layoutX="325.0" layoutY="13.0" mnemonicParsing="false" onAction="#onPreviousWeekClick" style="-fx-background-color: black; -fx-text-fill: white;" text="&lt;" textFill="WHITE">
           <font>
               <Font name="System Bold" size="23.0" />
           </font>
       </Button>
-      <Button layoutX="378.0" layoutY="13.0" mnemonicParsing="false" onAction="#onNextWeekClick" style="-fx-background-color: black; -fx-text-fill: white;" text="&gt;" textFill="WHITE">
+      <Button fx:id="nextWeekButton" layoutX="378.0" layoutY="13.0" mnemonicParsing="false" onAction="#onNextWeekClick" style="-fx-background-color: black; -fx-text-fill: white;" text="&gt;" textFill="WHITE">
           <font>
               <Font name="System Bold" size="23.0" />
           </font>

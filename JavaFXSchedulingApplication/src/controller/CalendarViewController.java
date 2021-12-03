@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -49,6 +50,10 @@ public class CalendarViewController {
     private TextField end;
     @FXML
     private AnchorPane navCalendar;
+    @FXML
+    private Button previousWeekButton;
+    @FXML
+    private Button nextWeekButton;
 
     private Region root;
     private Model model;
@@ -92,22 +97,36 @@ public class CalendarViewController {
 
     @FXML
     public void onNextWeekClick() {
-        currentDayOfWeek = currentDayOfWeek.plusDays(7);
-        endDayOfWeek = endDayOfWeek.plusDays(7);
-        model.goNextWeek();
-        initDates();
-        initCalendar();
-        initDayForAll();
+        if(model.hasNextWeek()){
+            nextWeekButton.setDisable(false);
+            previousWeekButton.setDisable(false);
+            currentDayOfWeek = currentDayOfWeek.plusDays(7);
+            endDayOfWeek = endDayOfWeek.plusDays(7);
+            model.goNextWeek();
+            initDates();
+            initCalendar();
+            initDayForAll();
+        }
+        else{
+            nextWeekButton.setDisable(true);
+        }
     }
 
     @FXML
     public void onPreviousWeekClick() {
-        currentDayOfWeek = currentDayOfWeek.minusDays(7);
-        endDayOfWeek = endDayOfWeek.minusDays(7);
-        model.goPreviousWeek();
-        initDates();
-        initCalendar();
-        initDayForAll();
+        if(model.hasPreviousWeek()){
+            nextWeekButton.setDisable(false);
+            previousWeekButton.setDisable(false);
+            currentDayOfWeek = currentDayOfWeek.minusDays(7);
+            endDayOfWeek = endDayOfWeek.minusDays(7);
+            model.goPreviousWeek();
+            initDates();
+            initCalendar();
+            initDayForAll();
+        }
+        else {
+            previousWeekButton.setDisable(true);
+        }
     }
 
     @FXML

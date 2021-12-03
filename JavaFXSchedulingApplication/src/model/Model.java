@@ -8,7 +8,9 @@ public interface Model {
     Week getCurrentWeek();
     int getCurrentWeekIndex();
     void goNextWeek();
+    boolean hasNextWeek();
     void goPreviousWeek();
+    boolean hasPreviousWeek();
     ArrayList<Week> getWeekList();
     int getNumberOfWeeksBetween();
     void initializeCurrentWeekIndex();
