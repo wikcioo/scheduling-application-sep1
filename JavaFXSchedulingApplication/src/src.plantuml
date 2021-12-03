@@ -2,18 +2,18 @@
 
 title __SRC's Class Diagram__\n
 
-  namespace a {
+
     class Main {
         {static} + main()
     }
-  }
+
   
 
-  namespace b {
+
     class MyApplication {
         + start()
     }
-  }
+
   
 
   MyApplication -up-|> javafx.application.Application
