@@ -1,10 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class BookingTime
+public class BookingTime implements Serializable
 {
   private LocalTime bookingStart;
   private LocalTime bookingEnd;
@@ -69,5 +70,16 @@ public class BookingTime
     this.date = date;
   }
   // compare time intervals
+
+  public boolean collideWith(BookingTime time)
+  {
+    if(!(date.equals(time.getDate())))
+      return false;
+    if(time.bookingEnd.isBefore(bookingStart))
+      return false;
+    if(bookingEnd.isBefore(time.bookingStart))
+      return false;
+    return true;
+  }
 
 }

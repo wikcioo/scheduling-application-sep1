@@ -1,10 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class Room
+public class Room implements Serializable
 {
   private String name;
   private int capacity;
@@ -12,6 +13,7 @@ public class Room
   private ArrayList<BookingTime> intervals;
 
   public Room(String name, int capacity, String mergeWith)
+
   {
     this.name = name;
     this.capacity = capacity;
@@ -21,7 +23,18 @@ public class Room
 
   public void Book(BookingTime time)
   {
+    if(canBeBookedAt(time))
     intervals.add(time);
+      else
+      System.out.println("Room is already booked at that time");
+  }
+
+  public boolean canBeBookedAt(BookingTime time)
+  {
+    for(BookingTime t: intervals)
+      if(t.collideWith(time))
+        return false;
+      return true;
   }
 
   public void unBook(BookingTime time)
