@@ -10,6 +10,8 @@ public class ModelManager implements Model {
 
     public ModelManager() {
         this.semester = new Semester(LocalDate.of(2021, 8, 30), LocalDate.of(2021, 12, 17));
+        this.studentList = new StudentList();
+        studentList.readStudentListFromBinFile();
     }
 
     public void readStudentFromTXTFile(File file) {

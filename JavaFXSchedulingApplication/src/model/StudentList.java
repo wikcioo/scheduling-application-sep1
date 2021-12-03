@@ -88,12 +88,14 @@ public class StudentList implements Serializable{
                 System.out.println(student);
             }
 
+        } catch (FileNotFoundException e) {
+            System.out.println(filename + " not found in the resources");
         } catch (IOException | ClassNotFoundException e) {
             //e.printStackTrace();
         } finally {
             try {
                 in.close();
-            } catch (IOException e) {
+            } catch (IOException | NullPointerException e) {
                 //e.printStackTrace();
             }
         }
