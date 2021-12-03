@@ -16,4 +16,6 @@ public interface Model {
     void initializeCurrentWeekIndex();
     int getCurrentYear();
     void initializeAllWeeks();
+    void readSemesterData();
+    void saveSemesterData();
 }

@@ -12,6 +12,7 @@ public class ModelManager implements Model {
         this.semester = new Semester(LocalDate.of(2021, 8, 30), LocalDate.of(2021, 12, 17));
         this.studentList = new StudentList();
         studentList.readStudentListFromBinFile();
+        semester.readData();
     }
 
     public void readStudentFromTXTFile(File file) {
@@ -66,5 +67,13 @@ public class ModelManager implements Model {
 
     public void initializeAllWeeks() {
         semester.initializeAllWeeks();
+    }
+
+    public void readSemesterData() {
+        semester.readData();
+    }
+
+    public void saveSemesterData() {
+        semester.saveData();
     }
 }

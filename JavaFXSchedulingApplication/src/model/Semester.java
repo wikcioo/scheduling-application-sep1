@@ -87,10 +87,11 @@ public class Semester {
             Week week1;
             while((week1 = (Week) in.readObject())!=null){
                 this.weekList.add(week1);
-                System.out.println(week1);
             }
-
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (FileNotFoundException e) {
+            System.out.println(filename + " not found in the resources");
+        }
+        catch (IOException | ClassNotFoundException e) {
             //e.printStackTrace();
         } finally {
             try {
