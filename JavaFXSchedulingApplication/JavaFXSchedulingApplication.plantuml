@@ -2,188 +2,224 @@
 
 title __JAVAFXSCHEDULINGAPPLICATION's Class Diagram__\n
 
-
+  namespace  {
     class Main {
     }
-
+  }
   
 
-
+  namespace  {
     class MyApplication {
     }
-
+  }
   
 
-
+  namespace  {
     namespace ontroller {
       class controller.CalendarViewController {
       }
     }
+  }
+  
 
+  namespace  {
+    namespace odel {
+      class model.BookingTime {
+      }
+    }
+  }
+  
 
+  namespace  {
     namespace odel {
       class model.Calendar {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace odel {
       class model.Class {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace odel {
       class model.Course {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace odel {
       class model.CourseList {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace odel {
       class model.CourseTest {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace odel {
       class model.Day {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace odel {
       class model.Lesson {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace odel {
       interface model.Model {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace odel {
       class model.ModelManager {
       }
     }
-
+  }
   
 
+  namespace  {
+    namespace odel {
+      class model.Room {
+      }
+    }
+  }
+  
 
+  namespace  {
+    namespace odel {
+      class model.RoomList {
+      }
+    }
+  }
+  
+
+  namespace  {
     namespace odel {
       class model.Semester {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace odel {
       class model.Student {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace odel {
       class model.StudentList {
       }
     }
+  }
+  
 
-
-
+  namespace  {
     namespace odel {
       class model.Teacher {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace odel {
       class model.TeacherList {
       }
     }
+  }
+  
 
+  namespace  {
+    namespace odel {
+      class model.Test {
+      }
+    }
+  }
+  
 
-
+  namespace  {
     namespace odel {
       class model.Week {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace tilities {
       class utilities.Util {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace iew {
       class view.AnchorPaneNode {
       }
     }
-
+  }
   
 
-
-    namespace view {
+  namespace  {
+    namespace iew {
       class view.AnchorPaneNodeNav {
       }
     }
-
+  }
   
 
-
-    namespace view {
+  namespace  {
+    namespace iew {
       class view.CalendarView {
       }
     }
-
+  }
   
 
-
-    namespace view {
+  namespace  {
+    namespace iew {
       class view.NavCalendarView {
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace iew {
       class view.ViewHandler {
       }
     }
-
+  }
   
 
   MyApplication -up-|> javafx.application.Application

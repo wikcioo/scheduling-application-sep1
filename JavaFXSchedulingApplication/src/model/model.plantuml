@@ -2,18 +2,39 @@
 
 title __MODEL's Class Diagram__\n
 
+  namespace model  {
+    namespace odel  {
+      class model.BookingTime {
+          - bookingEnd : LocalTime
+          - bookingStart : LocalTime
+          - date : LocalDate
+          + BookingTime()
+          + equals()
+          + getBookingEnd()
+          + getBookingStart()
+          + getDate()
+          + hashCode()
+          + setBookingEnd()
+          + setBookingStart()
+          + setDate()
+          + toString()
+      }
+    }
+  }
+  
 
+  namespace model  {
     namespace odel {
       class model.Calendar {
       }
     }
-
+  }
   
 
+  namespace model  {
     namespace odel {
       class model.Class {
           - name : String
-          - studentlist: Studentlist
           + Class()
           + getName()
           + getStudentList()
@@ -22,10 +43,10 @@ title __MODEL's Class Diagram__\n
           + toString()
       }
     }
-
+  }
   
 
-
+  namespace model  {
     namespace odel {
       class model.Course {
           - title : String
@@ -43,10 +64,10 @@ title __MODEL's Class Diagram__\n
           + toString()
       }
     }
-
+  }
   
 
-
+  namespace model  {
     namespace odel {
       class model.CourseList {
           - courses : ArrayList<Course>
@@ -63,19 +84,19 @@ title __MODEL's Class Diagram__\n
           + writeCourseListToBinFile()
       }
     }
-
+  }
   
 
-
+  namespace model  {
     namespace odel {
       class model.CourseTest {
           {static} + main()
       }
     }
-
+  }
   
 
-
+  namespace model  {
     namespace odel {
       class model.Day {
           - date : LocalDate
@@ -90,9 +111,10 @@ title __MODEL's Class Diagram__\n
           + toString()
       }
     }
-
+  }
   
 
+  namespace model  {
     namespace odel {
       class model.Lesson {
           - course : String
@@ -111,10 +133,10 @@ title __MODEL's Class Diagram__\n
           + toString()
       }
     }
-
+  }
   
 
-
+  namespace model  {
     namespace odel {
       interface model.Model {
           {abstract} + getCurrentWeek()
@@ -129,10 +151,10 @@ title __MODEL's Class Diagram__\n
           {abstract} + readStudentFromTXTFile()
       }
     }
-
+  }
   
 
-
+  namespace model  {
     namespace odel {
       class model.ModelManager {
           + ModelManager()
@@ -149,10 +171,50 @@ title __MODEL's Class Diagram__\n
           + setSemester()
       }
     }
-
+  }
   
 
+  namespace model  {
+    namespace odel {
+      class model.Room {
+          - capacity : int
+          - intervals : ArrayList<BookingTime>
+          - mergeWith : String
+          - name : String
+          + Book()
+          + Room()
+          + getCapacity()
+          + getIntervals()
+          + getMergeWith()
+          + getName()
+          + setCapacity()
+          + setIntervals()
+          + setMergeWith()
+          + setName()
+          + toString()
+          + unBook()
+      }
+    }
+  }
+  
 
+  namespace model  {
+    namespace odel {
+      class model.RoomList {
+          - rooms : ArrayList<Room>
+          + RoomList()
+          + addRoom()
+          + getRooms()
+          + readRoomsFromTXTFile()
+          + removeRoom()
+          + setRooms()
+          + toString()
+      }
+    }
+  }
+  
+
+  namespace model  {
     namespace odel {
       class model.Semester {
           - currentWeekIndex : int
@@ -175,10 +237,10 @@ title __MODEL's Class Diagram__\n
           + toString()
       }
     }
-
+  }
   
 
-
+  namespace model  {
     namespace odel {
       class model.Student {
           - _class : String
@@ -202,10 +264,10 @@ title __MODEL's Class Diagram__\n
           + toString()
       }
     }
-
+  }
   
 
-
+  namespace model  {
     namespace odel {
       class model.StudentList {
           - studentList : ArrayList<Student>
@@ -227,18 +289,18 @@ title __MODEL's Class Diagram__\n
           - isValidStudent()
       }
     }
-
+  }
   
 
-
+  namespace model  {
     namespace odel {
       class model.Teacher {
       }
     }
-
+  }
   
 
-
+  namespace model  {
     namespace odel {
       class model.TeacherList {
           ~ teachers : ArrayList<Teacher>
@@ -250,10 +312,19 @@ title __MODEL's Class Diagram__\n
           + size()
       }
     }
-
+  }
   
 
+  namespace model  {
+    namespace odel {
+      class model.Test {
+          {static} + main()
+      }
+    }
+  }
+  
 
+  namespace model  {
     namespace odel {
       class model.Week {
           - days : Day[]
@@ -267,7 +338,7 @@ title __MODEL's Class Diagram__\n
           + toString()
       }
     }
-
+  }
   
 
   model.Class .up.|> java.io.Serializable

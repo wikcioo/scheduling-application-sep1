@@ -2,7 +2,7 @@
 
 title __VIEW's Class Diagram__\n
 
-
+  namespace  {
     namespace iew {
       class view.AnchorPaneNode {
           - course : String
@@ -11,20 +11,20 @@ title __VIEW's Class Diagram__\n
           + toString()
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace iew {
       class view.AnchorPaneNodeNav {
           + AnchorPaneNodeNav()
           - doSomething()
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace iew {
       class view.CalendarView {
           - daysView : VBox[]
@@ -38,10 +38,10 @@ title __VIEW's Class Diagram__\n
           - putLessonWeekOnCalendar()
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace iew {
       class view.NavCalendarView {
           - calendar : Calendar
@@ -59,10 +59,10 @@ title __VIEW's Class Diagram__\n
           + updateMonthHeader()
       }
     }
-
+  }
   
 
-
+  namespace  {
     namespace iew {
       class view.ViewHandler {
           - currentScene : Scene
@@ -76,7 +76,7 @@ title __VIEW's Class Diagram__\n
           - loadCalendarView()
       }
     }
-
+  }
   
 
   view.AnchorPaneNode -up-|> javafx.scene.layout.AnchorPane

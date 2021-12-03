@@ -2,7 +2,7 @@
 
 title __CONTROLLER's Class Diagram__\n
 
-
+  namespace  {
     namespace ontroller {
       class controller.CalendarViewController {
           + currentDayOfWeek : LocalDate
@@ -41,7 +41,7 @@ title __CONTROLLER's Class Diagram__\n
           + reset()
       }
     }
-
+  }
   
 
   controller.CalendarViewController o-- model.Model : model
