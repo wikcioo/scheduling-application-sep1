@@ -68,7 +68,6 @@ public class CalendarViewController {
         this.model = model;
         this.viewHandler = viewHandler;
         this.root = root;
-        this.addLesson(new Lesson("SDJ", LocalTime.of(8, 0), LocalTime.of(10, 0)), 0);
         initDates();
         initCalendar();
         initNavCallendar();
@@ -107,7 +106,7 @@ public class CalendarViewController {
             initCalendar();
             initDayForAll();
         }
-        else{
+        if (!model.hasNextWeek()){
             nextWeekButton.setDisable(true);
         }
     }
@@ -124,7 +123,7 @@ public class CalendarViewController {
             initCalendar();
             initDayForAll();
         }
-        else {
+        if (!model.hasPreviousWeek()) {
             previousWeekButton.setDisable(true);
         }
     }

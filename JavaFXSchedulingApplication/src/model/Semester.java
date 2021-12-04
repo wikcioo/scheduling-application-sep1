@@ -22,10 +22,10 @@ public class Semester {
         initializeCurrentWeekIndex();
     }
     public boolean hasNextWeek(){
-        return weekList.size()-1>currentWeekIndex;
+        return weekList.size() - 1 >currentWeekIndex;
     }
     public boolean hasPreviousWeek(){
-        return currentWeekIndex>0;
+        return currentWeekIndex > 0;
     }
 
     public Week getCurrentWeek() {
@@ -85,8 +85,10 @@ public class Semester {
             FileInputStream fis = new FileInputStream(file);
             in = new ObjectInputStream(fis);
             Week week1;
+            int index = 0;
             while((week1 = (Week) in.readObject())!=null){
-                this.weekList.add(week1);
+                this.weekList.set(index, week1);
+                index++;
             }
         } catch (FileNotFoundException e) {
             System.out.println(filename + " not found in the resources");
@@ -96,7 +98,7 @@ public class Semester {
         } finally {
             try {
                 in.close();
-            } catch (IOException e) {
+            } catch (IOException | NullPointerException e) {
                 //e.printStackTrace();
             }
         }
