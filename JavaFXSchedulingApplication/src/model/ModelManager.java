@@ -7,12 +7,18 @@ import java.util.ArrayList;
 public class ModelManager implements Model {
     private Semester semester;
     private StudentList studentList;
+    private RoomList roomList;
+    private CourseList courseList;
+    private ClassList classList;
 
     public ModelManager() {
         this.semester = new Semester(LocalDate.of(2021, 8, 30), LocalDate.of(2021, 12, 17));
         this.studentList = new StudentList();
+        this.roomList = new RoomList();
+        this.courseList = new CourseList();
+        this.classList = new ClassList();
         studentList.readStudentListFromBinFile();
-        semester.readData();
+        readSemesterData();
     }
 
     public void readStudentFromTXTFile(File file) {
