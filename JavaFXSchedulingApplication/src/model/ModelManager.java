@@ -7,9 +7,18 @@ import java.util.ArrayList;
 public class ModelManager implements Model {
     private Semester semester;
     private StudentList studentList;
+    private RoomList roomList;
+    private CourseList courseList;
+    private ClassList classList;
 
     public ModelManager() {
         this.semester = new Semester(LocalDate.of(2021, 8, 30), LocalDate.of(2021, 12, 17));
+        this.studentList = new StudentList();
+        this.roomList = new RoomList();
+        this.courseList = new CourseList();
+        this.classList = new ClassList();
+        studentList.readStudentListFromBinFile();
+        readSemesterData();
     }
 
     public void readStudentFromTXTFile(File file) {
@@ -32,8 +41,18 @@ public class ModelManager implements Model {
         semester.goNextWeek();
     }
 
+    @Override
+    public boolean hasNextWeek() {
+        return semester.hasNextWeek();
+    }
+
     public void goPreviousWeek() {
         semester.goPreviousWeek();
+    }
+
+    @Override
+    public boolean hasPreviousWeek() {
+        return semester.hasPreviousWeek();
     }
 
     public ArrayList<Week> getWeekList() {
@@ -54,5 +73,13 @@ public class ModelManager implements Model {
 
     public void initializeAllWeeks() {
         semester.initializeAllWeeks();
+    }
+
+    public void readSemesterData() {
+        semester.readData();
+    }
+
+    public void saveSemesterData() {
+        semester.saveData();
     }
 }

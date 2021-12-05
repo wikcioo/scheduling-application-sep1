@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -49,6 +50,10 @@ public class CalendarViewController {
     private TextField end;
     @FXML
     private AnchorPane navCalendar;
+    @FXML
+    private Button previousWeekButton;
+    @FXML
+    private Button nextWeekButton;
 
     private Region root;
     private Model model;
@@ -63,7 +68,6 @@ public class CalendarViewController {
         this.model = model;
         this.viewHandler = viewHandler;
         this.root = root;
-        this.addLesson(new Lesson("SDJ", LocalTime.of(8, 0), LocalTime.of(10, 0)), 0);
         initDates();
         initCalendar();
         initNavCallendar();
@@ -92,22 +96,36 @@ public class CalendarViewController {
 
     @FXML
     public void onNextWeekClick() {
-        currentDayOfWeek = currentDayOfWeek.plusDays(7);
-        endDayOfWeek = endDayOfWeek.plusDays(7);
-        model.goNextWeek();
-        initDates();
-        initCalendar();
-        initDayForAll();
+        if(model.hasNextWeek()){
+            nextWeekButton.setDisable(false);
+            previousWeekButton.setDisable(false);
+            currentDayOfWeek = currentDayOfWeek.plusDays(7);
+            endDayOfWeek = endDayOfWeek.plusDays(7);
+            model.goNextWeek();
+            initDates();
+            initCalendar();
+            initDayForAll();
+        }
+        if (!model.hasNextWeek()){
+            nextWeekButton.setDisable(true);
+        }
     }
 
     @FXML
     public void onPreviousWeekClick() {
-        currentDayOfWeek = currentDayOfWeek.minusDays(7);
-        endDayOfWeek = endDayOfWeek.minusDays(7);
-        model.goPreviousWeek();
-        initDates();
-        initCalendar();
-        initDayForAll();
+        if(model.hasPreviousWeek()){
+            nextWeekButton.setDisable(false);
+            previousWeekButton.setDisable(false);
+            currentDayOfWeek = currentDayOfWeek.minusDays(7);
+            endDayOfWeek = endDayOfWeek.minusDays(7);
+            model.goPreviousWeek();
+            initDates();
+            initCalendar();
+            initDayForAll();
+        }
+        if (!model.hasPreviousWeek()) {
+            previousWeekButton.setDisable(true);
+        }
     }
 
     @FXML
