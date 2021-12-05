@@ -49,8 +49,8 @@ public class Room implements Serializable
 
   @Override public String toString()
   {
-    return "Room{" + "name='" + name + '\'' + ", capacity=" + capacity
-        + ", mergeWith='" + mergeWith + '\'' + ", intervals=" + intervals + '}' + "\n";
+    return "Room name :" + name + " ,capacity: " + capacity
+        + " ,The room can merge with: " + mergeWith + " ,Is booked at" + intervals + "\n";
   }
 
   public String getName()

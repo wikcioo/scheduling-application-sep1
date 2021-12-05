@@ -52,7 +52,7 @@ public class RoomList implements Serializable
 
   @Override public String toString()
   {
-    return "RoomList{" + "rooms=" + rooms + '}';
+    return "Room name: " + rooms;
   }
 
   public ArrayList<Room> getRooms()

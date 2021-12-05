@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RoomListController">
+   <children>
+      <Button fx:id="button2" layoutX="334.0" layoutY="445.0" mnemonicParsing="false" onAction="#SwitchToScreen1" prefHeight="50.0" prefWidth="126.0" text="go back" />
+      <ListView fx:id="list" layoutX="159.0" layoutY="98.0" prefHeight="278.0" prefWidth="513.0" />
+      <Button layoutX="159.0" layoutY="445.0" mnemonicParsing="false" onAction="#displayRooms" prefHeight="49.0" prefWidth="137.0" text="DisplayRooms" />
+   </children>
+</AnchorPane>
