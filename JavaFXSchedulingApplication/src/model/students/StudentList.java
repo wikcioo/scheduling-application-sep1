@@ -1,4 +1,4 @@
-package model;
+package model.students;
 
 import java.io.*;
 import java.util.ArrayList;

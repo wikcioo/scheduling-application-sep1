@@ -1,6 +1,11 @@
-package model;
+package model.courses;
 
-import java.util.ArrayList;
+import model.courses.Class;
+import model.courses.Course;
+import model.courses.CourseList;
+import model.courses.Teacher;
+import model.students.Student;
+import model.students.StudentList;
 
 public class CourseTest
 {

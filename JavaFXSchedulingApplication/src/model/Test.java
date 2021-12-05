@@ -1,10 +1,8 @@
 package model;
 
-import javafx.util.converter.LocalTimeStringConverter;
+import model.rooms.RoomList;
 
 import java.io.File;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class Test
 {

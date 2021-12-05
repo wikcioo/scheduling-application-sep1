@@ -1,4 +1,4 @@
-package model;
+package model.calendar;
 
 import java.io.Serializable;
 import java.time.LocalTime;

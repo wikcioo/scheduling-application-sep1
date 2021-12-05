@@ -1,5 +1,7 @@
 package model;
 
+import model.calendar.Week;
+
 import java.io.File;
 import java.util.ArrayList;
 

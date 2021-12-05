@@ -2,141 +2,7 @@
 
 title __MODEL's Class Diagram__\n
 
-  namespace model  {
-    namespace odel  {
-      class model.BookingTime {
-          - bookingEnd : LocalTime
-          - bookingStart : LocalTime
-          - date : LocalDate
-          + BookingTime()
-          + equals()
-          + getBookingEnd()
-          + getBookingStart()
-          + getDate()
-          + hashCode()
-          + setBookingEnd()
-          + setBookingStart()
-          + setDate()
-          + toString()
-      }
-    }
-  }
-  
-
-  namespace model  {
-    namespace odel {
-      class model.Calendar {
-      }
-    }
-  }
-  
-
-  namespace model  {
-    namespace odel {
-      class model.Class {
-          - name : String
-          + Class()
-          + getName()
-          + getStudentList()
-          + getStudentsList()
-          + setName()
-          + toString()
-      }
-    }
-  }
-  
-
-  namespace model  {
-    namespace odel {
-      class model.Course {
-          - title : String
-          + Course()
-          + Course()
-          + getClassOfStudents()
-          + getParticipants()
-          + getTeacherList()
-          + getTitle()
-          + initStudents()
-          + setClassOfStudents()
-          + setParticipants()
-          + setTeacherList()
-          + setTitle()
-          + toString()
-      }
-    }
-  }
-  
-
-  namespace model  {
-    namespace odel {
-      class model.CourseList {
-          - courses : ArrayList<Course>
-          + CourseList()
-          + addCourse()
-          + getCourses()
-          + getCoursesByClass()
-          + getCoursesByClassName()
-          + getCoursesByTeachers()
-          + getCoursesByTitle()
-          + importCourses()
-          + readCourseListFromBinFile()
-          + removeCourse()
-          + writeCourseListToBinFile()
-      }
-    }
-  }
-  
-
-  namespace model  {
-    namespace odel {
-      class model.CourseTest {
-          {static} + main()
-      }
-    }
-  }
-  
-
-  namespace model  {
-    namespace odel {
-      class model.Day {
-          - date : LocalDate
-          - lessons : ArrayList<Lesson>
-          + addLesson()
-          + getIndexForDay()
-          + getLessons()
-          + removeLesson()
-          + setDate()
-          + setLessons()
-          + sortLessons()
-          + toString()
-      }
-    }
-  }
-  
-
-  namespace model  {
-    namespace odel {
-      class model.Lesson {
-          - course : String
-          - end : LocalTime
-          - start : LocalTime
-          + Lesson()
-          + equals()
-          + getCourse()
-          + getEnd()
-          + getStart()
-          + hashCode()
-          + setCourse()
-          + setEnd()
-          + setStart()
-          + setTime()
-          + toString()
-      }
-    }
-  }
-  
-
-  namespace model  {
+  namespace  {
     namespace odel {
       interface model.Model {
           {abstract} + getCurrentWeek()
@@ -146,15 +12,19 @@ title __MODEL's Class Diagram__\n
           {abstract} + getWeekList()
           {abstract} + goNextWeek()
           {abstract} + goPreviousWeek()
+          {abstract} + hasNextWeek()
+          {abstract} + hasPreviousWeek()
           {abstract} + initializeAllWeeks()
           {abstract} + initializeCurrentWeekIndex()
+          {abstract} + readSemesterData()
           {abstract} + readStudentFromTXTFile()
+          {abstract} + saveSemesterData()
       }
     }
   }
   
 
-  namespace model  {
+  namespace  {
     namespace odel {
       class model.ModelManager {
           + ModelManager()
@@ -165,157 +35,20 @@ title __MODEL's Class Diagram__\n
           + getWeekList()
           + goNextWeek()
           + goPreviousWeek()
+          + hasNextWeek()
+          + hasPreviousWeek()
           + initializeAllWeeks()
           + initializeCurrentWeekIndex()
+          + readSemesterData()
           + readStudentFromTXTFile()
+          + saveSemesterData()
           + setSemester()
       }
     }
   }
   
 
-  namespace model  {
-    namespace odel {
-      class model.Room {
-          - capacity : int
-          - intervals : ArrayList<BookingTime>
-          - mergeWith : String
-          - name : String
-          + Book()
-          + Room()
-          + getCapacity()
-          + getIntervals()
-          + getMergeWith()
-          + getName()
-          + setCapacity()
-          + setIntervals()
-          + setMergeWith()
-          + setName()
-          + toString()
-          + unBook()
-      }
-    }
-  }
-  
-
-  namespace model  {
-    namespace odel {
-      class model.RoomList {
-          - rooms : ArrayList<Room>
-          + RoomList()
-          + addRoom()
-          + getRooms()
-          + readRoomsFromTXTFile()
-          + removeRoom()
-          + setRooms()
-          + toString()
-      }
-    }
-  }
-  
-
-  namespace model  {
-    namespace odel {
-      class model.Semester {
-          - currentWeekIndex : int
-          - numberOfWeeksInSemester : int
-          - semesterEnd : LocalDate
-          - semesterStart : LocalDate
-          - weekList : ArrayList<Week>
-          + Semester()
-          + getCurrentWeek()
-          + getCurrentWeekIndex()
-          + getCurrentYear()
-          + getNumberOfWeeksBetween()
-          + getWeekList()
-          + goNextWeek()
-          + goPreviousWeek()
-          + initializeAllWeeks()
-          + initializeCurrentWeekIndex()
-          + readData()
-          + saveData()
-          + toString()
-      }
-    }
-  }
-  
-
-  namespace model  {
-    namespace odel {
-      class model.Student {
-          - _class : String
-          - id : int
-          - isExchange : boolean
-          - name : String
-          - semester : int
-          + Student()
-          + equals()
-          + getId()
-          + getName()
-          + getSemester()
-          + get_class()
-          + hashCode()
-          + isExchange()
-          + setExchange()
-          + setId()
-          + setName()
-          + setSemester()
-          + set_class()
-          + toString()
-      }
-    }
-  }
-  
-
-  namespace model  {
-    namespace odel {
-      class model.StudentList {
-          - studentList : ArrayList<Student>
-          + StudentList()
-          + StudentList()
-          + addStudent()
-          + copy()
-          + getExchangeStudents()
-          + getStudent()
-          + getStudentList()
-          + getStudentsByClass()
-          + getStudentsByName()
-          + readStudentFromTXTFile()
-          + readStudentListFromBinFile()
-          + removeStudent()
-          + setStudentList()
-          + toString()
-          + writeStudentListToBinFile()
-          - isValidStudent()
-      }
-    }
-  }
-  
-
-  namespace model  {
-    namespace odel {
-      class model.Teacher {
-      }
-    }
-  }
-  
-
-  namespace model  {
-    namespace odel {
-      class model.TeacherList {
-          ~ teachers : ArrayList<Teacher>
-          + TeacherList()
-          + TeacherList()
-          + addTeacher()
-          + getTeacherByIndex()
-          + removeTeacher()
-          + size()
-      }
-    }
-  }
-  
-
-  namespace model  {
+  namespace  {
     namespace odel {
       class model.Test {
           {static} + main()
@@ -324,39 +57,12 @@ title __MODEL's Class Diagram__\n
   }
   
 
-  namespace model  {
-    namespace odel {
-      class model.Week {
-          - days : Day[]
-          - end : LocalDate
-          - start : LocalDate
-          + Week()
-          + addLesson()
-          + getDays()
-          + getEnd()
-          + getStart()
-          + toString()
-      }
-    }
-  }
-  
-
-  model.Class .up.|> java.io.Serializable
-  model.Class o-- model.StudentList : studentList
-  model.Course .up.|> java.io.Serializable
-  model.Course o-- model.Class : classOfStudents
-  model.Course o-- model.StudentList : participants
-  model.Course o-- model.TeacherList : teacherList
-  model.Day .up.|> java.io.Serializable
-  model.Lesson .up.|> java.io.Serializable
   model.ModelManager .up.|> model.Model
-  model.ModelManager o-- model.Semester : semester
-  model.ModelManager o-- model.StudentList : studentList
-  model.Student .up.|> java.io.Serializable
-  model.StudentList .up.|> java.io.Serializable
-  model.Teacher .up.|> java.io.Serializable
-  model.TeacherList .up.|> java.io.Serializable
-  model.Week .up.|> java.io.Serializable
+  model.ModelManager o-- model.courses.ClassList : classList
+  model.ModelManager o-- model.courses.CourseList : courseList
+  model.ModelManager o-- model.rooms.RoomList : roomList
+  model.ModelManager o-- model.calendar.Semester : semester
+  model.ModelManager o-- model.students.StudentList : studentList
 
 
 right footer

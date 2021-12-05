@@ -8,8 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import model.Room;
-import model.RoomList;
+import model.rooms.Room;
+import model.rooms.RoomList;
 
 import java.io.IOException;
 import java.util.ArrayList;

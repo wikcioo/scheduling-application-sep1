@@ -1,5 +1,12 @@
 package model;
 
+import model.calendar.Semester;
+import model.calendar.Week;
+import model.courses.ClassList;
+import model.courses.CourseList;
+import model.rooms.RoomList;
+import model.students.StudentList;
+
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package model;
+package model.calendar;
 
 import utilities.Util;
 
