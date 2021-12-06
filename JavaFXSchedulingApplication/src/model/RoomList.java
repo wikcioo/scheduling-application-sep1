@@ -132,5 +132,76 @@ public class RoomList implements Serializable
     }
   }
 
+  public ArrayList<Room> getRoomsByMinimumCapacity(int minCapacity)//manage
+  {
+    ArrayList<Room> result = new ArrayList<>();
+    for(Room room: rooms)
+    {
+      if(room.getCapacity() >= minCapacity)
+        result.add(room);
+    }
+    return result;
+  }
+
+  public ArrayList<Room> getMergeableRooms()//manage
+  {
+    ArrayList<Room> result = new ArrayList<>();
+    for(Room room: rooms)
+    {
+      if(room.getMergeWith()!=null)
+        result.add(room);
+    }
+    return result;
+  }
+
+  public ArrayList<Room> getUnMergeableRooms()//manage
+  {
+    ArrayList<Room> result = new ArrayList<>();
+    for(Room room: rooms)
+    {
+      if(room.getMergeWith()==null)
+        result.add(room);
+    }
+    return result;
+  }
+
+  public ArrayList<Room> getAvailableRoomsByMinimumCapacity(int minCapacity, BookingTime time)//book
+  {
+    ArrayList<Room> result = new ArrayList<>();
+    for(Room room: rooms)
+    {
+      if(room.getCapacity() >= minCapacity && room.canBeBookedAt(time))
+        result.add(room);
+    }
+    return result;
+  }
+
+  public ArrayList<Room> getAvailableAndMergeableRooms(BookingTime time)//book
+  {
+    ArrayList<Room> result = new ArrayList<>();
+    for(Room room: rooms)
+    {
+      if(room.getMergeWith()!=null && room.canBeBookedAt(time))
+        result.add(room);
+    }
+    return result;
+  }
+
+  public ArrayList<Room> getAvailableAndUnMergeableRooms(BookingTime time)//book
+  {
+    ArrayList<Room> result = new ArrayList<>();
+    for(Room room: rooms)
+    {
+      if(room.getMergeWith()==null && room.canBeBookedAt(time))
+        result.add(room);
+    }
+    return result;
+  }
+
+
+
+
+
+
   // modify a room field
 }
