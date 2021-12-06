@@ -1,6 +1,6 @@
 package model;
 
-import model.calendar.Semester;
+import model.calendar.Schedule;
 import model.calendar.Week;
 import model.courses.ClassList;
 import model.courses.CourseList;
@@ -12,14 +12,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ModelManager implements Model {
-    private Semester semester;
+    private Schedule schedule;
     private StudentList studentList;
     private RoomList roomList;
     private CourseList courseList;
     private ClassList classList;
 
     public ModelManager() {
-        this.semester = new Semester(LocalDate.of(2021, 8, 30), LocalDate.of(2021, 12, 17));
+        this.schedule = new Schedule(LocalDate.of(2021, 8, 30), LocalDate.of(2021, 12, 17));
         this.studentList = new StudentList();
         this.roomList = new RoomList();
         this.courseList = new CourseList();
@@ -33,60 +33,60 @@ public class ModelManager implements Model {
     }
 
     public void setSemester(LocalDate semesterStart, LocalDate semesterEnd) {
-        this.semester = new Semester(semesterStart, semesterEnd);
+        this.schedule = new Schedule(semesterStart, semesterEnd);
     }
 
     public Week getCurrentWeek() {
-        return semester.getCurrentWeek();
+        return schedule.getCurrentWeek();
     }
 
     public int getCurrentWeekIndex() {
-        return semester.getCurrentWeekIndex();
+        return schedule.getCurrentWeekIndex();
     }
 
     public void goNextWeek() {
-        semester.goNextWeek();
+        schedule.goNextWeek();
     }
 
     @Override
     public boolean hasNextWeek() {
-        return semester.hasNextWeek();
+        return schedule.hasNextWeek();
     }
 
     public void goPreviousWeek() {
-        semester.goPreviousWeek();
+        schedule.goPreviousWeek();
     }
 
     @Override
     public boolean hasPreviousWeek() {
-        return semester.hasPreviousWeek();
+        return schedule.hasPreviousWeek();
     }
 
     public ArrayList<Week> getWeekList() {
-        return semester.getWeekList();
+        return schedule.getWeekList();
     }
 
     public int getNumberOfWeeksBetween() {
-        return semester.getNumberOfWeeksBetween();
+        return schedule.getNumberOfWeeksBetween();
     }
 
     public void initializeCurrentWeekIndex() {
-        semester.initializeCurrentWeekIndex();
+        schedule.initializeCurrentWeekIndex();
     }
 
     public int getCurrentYear() {
-        return semester.getCurrentYear();
+        return schedule.getCurrentYear();
     }
 
     public void initializeAllWeeks() {
-        semester.initializeAllWeeks();
+        schedule.initializeAllWeeks();
     }
 
     public void readSemesterData() {
-        semester.readData();
+        schedule.readData();
     }
 
     public void saveSemesterData() {
-        semester.saveData();
+        schedule.saveData();
     }
 }

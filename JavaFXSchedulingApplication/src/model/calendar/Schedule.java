@@ -6,14 +6,14 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Semester {
+public class Schedule {
     private final ArrayList<Week> weekList;
     private final int numberOfWeeksInSemester;
     private int currentWeekIndex;
     private final LocalDate semesterStart;
     private final LocalDate semesterEnd;
 
-    public Semester(LocalDate semesterStart, LocalDate semesterEnd) {
+    public Schedule(LocalDate semesterStart, LocalDate semesterEnd) {
         this.weekList = new ArrayList<>();
         this.semesterStart = semesterStart;
         this.semesterEnd = semesterEnd;
