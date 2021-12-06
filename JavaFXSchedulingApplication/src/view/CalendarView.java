@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 //TODO:ADD hours dynamically , separate mvc model ,refactoring, set font to course ,fix jump nav cal, add on click functionality ,
@@ -30,28 +31,29 @@ public class CalendarView extends Node {
             daysView[i] = vb;
             calendar.getChildren().add(vb);
         }
+
 //      VIEW TEST
-//        Day today = new Day();
-//        today.setDate(LocalDate.now());
-//        LocalTime time1 = LocalTime.of(9, 0);
-//        LocalTime time2 = LocalTime.of(10, 0);
-//        week.addLesson(new Lesson("SDJ", time1, time2), today.getIndexForDay());
-//
-//        LocalTime time3 = LocalTime.of(12, 0);
-//        LocalTime time4 = LocalTime.of(14, 0);
-//
-//        week.addLesson(new Lesson("SDJ", time3, time4), today.getIndexForDay());
-//
-//        LocalTime time5 = LocalTime.of(14, 0);
-//        LocalTime time6 = LocalTime.of(15, 0);
-//
-//        today.setDate(LocalDate.now().plusDays(1));
-//        week.addLesson(new Lesson("SDJ", time5, time6), today.getIndexForDay());
-//
-//        LocalTime time7 = LocalTime.of(15, 10);
-//        LocalTime time8 = LocalTime.of(17, 0);
-//
-//        week.addLesson(new Lesson("SDJ", time7, time8), today.getIndexForDay());
+        Day today = new Day();
+        today.setDate(LocalDate.now());
+        LocalTime time1 = LocalTime.of(9, 0);
+        LocalTime time2 = LocalTime.of(10, 0);
+        week.addLesson(new Lesson("RWD", time1, time2), today.getIndexForDay());
+
+        LocalTime time3 = LocalTime.of(12, 0);
+        LocalTime time4 = LocalTime.of(14, 0);
+
+        week.addLesson(new Lesson("SDJ", time3, time4), today.getIndexForDay());
+
+        LocalTime time5 = LocalTime.of(14, 0);
+        LocalTime time6 = LocalTime.of(15, 0);
+
+        today.setDate(LocalDate.now().plusDays(1));
+        week.addLesson(new Lesson("SEP", time5, time6), today.getIndexForDay());
+
+        LocalTime time7 = LocalTime.of(15, 10);
+        LocalTime time8 = LocalTime.of(17, 0);
+
+        week.addLesson(new Lesson("SDJ", time7, time8), today.getIndexForDay());
 
         putLessonWeekOnCalendar(week);
         finalView = new VBox(calendar);
@@ -77,7 +79,7 @@ public class CalendarView extends Node {
                 if ((dif.toHoursPart() > 0) || (dif.toMinutesPart() > 0))
                     daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart, lesson.getStart()));
             }
-            AnchorPaneNode lessonBlock = getBlockForLesson(lesson.getStart(), lesson.getEnd());
+            AnchorPaneNode lessonBlock = getBlockForLesson(lesson.getStart(), lesson.getEnd(),lesson);
             daysView[day.getIndexForDay()].getChildren().add(lessonBlock);
             //Check for break
             if (i + 1 < currentDayLessons.size()) {
@@ -89,13 +91,13 @@ public class CalendarView extends Node {
         }
     }
 
-    private AnchorPaneNode getBlockForLesson(LocalTime start, LocalTime finish) {
+    private AnchorPaneNode getBlockForLesson(LocalTime start, LocalTime finish,Lesson lesson) {
         AnchorPaneNode ap = new AnchorPaneNode();
         ap.setPrefWidth(200);
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
-        ap.getStyleClass().add("SDJ");
-        Text text = new Text("SDJ-1Z");
-        ap.setCourse("SDJ");
+        ap.getStyleClass().add(lesson.getCourse());
+        Text text = new Text(lesson.getCourse() + "-1Z");
+        ap.setLesson(lesson);
         Text description = new Text(start + " -- " + finish);
         text.setFill(Color.WHITE);
         description.setFill(Color.WHITE);
@@ -117,7 +119,7 @@ public class CalendarView extends Node {
         System.out.println(start);
         System.out.println(finish);
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
-        ap.setCourse("Break");
+        ap.setLesson(null);
         return ap;
     }
 
