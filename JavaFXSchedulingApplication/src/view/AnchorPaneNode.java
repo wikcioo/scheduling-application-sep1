@@ -1,6 +1,5 @@
 package view;
 
-import controller.CalendarViewController;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -9,11 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.calendar.Day;
 import model.calendar.Lesson;
 
+import java.time.Duration;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
@@ -90,7 +93,39 @@ public class AnchorPaneNode extends AnchorPane {
 
     public void addALesson(String userInput) {
         Lesson lesson = new Lesson(userInput,this.lesson.getStart(),this.lesson.getEnd());
+        this.lesson = lesson;
         day.addLesson(lesson);
+        this.getChildren().add(getBlockForLessonForMoment(lesson.getStart(),lesson.getEnd(),lesson));
+    }
+
+    private AnchorPane getBlockForLessonForMoment(LocalTime start, LocalTime finish, Lesson lesson) {
+        AnchorPane ap = new AnchorPane();
+        ap.setPrefWidth(145);
+        ap.setPrefHeight(calculateHeightForBlock(start, finish));
+        ap.getStyleClass().add(lesson.getCourse());
+        Text text = new Text(lesson.getCourse() + "-1Z");
+        //Set the info for the anchor pane
+        Text description = new Text(start + " -- " + finish);
+        text.setFill(Color.WHITE);
+        description.setFill(Color.WHITE);
+        ap.getChildren().add(text);
+        ap.getChildren().add(description);
+        text.setLayoutX(10);
+        text.setLayoutY(20);
+        description.setLayoutX(10);
+        description.setLayoutY(20);
+        AnchorPane.setTopAnchor(text, 5.0);
+        AnchorPane.setTopAnchor(description, 50.0);
+        return ap;
+    }
+
+    public long calculateHeightForBlock(LocalTime start, LocalTime finish) {
+        //One unit is 60 --> 1 hr ,1 minute is 1 pixel
+        Duration duration = Duration.between(start, finish);
+        long hour = duration.toHoursPart();
+        long minute = duration.toMinutesPart();
+        long result = hour * 60 + minute * 1;
+        return result;
     }
 
     @Override
@@ -98,5 +133,9 @@ public class AnchorPaneNode extends AnchorPane {
         return "AnchorPaneNode{" +
                 "lesson=" + lesson +
                 '}';
+    }
+
+    public Lesson getLesson() {
+        return lesson;
     }
 }

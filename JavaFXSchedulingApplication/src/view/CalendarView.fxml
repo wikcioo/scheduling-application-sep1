@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -98,7 +100,15 @@
             <Button layoutX="209.0" layoutY="166.0" mnemonicParsing="false" onAction="#navViewNextWeek" style="-fx-background-color: black;" text="&gt;&gt;" textFill="WHITE" />
             <Accordion layoutX="7.0" layoutY="468.0" prefHeight="53.0" prefWidth="264.0">
               <panes>
-                <TitledPane animated="false" text="untitled 2" textFill="WHITE" />
+                <TitledPane animated="false" text="Edit a lesson" textFill="WHITE">
+                     <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="Add a lesson" />
+                              <Button mnemonicParsing="false" text="Remove a lesson" />
+                           </children>
+                        </VBox>
+                     </content></TitledPane>
                 <TitledPane animated="false" prefHeight="54.0" prefWidth="214.0" text="Import" textFill="WHITE">
                      <content>
                         <Button mnemonicParsing="false" onAction="#onChooseFileButton" text="Choose files" />
@@ -106,6 +116,46 @@
                   </TitledPane>
               </panes>
             </Accordion>
+            <Text fill="WHITE" layoutX="71.0" layoutY="576.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SDJ" wrappingWidth="239.99999999999994">
+               <font>
+                  <Font name="Century Gothic" size="23.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="71.0" layoutY="628.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RWD" wrappingWidth="239.99999999999994">
+               <font>
+                  <Font name="Century Gothic" size="21.0" />
+               </font>
+            </Text>
+            <Button layoutX="15.0" layoutY="542.0" mnemonicParsing="false" style="-fx-background-color: black;">
+               <graphic>
+                  <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+               </graphic>
+            </Button>
+            <Text fill="WHITE" layoutX="71.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEP" wrappingWidth="239.99999999999994">
+               <font>
+                  <Font name="Century Gothic" size="21.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="71.0" layoutY="722.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DMA" wrappingWidth="239.99999999999994">
+               <font>
+                  <Font name="Century Gothic" size="21.0" />
+               </font>
+            </Text>
+            <Button layoutX="15.0" layoutY="594.0" mnemonicParsing="false" style="-fx-background-color: black;">
+               <graphic>
+                  <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+               </graphic>
+            </Button>
+            <Button layoutX="15.0" layoutY="642.0" mnemonicParsing="false" style="-fx-background-color: black;">
+               <graphic>
+                  <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+               </graphic>
+            </Button>
+            <Button layoutX="15.0" layoutY="688.0" mnemonicParsing="false" style="-fx-background-color: black;">
+               <graphic>
+                  <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+               </graphic>
+            </Button>
          </children>
       </Pane>
       <Text fx:id="day1" layoutX="325.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="52.79998779296875">
