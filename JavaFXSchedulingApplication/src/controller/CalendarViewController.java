@@ -9,6 +9,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import model.*;
+import model.calendar.Lesson;
 import utilities.Util;
 import view.CalendarView;
 import view.NavCalendarView;

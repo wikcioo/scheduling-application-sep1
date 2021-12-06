@@ -23,64 +23,8 @@ title __JAVAFXSCHEDULINGAPPLICATION's Class Diagram__\n
   
 
   namespace  {
-    namespace odel {
-      class model.BookingTime {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
-      class model.Calendar {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
-      class model.Class {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
-      class model.Course {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
-      class model.CourseList {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
-      class model.CourseTest {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
-      class model.Day {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
-      class model.Lesson {
+    namespace ontroller {
+      class controller.RoomListController {
       }
     }
   }
@@ -104,62 +48,6 @@ title __JAVAFXSCHEDULINGAPPLICATION's Class Diagram__\n
 
   namespace  {
     namespace odel {
-      class model.Room {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
-      class model.RoomList {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
-      class model.Semester {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
-      class model.Student {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
-      class model.StudentList {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
-      class model.Teacher {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
-      class model.TeacherList {
-      }
-    }
-  }
-  
-
-  namespace  {
-    namespace odel {
       class model.Test {
       }
     }
@@ -168,7 +56,159 @@ title __JAVAFXSCHEDULINGAPPLICATION's Class Diagram__\n
 
   namespace  {
     namespace odel {
-      class model.Week {
+      namespace calendar {
+        class model.calendar.Day {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace calendar {
+        class model.calendar.Lesson {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace calendar {
+        class model.calendar.Semester {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace calendar {
+        class model.calendar.Week {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace courses {
+        class model.courses.Class {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace courses {
+        class model.courses.ClassList {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace courses {
+        class model.courses.Course {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace courses {
+        class model.courses.CourseList {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace courses {
+        class model.courses.CourseTest {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace courses {
+        class model.courses.Teacher {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace courses {
+        class model.courses.TeacherList {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace rooms {
+        class model.rooms.BookingTime {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace rooms {
+        class model.rooms.Room {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace rooms {
+        class model.rooms.RoomList {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace students {
+        class model.students.Student {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      namespace students {
+        class model.students.StudentList {
+        }
       }
     }
   }
@@ -216,6 +256,14 @@ title __JAVAFXSCHEDULINGAPPLICATION's Class Diagram__\n
 
   namespace  {
     namespace iew {
+      class view.RoomView {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
       class view.ViewHandler {
       }
     }
@@ -223,25 +271,33 @@ title __JAVAFXSCHEDULINGAPPLICATION's Class Diagram__\n
   
 
   MyApplication -up-|> javafx.application.Application
+  MyApplication o-- view.ViewHandler : view
   controller.CalendarViewController o-- model.Model : model
   controller.CalendarViewController o-- view.NavCalendarView : navCalendarView
   controller.CalendarViewController o-- view.ViewHandler : viewHandler
-  model.Class .up.|> java.io.Serializable
-  model.Class o-- model.StudentList : studentList
-  model.Course .up.|> java.io.Serializable
-  model.Course o-- model.Class : classOfStudents
-  model.Course o-- model.StudentList : participants
-  model.Course o-- model.TeacherList : teacherList
-  model.Day .up.|> java.io.Serializable
-  model.Lesson .up.|> java.io.Serializable
+  controller.RoomListController o-- model.rooms.RoomList : rooms
   model.ModelManager .up.|> model.Model
-  model.ModelManager o-- model.Semester : semester
-  model.ModelManager o-- model.StudentList : studentList
-  model.Student .up.|> java.io.Serializable
-  model.StudentList .up.|> java.io.Serializable
-  model.Teacher .up.|> java.io.Serializable
-  model.TeacherList .up.|> java.io.Serializable
-  model.Week .up.|> java.io.Serializable
+  model.ModelManager o-- model.courses.ClassList : classList
+  model.ModelManager o-- model.courses.CourseList : courseList
+  model.ModelManager o-- model.rooms.RoomList : roomList
+  model.ModelManager o-- model.calendar.Semester : semester
+  model.ModelManager o-- model.students.StudentList : studentList
+  model.calendar.Day .up.|> java.io.Serializable
+  model.calendar.Lesson .up.|> java.io.Serializable
+  model.calendar.Week .up.|> java.io.Serializable
+  model.courses.Class .up.|> java.io.Serializable
+  model.courses.Class o-- model.students.StudentList : studentList
+  model.courses.Course .up.|> java.io.Serializable
+  model.courses.Course o-- model.courses.Class : classOfStudents
+  model.courses.Course o-- model.students.StudentList : participants
+  model.courses.Course o-- model.courses.TeacherList : teacherList
+  model.courses.Teacher .up.|> java.io.Serializable
+  model.courses.TeacherList .up.|> java.io.Serializable
+  model.rooms.BookingTime .up.|> java.io.Serializable
+  model.rooms.Room .up.|> java.io.Serializable
+  model.rooms.RoomList .up.|> java.io.Serializable
+  model.students.Student .up.|> java.io.Serializable
+  model.students.StudentList .up.|> java.io.Serializable
   view.AnchorPaneNode -up-|> javafx.scene.layout.AnchorPane
   view.AnchorPaneNodeNav -up-|> javafx.scene.layout.AnchorPane
   view.CalendarView -up-|> javafx.scene.Node

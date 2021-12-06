@@ -12,11 +12,13 @@ title __SRC's Class Diagram__\n
   namespace  {
     class MyApplication {
         + start()
+        + stop()
     }
   }
   
 
   MyApplication -up-|> javafx.application.Application
+  MyApplication o-- view.ViewHandler : view
 
 
 right footer

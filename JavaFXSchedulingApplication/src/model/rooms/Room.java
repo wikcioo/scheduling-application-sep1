@@ -1,8 +1,6 @@
-package model;
+package model.rooms;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Room implements Serializable

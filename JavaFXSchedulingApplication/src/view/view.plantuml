@@ -64,6 +64,17 @@ title __VIEW's Class Diagram__\n
 
   namespace  {
     namespace iew {
+      class view.RoomView {
+          - list : ListView
+          + RoomView()
+          + getList()
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
       class view.ViewHandler {
           - currentScene : Scene
           - primaryStage : Stage

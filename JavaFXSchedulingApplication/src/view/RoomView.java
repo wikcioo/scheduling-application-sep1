@@ -1,8 +1,8 @@
 package view;
 
 import javafx.scene.control.ListView;
-import model.Room;
-import model.RoomList;
+import model.rooms.Room;
+import model.rooms.RoomList;
 
 import java.util.ArrayList;
 

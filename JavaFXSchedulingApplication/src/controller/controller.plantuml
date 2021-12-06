@@ -20,6 +20,8 @@ title __CONTROLLER's Class Diagram__\n
           - day7 : Text
           - end : TextField
           - navCalendar : AnchorPane
+          - nextWeekButton : Button
+          - previousWeekButton : Button
           - root : Region
           - scrollpane : ScrollPane
           - start : TextField
@@ -44,9 +46,24 @@ title __CONTROLLER's Class Diagram__\n
   }
   
 
+  namespace  {
+    namespace ontroller {
+      class controller.RoomListController {
+          - list : ListView
+          - root : Region
+          - scene : Scene
+          - stage : Stage
+          + SwitchToScreen1()
+          + displayRooms()
+      }
+    }
+  }
+  
+
   controller.CalendarViewController o-- model.Model : model
   controller.CalendarViewController o-- view.NavCalendarView : navCalendarView
   controller.CalendarViewController o-- view.ViewHandler : viewHandler
+  controller.RoomListController o-- model.rooms.RoomList : rooms
 
 
 right footer

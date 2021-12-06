@@ -1,4 +1,6 @@
-package model;
+package model.courses;
+
+import model.courses.Teacher;
 
 import java.io.Serializable;
 import java.util.ArrayList;

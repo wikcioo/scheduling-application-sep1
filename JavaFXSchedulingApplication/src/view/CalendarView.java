@@ -1,18 +1,16 @@
 package view;
 
-import model.Day;
-import model.Lesson;
-import model.Week;
+import model.calendar.Day;
+import model.calendar.Lesson;
+import model.calendar.Week;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 //TODO:ADD hours dynamically , separate mvc model ,refactoring, set font to course ,fix jump nav cal, add on click functionality ,
