@@ -46,6 +46,10 @@ public class Day implements Serializable {
         this.date = date;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     @Override
     public String toString() {
         return "Day{" +
