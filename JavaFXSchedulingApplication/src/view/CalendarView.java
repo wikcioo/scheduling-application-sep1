@@ -67,14 +67,16 @@ public class CalendarView extends Node {
 
     //FIXME this needs refactoring and testing
     private void putLessonDayOnCalendar(Day day) {
+        LocalTime fixedStart = LocalTime.of(8, 0);
+        LocalTime end = LocalTime.of(23, 0);
         ArrayList<Lesson> currentDayLessons = day.getLessons();
-
+        if (currentDayLessons.size() == 0)
+            daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart,end));
         for (int i = 0; i < currentDayLessons.size(); i++) {
 
             //Put currrent lesson on the calendar
             Lesson lesson = currentDayLessons.get(i);
             if (i == 0) {
-                LocalTime fixedStart = LocalTime.of(8, 0);
                 Duration dif = Duration.between(fixedStart,lesson.getStart());
                 if ((dif.toHoursPart() > 0) || (dif.toMinutesPart() > 0))
                     daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart, lesson.getStart()));
@@ -119,7 +121,7 @@ public class CalendarView extends Node {
         System.out.println(start);
         System.out.println(finish);
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
-        ap.setLesson(null);
+        ap.setLesson(new Lesson("Break",start,finish));
         return ap;
     }
 

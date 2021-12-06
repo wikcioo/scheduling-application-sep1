@@ -17,8 +17,8 @@ public class AnchorPaneNode extends AnchorPane {
     public AnchorPaneNode(Node... nodes) {
         super(nodes);
         this.setOnMouseClicked(e -> {
-                if (!(this.lesson==null)) displayLesson();
-                else addALesson();
+                if ((this.lesson.getCourse().equals("Break"))) addALesson();
+                else displayLesson();
                 System.out.println("This pane's info is: " + toString());});
     }
 
@@ -44,18 +44,20 @@ public class AnchorPaneNode extends AnchorPane {
     }
 
     public void addALesson() {
+        this.getStyleClass().add("selected");
         Stage displayWindow = new Stage();
         displayWindow.initModality(Modality.APPLICATION_MODAL);
         displayWindow.setTitle("Add a lesson");
         VBox finalView = new VBox(25);
-        Label start = new Label("Lesson starts at : " + lesson.getStart());
-        Label end = new Label("Lesson ends at : " + lesson.getEnd());
-        finalView.getChildren().add(start);
-        finalView.getChildren().add(end);
+        Label greeting = new Label("Do you want to add a new lesson here?");
+        Label timePeriods = new Label("New lesson is between :" + lesson.getStart() + " -- " + lesson.getEnd());
+        finalView.getChildren().add(greeting);
+        finalView.getChildren().add(timePeriods);
         finalView.setAlignment(Pos.CENTER);
         Scene scene1 = new Scene(finalView, 300, 200);
         displayWindow.setScene(scene1);
         displayWindow.showAndWait();
+        this.getStyleClass().clear();
     }
 
     @Override
