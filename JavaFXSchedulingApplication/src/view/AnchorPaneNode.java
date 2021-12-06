@@ -1,13 +1,13 @@
 package view;
 
+import controller.CalendarViewController;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,10 +21,11 @@ public class AnchorPaneNode extends AnchorPane {
     private Lesson lesson;
     private Day day;
 
+
     public AnchorPaneNode(Node... nodes) {
         super(nodes);
         this.setOnMouseClicked(e -> {
-                if ((this.lesson.getCourse().equals("Break"))) addALesson();
+                if ((this.lesson.getCourse().equals("Break"))) addALessonDisplay();
                 else displayLesson();
                 System.out.println("This pane's info is: " + toString());});
     }
@@ -56,7 +57,7 @@ public class AnchorPaneNode extends AnchorPane {
         displayWindow.showAndWait();
     }
 
-    public void addALesson() {
+    public void addALessonDisplay() {
         this.getStyleClass().add("selected");
         Stage displayWindow = new Stage();
         displayWindow.initModality(Modality.APPLICATION_MODAL);
@@ -66,16 +67,30 @@ public class AnchorPaneNode extends AnchorPane {
         Label timePeriods = new Label("New lesson is between :" + lesson.getStart() + " -- " + lesson.getEnd());
         Label date = new Label("New lesson is in "  + day.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
         Label info = new Label("Add a new Lesson with the following fields:");
-        GridPane gridPaneFields = new GridPane();
+        Label labelForCourse = new Label("Course name:");
+        TextField userInputForCourse = new TextField();
+        Button submit = new Button("Submit");
+        submit.setOnMouseClicked(event -> {
+            addALesson(userInputForCourse.getText());
+            displayWindow.close();
+        });
         finalView.getChildren().add(greeting);
         finalView.getChildren().add(timePeriods);
         finalView.getChildren().add(date);
         finalView.getChildren().add(info);
+        finalView.getChildren().add(labelForCourse);
+        finalView.getChildren().add(userInputForCourse);
+        finalView.getChildren().add(submit);
         finalView.setAlignment(Pos.CENTER);
-        Scene scene1 = new Scene(finalView, 300, 200);
+        Scene scene1 = new Scene(finalView, 300, 500);
         displayWindow.setScene(scene1);
         displayWindow.showAndWait();
         this.getStyleClass().clear();
+    }
+
+    public void addALesson(String userInput) {
+        Lesson lesson = new Lesson(userInput,this.lesson.getStart(),this.lesson.getEnd());
+        day.addLesson(lesson);
     }
 
     @Override
