@@ -50,10 +50,16 @@ public class AnchorPaneNode extends AnchorPane {
         Label start = new Label("Lesson starts at : " + lesson.getStart());
         Label end = new Label("Lesson ends at : " + lesson.getEnd());
         Label date = new Label("Date: "  + day.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
+        Button remove = new Button("remove this lesson");
+        remove.setOnMouseClicked(event -> {
+            displayWindow.close();
+            removeLesson();
+        });
         finalView.getChildren().add(course);
         finalView.getChildren().add(start);
         finalView.getChildren().add(end);
         finalView.getChildren().add(date);
+        finalView.getChildren().add(remove);
         finalView.setAlignment(Pos.CENTER);
         Scene scene1 = new Scene(finalView, 300, 200);
         displayWindow.setScene(scene1);
@@ -96,6 +102,15 @@ public class AnchorPaneNode extends AnchorPane {
         this.lesson = lesson;
         day.addLesson(lesson);
         this.getChildren().add(getBlockForLessonForMoment(lesson.getStart(),lesson.getEnd(),lesson));
+    }
+
+    public void removeLesson() {
+        day.removeLesson(this.lesson);
+        Lesson lesson = new Lesson("Break",this.lesson.getStart(),this.lesson.getEnd());
+        this.lesson = lesson;
+        this.getStyleClass().clear();
+        this.getChildren().remove(0);
+        this.getChildren().remove(0);
     }
 
     private AnchorPane getBlockForLessonForMoment(LocalTime start, LocalTime finish, Lesson lesson) {
