@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import model.Model;
 import view.ViewHandler;
 
-public class BookingController
+public class BookingController extends ViewController
 {
 
   private Region root;

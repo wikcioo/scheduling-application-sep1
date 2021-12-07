@@ -65,7 +65,7 @@ public class RoomListViewController extends ViewController{
 
     @FXML
     private void onBackButtonClick() {
-        viewHandler.openView("CourseListView");
+        viewHandler.openView("ManageDataView");
     }
 
     @FXML

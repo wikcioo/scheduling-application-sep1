@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import model.Model;
 import view.ViewHandler;
 
-public class ManageDataController
+public class ManageDataController extends ViewController
 {
   private Region root;
   private Model model;
@@ -31,7 +31,7 @@ public class ManageDataController
 
   public void openManageStudents()
   {
-    viewHandler.openView("ManageStudentsView");
+    viewHandler.openView("StudentListView");
   }
 
   public void openManageTeachers()
@@ -41,12 +41,12 @@ public class ManageDataController
 
   public void openManageRooms()
   {
-    viewHandler.openView("ManageRoomsView");
+    viewHandler.openView("RoomListView");
   }
 
   public void openManageCourses()
   {
-    viewHandler.openView("ManageCoursesView");
+    viewHandler.openView("CourseListView");
   }
 
   public void openManageAsses()

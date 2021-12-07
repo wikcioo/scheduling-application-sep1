@@ -68,7 +68,7 @@ public class CourseListViewController extends ViewController {
 
     @FXML
     private void onBackButtonClick() {
-        viewHandler.openView("StudentListView");
+        viewHandler.openView("ManageDataView");
     }
 
     @FXML

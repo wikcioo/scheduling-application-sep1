@@ -8,7 +8,8 @@ import model.Model;
 import view.ViewHandler;
 
 
-public class MainMenuController
+
+public class MainMenuController extends ViewController
 {
 
   private Region root;
