@@ -10,11 +10,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="872.0" prefWidth="1316.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CalendarViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="872.0" prefWidth="1316.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CalendarViewController">
 <children>
     <ScrollPane fx:id="scrollpane" layoutX="274.0" layoutY="194.0" prefHeight="677.0" prefWidth="1042.0" />
     <GridPane layoutX="274.0" layoutY="163.0" prefHeight="30.0" prefWidth="1041.0">
@@ -116,47 +115,6 @@
                   </TitledPane>
               </panes>
             </Accordion>
-
-            <Text fill="WHITE" layoutX="71.0" layoutY="576.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SDJ" wrappingWidth="239.99999999999994">
-               <font>
-                  <Font name="Century Gothic" size="23.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="71.0" layoutY="628.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RWD" wrappingWidth="239.99999999999994">
-               <font>
-                  <Font name="Century Gothic" size="21.0" />
-               </font>
-            </Text>
-            <Button layoutX="15.0" layoutY="542.0" mnemonicParsing="false" style="-fx-background-color: black;">
-               <graphic>
-                  <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
-               </graphic>
-            </Button>
-            <Text fill="WHITE" layoutX="71.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEP" wrappingWidth="239.99999999999994">
-               <font>
-                  <Font name="Century Gothic" size="21.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="71.0" layoutY="722.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DMA" wrappingWidth="239.99999999999994">
-               <font>
-                  <Font name="Century Gothic" size="21.0" />
-               </font>
-            </Text>
-            <Button layoutX="15.0" layoutY="594.0" mnemonicParsing="false" style="-fx-background-color: black;">
-               <graphic>
-                  <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
-               </graphic>
-            </Button>
-            <Button layoutX="15.0" layoutY="642.0" mnemonicParsing="false" style="-fx-background-color: black;">
-               <graphic>
-                  <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
-               </graphic>
-            </Button>
-            <Button layoutX="15.0" layoutY="688.0" mnemonicParsing="false" style="-fx-background-color: black;">
-               <graphic>
-                  <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
-               </graphic>
-            </Button>
 
             <Button layoutX="119.0" layoutY="554.0" mnemonicParsing="false" onAction="#back" text="back" />
 
