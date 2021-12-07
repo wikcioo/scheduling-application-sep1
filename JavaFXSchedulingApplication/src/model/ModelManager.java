@@ -1,12 +1,10 @@
 package model;
 
-import controller.CourseListViewController;
 import model.calendar.Schedule;
 import model.calendar.Week;
 import model.courses.ClassList;
 import model.courses.CourseList;
 import model.rooms.RoomList;
-import model.students.Student;
 import model.students.StudentList;
 
 import java.io.File;
@@ -99,5 +97,9 @@ public class ModelManager implements Model {
 
     public void saveSemesterData() {
         schedule.saveData();
+    }
+
+    public void exportAsXML() {
+        schedule.exportAsXML();
     }
 }

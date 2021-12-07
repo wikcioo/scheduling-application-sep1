@@ -26,4 +26,5 @@ public interface Model {
     RoomList getRoomList();
     StudentList getStudentList();
     CourseList getCourseList();
+    void exportAsXML();
 }
