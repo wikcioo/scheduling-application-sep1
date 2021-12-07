@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="872.0" prefWidth="1316.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CalendarViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="872.0" prefWidth="1316.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CalendarViewController">
 <children>
     <ScrollPane fx:id="scrollpane" layoutX="274.0" layoutY="194.0" prefHeight="677.0" prefWidth="1042.0" />
     <GridPane layoutX="274.0" layoutY="163.0" prefHeight="30.0" prefWidth="1041.0">
@@ -116,6 +116,7 @@
                   </TitledPane>
               </panes>
             </Accordion>
+<<<<<<< Updated upstream
             <Text fill="WHITE" layoutX="71.0" layoutY="576.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SDJ" wrappingWidth="239.99999999999994">
                <font>
                   <Font name="Century Gothic" size="23.0" />
@@ -156,6 +157,9 @@
                   <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
                </graphic>
             </Button>
+=======
+            <Button layoutX="119.0" layoutY="554.0" mnemonicParsing="false" onAction="#back" text="back" />
+>>>>>>> Stashed changes
          </children>
       </Pane>
       <Text fx:id="day1" layoutX="325.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="52.79998779296875">

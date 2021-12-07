@@ -43,9 +43,22 @@
 .accordion .titled-pane .title {
     -fx-background-color: transparent ;
 }
+<<<<<<< Updated upstream
 /*FIXME:this is just a placeholder asset" */
 .selected {
  -fx-background-color:red;
 }
+=======
+
+#leftBar{
+   -fx-background-color: #747474;
+
+}
+
+#bg{
+-fx-background-color: #B1B1B1;
+}
+
+>>>>>>> Stashed changes
 
 

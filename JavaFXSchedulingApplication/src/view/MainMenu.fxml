@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
+   <children>
+      <Pane fx:id="leftBar" prefHeight="486.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="68.0" prefHeight="54.0" prefWidth="173.0" text="Schedule App">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button layoutX="265.0" layoutY="89.0" mnemonicParsing="false" onAction="#OpenCalendar" prefHeight="140.0" prefWidth="140.0" text="SCHEDULE" />
+      <Button layoutX="373.0" layoutY="271.0" mnemonicParsing="false" onAction="#OpenBooking" prefHeight="140.0" prefWidth="140.0" text="BOOK A ROOM" wrapText="true" />
+      <Button layoutX="468.0" layoutY="89.0" mnemonicParsing="false" onAction="#OpenManageData" prefHeight="140.0" prefWidth="140.0" text="MANAGE DATA" />
+   </children>
+</AnchorPane>

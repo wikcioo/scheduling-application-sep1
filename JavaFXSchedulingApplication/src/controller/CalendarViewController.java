@@ -181,4 +181,8 @@ public class CalendarViewController {
         navCalendarView.navPrevWeek();
     }
 
+    public void back(){
+        viewHandler.openView("MainMenu");
+    }
+
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.ManageStudentsController"
+            prefHeight="486.0" prefWidth="694.0">
+    <children>
+        <Label layoutX="325.0" layoutY="109.0" text="Students" />
+        <Button layoutX="327.0" layoutY="310.0" mnemonicParsing="false" onAction="#back" text="back" />
+    </children>
+</AnchorPane>
