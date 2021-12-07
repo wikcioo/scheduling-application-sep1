@@ -5,7 +5,7 @@ title __COURSES's Class Diagram__\n
   namespace  {
     namespace odel {
       namespace courses {
-        class model.courses.Class {
+        class model.courses.ClassOfStudents {
             - name : String
             + Class()
             + getName()
@@ -114,10 +114,10 @@ title __COURSES's Class Diagram__\n
   }
   
 
-  model.courses.Class .up.|> java.io.Serializable
-  model.courses.Class o-- model.students.StudentList : studentList
+  model.courses.ClassOfStudents .up.|> java.io.Serializable
+  model.courses.ClassOfStudents o-- model.students.StudentList : studentList
   model.courses.Course .up.|> java.io.Serializable
-  model.courses.Course o-- model.courses.Class : classOfStudents
+  model.courses.Course o-- model.courses.ClassOfStudents : classOfStudents
   model.courses.Course o-- model.students.StudentList : participants
   model.courses.Course o-- model.courses.TeacherList : teacherList
   model.courses.Teacher .up.|> java.io.Serializable

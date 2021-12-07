@@ -39,7 +39,7 @@ public class MainMenuController extends ViewController
 
   public void OpenCalendar()
   {
-    viewHandler.openView("CalendarView");
+    viewHandler.openView("ScheduleListView");
   }
 
   public void OpenBooking()

@@ -1,9 +1,5 @@
 package model.courses;
 
-import model.courses.Class;
-import model.courses.Course;
-import model.courses.CourseList;
-import model.courses.Teacher;
 import model.students.Student;
 import model.students.StudentList;
 
@@ -16,8 +12,8 @@ public class CourseTest
     Student student2 = new Student("Polo2", "polo2@email.com",3,"x",3);
     students.addStudent(student1);
     students.addStudent(student2);
-    Class classofStudents = new Class("X",students);
-    Teacher teacher = new Teacher("Steffen");
+    ClassOfStudents classofStudents = new ClassOfStudents("X",students);
+    Teacher teacher = new Teacher("LOL");
     Course course = new Course("sdj",teacher,classofStudents);
     course.getParticipants().removeStudent(student1);
 //    System.out.println(course.getClassOfStudents());

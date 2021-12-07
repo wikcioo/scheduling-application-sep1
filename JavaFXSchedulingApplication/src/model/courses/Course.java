@@ -9,10 +9,10 @@ public class Course implements Serializable
 {
   private String title;
   private TeacherList teacherList;
-  private Class classOfStudents;
+  private ClassOfStudents classOfStudents;
   private StudentList participants;
 
-  public Course(String title, Teacher teacher, Class classOfStudents)
+  public Course(String title, Teacher teacher, ClassOfStudents classOfStudents)
   {
     this.title = title;
     this.teacherList = new TeacherList();
@@ -31,7 +31,7 @@ public class Course implements Serializable
     this.title = title;
   }
 
-  public void setClassOfStudents(Class classOfStudents)
+  public void setClassOfStudents(ClassOfStudents classOfStudents)
   {
     this.classOfStudents = classOfStudents;
   }
@@ -65,7 +65,7 @@ public class Course implements Serializable
     this.teacherList = new TeacherList(teacherList);
   }
 
-  public Class getClassOfStudents()
+  public ClassOfStudents getClassOfStudents()
   {
     return classOfStudents;
   }

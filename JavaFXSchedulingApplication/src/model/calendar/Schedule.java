@@ -1,26 +1,35 @@
 package model.calendar;
 
+import model.courses.ClassOfStudents;
 import utilities.Util;
 
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Schedule {
+public class Schedule implements Serializable {
     private final ArrayList<Week> weekList;
+    private ClassOfStudents classOfStudents;
     private final int numberOfWeeksInSemester;
     private int currentWeekIndex;
     private final LocalDate semesterStart;
     private final LocalDate semesterEnd;
 
-    public Schedule(LocalDate semesterStart, LocalDate semesterEnd) {
+    public Schedule(LocalDate semesterStart, LocalDate semesterEnd, ClassOfStudents classOfStudents) {
         this.weekList = new ArrayList<>();
+        this.classOfStudents = classOfStudents;
         this.semesterStart = semesterStart;
         this.semesterEnd = semesterEnd;
         this.numberOfWeeksInSemester = getNumberOfWeeksBetween();
         initializeAllWeeks();
         initializeCurrentWeekIndex();
     }
+
+    public ClassOfStudents getClassOfStudents()
+    {
+        return classOfStudents;
+    }
+
     public boolean hasNextWeek(){
         return weekList.size() - 1 >currentWeekIndex;
     }

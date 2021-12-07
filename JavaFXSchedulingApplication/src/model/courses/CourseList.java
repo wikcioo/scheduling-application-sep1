@@ -49,7 +49,7 @@ public class CourseList
     return result;
   }
 
-  public ArrayList<Course> getCoursesByClass(Class classOfStudents)
+  public ArrayList<Course> getCoursesByClass(ClassOfStudents classOfStudents)
   {
     ArrayList<Course> result = new ArrayList<>();
     for (Course course : courses)
@@ -60,7 +60,7 @@ public class CourseList
     return result;
   }
 
-  public ArrayList<Course> getCoursesByClassName(Class className)
+  public ArrayList<Course> getCoursesByClassName(ClassOfStudents className)
   {
     ArrayList<Course> result = new ArrayList<>();
     for (Course course : courses)
@@ -133,7 +133,7 @@ public class CourseList
         System.out.println("Wrong format, skipping...");
         e.printStackTrace();
       }
-      courses.add(new Course(courseTitle, new Teacher(teacher), new Class("1Z",null)));
+      courses.add(new Course(courseTitle, new Teacher(teacher), new ClassOfStudents("1Z",null)));
 
 
     }

@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import model.Model;
+import model.courses.ClassOfStudents;
 
 public class ViewHandler {
     private Scene currentScene;
@@ -15,17 +16,12 @@ public class ViewHandler {
     private StudentListViewController studentListViewController;
     private RoomListViewController roomListViewController;
     private CourseListViewController courseListViewController;
-
-
     private MainMenuController mainMenuController;
     private ManageDataController manageDataController;
     private BookingController bookingController;
     private ManageTeachersController manageTeachersController;
     private ManageClassesController manageClassesController;
-    //Manage classes
-
-
-
+    private ScheduleListViewController scheduleListViewController;
 
     public ViewHandler(Model model) {
         this.model = model;
@@ -34,8 +30,6 @@ public class ViewHandler {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         openView("MainMenu");
-        //openView("CalendarView");
-        //openView("StudentListView");
     }
 
     public void openView(String id) {
@@ -43,6 +37,9 @@ public class ViewHandler {
         switch (id) {
             case "CalendarView":
                 root = loadView("CalendarView.fxml", calendarViewController);
+                break;
+            case "ScheduleListView":
+                root = loadView("ScheduleList.fxml", scheduleListViewController);
                 break;
             case "StudentListView":
                 root = loadView("StudentListView.fxml", studentListViewController);
@@ -113,7 +110,7 @@ public class ViewHandler {
     }
 
     public void closeView() {
-        this.model.saveSemesterData();
+//        this.model.saveSemesterData();
         primaryStage.close();
     }
 

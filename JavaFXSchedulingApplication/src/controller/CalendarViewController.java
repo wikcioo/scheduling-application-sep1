@@ -150,6 +150,7 @@ public class CalendarViewController extends ViewController {
 
     public void initCalendar() {
         scrollpane.setFitToWidth(true);
+        System.out.println(model.getScheduleList().getCurrentSchedule().getClassOfStudents());
         scrollpane.setContent(new CalendarView(this.model.getCurrentWeek()).getFinalView());
     }
 

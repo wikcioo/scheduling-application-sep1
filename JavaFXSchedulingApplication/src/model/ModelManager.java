@@ -1,31 +1,40 @@
 package model;
 
 import model.calendar.Schedule;
+import model.calendar.ScheduleList;
 import model.calendar.Week;
 import model.courses.ClassList;
+import model.courses.ClassOfStudents;
 import model.courses.CourseList;
 import model.rooms.RoomList;
 import model.students.StudentList;
 
 import java.io.File;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ModelManager implements Model {
-    private Schedule schedule;
+    private ScheduleList scheduleList;
     private StudentList studentList;
     private RoomList roomList;
     private CourseList courseList;
     private ClassList classList;
 
     public ModelManager() {
-        this.schedule = new Schedule(LocalDate.of(2021, 8, 30), LocalDate.of(2021, 12, 17));
+        this.scheduleList = new ScheduleList();
         this.studentList = new StudentList();
         this.roomList = new RoomList();
         this.courseList = new CourseList();
         this.classList = new ClassList();
         studentList.readStudentListFromBinFile();
-        readSemesterData();
+        //readSemesterData();
+    }
+
+    public ScheduleList getScheduleList() {
+        return scheduleList;
+    }
+
+    public ClassList getClassList() {
+        return classList;
     }
     public StudentList getStudentList(){
         return this.studentList;
@@ -41,65 +50,64 @@ public class ModelManager implements Model {
         studentList.readStudentFromTXTFile(file);
     }
 
-    public void setSemester(LocalDate semesterStart, LocalDate semesterEnd) {
-        this.schedule = new Schedule(semesterStart, semesterEnd);
-    }
 
     public Week getCurrentWeek() {
-        return schedule.getCurrentWeek();
+        return scheduleList.getCurrentSchedule().getCurrentWeek();
     }
 
     public int getCurrentWeekIndex() {
-        return schedule.getCurrentWeekIndex();
+        return scheduleList.getCurrentSchedule().getCurrentWeekIndex();
     }
 
     public void goNextWeek() {
-        schedule.goNextWeek();
+        scheduleList.getCurrentSchedule().goNextWeek();
     }
 
     @Override
     public boolean hasNextWeek() {
-        return schedule.hasNextWeek();
+        return scheduleList.getCurrentSchedule().hasNextWeek();
     }
 
     public void goPreviousWeek() {
-        schedule.goPreviousWeek();
+        scheduleList.getCurrentSchedule().goPreviousWeek();
     }
 
     @Override
     public boolean hasPreviousWeek() {
-        return schedule.hasPreviousWeek();
+        return scheduleList.getCurrentSchedule().hasPreviousWeek();
     }
 
     public ArrayList<Week> getWeekList() {
-        return schedule.getWeekList();
+        return scheduleList.getCurrentSchedule().getWeekList();
     }
 
     public int getNumberOfWeeksBetween() {
-        return schedule.getNumberOfWeeksBetween();
+        return scheduleList.getCurrentSchedule().getNumberOfWeeksBetween();
     }
 
     public void initializeCurrentWeekIndex() {
-        schedule.initializeCurrentWeekIndex();
+        scheduleList.getCurrentSchedule().initializeCurrentWeekIndex();
     }
 
+    public ArrayList<ClassOfStudents> getClasses() { return classList.getClasses(); }
+
     public int getCurrentYear() {
-        return schedule.getCurrentYear();
+        return scheduleList.getCurrentSchedule().getCurrentYear();
     }
 
     public void initializeAllWeeks() {
-        schedule.initializeAllWeeks();
+        scheduleList.getCurrentSchedule().initializeAllWeeks();
     }
 
     public void readSemesterData() {
-        schedule.readData();
+        scheduleList.getCurrentSchedule().readData();
     }
 
     public void saveSemesterData() {
-        schedule.saveData();
+        scheduleList.getCurrentSchedule().saveData();
     }
 
     public void exportAsXML() {
-        schedule.exportAsXML();
+        scheduleList.getCurrentSchedule().exportAsXML();
     }
 }

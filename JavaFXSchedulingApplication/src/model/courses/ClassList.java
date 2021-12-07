@@ -1,12 +1,44 @@
 package model.courses;
 
-import model.courses.Class;
+import utilities.ClassNameSorter;
 
 import java.util.ArrayList;
 
 public class ClassList {
-    private ArrayList<Class> classList;
+
+    private ArrayList<ClassOfStudents> classList;
+
     public ClassList(){
         this.classList = new ArrayList<>();
     }
+
+    public void addClass(ClassOfStudents _class) {
+        classList.add(_class);
+        classList.sort(new ClassNameSorter());
+    }
+
+    public void removeClass(ClassOfStudents _class) {
+        try {
+            classList.remove(_class);
+        }
+        catch(IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sortClassesByName() {
+        classList.sort(new ClassNameSorter());
+    }
+
+
+    public ArrayList<ClassOfStudents> getClasses() {
+        return classList;
+    }
+
+    public ArrayList<ClassOfStudents> copyClasses() {
+        return new ArrayList<ClassOfStudents>(classList);
+    }
+
+
+
 }

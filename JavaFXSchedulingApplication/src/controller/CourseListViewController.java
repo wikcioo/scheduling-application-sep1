@@ -14,7 +14,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Model;
-import model.courses.Class;
+import model.courses.ClassOfStudents;
 import model.courses.Course;
 import model.courses.Teacher;
 import model.courses.TeacherList;
@@ -140,7 +140,7 @@ public class CourseListViewController extends ViewController {
                     tfTeacher.setText(course.getTeacherList().getTeacherByIndex(0).getName());
 
                     btnChange.setOnAction(e -> {
-                        this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), new Teacher(tfTeacher.getText()), new Class("1Z",null)));
+                        this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), new Teacher(tfTeacher.getText()), new ClassOfStudents("1Z",null)));
                         displayWindow.close();
                     });
                     btnReset.setOnAction(e -> {
@@ -155,7 +155,7 @@ public class CourseListViewController extends ViewController {
                     Button btnClear = new Button("Clear");
                     hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
                     btnAdd.setOnAction(e -> {
-                        this.model.getCourseList().addCourse(new Course(tfTitle.getText(), new Teacher(tfTeacher.getText()), new Class("1Z",null)));
+                        this.model.getCourseList().addCourse(new Course(tfTitle.getText(), new Teacher(tfTeacher.getText()), new ClassOfStudents("1Z",null)));
                         displayWindow.close();
                     });
                     break;

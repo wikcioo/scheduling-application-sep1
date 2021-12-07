@@ -1,9 +1,14 @@
 package model;
 
+import model.calendar.Schedule;
 import model.calendar.Week;
 import model.courses.CourseList;
 import model.rooms.RoomList;
 import model.students.StudentList;
+import model.courses.ClassList;
+import model.courses.ClassOfStudents;
+import model.calendar.ScheduleList;
+import model.courses.CourseList;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,11 +18,14 @@ public interface Model {
     Week getCurrentWeek();
     int getCurrentWeekIndex();
     void goNextWeek();
+    ArrayList<ClassOfStudents> getClasses();
     boolean hasNextWeek();
     void goPreviousWeek();
     boolean hasPreviousWeek();
     ArrayList<Week> getWeekList();
     int getNumberOfWeeksBetween();
+    ScheduleList getScheduleList();
+    ClassList getClassList();
     void initializeCurrentWeekIndex();
     int getCurrentYear();
     void initializeAllWeeks();
