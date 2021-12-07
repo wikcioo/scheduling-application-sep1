@@ -116,7 +116,7 @@
                   </TitledPane>
               </panes>
             </Accordion>
-<<<<<<< Updated upstream
+
             <Text fill="WHITE" layoutX="71.0" layoutY="576.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SDJ" wrappingWidth="239.99999999999994">
                <font>
                   <Font name="Century Gothic" size="23.0" />
@@ -157,9 +157,9 @@
                   <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
                </graphic>
             </Button>
-=======
+
             <Button layoutX="119.0" layoutY="554.0" mnemonicParsing="false" onAction="#back" text="back" />
->>>>>>> Stashed changes
+
          </children>
       </Pane>
       <Text fx:id="day1" layoutX="325.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="52.79998779296875">
