@@ -107,7 +107,11 @@ public class ModelManager implements Model {
         scheduleList.getCurrentSchedule().saveData();
     }
 
-    public void exportAsXML() {
-        scheduleList.getCurrentSchedule().exportAsXML();
+    public void exportScheduleAsXML() {
+        scheduleList.getCurrentSchedule().exportScheduleAsXML();
+    }
+
+    public void exportWeekAsXML(Week week) {
+        scheduleList.getCurrentSchedule().exportWeekAsXML(week);
     }
 }

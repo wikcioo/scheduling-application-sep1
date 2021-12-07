@@ -34,5 +34,6 @@ public interface Model {
     RoomList getRoomList();
     StudentList getStudentList();
     CourseList getCourseList();
-    void exportAsXML();
+    void exportScheduleAsXML();
+    void exportWeekAsXML(Week week);
 }
