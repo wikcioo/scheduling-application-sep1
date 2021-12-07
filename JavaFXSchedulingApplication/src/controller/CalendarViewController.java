@@ -6,6 +6,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import model.*;
@@ -13,8 +14,10 @@ import model.calendar.Day;
 import model.calendar.Lesson;
 import model.calendar.Week;
 import model.courses.Course;
+import model.courses.CourseList;
 import utilities.Util;
 import view.CalendarView;
+import view.CoursesListView;
 import view.NavCalendarView;
 import view.ViewHandler;
 
@@ -59,6 +62,8 @@ public class CalendarViewController extends ViewController {
     private Button previousWeekButton;
     @FXML
     private Button nextWeekButton;
+    @FXML
+    private AnchorPane filter;
 
     private Region root;
     private Model model;
@@ -74,9 +79,10 @@ public class CalendarViewController extends ViewController {
         this.viewHandler = viewHandler;
         this.root = root;
         initDates();
-        initCalendar();
+        initCalendar(this.model.getCurrentWeek());
         initNavCallendar();
         initDayForAll();
+        initCourseListView();
     }
 
     public void reset() {
@@ -108,8 +114,9 @@ public class CalendarViewController extends ViewController {
             endDayOfWeek = endDayOfWeek.plusDays(7);
             model.goNextWeek();
             initDates();
-            initCalendar();
+            initCalendar(this.model.getCurrentWeek());
             initDayForAll();
+            initCourseListView();
         }
         if (!model.hasNextWeek()){
             nextWeekButton.setDisable(true);
@@ -125,8 +132,9 @@ public class CalendarViewController extends ViewController {
             endDayOfWeek = endDayOfWeek.minusDays(7);
             model.goPreviousWeek();
             initDates();
-            initCalendar();
+            initCalendar(this.model.getCurrentWeek());
             initDayForAll();
+            initCourseListView();
         }
         if (!model.hasPreviousWeek()) {
             previousWeekButton.setDisable(true);
@@ -138,7 +146,7 @@ public class CalendarViewController extends ViewController {
         int _start = Integer.parseInt(start.getText());
         int _end = Integer.parseInt(end.getText());
         addLesson(new Lesson(course.getText(), LocalTime.of(_start, 0), LocalTime.of(_end, 0)), Integer.parseInt(day.getText()));
-        initCalendar();
+        initCalendar(this.model.getCurrentWeek());
     }
 
     @FXML
@@ -148,11 +156,13 @@ public class CalendarViewController extends ViewController {
         this.model.readStudentFromTXTFile(file);
     }
 
-    public void initCalendar() {
+    public void initCalendar(Week week) {
         scrollpane.setFitToWidth(true);
         System.out.println(model.getScheduleList().getCurrentSchedule().getClassOfStudents());
-        scrollpane.setContent(new CalendarView(this.model.getCurrentWeek()).getFinalView());
+        scrollpane.setContent(new CalendarView(week).getFinalView());
     }
+
+
 
     public void initDayText(Text day,int forward) {
         day.setText(String.valueOf(currentDayOfWeek.plusDays(forward).getDayOfMonth()));
@@ -187,4 +197,14 @@ public class CalendarViewController extends ViewController {
         viewHandler.openView("MainMenu");
     }
 
+    //FILTER FOR MAIN CALENDAR
+    public void initCourseListView() {
+        CoursesListView coursesListView = new CoursesListView(this.model.getCurrentWeek());
+        filter.getChildren().add(coursesListView.getFinalView());
+        for (Button button:coursesListView.getButtonsForEachCourse()) {
+            button.setOnMouseClicked(event -> {
+                initCalendar(this.model.getCurrentWeek().filterBasedOnCourse(button.getText()));
+            });
+        }
+    }
 }

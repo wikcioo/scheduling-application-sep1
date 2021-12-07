@@ -87,7 +87,7 @@
               <Font name="System Bold" size="23.0" />
           </font>
       </Button>
-      <Pane layoutY="-20.0" prefHeight="970.0" prefWidth="276.0" style="-fx-background-color: black;">
+      <Pane layoutY="-18.0" prefHeight="970.0" prefWidth="276.0" style="-fx-background-color: black;">
          <children>
             <Text fill="WHITE" layoutX="34.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calendar">
                <font>
@@ -115,8 +115,7 @@
                   </TitledPane>
               </panes>
             </Accordion>
-
-            <Button layoutX="119.0" layoutY="554.0" mnemonicParsing="false" onAction="#back" text="back" />
+            <AnchorPane fx:id="filter" layoutX="26.0" layoutY="592.0" prefHeight="218.0" prefWidth="226.0" />
 
          </children>
       </Pane>
@@ -155,5 +154,11 @@
             <Font name="Berlin Sans FB" size="48.0" />
          </font>
       </Text>
+
+            <Button layoutX="1228.0" layoutY="22.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: BLACK;" text="Menu" textFill="#f4f4f4">
+         <font>
+            <Font name="Berlin Sans FB" size="17.0" />
+         </font>
+      </Button>
 </children>
 </AnchorPane>
