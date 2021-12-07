@@ -43,6 +43,9 @@
 .accordion .titled-pane .title {
     -fx-background-color: transparent ;
 }
-
+/*FIXME:this is just a placeholder asset" */
+.selected {
+ -fx-background-color:red;
+}
 
 
