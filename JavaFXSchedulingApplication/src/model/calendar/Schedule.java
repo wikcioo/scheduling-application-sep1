@@ -127,6 +127,39 @@ public class Schedule {
         }
     }
 
+    public void exportAsXML() {
+        File file = new File("res/saved-data/schedule.xml");
+        PrintWriter out = null;
+        try {
+            out = new PrintWriter(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String xml = "";
+        xml += "<schedule startTime=\"9:00\" endTime=\"22:00\">";
+        for (Week week : this.weekList) {
+            xml += "\n\t<week>";
+            for (Day day : week.getDays()) {
+                xml += "\n\t\t<day date=\"" + day.getDate() + "\">";
+                for (Lesson lesson : day.getLessons()) {
+                    xml += "\n\t\t\t<lesson>";
+                    xml += "\n\t\t\t\t<course>" + lesson.getCourse() + "</course>";
+                    xml += "\n\t\t\t\t<startTime>" + lesson.getStart() + "</startTime>";
+                    xml += "\n\t\t\t\t<endTime>" + lesson.getEnd() + "</endTime>";
+                    xml += "\n\t\t\t</lesson>";
+                }
+                xml += "\n\t\t</day>";
+            }
+            xml += "\n\t</week>";
+        }
+        xml += "\n</schedule>";
+
+        assert (out != null);
+        out.println(xml);
+        out.close();
+    }
+
     @Override
     public String toString() {
         return "Semester{" +
