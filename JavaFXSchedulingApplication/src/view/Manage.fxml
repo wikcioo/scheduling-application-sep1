@@ -12,7 +12,7 @@
       <Button layoutX="384.0" layoutY="243.0" mnemonicParsing="false" onAction="#openManageTeachers" prefHeight="110.0" prefWidth="118.0" text="MANAGE TEACHERS" wrapText="true" />
       <Button layoutX="384.0" layoutY="88.0" mnemonicParsing="false" onAction="#openManageCourses" prefHeight="110.0" prefWidth="118.0" text="MANAGE COURSES" wrapText="true" />
       <Button layoutX="243.0" layoutY="243.0" mnemonicParsing="false" onAction="#openMainMenu" prefHeight="110.0" prefWidth="118.0" text="Main Manu" wrapText="true" />
-      <Button layoutX="527.0" layoutY="88.0" mnemonicParsing="false" onAction="#openManageAsses" prefHeight="110.0" prefWidth="118.0" text="MANAGE ASSES" wrapText="true" />
+      <Button layoutX="527.0" layoutY="88.0" mnemonicParsing="false" onAction="#openManageClasses" prefHeight="110.0" prefWidth="118.0" text="MANAGE CLASSES" wrapText="true" />
       <Pane fx:id="leftBar" layoutY="26.0" prefHeight="460.0" prefWidth="200.0">
          <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="41.0" prefHeight="54.0" prefWidth="173.0" text="Schedule App">

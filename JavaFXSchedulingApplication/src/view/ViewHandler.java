@@ -21,6 +21,7 @@ public class ViewHandler {
     private ManageDataController manageDataController;
     private BookingController bookingController;
     private ManageTeachersController manageTeachersController;
+    private ManageClassesController manageClassesController;
     //Manage classes
 
 
@@ -63,6 +64,9 @@ public class ViewHandler {
                 break;
             case "ManageTeachersView":
                 root = loadView("ManageTeachers.fxml", manageTeachersController);
+                break;
+            case "ManageClassesView":
+                root = loadView("ManageClasses.fxml", manageClassesController);
                 break;
             default:
                 root = new Region();

@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import model.Model;
 import view.ViewHandler;
 
-public class ManageAssesController
+public class ManageClassesController extends ViewController
 {
   private Region root;
   private Model model;

@@ -49,9 +49,9 @@ public class ManageDataController extends ViewController
     viewHandler.openView("CourseListView");
   }
 
-  public void openManageAsses()
+  public void openManageClasses()
   {
-    viewHandler.openView("ManageAssesView");
+    viewHandler.openView("ManageClassesView");
   }
 
   public void openMainMenu()
