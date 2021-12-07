@@ -1,0 +1,22 @@
+<schedule startTime="9:00" endTime="22:00"><week>
+	<day date="2021-12-06">
+	</day>
+	<day date="2021-12-07">
+	</day>
+	<day date="2021-12-08">
+		<lesson>
+			<course>SDJ</course>
+			<startTime>15:10</startTime>
+			<endTime>17:00</endTime>
+		</lesson>
+	</day>
+	<day date="2021-12-09">
+	</day>
+	<day date="2021-12-10">
+	</day>
+	<day date="2021-12-11">
+	</day>
+	<day date="2021-12-12">
+	</day>
+</week>
+</schedule>
