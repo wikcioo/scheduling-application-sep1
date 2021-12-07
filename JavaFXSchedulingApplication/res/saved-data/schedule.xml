@@ -1,0 +1,268 @@
+<schedule startTime="9:00" endTime="22:00">
+	<week>
+		<day date="2021-08-30">
+		</day>
+		<day date="2021-08-31">
+		</day>
+		<day date="2021-09-01">
+		</day>
+		<day date="2021-09-02">
+		</day>
+		<day date="2021-09-03">
+		</day>
+		<day date="2021-09-04">
+		</day>
+		<day date="2021-09-05">
+		</day>
+	</week>
+	<week>
+		<day date="2021-09-06">
+		</day>
+		<day date="2021-09-07">
+		</day>
+		<day date="2021-09-08">
+		</day>
+		<day date="2021-09-09">
+		</day>
+		<day date="2021-09-10">
+		</day>
+		<day date="2021-09-11">
+		</day>
+		<day date="2021-09-12">
+		</day>
+	</week>
+	<week>
+		<day date="2021-09-13">
+		</day>
+		<day date="2021-09-14">
+		</day>
+		<day date="2021-09-15">
+		</day>
+		<day date="2021-09-16">
+		</day>
+		<day date="2021-09-17">
+		</day>
+		<day date="2021-09-18">
+		</day>
+		<day date="2021-09-19">
+		</day>
+	</week>
+	<week>
+		<day date="2021-09-20">
+		</day>
+		<day date="2021-09-21">
+		</day>
+		<day date="2021-09-22">
+		</day>
+		<day date="2021-09-23">
+		</day>
+		<day date="2021-09-24">
+		</day>
+		<day date="2021-09-25">
+		</day>
+		<day date="2021-09-26">
+		</day>
+	</week>
+	<week>
+		<day date="2021-09-27">
+		</day>
+		<day date="2021-09-28">
+		</day>
+		<day date="2021-09-29">
+		</day>
+		<day date="2021-09-30">
+		</day>
+		<day date="2021-10-01">
+		</day>
+		<day date="2021-10-02">
+		</day>
+		<day date="2021-10-03">
+		</day>
+	</week>
+	<week>
+		<day date="2021-10-04">
+		</day>
+		<day date="2021-10-05">
+		</day>
+		<day date="2021-10-06">
+		</day>
+		<day date="2021-10-07">
+		</day>
+		<day date="2021-10-08">
+		</day>
+		<day date="2021-10-09">
+		</day>
+		<day date="2021-10-10">
+		</day>
+	</week>
+	<week>
+		<day date="2021-10-11">
+		</day>
+		<day date="2021-10-12">
+		</day>
+		<day date="2021-10-13">
+		</day>
+		<day date="2021-10-14">
+		</day>
+		<day date="2021-10-15">
+		</day>
+		<day date="2021-10-16">
+		</day>
+		<day date="2021-10-17">
+		</day>
+	</week>
+	<week>
+		<day date="2021-10-18">
+		</day>
+		<day date="2021-10-19">
+		</day>
+		<day date="2021-10-20">
+		</day>
+		<day date="2021-10-21">
+		</day>
+		<day date="2021-10-22">
+		</day>
+		<day date="2021-10-23">
+		</day>
+		<day date="2021-10-24">
+		</day>
+	</week>
+	<week>
+		<day date="2021-10-25">
+		</day>
+		<day date="2021-10-26">
+		</day>
+		<day date="2021-10-27">
+		</day>
+		<day date="2021-10-28">
+		</day>
+		<day date="2021-10-29">
+		</day>
+		<day date="2021-10-30">
+		</day>
+		<day date="2021-10-31">
+		</day>
+	</week>
+	<week>
+		<day date="2021-11-01">
+		</day>
+		<day date="2021-11-02">
+		</day>
+		<day date="2021-11-03">
+		</day>
+		<day date="2021-11-04">
+		</day>
+		<day date="2021-11-05">
+		</day>
+		<day date="2021-11-06">
+		</day>
+		<day date="2021-11-07">
+		</day>
+	</week>
+	<week>
+		<day date="2021-11-08">
+		</day>
+		<day date="2021-11-09">
+		</day>
+		<day date="2021-11-10">
+		</day>
+		<day date="2021-11-11">
+		</day>
+		<day date="2021-11-12">
+		</day>
+		<day date="2021-11-13">
+		</day>
+		<day date="2021-11-14">
+		</day>
+	</week>
+	<week>
+		<day date="2021-11-15">
+		</day>
+		<day date="2021-11-16">
+		</day>
+		<day date="2021-11-17">
+		</day>
+		<day date="2021-11-18">
+		</day>
+		<day date="2021-11-19">
+		</day>
+		<day date="2021-11-20">
+		</day>
+		<day date="2021-11-21">
+		</day>
+	</week>
+	<week>
+		<day date="2021-11-22">
+		</day>
+		<day date="2021-11-23">
+		</day>
+		<day date="2021-11-24">
+		</day>
+		<day date="2021-11-25">
+		</day>
+		<day date="2021-11-26">
+		</day>
+		<day date="2021-11-27">
+		</day>
+		<day date="2021-11-28">
+		</day>
+	</week>
+	<week>
+		<day date="2021-11-29">
+		</day>
+		<day date="2021-11-30">
+		</day>
+		<day date="2021-12-01">
+		</day>
+		<day date="2021-12-02">
+		</day>
+		<day date="2021-12-03">
+		</day>
+		<day date="2021-12-04">
+		</day>
+		<day date="2021-12-05">
+		</day>
+	</week>
+	<week>
+		<day date="2021-12-06">
+		</day>
+		<day date="2021-12-07">
+			<lesson>
+				<course>SDJ</course>
+				<startTime>15:10</startTime>
+				<endTime>17:00</endTime>
+			</lesson>
+		</day>
+		<day date="2021-12-08">
+			<lesson>
+				<course>RWD</course>
+				<startTime>11:00</startTime>
+				<endTime>12:00</endTime>
+			</lesson>
+		</day>
+		<day date="2021-12-09">
+		</day>
+		<day date="2021-12-10">
+		</day>
+		<day date="2021-12-11">
+		</day>
+		<day date="2021-12-12">
+		</day>
+	</week>
+	<week>
+		<day date="2021-12-13">
+		</day>
+		<day date="2021-12-14">
+		</day>
+		<day date="2021-12-15">
+		</day>
+		<day date="2021-12-16">
+		</day>
+		<day date="2021-12-17">
+		</day>
+		<day date="2021-12-18">
+		</day>
+		<day date="2021-12-19">
+		</day>
+	</week>
+</schedule>
