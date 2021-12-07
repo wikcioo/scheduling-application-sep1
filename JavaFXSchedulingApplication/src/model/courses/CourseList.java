@@ -1,8 +1,11 @@
 package model.courses;
 
+import model.rooms.Room;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class CourseList
 {
@@ -102,6 +105,45 @@ public class CourseList
     }
   }
 
+  public  void readCoursesFromTXTFile(File file) {
+
+    Scanner in = null;
+    try {
+      in = new Scanner(file);
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+    while (in.hasNext()){
+      int semester = -1;
+      String _class = null;
+      String courseTitle = null;
+      String teacher = null;
+      int ects=-1;
+      String line = in.nextLine();
+      String[] token = line.split(",");
+      try {
+        semester = Integer.parseInt(token[0]);
+        _class = token[1];
+        courseTitle = token[2];
+        teacher = token[3];
+        ects = Integer.parseInt(token[4]);
+
+
+      } catch (NumberFormatException e) {
+        System.out.println("Wrong format, skipping...");
+        e.printStackTrace();
+      }
+      courses.add(new Course(courseTitle, new Teacher(teacher), new Class("1Z",null)));
+
+
+    }
+    ArrayList<Teacher> teach = new ArrayList<>();
+    teach.add(new Teacher("fuck"));
+    teach.add(new Teacher("this"));
+    teach.add(new Teacher("shit"));
+    courses.get(0).setTeacherList(teach);
+    in.close();
+  }
   public void writeCourseListToBinFile() {
     String filename = "res/saved-data/courseList.bin";
 

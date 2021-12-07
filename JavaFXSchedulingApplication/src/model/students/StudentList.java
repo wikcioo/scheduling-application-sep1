@@ -41,6 +41,9 @@ public class StudentList implements Serializable{
     public void removeStudent(Student student) {
         studentList.remove(student);
     }
+    public void removeStudent(int index) {
+        studentList.remove(index);
+    }
 
     public ArrayList<Student> getStudentsByClass(String _class) {
         ArrayList<Student> s = new ArrayList<>();

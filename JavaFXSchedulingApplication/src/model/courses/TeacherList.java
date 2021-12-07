@@ -36,4 +36,18 @@ public class TeacherList implements Serializable
     teachers.remove(teacher);
   }
 
+  @Override
+  public String toString() {
+    String all = "";
+    for(int i = 0; i<teachers.size(); i++){
+      if(i!=teachers.size()-1){
+        all+= teachers.get(i).getName()+", ";
+      }
+      else{
+        all+= teachers.get(i).getName();
+      }
+
+    }
+    return all;
+  }
 }

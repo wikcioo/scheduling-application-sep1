@@ -18,12 +18,13 @@ import view.CalendarView;
 import view.NavCalendarView;
 import view.ViewHandler;
 
+
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class CalendarViewController {
+public class CalendarViewController extends ViewController {
     @FXML
     private ScrollPane scrollpane;
     @FXML

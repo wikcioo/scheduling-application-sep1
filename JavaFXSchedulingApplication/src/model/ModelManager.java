@@ -1,10 +1,12 @@
 package model;
 
+import controller.CourseListViewController;
 import model.calendar.Schedule;
 import model.calendar.Week;
 import model.courses.ClassList;
 import model.courses.CourseList;
 import model.rooms.RoomList;
+import model.students.Student;
 import model.students.StudentList;
 
 import java.io.File;
@@ -27,7 +29,16 @@ public class ModelManager implements Model {
         studentList.readStudentListFromBinFile();
         readSemesterData();
     }
+    public StudentList getStudentList(){
+        return this.studentList;
+    }
 
+    public CourseList getCourseList(){
+        return this.courseList;
+    }
+    public RoomList getRoomList(){
+        return this.roomList;
+    }
     public void readStudentFromTXTFile(File file) {
         studentList.readStudentFromTXTFile(file);
     }

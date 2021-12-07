@@ -12,6 +12,7 @@ public class ViewHandler {
     private Stage primaryStage;
     private Model model;
     private CalendarViewController calendarViewController;
+<<<<<<< Updated upstream
     private MainMenuController mainMenuController;
     private ManageDataController manageDataController;
     private BookingController bookingController;
@@ -20,6 +21,11 @@ public class ViewHandler {
     private ManageStudentsController manageStudentsController;
     private ManageTeachersController manageTeachersController;
     private ManageAssesController manageAssesController;
+=======
+    private StudentListViewController studentListViewController;
+    private RoomListViewController roomListViewController;
+    private CourseListViewController courseListViewController;
+>>>>>>> Stashed changes
 
     public ViewHandler(Model model) {
         this.model = model;
@@ -28,14 +34,28 @@ public class ViewHandler {
 
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
+<<<<<<< Updated upstream
         openView("MainMenu");
+=======
+        //openView("CalendarView");
+        openView("StudentListView");
+>>>>>>> Stashed changes
     }
 
     public void openView(String id) {
         Region root;
         switch (id) {
             case "CalendarView":
-                root = loadCalendarView();
+                root = loadView("CalendarView.fxml", calendarViewController);
+                break;
+            case "StudentListView":
+                root = loadView("StudentListView.fxml", studentListViewController);
+                break;
+            case "RoomListView":
+                root = loadView("RoomListView.fxml",roomListViewController);
+                break;
+            case "CourseListView":
+                root = loadView("CourseListView.fxml",courseListViewController);
                 break;
             case "MainMenu":
                 root = loadMainMenuView();
@@ -81,21 +101,22 @@ public class ViewHandler {
         primaryStage.show();
     }
 
-    private Region loadCalendarView() {
-        if (calendarViewController == null) {
+    private Region loadView(String fxmlFile, ViewController viewController) {
+        if (viewController == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("CalendarView.fxml"));
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource(fxmlFile));
                 Region root = loader.load();
-                calendarViewController = loader.getController();
-                calendarViewController.init(this, model, root);
+                viewController = loader.getController();
+                viewController.init(this, model, root);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else {
-             calendarViewController.reset();
-        }
 
-        return calendarViewController.getRoot();
+        } else {
+            viewController.reset();
+        }
+        return viewController.getRoot();
     }
 
     private Region loadMainMenuView() {

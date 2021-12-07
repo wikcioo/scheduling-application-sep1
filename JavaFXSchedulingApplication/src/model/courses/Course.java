@@ -75,6 +75,12 @@ public class Course implements Serializable
     return participants;
   }
 
+  public String getClassName(){
+    return this.classOfStudents.getName();
+  }
+  public String getTeacherName(){
+    return teacherList.toString();
+  }
   public void setParticipants(StudentList participants)
   {
     this.participants = participants;
