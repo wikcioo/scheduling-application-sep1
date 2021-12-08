@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import javafx.scene.text.Text;
@@ -17,6 +18,7 @@ import model.calendar.Day;
 import model.calendar.Lesson;
 
 
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
@@ -97,8 +99,11 @@ public class AnchorPaneNode extends AnchorPane {
         displayWindow.showAndWait();
     }
 
-    public void addALesson(String userInput) {
-        Lesson lesson = new Lesson(userInput,this.lesson.getStart(),this.lesson.getEnd());
+    public void addALesson(String userInput,String userInputForStart,String userInputForStartMin,String userInputForEnd,String userInputForEndMin) {
+        //Convert all data to int
+        LocalTime timeStart = LocalTime.of(Integer.parseInt(userInputForStart),Integer.parseInt(userInputForStartMin));
+        LocalTime timeEnd = LocalTime.of(Integer.parseInt(userInputForEnd),Integer.parseInt(userInputForEndMin));
+        Lesson lesson = new Lesson(userInput,timeStart,timeEnd);
         this.lesson = lesson;
         day.addLesson(lesson);
     }
@@ -118,20 +123,41 @@ public class AnchorPaneNode extends AnchorPane {
         Label greeting = new Label("Do you want to add a new lesson here?");
         Label timePeriods = new Label("New lesson is between :" + lesson.getStart() + " -- " + lesson.getEnd());
         Label date = new Label("New lesson is in "  + day.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
+
         Label info = new Label("Add a new Lesson with the following fields:");
-        Label labelForCourse = new Label("Course name:");
+        GridPane gridPane = new GridPane();
+        Label labelForCourse = new Label("Course name:  ");
         TextField userInputForCourse = new TextField();
+        gridPane.add(labelForCourse,0,0);
+        gridPane.add(userInputForCourse,1,0);
+        gridPane.setAlignment(Pos.CENTER);
+        Label labelForStart = new Label("Start Hour:  ");
+        TextField userInputForStart = new TextField();
+        gridPane.add(labelForStart,0,1);
+        gridPane.add(userInputForStart,1,1);
+        Label labelForStartMin = new Label("Start Min:  ");
+        TextField userInputForStartMin = new TextField();
+        gridPane.add(labelForStartMin,0,2);
+        gridPane.add(userInputForStartMin,1,2);
+        Label labelForEnd = new Label("End Hour:  ");
+        TextField userInputForEnd = new TextField();
+        gridPane.add(labelForEnd,0,3);
+        gridPane.add(userInputForEnd,1,3);
+        Label labelForEndMin = new Label("End Min:  ");
+        TextField userInputForEndMin = new TextField();
+        gridPane.add(labelForEndMin,0,4);
+        gridPane.add(userInputForEndMin,1,4);
+        gridPane.setAlignment(Pos.CENTER);
         Button submit = new Button("Submit");
         submit.setOnMouseClicked(event -> {
-            addALesson(userInputForCourse.getText());
+            addALesson(userInputForCourse.getText(),userInputForStart.getText(),userInputForStartMin.getText(),userInputForEnd.getText(),userInputForEndMin.getText());
             displayWindow.close();
         });
         finalView.getChildren().add(greeting);
         finalView.getChildren().add(timePeriods);
         finalView.getChildren().add(date);
         finalView.getChildren().add(info);
-        finalView.getChildren().add(labelForCourse);
-        finalView.getChildren().add(userInputForCourse);
+        finalView.getChildren().add(gridPane);
         finalView.getChildren().add(submit);
         finalView.setAlignment(Pos.CENTER);
         Scene scene = new Scene(finalView,300,500);

@@ -96,11 +96,16 @@ public class CalendarView extends Node {
             if (i + 1 < currentDayLessons.size()) {
                 Lesson nextLesson = currentDayLessons.get(i + 1);
                 Duration dif = Duration.between(lesson.getEnd(), nextLesson.getStart());
-                if ((dif.toHoursPart() > 0) || (dif.toMinutesPart() > 0))
+                if ((dif.toHoursPart() >= 0) || (dif.toMinutesPart() >= 0))
                     daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(lesson.getEnd(), nextLesson.getStart(),day));
             }
         }
-    }
+        //Add a break after the last lesson
+        if (currentDayLessons.size() > 0) {
+            Lesson lastLesson = currentDayLessons.get(currentDayLessons.size() - 1);
+            daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(lastLesson.getEnd(), end, day));
+        }
+        }
 
     private AnchorPaneNode getBlockForLesson(LocalTime start, LocalTime finish,Lesson lesson,Day day) {
         AnchorPaneNode ap = new AnchorPaneNode();
