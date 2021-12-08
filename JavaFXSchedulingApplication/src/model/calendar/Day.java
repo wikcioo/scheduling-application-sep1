@@ -46,6 +46,10 @@ public class Day implements Serializable {
         this.date = date;
     }
 
+    public ArrayList<Lesson> copyLessons() {
+        return (ArrayList<Lesson>) lessons.clone();
+    }
+
     public LocalDate getDate() {
         return date;
     }

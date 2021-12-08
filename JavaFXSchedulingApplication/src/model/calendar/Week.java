@@ -48,6 +48,26 @@ public class Week implements Serializable {
         return days;
     }
 
+    public void copyWeekLessons(Week week) {
+        setDaysLessons(week.copyDays());
+    }
+
+    private void setDaysLessons(Day[] days) {
+        for (int i = 0; i < 7; i++) {
+            this.days[i].setLessons(days[i].copyLessons());
+        }
+    }
+
+    public Day[] copyDays() {
+        return days.clone();
+    }
+
+    public Week copy() {
+        Week newWeek = new Week(start,end);
+        newWeek.setDaysLessons(this.days);
+        return newWeek;
+    }
+
     @Override
     public String toString() {
         return "\nWeek{" +

@@ -1,5 +1,6 @@
 package model;
 
+import model.calendar.CopiedWeek;
 import model.calendar.Schedule;
 import model.calendar.Week;
 import model.courses.CourseList;
@@ -34,6 +35,7 @@ public interface Model {
     RoomList getRoomList();
     StudentList getStudentList();
     CourseList getCourseList();
+    CopiedWeek getCopiedWeekWrapper();
     void exportScheduleAsXML();
     void exportWeekAsXML(Week week);
 }

@@ -1,5 +1,6 @@
 package model;
 
+import model.calendar.CopiedWeek;
 import model.calendar.Schedule;
 import model.calendar.ScheduleList;
 import model.calendar.Week;
@@ -18,6 +19,7 @@ public class ModelManager implements Model {
     private RoomList roomList;
     private CourseList courseList;
     private ClassList classList;
+    private CopiedWeek copiedWeek;
 
     public ModelManager() {
         this.scheduleList = new ScheduleList();
@@ -25,8 +27,13 @@ public class ModelManager implements Model {
         this.roomList = new RoomList();
         this.courseList = new CourseList();
         this.classList = new ClassList();
+        this.copiedWeek = new CopiedWeek();
         studentList.readStudentListFromBinFile();
         //readSemesterData();
+    }
+
+    public CopiedWeek getCopiedWeekWrapper() {
+        return copiedWeek;
     }
 
     public ScheduleList getScheduleList() {

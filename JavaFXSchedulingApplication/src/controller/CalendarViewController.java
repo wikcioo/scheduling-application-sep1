@@ -6,10 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
@@ -35,6 +32,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class CalendarViewController extends ViewController {
     @FXML
@@ -58,6 +56,8 @@ public class CalendarViewController extends ViewController {
     @FXML
     private Text day7;
     @FXML
+    private Text copiedWeekNumber;
+    @FXML
     private TextField course;
     @FXML
     private TextField day;
@@ -71,6 +71,12 @@ public class CalendarViewController extends ViewController {
     private Button previousWeekButton;
     @FXML
     private Button nextWeekButton;
+    @FXML
+    private Button copyButton;
+    @FXML
+    private Button pasteButton;
+    @FXML
+    private Button pasteToAllButton;
     @FXML
     private AnchorPane filter;
 
@@ -88,7 +94,7 @@ public class CalendarViewController extends ViewController {
         this.viewHandler = viewHandler;
         this.root = root;
         initDates();
-
+        initCopyPaste();
         initCalendar(this.model.getCurrentWeek());
         initNavCallendar();
         initDayForAll();
@@ -112,6 +118,59 @@ public class CalendarViewController extends ViewController {
         } else {
             date1.setText(currentDayOfWeek.format(DateTimeFormatter.ofPattern("MMM")));
             date2.setText(" - " + endDayOfWeek.format(DateTimeFormatter.ofPattern("MMM")) + " " + endDayOfWeek.format(DateTimeFormatter.ofPattern("yyyy")));
+        }
+    }
+
+    private void initCopyPaste() {
+        disablePasteButtons(true);
+        model.getCopiedWeekWrapper().removeCopiedWeek();
+    }
+
+    private void disablePasteButtons(boolean disable) {
+        pasteButton.setDisable(disable);
+        pasteToAllButton.setDisable(disable);
+    }
+
+    @FXML
+    public void copyWeek() {
+        model.getCopiedWeekWrapper().setCopiedWeek(model.getCurrentWeek().copy());
+        copiedWeekNumber.setText(model.getCurrentWeek().getStart() + " " + model.getCurrentWeek().getEnd());
+        disablePasteButtons(false);
+    }
+
+    @FXML
+    public void pasteCopiedWeek() {
+        Week copiedWeek = model.getCopiedWeekWrapper().getCopiedWeek();
+        if(copiedWeek != null) {
+            if(showConfirmAlert("Confirm pasting","Confirm pasting to week","Are you sure? This action will override all lessons in this week."))
+            {
+                model.getCurrentWeek().copyWeekLessons(copiedWeek);
+                System.out.println("Copying successful");
+                initCalendar(model.getCurrentWeek());
+            }
+        }
+    }
+
+    public boolean showConfirmAlert(String title,String header, String content) {
+        //        https://code.makery.ch/blog/javafx-dialogs-official/
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        Optional<ButtonType> result = alert.showAndWait();
+        return  result.get() == ButtonType.OK;
+    }
+
+    @FXML
+    public void pasteCopiedWeekToAll() {
+        Week copiedWeek = model.getCopiedWeekWrapper().getCopiedWeek();
+        if(copiedWeek != null){
+            if(showConfirmAlert("Confirm pasting","Confirm pasting to all weeks","Are you sure? This action will override ALL other lessons in this semester!")) {
+                for(Week week : model.getScheduleList().getCurrentSchedule().getWeekList()) {
+                    week.copyWeekLessons(copiedWeek);
+                }
+                initCalendar(model.getCurrentWeek());
+            }
         }
     }
 

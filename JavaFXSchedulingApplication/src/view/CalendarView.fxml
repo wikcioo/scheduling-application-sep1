@@ -7,13 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="872.0" prefWidth="1316.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CalendarViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="872.0" prefWidth="1316.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CalendarViewController">
 <children>
     <ScrollPane fx:id="scrollpane" layoutX="274.0" layoutY="194.0" prefHeight="677.0" prefWidth="1042.0" />
     <GridPane layoutX="274.0" layoutY="163.0" prefHeight="30.0" prefWidth="1041.0">
@@ -111,6 +112,26 @@
                 <TitledPane animated="false" prefHeight="54.0" prefWidth="214.0" text="Import" textFill="WHITE">
                      <content>
                         <Button mnemonicParsing="false" onAction="#onChooseFileButton" text="Choose files" />
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" text="Copy/Paste Week" textFill="WHITE">
+                     <content>
+                        <HBox alignment="BASELINE_CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="71.0" prefWidth="129.0">
+                                 <children>
+                                    <Text fx:id="copiedWeekNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="Copied: " />
+                                    <Button fx:id="copyButton" mnemonicParsing="false" onMouseClicked="#copyWeek" text="Copy" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="133.0">
+                                 <children>
+                                    <Button fx:id="pasteButton" mnemonicParsing="false" onMouseClicked="#pasteCopiedWeek" text="Paste" />
+                                    <Button fx:id="pasteToAllButton" mnemonicParsing="false" onMouseClicked="#pasteCopiedWeekToAll" text="Paste to all " />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
                      </content>
                   </TitledPane>
               </panes>
