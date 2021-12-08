@@ -1,5 +1,6 @@
 package view;
 
+import javafx.scene.text.Font;
 import model.calendar.Day;
 import model.calendar.Lesson;
 import model.calendar.Week;
@@ -109,11 +110,12 @@ public class CalendarView extends Node {
         ap.setPrefWidth(200);
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
         ap.getStyleClass().add(lesson.getCourse());
-        Text text = new Text(lesson.getCourse() + "-1Z");
+        Text text = new Text(lesson.getCourse());
         //Set the info for the anchor pane
         ap.setLesson(lesson);
         ap.setDay(day);
         Text description = new Text(start + " -- " + finish);
+        text.setFont(Font.font ("Century Gothic", 25));
         text.setFill(Color.WHITE);
         description.setFill(Color.WHITE);
         ap.getChildren().add(text);
