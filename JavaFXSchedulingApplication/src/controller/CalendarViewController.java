@@ -186,7 +186,6 @@ public class CalendarViewController extends ViewController {
                 initCalendar(week);
             });
         }
-
         for (int i=0;i<allEmptyBlocks.size();i++) {
             int finalI = i;
             calendarView.getEmptyBlocks().get(i).returnAp().setOnMouseClicked(null);

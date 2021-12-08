@@ -78,7 +78,6 @@ public class CalendarView extends Node {
         if (currentDayLessons.size() == 0)
              {
                 daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart, end, day));
-                emptyBlocks.add(getBlockForEmpty(fixedStart, end, day));
                 fixedStart = fixedStart.plusHours(1);
             }
         for (int i = 0; i < currentDayLessons.size(); i++) {
@@ -87,7 +86,6 @@ public class CalendarView extends Node {
             if (i == 0) {
                 Duration dif = Duration.between(fixedStart,lesson.getStart());
                 if ((dif.toHoursPart() > 0) || (dif.toMinutesPart() > 0))
-                    emptyBlocks.add(getBlockForEmpty(fixedStart, lesson.getStart(), day));
                     daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart, lesson.getStart(),day));
             }
             //Put current lesson on the calendar
@@ -100,7 +98,6 @@ public class CalendarView extends Node {
                 Duration dif = Duration.between(lesson.getEnd(), nextLesson.getStart());
                 if ((dif.toHoursPart() > 0) || (dif.toMinutesPart() > 0))
                     daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(lesson.getEnd(), nextLesson.getStart(),day));
-                    emptyBlocks.add(getBlockForEmpty(lesson.getEnd(),nextLesson.getStart(),day));
             }
         }
     }
@@ -137,6 +134,7 @@ public class CalendarView extends Node {
         //Set the info for the anchor pane
         ap.setDay(day);
         ap.setLesson(new Lesson("Break",start,finish));
+        getEmptyBlocks().add(ap);
         return ap;
     }
 

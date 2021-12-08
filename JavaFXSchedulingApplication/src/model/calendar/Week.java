@@ -28,7 +28,7 @@ public class Week implements Serializable {
         Week result = new Week(start,end);
         for (Day day : this.days) {
             for (Lesson lesson :day.getLessons()) {
-                if (!lesson.getCourse().equals(course))
+                if (lesson.getCourse().equals(course))
                     result.addLesson(lesson,day.getIndexForDay());
             }
         }

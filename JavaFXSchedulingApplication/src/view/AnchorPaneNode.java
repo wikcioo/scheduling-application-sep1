@@ -134,8 +134,9 @@ public class AnchorPaneNode extends AnchorPane {
         finalView.getChildren().add(userInputForCourse);
         finalView.getChildren().add(submit);
         finalView.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(finalView,300,200);
+        Scene scene = new Scene(finalView,300,500);
         displayWindow.setScene(scene);
+        displayWindow.showAndWait();
     }
 
     public void removeLesson() {
