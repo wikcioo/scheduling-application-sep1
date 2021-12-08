@@ -143,7 +143,7 @@ public class CourseListViewController extends ViewController {
                     tfTeacher.setText(course.getTeacherList().getTeacherByIndex(0).getName());
 
                     btnChange.setOnAction(e -> {
-                        this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), new Teacher(tfTeacher.getText()), new ClassOfStudents(tfClassName.getText(),null)));
+                        this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), new Teacher(tfTeacher.getText()), new ClassOfStudents(tfClassName.getText())));
                         displayWindow.close();
                     });
                     btnReset.setOnAction(e -> {
@@ -158,7 +158,7 @@ public class CourseListViewController extends ViewController {
                     Button btnClear = new Button("Clear");
                     hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
                     btnAdd.setOnAction(e -> {
-                        this.model.getCourseList().addCourse(new Course(tfTitle.getText(), new Teacher(tfTeacher.getText()), new ClassOfStudents(tfClassName.getText(),null)));
+                        this.model.getCourseList().addCourse(new Course(tfTitle.getText(), new Teacher(tfTeacher.getText()), new ClassOfStudents(tfClassName.getText())));
                         displayWindow.close();
                     });
                     break;

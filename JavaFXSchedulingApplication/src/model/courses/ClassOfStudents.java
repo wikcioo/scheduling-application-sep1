@@ -15,6 +15,11 @@ public class ClassOfStudents implements Serializable
         this.name = name;
         this.studentList = studentList;
     }
+    public ClassOfStudents(String name)
+    {
+        this.name = name;
+        this.studentList = new StudentList();
+    }
 
     public StudentList getStudentList() {
         return studentList;
