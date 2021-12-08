@@ -65,6 +65,9 @@ public class ViewHandler {
             case "ManageClassesView":
                 root = loadView("ManageClasses.fxml", manageClassesController);
                 break;
+            case "ShowLesson":
+                root = loadView("ShowLesson.fxml", manageClassesController);
+                break;
             default:
                 root = new Region();
         }

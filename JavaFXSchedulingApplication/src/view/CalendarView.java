@@ -18,8 +18,12 @@ import java.util.ArrayList;
 public class CalendarView extends Node {
     private VBox finalView;
     private VBox[] daysView = new VBox[7];
-
+    private ArrayList<AnchorPaneNode> lessonBlocks;
+    private ArrayList<AnchorPaneNode> emptyBlocks;
+    private ArrayList<String> filters;
     public CalendarView(Week week) {
+        lessonBlocks = new ArrayList<>();
+        emptyBlocks = new ArrayList<>();
         int hour = 7;
         HBox calendar = new HBox(5);
         calendar.getStyleClass().add("linearStripes");
@@ -33,27 +37,27 @@ public class CalendarView extends Node {
         }
 
 //      VIEW TEST
-//        Day today = new Day();
-//        today.setDate(LocalDate.now());
-//        LocalTime time1 = LocalTime.of(9, 0);
-//        LocalTime time2 = LocalTime.of(10, 0);
-//        week.addLesson(new Lesson("RWD", time1, time2), today.getIndexForDay());
-//
-//        LocalTime time3 = LocalTime.of(12, 0);
-//        LocalTime time4 = LocalTime.of(14, 0);
-//
-//        week.addLesson(new Lesson("SDJ", time3, time4), today.getIndexForDay());
-//
-//        LocalTime time5 = LocalTime.of(14, 0);
-//        LocalTime time6 = LocalTime.of(15, 0);
-//
-//        today.setDate(LocalDate.now().plusDays(1));
-//        week.addLesson(new Lesson("SEP", time5, time6), today.getIndexForDay());
-//
-//        LocalTime time7 = LocalTime.of(15, 10);
-//        LocalTime time8 = LocalTime.of(17, 0);
-//
-//        week.addLesson(new Lesson("SDJ", time7, time8), today.getIndexForDay());
+        Day today = new Day();
+        today.setDate(LocalDate.now());
+        LocalTime time1 = LocalTime.of(9, 0);
+        LocalTime time2 = LocalTime.of(10, 0);
+        week.addLesson(new Lesson("RWD", time1, time2), today.getIndexForDay());
+
+        LocalTime time3 = LocalTime.of(12, 0);
+        LocalTime time4 = LocalTime.of(14, 0);
+
+        week.addLesson(new Lesson("SDJ", time3, time4), today.getIndexForDay());
+
+        LocalTime time5 = LocalTime.of(14, 0);
+        LocalTime time6 = LocalTime.of(15, 0);
+
+        today.setDate(LocalDate.now().plusDays(1));
+        week.addLesson(new Lesson("SEP", time5, time6), today.getIndexForDay());
+
+        LocalTime time7 = LocalTime.of(15, 10);
+        LocalTime time8 = LocalTime.of(17, 0);
+
+        week.addLesson(new Lesson("SDJ", time7, time8), today.getIndexForDay());
 
         putLessonWeekOnCalendar(week);
         finalView = new VBox(calendar);
@@ -71,28 +75,31 @@ public class CalendarView extends Node {
         LocalTime end = LocalTime.of(23, 0);
         ArrayList<Lesson> currentDayLessons = day.getLessons();
         if (currentDayLessons.size() == 0)
-            for (int i=0;i<16;i++) {
-                LocalTime oneHour = fixedStart.plusHours(1);
-                daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart, oneHour, day));
+             {
+                daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart, end, day));
+                emptyBlocks.add(getBlockForEmpty(fixedStart, end, day));
                 fixedStart = fixedStart.plusHours(1);
             }
         for (int i = 0; i < currentDayLessons.size(); i++) {
-
-            //Put currrent lesson on the calendar
+            //Put a break before the lesson if the lesson doesn't start at fixedStart
             Lesson lesson = currentDayLessons.get(i);
             if (i == 0) {
                 Duration dif = Duration.between(fixedStart,lesson.getStart());
                 if ((dif.toHoursPart() > 0) || (dif.toMinutesPart() > 0))
+                    emptyBlocks.add(getBlockForEmpty(fixedStart, lesson.getStart(), day));
                     daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart, lesson.getStart(),day));
             }
+            //Put current lesson on the calendar
             AnchorPaneNode lessonBlock = getBlockForLesson(lesson.getStart(), lesson.getEnd(),lesson,day);
             daysView[day.getIndexForDay()].getChildren().add(lessonBlock);
+            lessonBlocks.add(lessonBlock);
             //Check for break
             if (i + 1 < currentDayLessons.size()) {
                 Lesson nextLesson = currentDayLessons.get(i + 1);
                 Duration dif = Duration.between(lesson.getEnd(), nextLesson.getStart());
                 if ((dif.toHoursPart() > 0) || (dif.toMinutesPart() > 0))
                     daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(lesson.getEnd(), nextLesson.getStart(),day));
+                    emptyBlocks.add(getBlockForEmpty(lesson.getEnd(),nextLesson.getStart(),day));
             }
         }
     }
@@ -140,7 +147,19 @@ public class CalendarView extends Node {
         return result;
     }
 
+    public ArrayList<String> getFilters() {
+        return filters;
+    }
+
     public VBox getFinalView() {
         return finalView;
+    }
+
+    public ArrayList<AnchorPaneNode> getLessonBlocks() {
+        return lessonBlocks;
+    }
+
+    public ArrayList<AnchorPaneNode> getEmptyBlocks() {
+        return emptyBlocks;
     }
 }
