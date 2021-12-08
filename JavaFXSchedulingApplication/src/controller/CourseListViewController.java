@@ -18,12 +18,15 @@ import model.courses.ClassOfStudents;
 import model.courses.Course;
 import model.courses.Teacher;
 import model.courses.TeacherList;
+import model.students.Student;
 import view.ViewHandler;
 
 import java.io.File;
 
 
 public class CourseListViewController extends ViewController {
+    @FXML
+    TextField textField;
     @FXML
     TableView tableView;
     @FXML
@@ -140,7 +143,7 @@ public class CourseListViewController extends ViewController {
                     tfTeacher.setText(course.getTeacherList().getTeacherByIndex(0).getName());
 
                     btnChange.setOnAction(e -> {
-                        this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), new Teacher(tfTeacher.getText()), new ClassOfStudents("1Z",null)));
+                        this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), new Teacher(tfTeacher.getText()), new ClassOfStudents(tfClassName.getText(),null)));
                         displayWindow.close();
                     });
                     btnReset.setOnAction(e -> {
@@ -155,7 +158,7 @@ public class CourseListViewController extends ViewController {
                     Button btnClear = new Button("Clear");
                     hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
                     btnAdd.setOnAction(e -> {
-                        this.model.getCourseList().addCourse(new Course(tfTitle.getText(), new Teacher(tfTeacher.getText()), new ClassOfStudents("1Z",null)));
+                        this.model.getCourseList().addCourse(new Course(tfTitle.getText(), new Teacher(tfTeacher.getText()), new ClassOfStudents(tfClassName.getText(),null)));
                         displayWindow.close();
                     });
                     break;
@@ -182,6 +185,17 @@ public class CourseListViewController extends ViewController {
             displayWindow.setScene(scene1);
             displayWindow.showAndWait();
             reset();
+        }
+    }
+
+    public void onNewFilter(){
+        tableView.getItems().clear();
+        for (Course c : this.model.getCourseList().getCourses()) {
+            String filter = textField.getText();
+            if(filter!=""&&(c.getTitle().toLowerCase().contains(filter.toLowerCase())||c.getClassName().toLowerCase().contains(filter.toLowerCase())||c.getTeacherName().toLowerCase().contains(filter))){
+                tableView.getItems().add(c);
+            }
+
         }
     }
 }

@@ -28,7 +28,7 @@ public class RoomList implements Serializable
     while (in.hasNext()){
       String roomName = null;
       int capacity = 0;
-      String mergeWith = null;
+      String mergeWith = "";
       String line = in.nextLine();
       String[] token = line.split(",");
       try {
