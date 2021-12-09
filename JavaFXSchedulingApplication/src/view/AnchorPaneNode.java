@@ -34,6 +34,8 @@ public class AnchorPaneNode extends AnchorPane {
     private Model model;
     @FXML
     private ComboBox<Course> userInputForCourse;
+    @FXML
+    private ComboBox<Teacher> userInputForTeacher;
 
 
     public AnchorPaneNode(Model model,Node... nodes) {
@@ -135,34 +137,58 @@ public class AnchorPaneNode extends AnchorPane {
         Label date = new Label("New lesson is in "  + day.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
         Label info = new Label("Add a new Lesson with the following fields:");
         GridPane gridPane = new GridPane();
+        int gridRow = 0;
+        gridPane.setAlignment(Pos.CENTER);
+
         Label labelForCourse = new Label("Course:  ");
         userInputForCourse = CourseComboBox();
         userInputForCourse.getItems().addAll(model.getCourseList().getCourses());
-        gridPane.add(labelForCourse,0,0);
-        gridPane.add(userInputForCourse,1,0);
-        gridPane.setAlignment(Pos.CENTER);
+        gridPane.add(labelForCourse,0,gridRow);
+        gridPane.add(userInputForCourse,1,gridRow);
+        userInputForCourse.setOnAction(event -> {
+            userInputForTeacher.setDisable(false);
+            userInputForTeacher.getItems().clear();
+            if(userInputForCourse.getValue() != null)
+                userInputForTeacher.getItems().addAll(userInputForCourse.getValue().getTeacherList().getTeacherList());
+        });
+
+        gridRow++;
+        Label labelForTeacher = new Label("Teacher:  ");
+        userInputForTeacher = TeacherComboBox();
+        userInputForTeacher.setDisable(true);
+        gridPane.add(labelForTeacher,0,gridRow);
+        gridPane.add(userInputForTeacher,1,gridRow);
+
+        gridRow ++;
         Label labelForStart = new Label("Start Hour:  ");
         TextField userInputForStart = new TextField();
-        gridPane.add(labelForStart,0,1);
-        gridPane.add(userInputForStart,1,1);
+        gridPane.add(labelForStart,0,gridRow);
+        gridPane.add(userInputForStart,1,gridRow);
+
+        gridRow ++;
         Label labelForStartMin = new Label("Start Min:  ");
         TextField userInputForStartMin = new TextField();
-        gridPane.add(labelForStartMin,0,2);
-        gridPane.add(userInputForStartMin,1,2);
+        gridPane.add(labelForStartMin,0,gridRow);
+        gridPane.add(userInputForStartMin,1,gridRow);
+
+        gridRow ++;
         Label labelForEnd = new Label("End Hour:  ");
         TextField userInputForEnd = new TextField();
-        gridPane.add(labelForEnd,0,3);
-        gridPane.add(userInputForEnd,1,3);
+        gridPane.add(labelForEnd,0,gridRow);
+        gridPane.add(userInputForEnd,1,gridRow);
+
+        gridRow ++;
         Label labelForEndMin = new Label("End Min:  ");
         TextField userInputForEndMin = new TextField();
-        gridPane.add(labelForEndMin,0,4);
-        gridPane.add(userInputForEndMin,1,4);
-        gridPane.setAlignment(Pos.CENTER);
+        gridPane.add(labelForEndMin,0,gridRow);
+        gridPane.add(userInputForEndMin,1,gridRow);
+
         Button submit = new Button("Submit");
         submit.setOnMouseClicked(event -> {
             addALesson(userInputForCourse.getValue(),userInputForStart.getText(),userInputForStartMin.getText(),userInputForEnd.getText(),userInputForEndMin.getText());
             displayWindow.close();
         });
+
         finalView.getChildren().add(greeting);
         finalView.getChildren().add(timePeriods);
         finalView.getChildren().add(date);
@@ -210,6 +236,44 @@ public class AnchorPaneNode extends AnchorPane {
         });
         return comboBox;
     }
+
+    public ComboBox<Teacher> TeacherComboBox() {
+        ComboBox<Teacher> comboBox = new ComboBox<>();
+        comboBox.setCellFactory(new Callback<ListView<Teacher>, ListCell<Teacher>>() {
+            @Override
+            public ListCell<Teacher> call(ListView<Teacher> param) {
+                ListCell<Teacher> cell = new ListCell<Teacher>() {
+                    @Override
+                    protected void updateItem(Teacher item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(item != null) {
+                            setText(item.getName());
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+        comboBox.setButtonCell(new ListCell<Teacher>() {
+            @Override
+            protected void updateItem(Teacher item, boolean empty){
+                super.updateItem(item, empty);
+                if (item != null)
+                {
+                    setText(item.getName());
+                }
+                else
+                {
+                    setText(null);
+                }
+            }
+        });
+        return comboBox;
+    }
+
+
 
     public void removeLesson() {
         day.removeLesson(this.lesson);
