@@ -1,6 +1,5 @@
 package model;
 
-import model.calendar.Schedule;
 import model.calendar.Week;
 import model.courses.CourseList;
 import model.rooms.RoomList;
@@ -8,7 +7,6 @@ import model.students.StudentList;
 import model.courses.ClassList;
 import model.courses.ClassOfStudents;
 import model.calendar.ScheduleList;
-import model.courses.CourseList;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,4 +34,5 @@ public interface Model {
     CourseList getCourseList();
     void exportScheduleAsXML();
     void exportWeekAsXML(Week week);
+    void saveModels();
 }

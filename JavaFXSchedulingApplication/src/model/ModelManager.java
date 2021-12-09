@@ -1,11 +1,11 @@
 package model;
 
-import model.calendar.Schedule;
 import model.calendar.ScheduleList;
 import model.calendar.Week;
 import model.courses.ClassList;
 import model.courses.ClassOfStudents;
 import model.courses.CourseList;
+import model.courses.TeacherList;
 import model.rooms.RoomList;
 import model.students.StudentList;
 
@@ -18,6 +18,7 @@ public class ModelManager implements Model {
     private RoomList roomList;
     private CourseList courseList;
     private ClassList classList;
+    private TeacherList teacherList;
 
     public ModelManager() {
         this.scheduleList = new ScheduleList();
@@ -25,6 +26,7 @@ public class ModelManager implements Model {
         this.roomList = new RoomList();
         this.courseList = new CourseList();
         this.classList = new ClassList();
+        this.teacherList = new TeacherList();
         studentList.readStudentListFromBinFile();
         //readSemesterData();
     }
@@ -113,5 +115,16 @@ public class ModelManager implements Model {
 
     public void exportWeekAsXML(Week week) {
         scheduleList.getCurrentSchedule().exportWeekAsXML(week);
+    }
+
+    public void saveModels() {
+        String system_state_path = "res/saved-data/system_state.bin";
+        scheduleList.writeScheduleListToBinFile(system_state_path);
+        studentList.writeStudentListToBinFile(system_state_path);
+        roomList.writeRoomListToBinFile(system_state_path);
+        courseList.writeCourseListToBinFile(system_state_path);
+        // TODO: implement methods below;
+        // classList.writeClassListToBinFile(system_state_path);
+        // teacherList.writeTeacherListToBinFile(system_state_path);
     }
 }
