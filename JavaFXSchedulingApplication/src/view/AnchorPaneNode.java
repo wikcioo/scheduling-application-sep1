@@ -145,7 +145,7 @@ public class AnchorPaneNode extends AnchorPane {
 
         Label labelForCourse = new Label("Course:  ");
         userInputForCourse = CourseComboBox();
-        userInputForCourse.getItems().addAll(model.getCourseList().getCourses());
+        userInputForCourse.getItems().addAll(model.getCourseList().getCoursesByClass(model.getScheduleList().getCurrentSchedule().getClassOfStudents()));
         gridPane.add(labelForCourse,0,gridRow);
         gridPane.add(userInputForCourse,1,gridRow);
         userInputForCourse.setOnAction(event -> {

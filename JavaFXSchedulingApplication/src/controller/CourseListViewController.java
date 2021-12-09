@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.Model;
 import model.courses.ClassOfStudents;
 import model.courses.Course;
@@ -136,7 +137,8 @@ public class CourseListViewController extends ViewController {
             grid.setAlignment(Pos.CENTER);
             Button btnCancel = new Button("Cancel");
             TextField tfTitle = new TextField();
-            TextField tfClassName = new TextField();
+            ComboBox<ClassOfStudents> cbClassOfStudents = CourseComboBox();
+            cbClassOfStudents.getItems().addAll(model.getClasses());
             TextField tfTeacher = new TextField();
 
 
@@ -148,7 +150,10 @@ public class CourseListViewController extends ViewController {
                     int index = tableView.getSelectionModel().getFocusedIndex();
                     Course course = this.model.getCourseList().getCourses().get(index);
                     tfTitle.setText(course.getTitle());
-                    tfClassName.setText(course.getClassName());
+
+                    //TODO: THIS IS GONNA LOSE ITS SHIT ONCE CLASS BECOMES NULL
+                    cbClassOfStudents.getSelectionModel().select(course.getClassOfStudents());
+
                     tfTeacher.setText(course.getTeacherList().getTeacherByIndex(0).getName());
 
                     btnChange.setOnAction(e -> {
@@ -157,12 +162,14 @@ public class CourseListViewController extends ViewController {
                         for (String s: token) {
                             teacherList.add(new Teacher(s.trim()));
                         }
-                        this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), teacherList , new ClassOfStudents(tfClassName.getText())));
+                        this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), teacherList , cbClassOfStudents.getValue()));
                         displayWindow.close();
                     });
                     btnReset.setOnAction(e -> {
                         tfTitle.setText(course.getTitle());
-                        tfClassName.setText(course.getClassName());
+                        cbClassOfStudents.getSelectionModel().select(course.getClassOfStudents());
+
+
                         tfTeacher.setText(course.getTeacherList().getTeacherByIndex(0).toString());
 
                     });
@@ -177,7 +184,7 @@ public class CourseListViewController extends ViewController {
                         for (String s: token) {
                             teacherList.add(new Teacher(s.trim()));
                         }
-                        this.model.getCourseList().addCourse(new Course(tfTitle.getText(), teacherList, new ClassOfStudents(tfClassName.getText())));
+                        this.model.getCourseList().addCourse(new Course(tfTitle.getText(), teacherList,cbClassOfStudents.getValue()));
                         displayWindow.close();
                     });
                     break;
@@ -195,7 +202,7 @@ public class CourseListViewController extends ViewController {
             grid.add(lblTitle, 0, 0);
             grid.add(tfTitle, 1, 0);
             grid.add(lblClassName, 0, 1);
-            grid.add(tfClassName, 1, 1);
+            grid.add(cbClassOfStudents, 1, 1);
             grid.add(lblTeacher, 0, 2);
             grid.add(tfTeacher, 1, 2);
             grid.add(innerGrid, 0, 3, 3, 1);
@@ -205,6 +212,42 @@ public class CourseListViewController extends ViewController {
             displayWindow.showAndWait();
             reset();
         }
+    }
+
+    public ComboBox<ClassOfStudents> CourseComboBox() {
+        ComboBox<ClassOfStudents> comboBox = new ComboBox<>();
+        comboBox.setCellFactory(new Callback<ListView<ClassOfStudents>, ListCell<ClassOfStudents>>() {
+            @Override
+            public ListCell<ClassOfStudents> call(ListView<ClassOfStudents> param) {
+                ListCell<ClassOfStudents> cell = new ListCell<ClassOfStudents>() {
+                    @Override
+                    protected void updateItem(ClassOfStudents item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(item != null) {
+                            setText(item.getName());
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+        comboBox.setButtonCell(new ListCell<ClassOfStudents>() {
+            @Override
+            protected void updateItem(ClassOfStudents item, boolean empty){
+                super.updateItem(item, empty);
+                if (item != null)
+                {
+                    setText(item.getName());
+                }
+                else
+                {
+                    setText(null);
+                }
+            }
+        });
+        return comboBox;
     }
 
     public void onViewDetailsClick(){
