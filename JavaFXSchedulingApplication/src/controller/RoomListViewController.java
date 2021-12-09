@@ -15,12 +15,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Model;
 import model.rooms.Room;
+import model.students.Student;
 import view.ViewHandler;
 
 import java.io.File;
 
 
-public class RoomListViewController extends ViewController{
+public class RoomListViewController extends ViewController {
+    @FXML
+    TextField textField;
     @FXML
     TableView tableView;
     @FXML
@@ -93,6 +96,18 @@ public class RoomListViewController extends ViewController{
         File file = fileChooser.showOpenDialog(viewHandler.getPrimaryStage());
         this.model.getRoomList().readRoomsFromTXTFile(file);
         reset();
+    }
+
+    public void onNewFilter() {
+        String filter = textField.getText();
+        if (filter != "") {
+            tableView.getItems().clear();
+            for (Room r : this.model.getRoomList().getRooms()) {
+                if (r.getName().toLowerCase().contains(filter.toLowerCase()) || r.getMergeWith().toLowerCase().contains(filter.toLowerCase()) || Integer.toString(r.getCapacity()).contains(filter)) {
+                    tableView.getItems().add(r);
+                }
+            }
+        }
     }
 
     @FXML

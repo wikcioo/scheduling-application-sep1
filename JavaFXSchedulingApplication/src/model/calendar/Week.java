@@ -24,6 +24,17 @@ public class Week implements Serializable {
     public void addLesson(Lesson lesson, int index) {
         days[index].addLesson(lesson);
     }
+    public Week filterBasedOnCourse(String course) {
+        Week result = new Week(start,end);
+        for (Day day : this.days) {
+            for (Lesson lesson :day.getLessons()) {
+                if (lesson.getCourse().equals(course))
+                    result.addLesson(lesson,day.getIndexForDay());
+            }
+        }
+        System.out.println(result);
+        return result;
+    }
 
     public LocalDate getStart() {
         return start;
@@ -35,6 +46,26 @@ public class Week implements Serializable {
 
     public Day[] getDays() {
         return days;
+    }
+
+    public void copyWeekLessons(Week week) {
+        setDaysLessons(week.copyDays());
+    }
+
+    private void setDaysLessons(Day[] days) {
+        for (int i = 0; i < 7; i++) {
+            this.days[i].setLessons(days[i].copyLessons());
+        }
+    }
+
+    public Day[] copyDays() {
+        return days.clone();
+    }
+
+    public Week copy() {
+        Week newWeek = new Week(start,end);
+        newWeek.setDaysLessons(this.days);
+        return newWeek;
     }
 
     @Override

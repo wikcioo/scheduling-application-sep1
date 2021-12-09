@@ -133,7 +133,7 @@ public class CourseList
         System.out.println("Wrong format, skipping...");
         e.printStackTrace();
       }
-      courses.add(new Course(courseTitle, new Teacher(teacher), new ClassOfStudents("1Z",null)));
+      courses.add(new Course(courseTitle, new Teacher(teacher), new ClassOfStudents("1Z")));
 
 
     }

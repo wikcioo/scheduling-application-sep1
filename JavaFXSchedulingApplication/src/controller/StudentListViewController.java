@@ -12,13 +12,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Model;
 import model.students.Student;
-import model.students.StudentList;
 import view.ViewHandler;
 
 import java.io.File;
+import java.util.Locale;
 
 
 public class StudentListViewController extends ViewController{
+    @FXML
+    TextField textField;
     @FXML
     TableView tableView;
     @FXML
@@ -98,6 +100,17 @@ public class StudentListViewController extends ViewController{
     public void onResetButtonClick() {
         reset();
     }
+    public void onNewFilter(){
+        tableView.getItems().clear();
+        for (Student s : this.model.getStudentList().getStudentList()) {
+            String filter = textField.getText();
+            if(filter!=""&&(s.getName().toLowerCase().contains(filter.toLowerCase())||s.get_class().toLowerCase().contains(filter.toLowerCase())||Integer.toString(s.getSemester()).contains(filter)||Integer.toString(s.getId()).contains(filter))){
+                tableView.getItems().add(s);
+            }
+
+        }
+    }
+
 
     public void onClick(String clickId) {
         if (clickId.equals("edit") && tableView.getSelectionModel().getSelectedItem() == null) {
