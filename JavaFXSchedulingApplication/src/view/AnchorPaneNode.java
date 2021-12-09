@@ -30,6 +30,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class AnchorPaneNode extends AnchorPane {
     private Lesson lesson;
@@ -314,7 +315,8 @@ public class AnchorPaneNode extends AnchorPane {
         grid.setAlignment(Pos.CENTER);
         Button btnCancel = new Button("Cancel");
         Button btnBook = new Button("Book");
-        hbButtons.getChildren().addAll(btnBook, btnCancel);
+        Button btnMerge = new Button("MergeRoom");
+        hbButtons.getChildren().addAll(btnBook, btnCancel,btnMerge);
 
 
         GridPane innerGrid = new GridPane();
@@ -340,6 +342,7 @@ public class AnchorPaneNode extends AnchorPane {
         }
 
         innerGrid.add(hbButtons, 0, 20);
+
         grid.add(lblName, 0, 1);
         grid.add(t,0, 2);
         grid.add(innerGrid, 0, 3, 3, 1);
@@ -359,6 +362,42 @@ public class AnchorPaneNode extends AnchorPane {
 
         });
 
+        btnMerge.setOnAction(e ->{
+            int index3 = t.getSelectionModel().getFocusedIndex();
+
+            if(finalLesson.getRoom() == null && index3 >= 0)
+            {
+                Room room =  this.model.getRoomList().getAvailableRoomsAt(book).get(index3);
+                finalLesson.setRoom(room);
+                room.Book(book);
+                if(room.getMergeWith() != null)
+                {
+                    Room room2 = this.model.getRoomList().getRoomByString(room.getMergeWith());
+                    try{
+                    if(room2.canBeBookedAt(book))
+                    {
+                        finalLesson.setRoom2(room2);
+                        room2.Book(book);
+                    }
+                    }catch (NullPointerException E)
+                    {
+
+                    }
+                }
+                else
+                {
+                    error();
+                }
+                displayWindow.close();
+                System.out.println(model.getRoomList().getRooms());
+            }
+            else
+            {
+                error2();
+            }
+
+        });
+
 
         Scene scene1 = new Scene(grid, 400, 400);
         displayWindow.setScene(scene1);
@@ -371,5 +410,27 @@ public class AnchorPaneNode extends AnchorPane {
 
     public Lesson getLesson() {
         return lesson;
+    }
+
+    private boolean error ()
+    {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Cannot booked merged rooms.Only one room booked"
+               );
+        Optional<ButtonType> result = alert.showAndWait();
+        return (result.isPresent()) && (result.get() == ButtonType.OK);
+    }
+
+    private boolean error2 ()
+    {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("It cannot be merged. Only one room booked"
+        );
+        Optional<ButtonType> result = alert.showAndWait();
+        return (result.isPresent()) && (result.get() == ButtonType.OK);
     }
 }

@@ -208,6 +208,17 @@ public class RoomList implements Serializable
     return result;
   }
 
+  public Room getRoomByString(String name)
+  {
+    for(Room room: rooms)
+    {
+      if(room.getName().equals(name))
+        return room;
+    }
+    return null;
+  }
+
+
 
 
 

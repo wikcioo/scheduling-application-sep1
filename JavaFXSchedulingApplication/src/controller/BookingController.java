@@ -16,6 +16,7 @@ import model.rooms.Room;
 import view.ViewHandler;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class BookingController extends ViewController
 {
@@ -41,8 +42,10 @@ public class BookingController extends ViewController
     endColumn.setCellValueFactory(new PropertyValueFactory<>("end"));
     TableColumn roomColumn = new TableColumn("Room");
     roomColumn.setCellValueFactory(new PropertyValueFactory<>("room"));
+    TableColumn room2Column = new TableColumn("Room2");
+    room2Column.setCellValueFactory(new PropertyValueFactory<>("room2"));
 
-    tableView.getColumns().addAll(nameColumn, capacityColumn, mergeColumn, endColumn, roomColumn);
+    tableView.getColumns().addAll(nameColumn, capacityColumn, mergeColumn, endColumn, roomColumn,room2Column);
     for (Lesson r : this.model.getScheduleList().getAllLessons()) {
       tableView.getItems().add(r);
       System.out.println(r);
@@ -88,7 +91,9 @@ public class BookingController extends ViewController
       Lesson lesson = this.model.getScheduleList().getAllLessons().get(index);
       BookingTime book = new BookingTime(lesson.getDate(),lesson.getStart(),lesson.getEnd());
       lesson.getRoom().unBook(book);
+      lesson.getRoom2().unBook(book);
       lesson.setRoom(null);
+      lesson.setRoom2(null);
       reset();
       return;
     }
@@ -114,7 +119,8 @@ public class BookingController extends ViewController
       grid.setAlignment(Pos.CENTER);
       Button btnCancel = new Button("Cancel");
       Button btnBook = new Button("Book");
-      hbButtons.getChildren().addAll(btnBook, btnCancel);
+      Button btnMerge = new Button("Merge");
+      hbButtons.getChildren().addAll(btnBook, btnCancel,btnMerge);
       switch (clickId) {
         case "BookRoom":
           int index = tableView.getSelectionModel().getFocusedIndex();
@@ -138,6 +144,7 @@ public class BookingController extends ViewController
       capacityColumn.setCellValueFactory(new PropertyValueFactory<>("capacity"));
       TableColumn mergeColumn = new TableColumn("Merge with");
       mergeColumn.setCellValueFactory(new PropertyValueFactory<>("mergeWith"));
+
 
       t.setPrefHeight(200);
       t.getColumns().addAll(nameColumn, capacityColumn, mergeColumn);
@@ -167,11 +174,63 @@ public class BookingController extends ViewController
 
       });
 
+      btnMerge.setOnAction(e ->{
+        int index3 = t.getSelectionModel().getFocusedIndex();
+
+        if(finalLesson.getRoom() == null && index3 >= 0)
+        {
+          Room room =  this.model.getRoomList().getAvailableRoomsAt(book).get(index3);
+          finalLesson.setRoom(room);
+          room.Book(book);
+          if(room.getMergeWith() != null)
+          {
+            Room room2 = this.model.getRoomList().getRoomByString(room.getMergeWith());
+            if(room2.canBeBookedAt(book))
+            {
+              finalLesson.setRoom2(room2);
+              room2.Book(book);
+            }
+          }
+          else
+          {
+            error();
+          }
+          displayWindow.close();
+          System.out.println(model.getRoomList().getRooms());
+        }
+        else
+        {
+          error2();
+        }
+
+      });
+
 
       Scene scene1 = new Scene(grid, 300, 300);
       displayWindow.setScene(scene1);
       displayWindow.showAndWait();
       reset();
     }
+  }
+  private boolean error ()
+  {
+
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText("Cannot booked merged rooms.Only one room booked"
+    );
+    Optional<ButtonType> result = alert.showAndWait();
+    return (result.isPresent()) && (result.get() == ButtonType.OK);
+  }
+
+  private boolean error2 ()
+  {
+
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText("It cannot be merged. Only one room booked"
+    );
+    Optional<ButtonType> result = alert.showAndWait();
+    return (result.isPresent()) && (result.get() == ButtonType.OK);
   }
 }

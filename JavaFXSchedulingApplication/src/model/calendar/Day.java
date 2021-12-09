@@ -65,7 +65,7 @@ public class Day implements Serializable {
         ArrayList<Lesson> lessons = new ArrayList<>();
 
         for(Lesson lesson : this.lessons) {
-            lessons.add(new Lesson(lesson.getCourse(),date,lesson.getStart(),lesson.getEnd(),lesson.getRoom()));
+            lessons.add(new Lesson(lesson.getCourse(),date,lesson.getStart(),lesson.getEnd(),lesson.getRoom(),lesson.getRoom2()));
         }
         return lessons;
     }
