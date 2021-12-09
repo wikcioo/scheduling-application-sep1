@@ -19,6 +19,7 @@ import model.students.Student;
 import view.ViewHandler;
 
 import java.io.File;
+import java.util.Optional;
 
 
 public class RoomListViewController extends ViewController {
@@ -87,9 +88,16 @@ public class RoomListViewController extends ViewController {
     @FXML
     private void onRemoveButtonClick() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            Room room = (Room) tableView.getSelectionModel().getSelectedItem();
-            this.model.getRoomList().removeRoom(room);
-            tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm removing");
+            alert.setHeaderText("Confirm removing room");
+            alert.setContentText("Are you sure? This action will remove the selected room.");
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.get() == ButtonType.OK){
+                Room room = (Room) tableView.getSelectionModel().getSelectedItem();
+                this.model.getRoomList().removeRoom(room);
+                tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
+            }
         }
     }
 

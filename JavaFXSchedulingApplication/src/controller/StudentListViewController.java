@@ -14,7 +14,7 @@ import model.Model;
 import model.students.Student;
 import view.ViewHandler;
 import java.io.File;
-
+import java.util.Optional;
 
 
 public class StudentListViewController extends ViewController{
@@ -86,9 +86,16 @@ public class StudentListViewController extends ViewController{
     @FXML
     private void onRemoveButtonClick() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            Student student = (Student) tableView.getSelectionModel().getSelectedItem();
-            this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList().remove(student);
-            tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm removing");
+            alert.setHeaderText("Confirm removing student");
+            alert.setContentText("Are you sure? This action will remove the selected student.");
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.get() == ButtonType.OK) {
+                Student student = (Student) tableView.getSelectionModel().getSelectedItem();
+                this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList().remove(student);
+                tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
+            }
         }
     }
 

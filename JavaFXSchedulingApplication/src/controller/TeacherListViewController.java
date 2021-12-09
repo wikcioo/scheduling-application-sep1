@@ -13,6 +13,8 @@ import model.Model;
 import model.courses.Teacher;
 import view.ViewHandler;
 
+import java.util.Optional;
+
 public class TeacherListViewController extends ViewController {
     @FXML
     TextField textField;
@@ -73,9 +75,16 @@ public class TeacherListViewController extends ViewController {
     @FXML
     private void onRemoveButtonClick() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            Teacher teacher = (Teacher) tableView.getSelectionModel().getSelectedItem();
-            this.model.getCourseList().getCourses().get(courseIndex).getTeacherList().removeTeacher(teacher);
-            tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm removing");
+            alert.setHeaderText("Confirm removing teacher");
+            alert.setContentText("Are you sure? This action will remove the selected teacher.");
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.get() == ButtonType.OK) {
+                Teacher teacher = (Teacher) tableView.getSelectionModel().getSelectedItem();
+                this.model.getCourseList().getCourses().get(courseIndex).getTeacherList().removeTeacher(teacher);
+                tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
+            }
         }
     }
 
