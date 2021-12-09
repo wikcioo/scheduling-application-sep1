@@ -18,6 +18,8 @@ public class Lesson implements Serializable {
         this.course = course;
         this.start = time;
         this.end = end;
+        this.room = null;
+        this.date = null;
     }
 
     public Lesson(String course, LocalDate date, LocalTime start, LocalTime end, Room room)

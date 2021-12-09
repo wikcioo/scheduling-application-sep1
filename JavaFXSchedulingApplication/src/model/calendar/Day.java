@@ -61,8 +61,13 @@ public class Day implements Serializable {
         this.date = date;
     }
 
-    public ArrayList<Lesson> copyLessons() {
-        return (ArrayList<Lesson>) lessons.clone();
+    public ArrayList<Lesson> copyLessons(LocalDate date) {
+        ArrayList<Lesson> lessons = new ArrayList<>();
+
+        for(Lesson lesson : this.lessons) {
+            lessons.add(new Lesson(lesson.getCourse(),date,lesson.getStart(),lesson.getEnd(),lesson.getRoom()));
+        }
+        return lessons;
     }
 
     public LocalDate getDate() {

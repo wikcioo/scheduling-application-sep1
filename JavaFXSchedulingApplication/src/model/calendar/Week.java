@@ -48,13 +48,10 @@ public class Week implements Serializable {
         return days;
     }
 
-    public void copyWeekLessons(Week week) {
-        setDaysLessons(week.copyDays());
-    }
-
-    private void setDaysLessons(Day[] days) {
+    public void setWeekLessons(Week week) {
+        Day[] copiedDays = week.copyDays();
         for (int i = 0; i < 7; i++) {
-            this.days[i].setLessons(days[i].copyLessons());
+            this.days[i].setLessons(copiedDays[i].copyLessons(days[i].getDate()));
         }
     }
 
@@ -64,7 +61,7 @@ public class Week implements Serializable {
 
     public Week copy() {
         Week newWeek = new Week(start,end);
-        newWeek.setDaysLessons(this.days);
+        newWeek.setWeekLessons(this);
         return newWeek;
     }
 

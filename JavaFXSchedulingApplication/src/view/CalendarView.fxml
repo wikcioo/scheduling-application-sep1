@@ -120,7 +120,7 @@
                            <children>
                               <VBox prefHeight="71.0" prefWidth="129.0">
                                  <children>
-                                    <Text fx:id="copiedWeekNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="Copied: " />
+                                    <Text fx:id="copiedWeekNumber" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Copied: " />
                                     <Button fx:id="copyButton" mnemonicParsing="false" onMouseClicked="#copyWeek" text="Copy" />
                                  </children>
                               </VBox>

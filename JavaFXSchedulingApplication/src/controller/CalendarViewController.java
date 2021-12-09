@@ -144,7 +144,7 @@ public class CalendarViewController extends ViewController {
         if(copiedWeek != null) {
             if(showConfirmAlert("Confirm pasting","Confirm pasting to week","Are you sure? This action will override all lessons in this week."))
             {
-                model.getCurrentWeek().copyWeekLessons(copiedWeek);
+                model.getCurrentWeek().setWeekLessons(copiedWeek);
                 System.out.println("Copying successful");
                 initCalendar(model.getCurrentWeek());
             }
@@ -167,7 +167,7 @@ public class CalendarViewController extends ViewController {
         if(copiedWeek != null){
             if(showConfirmAlert("Confirm pasting","Confirm pasting to all weeks","Are you sure? This action will override ALL other lessons in this semester!")) {
                 for(Week week : model.getScheduleList().getCurrentSchedule().getWeekList()) {
-                    week.copyWeekLessons(copiedWeek);
+                    week.setWeekLessons(copiedWeek);
                 }
                 initCalendar(model.getCurrentWeek());
             }
