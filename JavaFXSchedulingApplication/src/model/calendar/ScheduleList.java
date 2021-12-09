@@ -33,7 +33,19 @@ public class ScheduleList
     }
     else schedules.add(schedule);
   }
-
+  public ArrayList<Lesson> getAllLessons()
+  {
+    ArrayList<Lesson> lessons = new ArrayList<>();
+    for(Schedule s: schedules)
+    {
+      for(Week w: s.getWeekList())
+      {
+        for(Day d: w.getDays())
+          lessons.addAll(d.getLessons());
+      }
+    }
+    return lessons;
+  }
   public Schedule getScheduleByClass(ClassOfStudents class1, boolean createIfNoScheduleFound) {
     for(Schedule schedule : schedules) {
       if(Objects.equals(schedule.getClassOfStudents(),class1))

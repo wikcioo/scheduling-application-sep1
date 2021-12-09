@@ -3,6 +3,7 @@ package model;
 import model.rooms.RoomList;
 
 import java.io.File;
+import java.time.LocalTime;
 
 public class Test
 {
@@ -36,13 +37,14 @@ public class Test
 //    System.out.println(room1.getIntervals().toString());
 //       room1.unBook(book4);
 //    System.out.println(room1.getIntervals().toString());
-    RoomList list = new RoomList();
-    File file = new File("res/hod-data/Rooms.txt");
-   //list.readRoomsFromTXTFile(file);
-  //  list.writeRoomListToBinFile();
-    list.readRoomsListFromBinFile();
+//    RoomList list = new RoomList();
+//    File file = new File("res/hod-data/Rooms.txt");
+//   //list.readRoomsFromTXTFile(file);
+//  //  list.writeRoomListToBinFile();
+//    list.readRoomsListFromBinFile();
 
-
+    LocalTime time = LocalTime.parse("12:05:00");
+    System.out.println(time);
    // list.writeRoomListToBinFile();
 //
   }

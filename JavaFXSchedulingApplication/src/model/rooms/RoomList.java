@@ -56,7 +56,12 @@ public class RoomList implements Serializable
 
   @Override public String toString()
   {
-    return "Room name: " + rooms;
+    String str = "roomlist: ";
+    for (int i = 0; i < rooms.size(); i++)
+    {
+      str+= rooms.get(i).roomData() + ", ";
+    }
+    return str;
   }
 
   public ArrayList<Room> getRooms()

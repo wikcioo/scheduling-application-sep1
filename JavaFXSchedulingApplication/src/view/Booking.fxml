@@ -2,11 +2,19 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="486.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BookingController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BookingController">
    <children>
-      <Label layoutX="325.0" layoutY="109.0" text="Booking" />
-      <Button layoutX="327.0" layoutY="310.0" mnemonicParsing="false" onAction="#back" text="back" />
+      <Button layoutX="416.0" layoutY="377.0" mnemonicParsing="false" onAction="#back" prefHeight="47.0" prefWidth="112.0" text="back" />
+      <Label layoutX="276.0" layoutY="22.0" prefHeight="26.0" prefWidth="84.0" text="Lessons">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <TableView fx:id="tableView" layoutX="48.0" layoutY="58.0" prefHeight="308.0" prefWidth="540.0" />
+      <Button layoutX="96.0" layoutY="377.0" mnemonicParsing="false" onAction="#onBookButtonClick" prefHeight="47.0" prefWidth="112.0" text="Book a room" />
+      <Button layoutX="262.0" layoutY="377.0" mnemonicParsing="false" onAction="#onUnbookButtonClick" prefHeight="47.0" prefWidth="112.0" text="Unbook room" />
    </children>
 </AnchorPane>

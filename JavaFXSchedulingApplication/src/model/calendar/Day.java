@@ -1,6 +1,8 @@
 package model.calendar;
 
 import model.calendar.Lesson;
+import model.rooms.BookingTime;
+import model.rooms.Room;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -17,9 +19,13 @@ public class Day implements Serializable {
 
     public void setLessons(ArrayList<Lesson> lessons) {
         this.lessons = lessons;
+        //add date to each lesson
+        for (Lesson l: this.lessons)
+            l.setDate(date);
     }
 
     public void addLesson(Lesson lesson) {
+        lesson.setDate(date);
         lessons.add(lesson);
         sortLessons();
     }
@@ -33,8 +39,17 @@ public class Day implements Serializable {
             }
         });
     }
-
     public void removeLesson(Lesson lesson){
+        try
+        {
+
+            lesson.getRoom().unBook(
+                new BookingTime(lesson.getDate(), lesson.getStart(), lesson.getEnd()));
+        }
+        catch (Exception e)
+        {
+
+        }
         lessons.remove(lesson);
     }
 

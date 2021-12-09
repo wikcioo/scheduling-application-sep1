@@ -45,10 +45,15 @@ public class Room implements Serializable
     return intervals;
   }
 
-  @Override public String toString()
+  public String roomData()
   {
     return "Room name :" + name + " ,capacity: " + capacity
         + " ,The room can merge with: " + mergeWith + " ,Is booked at" + intervals + "\n";
+  }
+
+  @Override public String toString()
+  {
+    return name;
   }
 
   public String getName()

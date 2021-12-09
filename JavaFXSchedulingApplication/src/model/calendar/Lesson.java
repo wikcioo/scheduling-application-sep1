@@ -1,18 +1,42 @@
 package model.calendar;
 
+import model.rooms.Room;
+
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
 public class Lesson implements Serializable {
     private String course;
+    private LocalDate date;
     private LocalTime start;
     private LocalTime end;
+    private Room room;
 
     public Lesson(String course, LocalTime time,LocalTime end) {
         this.course = course;
         this.start = time;
         this.end = end;
+    }
+
+    public Lesson(String course, LocalDate date, LocalTime start, LocalTime end, Room room)
+    {
+        this.course = course;
+        this.date = date;
+        this.start = start;
+        this.end = end;
+        this.room = null;
+    }
+
+    public LocalDate getDate()
+    {
+        return date;
+    }
+
+    public void setDate(LocalDate date)
+    {
+        this.date = date;
     }
 
     public String getCourse() {
@@ -25,6 +49,11 @@ public class Lesson implements Serializable {
 
     public LocalTime getStart() {
         return start;
+    }
+
+    public Room getRoom()
+    {
+        return room;
     }
 
     public void setStart(LocalTime start) {
@@ -41,6 +70,12 @@ public class Lesson implements Serializable {
 
     public void setTime(LocalTime time) {
         this.start = time;
+    }
+
+    public void setRoom(Room room)
+    {
+
+        this.room = room;
     }
 
     @Override
