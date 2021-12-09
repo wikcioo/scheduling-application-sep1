@@ -14,15 +14,13 @@ import model.Model;
 import model.courses.ClassOfStudents;
 import model.courses.Course;
 import model.courses.Teacher;
-import model.courses.TeacherList;
 import model.students.Student;
+import model.students.StudentList;
 import view.ViewHandler;
 
 import java.io.File;
-import java.util.ArrayList;
 
-
-public class CourseListViewController extends ViewController {
+public class ClassListViewController extends ViewController {
     @FXML
     TextField textField;
     @FXML
@@ -32,7 +30,7 @@ public class CourseListViewController extends ViewController {
     private Model model;
     private ViewHandler viewHandler;
 
-    public CourseListViewController() {
+    public ClassListViewController() {
         // called by FXMLLoader
     }
 
@@ -41,27 +39,19 @@ public class CourseListViewController extends ViewController {
         this.viewHandler = viewHandler;
         this.root = root;
 
-        TableColumn titleColumn = new TableColumn("Title");
-        titleColumn.setSortable(false);
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         TableColumn _classColumn = new TableColumn("Class name");
         _classColumn.setSortable(false);
-        _classColumn.setCellValueFactory(new PropertyValueFactory<>("ClassName"));
-        TableColumn teacherColumn = new TableColumn("Teachers");
-        teacherColumn.setSortable(false);
-        teacherColumn.setCellValueFactory(new PropertyValueFactory<>("TeacherName"));
+        _classColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-
-        tableView.getColumns().addAll(titleColumn, _classColumn, teacherColumn);
-        for (Course c : this.model.getCourseList().getCourses()) {
+        tableView.getColumns().addAll( _classColumn);
+        for (ClassOfStudents c : this.model.getClasses()) {
             tableView.getItems().add(c);
         }
-
     }
 
     public void reset() {
         tableView.getItems().clear();
-        for (Course c : this.model.getCourseList().getCourses()) {
+        for (ClassOfStudents c : this.model.getClasses()) {
             tableView.getItems().add(c);
         }
     }
@@ -98,14 +88,10 @@ public class CourseListViewController extends ViewController {
     public void onImportFileButtonClick() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(viewHandler.getPrimaryStage());
-        this.model.getCourseList().readCoursesFromTXTFile(file);
+        this.model.getStudentList().readStudentFromTXTFile(file);
         reset();
     }
 
-    @FXML
-    public void onResetButtonClick() {
-        reset();
-    }
 
     public void onClick(String clickId) {
         if (clickId.equals("edit") && tableView.getSelectionModel().getSelectedItem() == null) {
@@ -113,7 +99,7 @@ public class CourseListViewController extends ViewController {
         } else {
             Stage displayWindow = new Stage();
             displayWindow.initModality(Modality.APPLICATION_MODAL);
-            displayWindow.setTitle("Display Student");
+            displayWindow.setTitle("Display Class");
             GridPane grid = new GridPane();
             grid.setHgap(10);
             grid.setVgap(12);
@@ -127,9 +113,8 @@ public class CourseListViewController extends ViewController {
             hbButtons.setSpacing(10.0);
             grid.setAlignment(Pos.CENTER);
             Button btnCancel = new Button("Cancel");
-            TextField tfTitle = new TextField();
             TextField tfClassName = new TextField();
-            TextField tfTeacher = new TextField();
+
 
 
             switch (clickId) {
@@ -138,38 +123,21 @@ public class CourseListViewController extends ViewController {
                     Button btnReset = new Button("Reset");
                     hbButtons.getChildren().addAll(btnChange, btnReset, btnCancel);
                     int index = tableView.getSelectionModel().getFocusedIndex();
-                    Course course = this.model.getCourseList().getCourses().get(index);
-                    tfTitle.setText(course.getTitle());
-                    tfClassName.setText(course.getClassName());
-                    tfTeacher.setText(course.getTeacherList().getTeacherByIndex(0).getName());
+                    ClassOfStudents classOfStudents = this.model.getClasses().get(index);
+                    tfClassName.setText(classOfStudents.getName());
 
                     btnChange.setOnAction(e -> {
-                        ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
-                        String[] token = tfTeacher.getText().split(",");
-                        for (String s: token) {
-                            teacherList.add(new Teacher(s.trim()));
-                        }
-                        this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), teacherList , new ClassOfStudents(tfClassName.getText())));
+                        this.model.getClasses().set(index,new ClassOfStudents(tfClassName.getText(),classOfStudents.getStudentList()));
                         displayWindow.close();
                     });
-                    btnReset.setOnAction(e -> {
-                        tfTitle.setText(course.getTitle());
-                        tfClassName.setText(course.getClassName());
-                        tfTeacher.setText(course.getTeacherList().getTeacherByIndex(0).toString());
-
-                    });
+                    btnReset.setOnAction(e -> tfClassName.setText(classOfStudents.getName()));
                     break;
                 default://Adding case
                     Button btnAdd = new Button("Add");
                     Button btnClear = new Button("Clear");
                     hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
                     btnAdd.setOnAction(e -> {
-                        ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
-                        String[] token = tfTeacher.getText().split(",");
-                        for (String s: token) {
-                            teacherList.add(new Teacher(s.trim()));
-                        }
-                        this.model.getCourseList().addCourse(new Course(tfTitle.getText(), teacherList, new ClassOfStudents(tfClassName.getText())));
+                        this.model.getClasses().add(new ClassOfStudents(tfClassName.getText(),new StudentList()));
                         displayWindow.close();
                     });
                     break;
@@ -178,19 +146,10 @@ public class CourseListViewController extends ViewController {
             GridPane innerGrid = new GridPane();
             innerGrid.setAlignment(Pos.CENTER);
             innerGrid.add(hbButtons, 0, 0);
-
-            Label lblTitle = new Label("Course title:");
             Label lblClassName = new Label("Class Name:");
-            Label lblTeacher = new Label("Teachers:");
-
-
-            grid.add(lblTitle, 0, 0);
-            grid.add(tfTitle, 1, 0);
-            grid.add(lblClassName, 0, 1);
-            grid.add(tfClassName, 1, 1);
-            grid.add(lblTeacher, 0, 2);
-            grid.add(tfTeacher, 1, 2);
-            grid.add(innerGrid, 0, 3, 3, 1);
+            grid.add(lblClassName, 0, 0);
+            grid.add(tfClassName, 1, 0);
+            grid.add(innerGrid, 0, 1, 3, 1);
             btnCancel.setOnAction(e -> displayWindow.close());
             Scene scene1 = new Scene(grid, 300, 300);
             displayWindow.setScene(scene1);
@@ -201,16 +160,16 @@ public class CourseListViewController extends ViewController {
 
     public void onViewDetailsClick(){
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            this.model.getCourseList().setCurrentSelectedCourse(tableView.getSelectionModel().getFocusedIndex());
-            this.viewHandler.openView("TeacherListView");
+            this.model.getClassList().setCurrentlySelectedClass(tableView.getSelectionModel().getFocusedIndex());
+            this.viewHandler.openView("StudentListView");
         }
     }
 
     public void onNewFilter(){
         tableView.getItems().clear();
-        for (Course c : this.model.getCourseList().getCourses()) {
+        for (ClassOfStudents c : this.model.getClasses()) {
             String filter = textField.getText();
-            if(filter!=""&&(c.getTitle().toLowerCase().contains(filter.toLowerCase())||c.getClassName().toLowerCase().contains(filter.toLowerCase())||c.getTeacherName().toLowerCase().contains(filter))){
+            if(filter!=""&&(c.getName().toLowerCase().contains(filter.toLowerCase()))){
                 tableView.getItems().add(c);
             }
 

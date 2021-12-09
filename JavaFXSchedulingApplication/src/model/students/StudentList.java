@@ -148,11 +148,11 @@ public class StudentList implements Serializable{
                 if (!isValidStudent(student)) {
                     throw new NumberFormatException();
                 }
-
+                System.out.println(student);
                 studentList.add(student);
             } catch (NumberFormatException e) {
                 System.out.println("Wrong format, skipping...");
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
         in.close();

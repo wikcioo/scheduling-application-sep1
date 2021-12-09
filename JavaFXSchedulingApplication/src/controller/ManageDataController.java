@@ -19,7 +19,6 @@ public class ManageDataController extends ViewController
     this.model = model;
     this.viewHandler = viewHandler;
     this.root = root;
-
   }
 
   public void reset() {
@@ -31,12 +30,12 @@ public class ManageDataController extends ViewController
 
   public void openManageStudents()
   {
-    viewHandler.openView("StudentListView");
+    viewHandler.openView("ClassListView");
   }
 
   public void openManageTeachers()
   {
-    viewHandler.openView("ManageTeachersView");
+    viewHandler.openView("CourseListView");
   }
 
   public void openManageRooms()
@@ -51,13 +50,11 @@ public class ManageDataController extends ViewController
 
   public void openManageClasses()
   {
-    viewHandler.openView("ManageClassesView");
+    viewHandler.openView("ClassListView");
   }
 
   public void openMainMenu()
   {
     viewHandler.openView("MainMenu");
   }
-
-
 }

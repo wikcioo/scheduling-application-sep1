@@ -13,9 +13,8 @@ import javafx.stage.Stage;
 import model.Model;
 import model.students.Student;
 import view.ViewHandler;
-
 import java.io.File;
-import java.util.Locale;
+
 
 
 public class StudentListViewController extends ViewController{
@@ -27,6 +26,7 @@ public class StudentListViewController extends ViewController{
     private Region root;
     private Model model;
     private ViewHandler viewHandler;
+    private int classIndex;
 
     public StudentListViewController() {
         // called by FXMLLoader
@@ -36,18 +36,22 @@ public class StudentListViewController extends ViewController{
         this.model = model;
         this.viewHandler = viewHandler;
         this.root = root;
-
+        classIndex = this.model.getClassList().getCurrentlySelectedClass();
         TableColumn nameColumn = new TableColumn("Name");
+        nameColumn.setSortable(false);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        TableColumn surnameColumn = new TableColumn("ID");
-        surnameColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TableColumn idColumn = new TableColumn("ID");
+        idColumn.setSortable(false);
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn _classColumn = new TableColumn("_class");
+        _classColumn.setSortable(false);
         _classColumn.setCellValueFactory(new PropertyValueFactory<>("_class"));
         TableColumn semesterColumn = new TableColumn("semester");
+        semesterColumn.setSortable(false);
         semesterColumn.setCellValueFactory(new PropertyValueFactory<>("semester"));
 
-        tableView.getColumns().addAll(nameColumn, surnameColumn, _classColumn, semesterColumn);
-        for (Student s : this.model.getStudentList().getStudentList()) {
+        tableView.getColumns().addAll(nameColumn, idColumn, _classColumn, semesterColumn);
+        for (Student s : this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList()) {
             tableView.getItems().add(s);
         }
 
@@ -55,7 +59,7 @@ public class StudentListViewController extends ViewController{
 
     public void reset() {
         tableView.getItems().clear();
-        for (Student s : this.model.getStudentList().getStudentList()) {
+        for (Student s : this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList()) {
             tableView.getItems().add(s);
         }
     }
@@ -66,7 +70,7 @@ public class StudentListViewController extends ViewController{
 
     @FXML
     private void onBackButtonClick() {
-        viewHandler.openView("ManageDataView");
+        viewHandler.openView("ClassListView");
     }
 
     @FXML
@@ -83,7 +87,7 @@ public class StudentListViewController extends ViewController{
     private void onRemoveButtonClick() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Student student = (Student) tableView.getSelectionModel().getSelectedItem();
-            this.model.getStudentList().removeStudent(student);
+            this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList().remove(student);
             tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
         }
     }
@@ -92,7 +96,7 @@ public class StudentListViewController extends ViewController{
     public void onImportFileButtonClick() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(viewHandler.getPrimaryStage());
-        this.model.readStudentFromTXTFile(file);
+        this.model.getClassList().getClasses().get(classIndex).getStudentList().readStudentFromTXTFile(file);
         reset();
     }
 
@@ -102,7 +106,7 @@ public class StudentListViewController extends ViewController{
     }
     public void onNewFilter(){
         tableView.getItems().clear();
-        for (Student s : this.model.getStudentList().getStudentList()) {
+        for (Student s : this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList()) {
             String filter = textField.getText();
             if(filter!=""&&(s.getName().toLowerCase().contains(filter.toLowerCase())||s.get_class().toLowerCase().contains(filter.toLowerCase())||Integer.toString(s.getSemester()).contains(filter)||Integer.toString(s.getId()).contains(filter))){
                 tableView.getItems().add(s);
@@ -148,7 +152,7 @@ public class StudentListViewController extends ViewController{
                     tfClass.setText(student.get_class());
                     tfSmstr.setText(Integer.toString(student.getSemester()));
                     btnChange.setOnAction(e -> {
-                        this.model.getStudentList().getStudentList().set(index, new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())));
+                        this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList().set(index, new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())));
                         displayWindow.close();
                     });
                     btnReset.setOnAction(e -> {
@@ -163,7 +167,7 @@ public class StudentListViewController extends ViewController{
                     Button btnClear = new Button("Clear");
                     hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
                     btnAdd.setOnAction(e -> {
-                        this.model.getStudentList().addStudent(new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())));
+                        this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList().add(new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())));
                         displayWindow.close();
                     });
                     break;

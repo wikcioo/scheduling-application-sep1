@@ -1,50 +1,52 @@
 package model.courses;
 
-import model.courses.Teacher;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class TeacherList implements Serializable
 {
-  ArrayList<Teacher> teachers;
+  ArrayList<Teacher> teacherList;
 
   public TeacherList()
   {
-    this.teachers = new ArrayList<>();
+    this.teacherList = new ArrayList<>();
   }
 
-  public TeacherList(ArrayList<Teacher> teachers) {
-    this.teachers = teachers;
+  public TeacherList(ArrayList<Teacher> teacherList) {
+    this.teacherList = teacherList;
   }
 
   public int size() {
-    return teachers.size();
+    return teacherList.size();
   }
 
   public Teacher getTeacherByIndex(int index) {
-    return teachers.get(index);
+    return teacherList.get(index);
   }
 
   public void addTeacher(Teacher teacher)
   {
-    this.teachers.add(teacher);
+    this.teacherList.add(teacher);
+  }
+
+  public ArrayList<Teacher> getTeacherList(){
+    return teacherList;
   }
 
   public void removeTeacher(Teacher teacher)
   {
-    teachers.remove(teacher);
+    teacherList.remove(teacher);
   }
 
   @Override
   public String toString() {
     String all = "";
-    for(int i = 0; i<teachers.size(); i++){
-      if(i!=teachers.size()-1){
-        all+= teachers.get(i).getName()+", ";
+    for(int i = 0; i< teacherList.size(); i++){
+      if(i!= teacherList.size()-1){
+        all+= teacherList.get(i).getName()+", ";
       }
       else{
-        all+= teachers.get(i).getName();
+        all+= teacherList.get(i).getName();
       }
 
     }

@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import model.Model;
-import model.courses.ClassOfStudents;
 
 public class ViewHandler {
     private Scene currentScene;
@@ -19,8 +18,8 @@ public class ViewHandler {
     private MainMenuController mainMenuController;
     private ManageDataController manageDataController;
     private BookingController bookingController;
-    private ManageTeachersController manageTeachersController;
-    private ManageClassesController manageClassesController;
+    private TeacherListViewController teacherListViewController;
+    private ClassListViewController classListViewController;
     private ScheduleListViewController scheduleListViewController;
 
     public ViewHandler(Model model) {
@@ -59,14 +58,14 @@ public class ViewHandler {
             case "BookingView":
                 root = loadView("Booking.fxml", bookingController);
                 break;
-            case "ManageTeachersView":
-                root = loadView("ManageTeachers.fxml", manageTeachersController);
+            case "TeacherListView":
+                root = loadView("TeacherListView.fxml", teacherListViewController);
                 break;
-            case "ManageClassesView":
-                root = loadView("ManageClasses.fxml", manageClassesController);
+            case "ClassListView":
+                root = loadView("ClassListView.fxml", classListViewController);
                 break;
             case "ShowLesson":
-                root = loadView("ShowLesson.fxml", manageClassesController);
+                root = loadView("ShowLesson.fxml", classListViewController);
                 break;
             default:
                 root = new Region();
@@ -105,8 +104,6 @@ public class ViewHandler {
         }
         return viewController.getRoot();
     }
-
-
 
     private Region loadAddLessonView() {
         return null;

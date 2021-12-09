@@ -6,22 +6,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.stage.FileChooser;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Model;
-import model.rooms.Room;
-import model.students.Student;
+import model.courses.Teacher;
 import view.ViewHandler;
 
-import java.io.File;
-
-
-public class RoomListViewController extends ViewController {
+public class TeacherListViewController extends ViewController {
     @FXML
     TextField textField;
     @FXML
@@ -30,8 +22,9 @@ public class RoomListViewController extends ViewController {
     private Region root;
     private Model model;
     private ViewHandler viewHandler;
+    private int courseIndex;
 
-    public RoomListViewController() {
+    public TeacherListViewController() {
         // called by FXMLLoader
     }
 
@@ -39,29 +32,22 @@ public class RoomListViewController extends ViewController {
         this.model = model;
         this.viewHandler = viewHandler;
         this.root = root;
-
+        courseIndex = this.model.getCourseList().getCurrentSelectedCourse();
         TableColumn nameColumn = new TableColumn("Name");
         nameColumn.setSortable(false);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        TableColumn capacityColumn = new TableColumn("Capacity");
-        capacityColumn.setSortable(false);
-        capacityColumn.setCellValueFactory(new PropertyValueFactory<>("capacity"));
-        TableColumn mergeColumn = new TableColumn("Merge with");
-        mergeColumn.setSortable(false);
-        mergeColumn.setCellValueFactory(new PropertyValueFactory<>("mergeWith"));
 
-
-        tableView.getColumns().addAll(nameColumn, capacityColumn, mergeColumn);
-        for (Room r : this.model.getRoomList().getRooms()) {
-            tableView.getItems().add(r);
+        tableView.getColumns().addAll(nameColumn);
+        for (Teacher t : this.model.getCourseList().getCourses().get(courseIndex).getTeacherList().getTeacherList()) {
+            tableView.getItems().add(t);
         }
 
     }
 
     public void reset() {
         tableView.getItems().clear();
-        for (Room r : this.model.getRoomList().getRooms()) {
-            tableView.getItems().add(r);
+        for (Teacher t : this.model.getCourseList().getCourses().get(courseIndex).getTeacherList().getTeacherList()) {
+            tableView.getItems().add(t);
         }
     }
 
@@ -71,7 +57,7 @@ public class RoomListViewController extends ViewController {
 
     @FXML
     private void onBackButtonClick() {
-        viewHandler.openView("ManageDataView");
+        viewHandler.openView("CourseListView");
     }
 
     @FXML
@@ -87,35 +73,15 @@ public class RoomListViewController extends ViewController {
     @FXML
     private void onRemoveButtonClick() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            Room room = (Room) tableView.getSelectionModel().getSelectedItem();
-            this.model.getRoomList().removeRoom(room);
+            Teacher teacher = (Teacher) tableView.getSelectionModel().getSelectedItem();
+            this.model.getCourseList().getCourses().get(courseIndex).getTeacherList().removeTeacher(teacher);
             tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
         }
     }
 
     @FXML
     public void onImportFileButtonClick() {
-        FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(viewHandler.getPrimaryStage());
-        this.model.getRoomList().readRoomsFromTXTFile(file);
-        reset();
-    }
-
-    public void onNewFilter() {
-        String filter = textField.getText();
-        if (filter != "") {
-            tableView.getItems().clear();
-            for (Room r : this.model.getRoomList().getRooms()) {
-                if (r.getName().toLowerCase().contains(filter.toLowerCase()) || r.getMergeWith().toLowerCase().contains(filter.toLowerCase()) || Integer.toString(r.getCapacity()).contains(filter)) {
-                    tableView.getItems().add(r);
-                }
-            }
-        }
-    }
-
-    @FXML
-    public void onResetButtonClick() {
-        reset();
+        System.out.println("Probably no importing here");
     }
 
     public void onClick(String clickId) {
@@ -124,7 +90,7 @@ public class RoomListViewController extends ViewController {
         } else {
             Stage displayWindow = new Stage();
             displayWindow.initModality(Modality.APPLICATION_MODAL);
-            displayWindow.setTitle("Display room");
+            displayWindow.setTitle("Display Teacher");
             GridPane grid = new GridPane();
             grid.setHgap(10);
             grid.setVgap(12);
@@ -139,34 +105,27 @@ public class RoomListViewController extends ViewController {
             grid.setAlignment(Pos.CENTER);
             Button btnCancel = new Button("Cancel");
             TextField tfName = new TextField();
-            TextField tfCapacity = new TextField();
-            TextField tfMerge = new TextField();
+
             switch (clickId) {
                 case "edit":
                     Button btnChange = new Button("Change");
                     Button btnReset = new Button("Reset");
                     hbButtons.getChildren().addAll(btnChange, btnReset, btnCancel);
                     int index = tableView.getSelectionModel().getFocusedIndex();
-                    Room room = this.model.getRoomList().getRooms().get(index);
-                    tfName.setText(room.getName());
-                    tfCapacity.setText(Integer.toString(room.getCapacity()));
-                    tfMerge.setText(room.getMergeWith());
+                    Teacher teacher = this.model.getCourseList().getCourses().get(courseIndex).getTeacherList().getTeacherByIndex(index);
+                    tfName.setText(teacher.getName());
                     btnChange.setOnAction(e -> {
-                        this.model.getRoomList().getRooms().set(index, new Room(tfName.getText(), Integer.parseInt(tfCapacity.getText()), tfMerge.getText()));
+                        this.model.getCourseList().getCourses().get(courseIndex).getTeacherList().getTeacherList().set(index, new Teacher(tfName.getText()));
                         displayWindow.close();
                     });
-                    btnReset.setOnAction(e -> {
-                        tfName.setText(room.getName());
-                        tfCapacity.setText(Integer.toString(room.getCapacity()));
-                        tfMerge.setText(room.getMergeWith());
-                    });
+                    btnReset.setOnAction(e -> tfName.setText(teacher.getName()));
                     break;
                 default://Adding case
                     Button btnAdd = new Button("Add");
                     Button btnClear = new Button("Clear");
                     hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
                     btnAdd.setOnAction(e -> {
-                        this.model.getRoomList().getRooms().add(new Room(tfName.getText(), Integer.parseInt(tfCapacity.getText()), tfMerge.getText()));
+                        this.model.getCourseList().getCourses().get(courseIndex).getTeacherList().getTeacherList().add(new Teacher(tfName.getText()));
                         displayWindow.close();
                     });
                     break;
@@ -175,23 +134,28 @@ public class RoomListViewController extends ViewController {
             GridPane innerGrid = new GridPane();
             innerGrid.setAlignment(Pos.CENTER);
             innerGrid.add(hbButtons, 0, 0);
-
-            Label lblName = new Label("Room name:");
-            Label lblID = new Label("Capacity:");
-            Label lblClass = new Label("Merge with:");
-
-            grid.add(lblName, 0, 0);
+            Label lblTitle = new Label("Teacher name:");
+            grid.add(lblTitle, 0, 0);
             grid.add(tfName, 1, 0);
-            grid.add(lblID, 0, 1);
-            grid.add(tfCapacity, 1, 1);
-            grid.add(lblClass, 0, 2);
-            grid.add(tfMerge, 1, 2);
-            grid.add(innerGrid, 0, 3, 3, 1);
+            grid.add(innerGrid, 0, 1, 3, 1);
             btnCancel.setOnAction(e -> displayWindow.close());
             Scene scene1 = new Scene(grid, 300, 300);
             displayWindow.setScene(scene1);
             displayWindow.showAndWait();
             reset();
+        }
+    }
+
+    public void onViewDetailsClick(){
+    }
+
+    public void onNewFilter(){
+        tableView.getItems().clear();
+        for (Teacher t : this.model.getCourseList().getCourses().get(courseIndex).getTeacherList().getTeacherList()) {
+            String filter = textField.getText();
+            if(filter!=""&&(t.getName().toLowerCase().contains(filter.toLowerCase()))){
+                tableView.getItems().add(t);
+            }
         }
     }
 }

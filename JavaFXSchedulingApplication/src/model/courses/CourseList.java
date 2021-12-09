@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class CourseList
 {
   private ArrayList<Course> courses;
+  private int currentSelectedCourse;
 
   public CourseList()
   {
@@ -133,7 +134,9 @@ public class CourseList
         System.out.println("Wrong format, skipping...");
         e.printStackTrace();
       }
-      courses.add(new Course(courseTitle, new Teacher(teacher), new ClassOfStudents("1Z")));
+      ArrayList<Teacher> teacherList = new ArrayList<>();
+      teacherList.add(new Teacher(teacher));
+      courses.add(new Course(courseTitle, teacherList, new ClassOfStudents("1Z")));
 
 
     }
@@ -168,4 +171,11 @@ public class CourseList
     }
   }
 
+  public void setCurrentSelectedCourse(int currentSelectedCourse) {
+    this.currentSelectedCourse = currentSelectedCourse;
+  }
+
+  public int getCurrentSelectedCourse() {
+    return currentSelectedCourse;
+  }
 }

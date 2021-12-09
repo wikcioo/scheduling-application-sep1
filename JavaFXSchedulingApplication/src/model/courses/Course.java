@@ -12,18 +12,18 @@ public class Course implements Serializable
   private ClassOfStudents classOfStudents;
   private StudentList participants;
 
-  public Course(String title, Teacher teacher, ClassOfStudents classOfStudents)
+  public Course(String title, ArrayList<Teacher> teacherList, ClassOfStudents classOfStudents)
   {
     this.title = title;
-    this.teacherList = new TeacherList();
-    this.teacherList.addTeacher(teacher);
+    this.teacherList = new TeacherList(teacherList);
+
     this.classOfStudents = classOfStudents;
     initStudents();
   }
 
-  public Course(String title, Teacher teacher)
+  public Course(String title, ArrayList<Teacher> teacherList)
   {
-    this(title, teacher, null);
+    this(title, teacherList, null);
   }
 
   public void setTitle(String title)

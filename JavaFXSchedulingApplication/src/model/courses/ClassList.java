@@ -7,6 +7,15 @@ import java.util.ArrayList;
 public class ClassList {
 
     private ArrayList<ClassOfStudents> classList;
+    private int currentlySelectedClass;
+
+    public int getCurrentlySelectedClass() {
+        return currentlySelectedClass;
+    }
+
+    public void setCurrentlySelectedClass(int currentlySelectedClass) {
+        this.currentlySelectedClass = currentlySelectedClass;
+    }
 
     public ClassList(){
         this.classList = new ArrayList<>();
