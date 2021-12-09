@@ -287,6 +287,7 @@ public class CalendarViewController extends ViewController {
     }
 
     public void back(){
+        this.model.getScheduleList().getCurrentSchedule().initializeCurrentWeekIndex();
         viewHandler.openView("MainMenu");
     }
 
