@@ -3,14 +3,14 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.*;
 
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -22,11 +22,14 @@ import model.calendar.Lesson;
 import model.courses.ClassOfStudents;
 import model.courses.Course;
 import model.courses.Teacher;
+import model.rooms.BookingTime;
+import model.rooms.Room;
 
 import java.awt.event.ActionEvent;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
 
 public class AnchorPaneNode extends AnchorPane {
     private Lesson lesson;
@@ -184,9 +187,11 @@ public class AnchorPaneNode extends AnchorPane {
         gridPane.add(userInputForEndMin,1,gridRow);
 
         Button submit = new Button("Submit");
+
         submit.setOnMouseClicked(event -> {
             addALesson(userInputForCourse.getValue(),userInputForStart.getText(),userInputForStartMin.getText(),userInputForEnd.getText(),userInputForEndMin.getText());
             displayWindow.close();
+            bookARoom(lesson);
         });
 
         finalView.getChildren().add(greeting);
@@ -285,6 +290,81 @@ public class AnchorPaneNode extends AnchorPane {
                 '}';
     }
 
+    public void bookARoom(Lesson lesson1)
+    {
+
+        Stage displayWindow = new Stage();
+
+        displayWindow.setResizable(false);
+        displayWindow.initModality(Modality.APPLICATION_MODAL);
+        displayWindow.setHeight(400);
+        displayWindow.setWidth(400);
+        displayWindow.setTitle("Room Booking");
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(12);
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setHalignment(HPos.LEFT);
+        grid.getColumnConstraints().add(column1);
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setHalignment(HPos.LEFT);
+        grid.getColumnConstraints().add(column2);
+        HBox hbButtons = new HBox();
+        hbButtons.setSpacing(10.0);
+        grid.setAlignment(Pos.CENTER);
+        Button btnCancel = new Button("Cancel");
+        Button btnBook = new Button("Book");
+        hbButtons.getChildren().addAll(btnBook, btnCancel);
+
+
+        GridPane innerGrid = new GridPane();
+        innerGrid.setAlignment(Pos.CENTER);
+
+
+        Label lblName = new Label("Select room to book for this lesson:");
+
+        TableView t = new TableView();
+        TableColumn nameColumn = new TableColumn("Name");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        TableColumn capacityColumn = new TableColumn("Capacity");
+        capacityColumn.setCellValueFactory(new PropertyValueFactory<>("capacity"));
+        TableColumn mergeColumn = new TableColumn("Merge with");
+        mergeColumn.setCellValueFactory(new PropertyValueFactory<>("mergeWith"));
+
+        t.setPrefHeight(200);
+        t.getColumns().addAll(nameColumn, capacityColumn, mergeColumn);
+        BookingTime book = new BookingTime(lesson.getDate(),lesson.getStart(),lesson.getEnd());
+        for (Room r : this.model.getRoomList().getAvailableRoomsAt(book))
+        {
+            t.getItems().add(r);
+        }
+
+        innerGrid.add(hbButtons, 0, 20);
+        grid.add(lblName, 0, 1);
+        grid.add(t,0, 2);
+        grid.add(innerGrid, 0, 3, 3, 1);
+        btnCancel.setOnAction(e -> displayWindow.close());
+        Lesson finalLesson = lesson1;
+
+        btnBook.setOnAction(e ->{
+            int index2 = t.getSelectionModel().getFocusedIndex();
+            if(finalLesson.getRoom() == null && index2 >= 0)
+            {
+                finalLesson.setRoom(
+                    this.model.getRoomList().getAvailableRoomsAt(book).get(index2));
+                this.model.getRoomList().getAvailableRoomsAt(book).get(index2).Book(book);
+                displayWindow.close();
+                System.out.println(model.getRoomList().getRooms());
+            }
+
+        });
+
+
+        Scene scene1 = new Scene(grid, 400, 400);
+        displayWindow.setScene(scene1);
+        displayWindow.showAndWait();
+
+    }
     public AnchorPane returnAp() {
         return this;
     }
