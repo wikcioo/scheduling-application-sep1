@@ -110,7 +110,7 @@ public class ViewHandler {
     }
 
     public void closeView() {
-//        this.model.saveSemesterData();
+        this.model.saveModels();
         primaryStage.close();
     }
 
