@@ -40,6 +40,7 @@ public class ViewHandler {
             case "ScheduleListView":
                 root = loadView("ScheduleList.fxml", scheduleListViewController);
                 break;
+
             case "StudentListView":
                 root = loadView("StudentListView.fxml", studentListViewController);
                 break;

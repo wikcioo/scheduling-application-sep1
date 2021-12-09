@@ -1,5 +1,6 @@
 package model.calendar;
 
+import model.courses.Course;
 import model.rooms.Room;
 
 import java.io.Serializable;
@@ -8,13 +9,13 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 public class Lesson implements Serializable {
-    private String course;
+    private Course course;
     private LocalDate date;
     private LocalTime start;
     private LocalTime end;
     private Room room;
 
-    public Lesson(String course, LocalTime time,LocalTime end) {
+    public Lesson(Course course, LocalTime time,LocalTime end) {
         this.course = course;
         this.start = time;
         this.end = end;
@@ -22,7 +23,7 @@ public class Lesson implements Serializable {
         this.date = null;
     }
 
-    public Lesson(String course, LocalDate date, LocalTime start, LocalTime end, Room room)
+    public Lesson(Course course, LocalDate date, LocalTime start, LocalTime end, Room room)
     {
         this.course = course;
         this.date = date;
@@ -41,11 +42,11 @@ public class Lesson implements Serializable {
         this.date = date;
     }
 
-    public String getCourse() {
+    public Course getCourse() {
         return course;
     }
 
-    public void setCourse(String course) {
+    public void setCourse(Course course) {
         this.course = course;
     }
 

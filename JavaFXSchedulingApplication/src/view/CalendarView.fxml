@@ -136,7 +136,7 @@
                   </TitledPane>
               </panes>
             </Accordion>
-            <AnchorPane fx:id="filter" layoutX="26.0" layoutY="592.0" prefHeight="218.0" prefWidth="226.0" />
+            <AnchorPane fx:id="filter" layoutX="26.0" layoutY="633.0" prefHeight="177.0" prefWidth="226.0" />
 
          </children>
       </Pane>

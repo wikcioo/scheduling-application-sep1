@@ -1,12 +1,13 @@
 package view;
 
 
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -14,10 +15,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import model.Model;
 import model.calendar.Day;
 import model.calendar.Lesson;
+import model.courses.ClassOfStudents;
+import model.courses.Course;
+import model.courses.Teacher;
 
-
+import java.awt.event.ActionEvent;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -25,10 +31,14 @@ import java.time.format.FormatStyle;
 public class AnchorPaneNode extends AnchorPane {
     private Lesson lesson;
     private Day day;
+    private Model model;
+    @FXML
+    private ComboBox<Course> userInputForCourse;
 
 
-    public AnchorPaneNode(Node... nodes) {
+    public AnchorPaneNode(Model model,Node... nodes) {
         super(nodes);
+        this.model = model;
     }
 
     public void setLesson(Lesson lesson) {
@@ -99,17 +109,17 @@ public class AnchorPaneNode extends AnchorPane {
         displayWindow.showAndWait();
     }
 
-    public void addALesson(String userInput,String userInputForStart,String userInputForStartMin,String userInputForEnd,String userInputForEndMin) {
+    public void addALesson(Course userInputForCourse,String userInputForStart,String userInputForStartMin,String userInputForEnd,String userInputForEndMin) {
         //Convert all data to int
         LocalTime timeStart = LocalTime.of(Integer.parseInt(userInputForStart),Integer.parseInt(userInputForStartMin));
         LocalTime timeEnd = LocalTime.of(Integer.parseInt(userInputForEnd),Integer.parseInt(userInputForEndMin));
-        Lesson lesson = new Lesson(userInput,timeStart,timeEnd);
+        Lesson lesson = new Lesson(userInputForCourse,timeStart,timeEnd);
         this.lesson = lesson;
         day.addLesson(lesson);
     }
 
-    public void editALesson(String userInput) {
-        Lesson lesson = new Lesson(userInput,this.lesson.getStart(),this.lesson.getEnd());
+    public void editALesson(Course userInputForCourse) {
+        Lesson lesson = new Lesson(userInputForCourse,this.lesson.getStart(),this.lesson.getEnd());
         this.lesson = lesson;
         day.removeLesson(lesson);
         day.addLesson(lesson);
@@ -123,11 +133,11 @@ public class AnchorPaneNode extends AnchorPane {
         Label greeting = new Label("Do you want to add a new lesson here?");
         Label timePeriods = new Label("New lesson is between :" + lesson.getStart() + " -- " + lesson.getEnd());
         Label date = new Label("New lesson is in "  + day.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
-
         Label info = new Label("Add a new Lesson with the following fields:");
         GridPane gridPane = new GridPane();
-        Label labelForCourse = new Label("Course name:  ");
-        TextField userInputForCourse = new TextField();
+        Label labelForCourse = new Label("Course:  ");
+        userInputForCourse = CourseComboBox();
+        userInputForCourse.getItems().addAll(model.getCourseList().getCourses());
         gridPane.add(labelForCourse,0,0);
         gridPane.add(userInputForCourse,1,0);
         gridPane.setAlignment(Pos.CENTER);
@@ -150,7 +160,7 @@ public class AnchorPaneNode extends AnchorPane {
         gridPane.setAlignment(Pos.CENTER);
         Button submit = new Button("Submit");
         submit.setOnMouseClicked(event -> {
-            addALesson(userInputForCourse.getText(),userInputForStart.getText(),userInputForStartMin.getText(),userInputForEnd.getText(),userInputForEndMin.getText());
+            addALesson(userInputForCourse.getValue(),userInputForStart.getText(),userInputForStartMin.getText(),userInputForEnd.getText(),userInputForEndMin.getText());
             displayWindow.close();
         });
         finalView.getChildren().add(greeting);
@@ -163,6 +173,42 @@ public class AnchorPaneNode extends AnchorPane {
         Scene scene = new Scene(finalView,300,500);
         displayWindow.setScene(scene);
         displayWindow.showAndWait();
+    }
+
+    public ComboBox<Course> CourseComboBox() {
+        ComboBox<Course> comboBox = new ComboBox<>();
+        comboBox.setCellFactory(new Callback<ListView<Course>, ListCell<Course>>() {
+            @Override
+            public ListCell<Course> call(ListView<Course> param) {
+                ListCell<Course> cell = new ListCell<Course>() {
+                    @Override
+                    protected void updateItem(Course item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(item != null) {
+                            setText(item.getTitle());
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+        comboBox.setButtonCell(new ListCell<Course>() {
+            @Override
+            protected void updateItem(Course item, boolean empty){
+                super.updateItem(item, empty);
+                if (item != null)
+                {
+                    setText(item.getTitle());
+                }
+                else
+                {
+                    setText(null);
+                }
+            }
+        });
+        return comboBox;
     }
 
     public void removeLesson() {

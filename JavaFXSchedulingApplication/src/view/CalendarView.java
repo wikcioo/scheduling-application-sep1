@@ -1,6 +1,7 @@
 package view;
 
 import javafx.scene.text.Font;
+import model.Model;
 import model.calendar.Day;
 import model.calendar.Lesson;
 import model.calendar.Week;
@@ -10,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import model.courses.Course;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -17,12 +19,15 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 //TODO:ADD hours dynamically , separate mvc model ,refactoring, set font to course ,fix jump nav cal, add on click functionality ,
 public class CalendarView extends Node {
+    private Model model;
     private VBox finalView;
     private VBox[] daysView = new VBox[7];
     private ArrayList<AnchorPaneNode> lessonBlocks;
     private ArrayList<AnchorPaneNode> emptyBlocks;
     private ArrayList<String> filters;
-    public CalendarView(Week week) {
+    public CalendarView(Model model) {
+        this.model = model;
+        Week week = model.getCurrentWeek();
         lessonBlocks = new ArrayList<>();
         emptyBlocks = new ArrayList<>();
         int hour = 7;
@@ -108,12 +113,12 @@ public class CalendarView extends Node {
         }
 
     private AnchorPaneNode getBlockForLesson(LocalTime start, LocalTime finish,Lesson lesson,Day day) {
-        AnchorPaneNode ap = new AnchorPaneNode();
+        AnchorPaneNode ap = new AnchorPaneNode(model);
         ap.setPrefWidth(200);
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
-        ap.getStyleClass().add(lesson.getCourse());
+        ap.getStyleClass().add(lesson.getCourse().getTitle());
         ap.getStyleClass().add("lesson");
-        Text text = new Text(lesson.getCourse());
+        Text text = new Text(lesson.getCourse().getTitle());
         //Set the info for the anchor pane
         ap.setLesson(lesson);
         ap.setDay(day);
@@ -133,13 +138,13 @@ public class CalendarView extends Node {
     }
 
     private AnchorPaneNode getBlockForEmpty(LocalTime start, LocalTime finish,Day day) {
-        AnchorPaneNode ap = new AnchorPaneNode();
+        AnchorPaneNode ap = new AnchorPaneNode(model);
         ap.setPrefWidth(200);
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
         //Set the info for the anchor pane
         ap.setDay(day);
-        ap.setLesson(new Lesson("Break",start,finish));
+        ap.setLesson(new Lesson(new Course("Break",null),start,finish));
         getEmptyBlocks().add(ap);
         return ap;
     }

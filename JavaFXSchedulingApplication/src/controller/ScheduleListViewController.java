@@ -104,7 +104,6 @@ public class ScheduleListViewController extends ViewController{
 
   @FXML public void switchToCalendar()
   {
-//    viewHandler.closeView();
     viewHandler.openView("CalendarView");
   }
 

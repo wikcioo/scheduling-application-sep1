@@ -21,7 +21,7 @@ public class CoursesListView {
         for (Day day : week.getDays()) {
             for (Lesson lesson :day.getLessons()) {
                 if (!listOfCourses.contains(lesson.getCourse()))
-                    listOfCourses.add(lesson.getCourse());
+                    listOfCourses.add(lesson.getCourse().getTitle());
             }
         }
 

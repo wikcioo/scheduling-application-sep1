@@ -18,7 +18,9 @@ public class Course implements Serializable
     this.teacherList = new TeacherList(teacherList);
 
     this.classOfStudents = classOfStudents;
-    initStudents();
+    if(classOfStudents != null) {
+      initStudents();
+    }
   }
 
   public Course(String title, ArrayList<Teacher> teacherList)
