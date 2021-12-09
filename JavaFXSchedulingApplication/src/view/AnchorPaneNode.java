@@ -362,7 +362,7 @@ public class AnchorPaneNode extends AnchorPane {
 
         Scene scene1 = new Scene(grid, 400, 400);
         displayWindow.setScene(scene1);
-        displayWindow.showAndWait();
+        displayWindow.show();
 
     }
     public AnchorPane returnAp() {
