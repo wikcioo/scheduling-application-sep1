@@ -5,6 +5,7 @@ import model.rooms.Room;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class RoomList implements Serializable
@@ -88,8 +89,9 @@ public class RoomList implements Serializable
       return available;
   }
 
-  public void writeRoomListToBinFile() {
-    String filename = "res/saved-data/RoomList.bin";
+  public void writeRoomListToBinFile(String _file) {
+    String filename;
+    filename = Objects.requireNonNullElse(_file, "res/saved-data/roomList.bin");
 
     ObjectOutputStream out = null;
     try {

@@ -144,8 +144,9 @@ public class CourseList
     courses.get(0).setTeacherList(teach);
     in.close();
   }
-  public void writeCourseListToBinFile() {
-    String filename = "res/saved-data/courseList.bin";
+  public void writeCourseListToBinFile(String _file) {
+    String filename;
+    filename = Objects.requireNonNullElse(_file, "res/saved-data/courseList.bin");
 
     ObjectOutputStream out = null;
     try {

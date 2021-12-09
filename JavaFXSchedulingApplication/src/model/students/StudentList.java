@@ -2,6 +2,7 @@ package model.students;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class StudentList implements Serializable{
@@ -104,8 +105,9 @@ public class StudentList implements Serializable{
         }
     }
 
-    public void writeStudentListToBinFile() {
-        String filename = "res/saved-data/studentList.bin";
+    public void writeStudentListToBinFile(String _file) {
+        String filename;
+        filename = Objects.requireNonNullElse(_file, "res/saved-data/studentList.bin");
 
         ObjectOutputStream out = null;
         try {

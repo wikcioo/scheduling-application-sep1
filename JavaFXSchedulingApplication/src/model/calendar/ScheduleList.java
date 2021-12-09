@@ -52,8 +52,9 @@ public class ScheduleList
     return null;
   }
 
-  public void saveData() {
-    String filename = "res/saved-data/scheduleList.bin";
+  public void writeScheduleListToBinFile(String _file) {
+    String filename;
+    filename = Objects.requireNonNullElse(_file, "res/saved-data/scheduleList.bin");
 
     ObjectOutputStream out = null;
     try {
@@ -74,7 +75,7 @@ public class ScheduleList
     }
   }
 
-  public void readData() {
+  public void readScheduleListToBinFile() {
     String filename = "res/saved-data/scheduleList.bin";
     ObjectInputStream in = null;
     try {
