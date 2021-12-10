@@ -2,7 +2,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import model.Model;
 import model.ModelManager;
-import model.calendar.Lesson;
 import model.calendar.Schedule;
 import model.courses.ClassOfStudents;
 import model.students.StudentList;
