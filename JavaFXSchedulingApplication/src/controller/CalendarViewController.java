@@ -81,7 +81,7 @@ public class CalendarViewController extends ViewController {
     private Region root;
     private Model model;
     private ViewHandler viewHandler;
-    private NavCalendarView navCalendarView = new NavCalendarView();
+    private NavCalendarView navCalendarView;
 
     public void CreateCalendarViewController() {
 
@@ -91,6 +91,7 @@ public class CalendarViewController extends ViewController {
         this.model = model;
         this.viewHandler = viewHandler;
         this.root = root;
+        this.navCalendarView = new NavCalendarView(this.model, this);
         initDates();
         initCopyPaste();
         initCalendar();
@@ -261,7 +262,6 @@ public class CalendarViewController extends ViewController {
         }
 
     }
-
 
     public void initDayText(Text day,int forward) {
         day.setText(String.valueOf(currentDayOfWeek.plusDays(forward).getDayOfMonth()));
