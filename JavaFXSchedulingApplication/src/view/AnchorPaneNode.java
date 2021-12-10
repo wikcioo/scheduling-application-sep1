@@ -63,18 +63,27 @@ public class AnchorPaneNode extends AnchorPane {
         Label start = new Label("Lesson starts at : " + lesson.getStart());
         Label end = new Label("Lesson ends at : " + lesson.getEnd());
         Label date = new Label("Date: "  + day.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
-        Button remove = new Button("remove this lesson");
-        Button edit = new Button("edit this lesson");
-        remove.setOnMouseClicked(event -> {
-            displayWindow.close();
-            removeLesson();
-        });
         finalView.getChildren().add(course);
         finalView.getChildren().add(start);
         finalView.getChildren().add(end);
         finalView.getChildren().add(date);
+        Label room;
+        if (lesson.getRoom() != null) {
+            room = new Label("Room : " + lesson.getRoom());
+            finalView.getChildren().add(room);
+        }
+        Label room2;
+        if (lesson.getRoom2() != null) {
+            room2 = new Label("Room : " + lesson.getRoom());
+            finalView.getChildren().add(room2);
+        }
+        Button remove = new Button("remove this lesson");
+        remove.setOnMouseClicked(event -> {
+            displayWindow.close();
+            removeLesson();
+        });
+
         finalView.getChildren().add(remove);
-        finalView.getChildren().add(edit);
         finalView.setAlignment(Pos.CENTER);
         Scene scene = new Scene(finalView, 300, 300);
         displayWindow.setScene(scene);
