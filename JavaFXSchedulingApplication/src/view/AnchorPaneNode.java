@@ -42,7 +42,7 @@ public class AnchorPaneNode extends AnchorPane {
     private ComboBox<Teacher> userInputForTeacher;
 
 
-    public AnchorPaneNode(Model model,Node... nodes) {
+    public AnchorPaneNode(Model model, Node... nodes) {
         super(nodes);
         this.model = model;
     }
@@ -54,7 +54,8 @@ public class AnchorPaneNode extends AnchorPane {
     public void setDay(Day day) {
         this.day = day;
     }
-    public void displayLesson()  {
+
+    public void displayLesson() {
         Stage displayWindow = new Stage();
         displayWindow.initModality(Modality.APPLICATION_MODAL);
         displayWindow.setTitle("Display Lesson");
@@ -62,7 +63,7 @@ public class AnchorPaneNode extends AnchorPane {
         Label course = new Label("Course : " + lesson.getCourse().toString());
         Label start = new Label("Lesson starts at : " + lesson.getStart());
         Label end = new Label("Lesson ends at : " + lesson.getEnd());
-        Label date = new Label("Date: "  + day.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
+        Label date = new Label("Date: " + day.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
         finalView.getChildren().add(course);
         finalView.getChildren().add(start);
         finalView.getChildren().add(end);
@@ -119,22 +120,25 @@ public class AnchorPaneNode extends AnchorPane {
         finalView.getChildren().add(newEndInput);
         finalView.getChildren().add(submit);
         finalView.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(finalView,300,600);
+        Scene scene = new Scene(finalView, 300, 600);
         displayWindow.setScene(scene);
         displayWindow.showAndWait();
     }
 
-    public void addALesson(Course userInputForCourse,String userInputForStart,String userInputForStartMin,String userInputForEnd,String userInputForEndMin) {
+    public void addALesson(Course userInputForCourse, String userInputForStart, String userInputForStartMin, String userInputForEnd, String userInputForEndMin) {
         //Convert all data to int
-        LocalTime timeStart = LocalTime.of(Integer.parseInt(userInputForStart),Integer.parseInt(userInputForStartMin));
-        LocalTime timeEnd = LocalTime.of(Integer.parseInt(userInputForEnd),Integer.parseInt(userInputForEndMin));
-        Lesson lesson = new Lesson(userInputForCourse,timeStart,timeEnd);
-        this.lesson = lesson;
-        day.addLesson(lesson);
+        LocalTime timeStart = LocalTime.of(Integer.parseInt(userInputForStart), Integer.parseInt(userInputForStartMin));
+        LocalTime timeEnd = LocalTime.of(Integer.parseInt(userInputForEnd), Integer.parseInt(userInputForEndMin));
+        Lesson lesson = new Lesson(userInputForCourse, timeStart, timeEnd);
+        if (day.isValidDataForTime(lesson)) {
+            this.lesson = lesson;
+            day.addLesson(lesson);
+            bookARoom(lesson);
+        } else error3();
     }
 
     public void editALesson(Course userInputForCourse) {
-        Lesson lesson = new Lesson(userInputForCourse,this.lesson.getStart(),this.lesson.getEnd());
+        Lesson lesson = new Lesson(userInputForCourse, this.lesson.getStart(), this.lesson.getEnd());
         this.lesson = lesson;
         day.removeLesson(lesson);
         day.addLesson(lesson);
@@ -147,7 +151,7 @@ public class AnchorPaneNode extends AnchorPane {
         VBox finalView = new VBox(25);
         Label greeting = new Label("Do you want to add a new lesson here?");
         Label timePeriods = new Label("New lesson is between :" + lesson.getStart() + " -- " + lesson.getEnd());
-        Label date = new Label("New lesson is in "  + day.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
+        Label date = new Label("New lesson is in " + day.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
         Label info = new Label("Add a new Lesson with the following fields:");
         GridPane gridPane = new GridPane();
         int gridRow = 0;
@@ -156,12 +160,12 @@ public class AnchorPaneNode extends AnchorPane {
         Label labelForCourse = new Label("Course:  ");
         userInputForCourse = CourseComboBox();
         userInputForCourse.getItems().addAll(model.getCourseList().getCoursesByClass(model.getScheduleList().getCurrentSchedule().getClassOfStudents()));
-        gridPane.add(labelForCourse,0,gridRow);
-        gridPane.add(userInputForCourse,1,gridRow);
+        gridPane.add(labelForCourse, 0, gridRow);
+        gridPane.add(userInputForCourse, 1, gridRow);
         userInputForCourse.setOnAction(event -> {
             userInputForTeacher.setDisable(false);
             userInputForTeacher.getItems().clear();
-            if(userInputForCourse.getValue() != null)
+            if (userInputForCourse.getValue() != null)
                 userInputForTeacher.getItems().addAll(userInputForCourse.getValue().getTeacherList().getTeacherList());
         });
 
@@ -169,39 +173,38 @@ public class AnchorPaneNode extends AnchorPane {
         Label labelForTeacher = new Label("Teacher:  ");
         userInputForTeacher = TeacherComboBox();
         userInputForTeacher.setDisable(true);
-        gridPane.add(labelForTeacher,0,gridRow);
-        gridPane.add(userInputForTeacher,1,gridRow);
+        gridPane.add(labelForTeacher, 0, gridRow);
+        gridPane.add(userInputForTeacher, 1, gridRow);
 
-        gridRow ++;
+        gridRow++;
         Label labelForStart = new Label("Start Hour:  ");
         TextField userInputForStart = new TextField();
-        gridPane.add(labelForStart,0,gridRow);
-        gridPane.add(userInputForStart,1,gridRow);
+        gridPane.add(labelForStart, 0, gridRow);
+        gridPane.add(userInputForStart, 1, gridRow);
 
-        gridRow ++;
+        gridRow++;
         Label labelForStartMin = new Label("Start Min:  ");
         TextField userInputForStartMin = new TextField();
-        gridPane.add(labelForStartMin,0,gridRow);
-        gridPane.add(userInputForStartMin,1,gridRow);
+        gridPane.add(labelForStartMin, 0, gridRow);
+        gridPane.add(userInputForStartMin, 1, gridRow);
 
-        gridRow ++;
+        gridRow++;
         Label labelForEnd = new Label("End Hour:  ");
         TextField userInputForEnd = new TextField();
-        gridPane.add(labelForEnd,0,gridRow);
-        gridPane.add(userInputForEnd,1,gridRow);
+        gridPane.add(labelForEnd, 0, gridRow);
+        gridPane.add(userInputForEnd, 1, gridRow);
 
-        gridRow ++;
+        gridRow++;
         Label labelForEndMin = new Label("End Min:  ");
         TextField userInputForEndMin = new TextField();
-        gridPane.add(labelForEndMin,0,gridRow);
-        gridPane.add(userInputForEndMin,1,gridRow);
+        gridPane.add(labelForEndMin, 0, gridRow);
+        gridPane.add(userInputForEndMin, 1, gridRow);
 
         Button submit = new Button("Submit");
 
         submit.setOnMouseClicked(event -> {
-            addALesson(userInputForCourse.getValue(),userInputForStart.getText(),userInputForStartMin.getText(),userInputForEnd.getText(),userInputForEndMin.getText());
+            addALesson(userInputForCourse.getValue(), userInputForStart.getText(), userInputForStartMin.getText(), userInputForEnd.getText(), userInputForEndMin.getText());
             displayWindow.close();
-            bookARoom(lesson);
         });
 
         finalView.getChildren().add(greeting);
@@ -211,7 +214,7 @@ public class AnchorPaneNode extends AnchorPane {
         finalView.getChildren().add(gridPane);
         finalView.getChildren().add(submit);
         finalView.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(finalView,300,500);
+        Scene scene = new Scene(finalView, 300, 500);
         displayWindow.setScene(scene);
         displayWindow.showAndWait();
     }
@@ -225,7 +228,7 @@ public class AnchorPaneNode extends AnchorPane {
                     @Override
                     protected void updateItem(Course item, boolean empty) {
                         super.updateItem(item, empty);
-                        if(item != null) {
+                        if (item != null) {
                             setText(item.getTitle());
                         } else {
                             setText(null);
@@ -237,14 +240,11 @@ public class AnchorPaneNode extends AnchorPane {
         });
         comboBox.setButtonCell(new ListCell<Course>() {
             @Override
-            protected void updateItem(Course item, boolean empty){
+            protected void updateItem(Course item, boolean empty) {
                 super.updateItem(item, empty);
-                if (item != null)
-                {
+                if (item != null) {
                     setText(item.getTitle());
-                }
-                else
-                {
+                } else {
                     setText(null);
                 }
             }
@@ -261,7 +261,7 @@ public class AnchorPaneNode extends AnchorPane {
                     @Override
                     protected void updateItem(Teacher item, boolean empty) {
                         super.updateItem(item, empty);
-                        if(item != null) {
+                        if (item != null) {
                             setText(item.getName());
                         } else {
                             setText(null);
@@ -273,14 +273,11 @@ public class AnchorPaneNode extends AnchorPane {
         });
         comboBox.setButtonCell(new ListCell<Teacher>() {
             @Override
-            protected void updateItem(Teacher item, boolean empty){
+            protected void updateItem(Teacher item, boolean empty) {
                 super.updateItem(item, empty);
-                if (item != null)
-                {
+                if (item != null) {
                     setText(item.getName());
-                }
-                else
-                {
+                } else {
                     setText(null);
                 }
             }
@@ -289,10 +286,10 @@ public class AnchorPaneNode extends AnchorPane {
     }
 
 
-
     public void removeLesson() {
         day.removeLesson(this.lesson);
     }
+
     @Override
     public String toString() {
         return "AnchorPaneNode{" +
@@ -300,8 +297,7 @@ public class AnchorPaneNode extends AnchorPane {
                 '}';
     }
 
-    public void bookARoom(Lesson lesson1)
-    {
+    public void bookARoom(Lesson lesson1) {
 
         Stage displayWindow = new Stage();
 
@@ -325,7 +321,7 @@ public class AnchorPaneNode extends AnchorPane {
         Button btnCancel = new Button("Cancel");
         Button btnBook = new Button("Book");
         Button btnMerge = new Button("MergeRoom");
-        hbButtons.getChildren().addAll(btnBook, btnCancel,btnMerge);
+        hbButtons.getChildren().addAll(btnBook, btnCancel, btnMerge);
 
 
         GridPane innerGrid = new GridPane();
@@ -344,26 +340,24 @@ public class AnchorPaneNode extends AnchorPane {
 
         t.setPrefHeight(200);
         t.getColumns().addAll(nameColumn, capacityColumn, mergeColumn);
-        BookingTime book = new BookingTime(lesson.getDate(),lesson.getStart(),lesson.getEnd());
-        for (Room r : this.model.getRoomList().getAvailableRoomsAt(book))
-        {
+        BookingTime book = new BookingTime(lesson.getDate(), lesson.getStart(), lesson.getEnd());
+        for (Room r : this.model.getRoomList().getAvailableRoomsAt(book)) {
             t.getItems().add(r);
         }
 
         innerGrid.add(hbButtons, 0, 20);
 
         grid.add(lblName, 0, 1);
-        grid.add(t,0, 2);
+        grid.add(t, 0, 2);
         grid.add(innerGrid, 0, 3, 3, 1);
         btnCancel.setOnAction(e -> displayWindow.close());
         Lesson finalLesson = lesson1;
 
-        btnBook.setOnAction(e ->{
+        btnBook.setOnAction(e -> {
             int index2 = t.getSelectionModel().getFocusedIndex();
-            if(finalLesson.getRoom() == null && index2 >= 0)
-            {
+            if (finalLesson.getRoom() == null && index2 >= 0) {
                 finalLesson.setRoom(
-                    this.model.getRoomList().getAvailableRoomsAt(book).get(index2));
+                        this.model.getRoomList().getAvailableRoomsAt(book).get(index2));
                 this.model.getRoomList().getAvailableRoomsAt(book).get(index2).Book(book);
                 displayWindow.close();
                 System.out.println(model.getRoomList().getRooms());
@@ -371,37 +365,29 @@ public class AnchorPaneNode extends AnchorPane {
 
         });
 
-        btnMerge.setOnAction(e ->{
+        btnMerge.setOnAction(e -> {
             int index3 = t.getSelectionModel().getFocusedIndex();
 
-            if(finalLesson.getRoom() == null && index3 >= 0)
-            {
-                Room room =  this.model.getRoomList().getAvailableRoomsAt(book).get(index3);
+            if (finalLesson.getRoom() == null && index3 >= 0) {
+                Room room = this.model.getRoomList().getAvailableRoomsAt(book).get(index3);
                 finalLesson.setRoom(room);
                 room.Book(book);
-                if(room.getMergeWith() != null)
-                {
+                if (room.getMergeWith() != null) {
                     Room room2 = this.model.getRoomList().getRoomByString(room.getMergeWith());
-                    try{
-                    if(room2.canBeBookedAt(book))
-                    {
-                        finalLesson.setRoom2(room2);
-                        room2.Book(book);
-                    }
-                    }catch (NullPointerException E)
-                    {
+                    try {
+                        if (room2.canBeBookedAt(book)) {
+                            finalLesson.setRoom2(room2);
+                            room2.Book(book);
+                        }
+                    } catch (NullPointerException E) {
 
                     }
-                }
-                else
-                {
+                } else {
                     error();
                 }
                 displayWindow.close();
                 System.out.println(model.getRoomList().getRooms());
-            }
-            else
-            {
+            } else {
                 error2();
             }
 
@@ -413,6 +399,7 @@ public class AnchorPaneNode extends AnchorPane {
         displayWindow.show();
 
     }
+
     public AnchorPane returnAp() {
         return this;
     }
@@ -421,24 +408,30 @@ public class AnchorPaneNode extends AnchorPane {
         return lesson;
     }
 
-    private boolean error ()
-    {
-
+    private boolean error() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Cannot booked merged rooms.Only one room booked"
-               );
+        );
         Optional<ButtonType> result = alert.showAndWait();
         return (result.isPresent()) && (result.get() == ButtonType.OK);
     }
 
-    private boolean error2 ()
-    {
+
+    private boolean error2() {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("It cannot be merged. Only one room booked"
         );
+        Optional<ButtonType> result = alert.showAndWait();
+        return (result.isPresent()) && (result.get() == ButtonType.OK);
+    }
+
+    private boolean error3() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("There is already a lesson overlapping");
         Optional<ButtonType> result = alert.showAndWait();
         return (result.isPresent()) && (result.get() == ButtonType.OK);
     }
