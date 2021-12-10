@@ -133,6 +133,7 @@ public class AnchorPaneNode extends AnchorPane {
         if (day.isValidDataForTime(lesson)) {
             this.lesson = lesson;
             day.addLesson(lesson);
+            bookARoom(lesson);
         } else error3();
     }
 
@@ -204,7 +205,6 @@ public class AnchorPaneNode extends AnchorPane {
         submit.setOnMouseClicked(event -> {
             addALesson(userInputForCourse.getValue(), userInputForStart.getText(), userInputForStartMin.getText(), userInputForEnd.getText(), userInputForEndMin.getText());
             displayWindow.close();
-            bookARoom(lesson);
         });
 
         finalView.getChildren().add(greeting);
