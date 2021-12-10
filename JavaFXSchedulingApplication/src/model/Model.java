@@ -36,5 +36,4 @@ public interface Model {
     CopiedWeek getCopiedWeekWrapper();
     void exportScheduleAsXML();
     void exportWeekAsXML(Week week);
-    void saveModels();
 }

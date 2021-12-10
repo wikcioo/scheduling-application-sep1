@@ -11,9 +11,10 @@ import model.rooms.RoomList;
 import model.students.StudentList;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ModelManager implements Model {
+public class ModelManager implements Model, Serializable {
     private ScheduleList scheduleList;
     private StudentList studentList;
     private RoomList roomList;
@@ -30,8 +31,6 @@ public class ModelManager implements Model {
         this.classList = new ClassList();
         this.teacherList = new TeacherList();
         this.copiedWeek = new CopiedWeek();
-        studentList.readStudentListFromBinFile();
-        //readSemesterData();
     }
 
     public CopiedWeek getCopiedWeekWrapper() {
@@ -122,16 +121,5 @@ public class ModelManager implements Model {
 
     public void exportWeekAsXML(Week week) {
         scheduleList.getCurrentSchedule().exportWeekAsXML(week);
-    }
-
-    public void saveModels() {
-        String system_state_path = "res/saved-data/system_state.bin";
-        scheduleList.writeScheduleListToBinFile(system_state_path);
-        studentList.writeStudentListToBinFile(system_state_path);
-        roomList.writeRoomListToBinFile(system_state_path);
-        courseList.writeCourseListToBinFile(system_state_path);
-        // TODO: implement methods below;
-        // classList.writeClassListToBinFile(system_state_path);
-        // teacherList.writeTeacherListToBinFile(system_state_path);
     }
 }
