@@ -5,47 +5,51 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import model.Model;
+import model.ModelSaverReader;
 import view.ViewHandler;
 
+public class MainMenuController extends ViewController {
+    private Region root;
+    private Model model;
+    private ViewHandler viewHandler;
+    @FXML
+    private Pane leftBar;
+    @FXML
+    private AnchorPane bg;
 
+    public void init(ViewHandler viewHandler, Model model, Region root) {
+        this.model = model;
+        this.viewHandler = viewHandler;
+        this.root = root;
+    }
 
-public class MainMenuController extends ViewController
-{
+    public void reset() {
+    }
 
-  private Region root;
-  private Model model;
-  private ViewHandler viewHandler;
-  @FXML private Pane leftBar;
-  @FXML private AnchorPane bg;
+    public Region getRoot() {
+        return root;
+    }
 
-  public void init(ViewHandler viewHandler, Model model, Region root) {
-    this.model = model;
-    this.viewHandler = viewHandler;
-    this.root = root;
+    public void OpenManageData() {
+        viewHandler.openView("ManageDataView");
+    }
 
-  }
+    public void OpenCalendar() {
+        viewHandler.openView("ScheduleListView");
+    }
 
-  public void reset() {
-  }
+    public void OpenBooking() {
+        viewHandler.openView("BookingView");
+    }
 
-  public Region getRoot() {
-    return root;
-  }
+    @FXML
+    public void onSaveButtonClick() {
+        ModelSaverReader.saveModel(this.model);
+    }
 
-  public void OpenManageData()
-  {
-       viewHandler.openView("ManageDataView");
-  }
-
-  public void OpenCalendar()
-  {
-    viewHandler.openView("ScheduleListView");
-  }
-
-  public void OpenBooking()
-  {
-    viewHandler.openView("BookingView");
-  }
-
-
+    @FXML
+    public void onLoadButtonClick() {
+        this.model = ModelSaverReader.readModel();
+        this.viewHandler.reassignModel(this.model);
+    }
 }
