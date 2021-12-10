@@ -6,7 +6,6 @@ import java.util.Objects;
 public class Student extends Person implements Serializable {
     private int semester;
     private String _class;
-    private boolean isExchange;
 
     public Student(String name, int id, String _class, int semester) {
         super(name, id + "@via.dk", id);
@@ -34,14 +33,6 @@ public class Student extends Person implements Serializable {
 
     public void set_class(String _class) {
         this._class = _class;
-    }
-
-    public boolean isExchange() {
-        return isExchange;
-    }
-
-    public void setExchange(boolean exchange) {
-        isExchange = exchange;
     }
 
     public String getName() {

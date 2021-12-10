@@ -42,6 +42,7 @@ public class StudentList implements Serializable{
     public void removeStudent(Student student) {
         studentList.remove(student);
     }
+
     public void removeStudent(int index) {
         studentList.remove(index);
     }
@@ -68,16 +69,6 @@ public class StudentList implements Serializable{
         return s;
     }
 
-    public ArrayList<Student> getExchangeStudents() {
-        ArrayList<Student> s = new ArrayList<>();
-        for (Student student : this.studentList) {
-            if (student.isExchange()) {
-                s.add(student);
-            }
-        }
-
-        return s;
-    }
 
     public void readStudentListFromBinFile() {
         String filename = "res/saved-data/studentList.bin";
@@ -164,7 +155,6 @@ public class StudentList implements Serializable{
         for (Student s : this.studentList) {
             if (s.getId() == student.getId()) return false;
         }
-
         return true;
     }
 
