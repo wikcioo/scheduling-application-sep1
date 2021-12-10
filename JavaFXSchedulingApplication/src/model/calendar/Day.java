@@ -24,6 +24,17 @@ public class Day implements Serializable {
             l.setDate(date);
     }
 
+    public boolean isValidDataForTime(Lesson lesson) {
+        for (Lesson l: lessons) {
+            if (overlaps(l,lesson)) return false;
+        }
+        return true;
+    }
+
+    private boolean overlaps(Lesson l, Lesson lesson) {
+        return ! (lesson.getStart().isBefore(l.getEnd()) && lesson.getEnd().isBefore(l.getStart()));
+    }
+
     public void addLesson(Lesson lesson) {
         lesson.setDate(date);
         lessons.add(lesson);
