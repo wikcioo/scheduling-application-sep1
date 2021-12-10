@@ -26,6 +26,7 @@ public class ViewHandler {
         this.model = model;
         this.currentScene = new Scene(new Region());
     }
+
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         openView("MainMenu");
@@ -45,16 +46,16 @@ public class ViewHandler {
                 root = loadView("StudentListView.fxml", studentListViewController);
                 break;
             case "RoomListView":
-                root = loadView("RoomListView.fxml",roomListViewController);
+                root = loadView("RoomListView.fxml", roomListViewController);
                 break;
             case "CourseListView":
-                root = loadView("CourseListView.fxml",courseListViewController);
+                root = loadView("CourseListView.fxml", courseListViewController);
                 break;
             case "MainMenu":
-                root = loadView("MainMenu.fxml",mainMenuController);
+                root = loadView("MainMenu.fxml", mainMenuController);
                 break;
             case "ManageDataView":
-                root = loadView("Manage.fxml",manageDataController);
+                root = loadView("Manage.fxml", manageDataController);
                 break;
             case "BookingView":
                 root = loadView("Booking.fxml", bookingController);
@@ -111,11 +112,14 @@ public class ViewHandler {
     }
 
     public void closeView() {
-        this.model.saveModels();
         primaryStage.close();
     }
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public void reassignModel(Model model) {
+        this.model = model;
     }
 }
