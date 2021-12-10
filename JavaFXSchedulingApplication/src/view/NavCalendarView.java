@@ -1,13 +1,20 @@
 package view;
 
+import controller.CalendarViewController;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.Model;
+import utilities.Util;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -16,8 +23,12 @@ public class NavCalendarView {
     private ArrayList<Button> gridPaneItems = new ArrayList<>();
     private Text header = new Text();
     private Calendar calendar = Calendar.getInstance();
+    private Model model;
+    private CalendarViewController calendarViewController;
 
-    public NavCalendarView() {
+    public NavCalendarView(Model model, CalendarViewController calendarViewController) {
+        this.model = model;
+        this.calendarViewController = calendarViewController;
         //Make GridPane for day label
 
         GridPane dayGrid = new GridPane();
@@ -82,7 +93,7 @@ public class NavCalendarView {
     public void initDays() {
         // FIXME: 12/2/2021 //Test solution
         //Get first day in the month
-        int startDay = calendar.get(Calendar.DAY_OF_WEEK) - 2;
+        int startDay = calendar.get(Calendar.DAY_OF_WEEK) - 3;
         if (startDay <= 0) startDay = 7 + startDay; // Get startDay if it starts before the row for months that start on Sunday,Saturday,etc.
         //Get the max number of days in a mounth
         int maxNumberOfDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -106,7 +117,30 @@ public class NavCalendarView {
         //Set current week
         for (int i = startDay - 1; i < maxNumberOfDays + startDay - 1; i++) {
             dayCount++;
-            gridPaneItems.get(i).setOnMouseClicked(null);
+            gridPaneItems.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    String foo = mouseEvent.getSource().toString();
+                    int day_num = Integer.parseInt(foo.substring(foo.indexOf("'") + 1, foo.lastIndexOf("'")));
+                    LocalDate date = Util.getMonday(LocalDate.of(calendar.getWeekYear(), Util.monthStringToMonthInt(getCurrentMonth()), day_num));
+                    System.out.println(date);
+                    int currentWeekIndex = model.getScheduleList().getCurrentSchedule().getCurrentWeekIndex();
+                    int newWeekIndex = (int) ChronoUnit.WEEKS.between(model.getScheduleList().getCurrentSchedule().getSemesterStart(), date);
+                    int diff = currentWeekIndex - newWeekIndex;
+                    System.out.println("Diff: " + diff + ", old: " + currentWeekIndex + ", new: " + newWeekIndex);
+                    if (diff < 0) {
+                        for (int i = 0; i < Math.abs(diff); i++) {
+                            calendarViewController.onNextWeekClick();
+                        }
+                    } else if (diff > 0) {
+                        for (int i = 0; i < diff; i++) {
+                            calendarViewController.onPreviousWeekClick();
+                        }
+                    }
+
+                    model.getScheduleList().getCurrentSchedule().setCurrentWeekIndex(newWeekIndex);
+                }
+            });
             gridPaneItems.get(i).getStyleClass().remove("white");
             gridPaneItems.get(i).getStyleClass().remove("grey");
             gridPaneItems.get(i).setText(dayCount + "");
