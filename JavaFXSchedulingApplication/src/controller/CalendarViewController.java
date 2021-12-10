@@ -208,6 +208,14 @@ public class CalendarViewController extends ViewController {
         }
     }
 
+    @FXML
+    public void onExportCurrentButtonClick() {
+        this.model.exportWeekAsXML(this.model.getCurrentWeek());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Successfully exported current week", ButtonType.OK);
+        alert.setHeaderText("Information");
+        alert.show();
+    }
+
 //    @FXML
 //    public void onAddLessonClick() {
 //        int _start = Integer.parseInt(start.getText());
