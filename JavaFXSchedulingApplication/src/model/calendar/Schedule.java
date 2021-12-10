@@ -87,7 +87,7 @@ public class Schedule implements Serializable {
     }
 
     public void readData() {
-        String filename = "res/saved-data/weekList.bin";
+        String filename = "res/saved-data/saved-lists/weekList.bin";
         ObjectInputStream in = null;
         try {
             File file = new File(filename);
@@ -115,7 +115,7 @@ public class Schedule implements Serializable {
 
     //Saves data about weeks to binary file
     public void saveData() {
-        String filename = "res/saved-data/weekList.bin";
+        String filename = "res/saved-data/saved-lists/weekList.bin";
 
         ObjectOutputStream out = null;
         try {
@@ -200,8 +200,9 @@ public class Schedule implements Serializable {
 
     @Override
     public String toString() {
-        return "Semester{" +
+        return "Schedule{" +
                 "weekList=" + weekList +
+                ", classOfStudents=" + classOfStudents +
                 ", numberOfWeeksInSemester=" + numberOfWeeksInSemester +
                 ", currentWeekIndex=" + currentWeekIndex +
                 ", semesterStart=" + semesterStart +

@@ -80,7 +80,7 @@ public class StudentList implements Serializable{
     }
 
     public void readStudentListFromBinFile() {
-        String filename = "res/saved-data/studentList.bin";
+        String filename = "res/saved-data/saved-lists/studentList.bin";
         ObjectInputStream in = null;
         try {
             File file = new File(filename);
@@ -95,19 +95,19 @@ public class StudentList implements Serializable{
         } catch (FileNotFoundException e) {
             System.out.println(filename + " not found in the resources");
         } catch (IOException | ClassNotFoundException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         } finally {
             try {
                 in.close();
             } catch (IOException | NullPointerException e) {
-                //e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }
 
     public void writeStudentListToBinFile(String _file) {
         String filename;
-        filename = Objects.requireNonNullElse(_file, "res/saved-data/studentList.bin");
+        filename = Objects.requireNonNullElse(_file, "res/saved-data/saved-lists/studentList.bin");
 
         ObjectOutputStream out = null;
         try {

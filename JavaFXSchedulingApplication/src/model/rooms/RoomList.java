@@ -1,8 +1,5 @@
 package model.rooms;
 
-import model.rooms.BookingTime;
-import model.rooms.Room;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -16,7 +13,6 @@ public class RoomList implements Serializable
   {
     rooms = new ArrayList<>();
   }
-
 
   public  void readRoomsFromTXTFile(File file) {
 
@@ -96,7 +92,7 @@ public class RoomList implements Serializable
 
   public void writeRoomListToBinFile(String _file) {
     String filename;
-    filename = Objects.requireNonNullElse(_file, "res/saved-data/roomList.bin");
+    filename = Objects.requireNonNullElse(_file, "res/saved-data/saved-lists/roomList.bin");
 
     ObjectOutputStream out = null;
     try {
@@ -119,7 +115,7 @@ public class RoomList implements Serializable
   }
 
   public void readRoomsListFromBinFile() {
-    String filename = "res/saved-data/RoomList.bin";
+    String filename = "res/saved-data/saved-lists/roomList.bin";
     ObjectInputStream in = null;
     try {
       File file = new File(filename);
@@ -132,12 +128,12 @@ public class RoomList implements Serializable
       }
 
     } catch (IOException | ClassNotFoundException e) {
-      //e.printStackTrace();
+      e.printStackTrace();
     } finally {
       try {
         in.close();
-      } catch (IOException e) {
-        //e.printStackTrace();
+      } catch (NullPointerException | IOException e) {
+        e.printStackTrace();
       }
     }
   }
@@ -217,12 +213,6 @@ public class RoomList implements Serializable
     }
     return null;
   }
-
-
-
-
-
-
 
   // modify a room field
 }
