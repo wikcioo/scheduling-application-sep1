@@ -2,10 +2,10 @@ package model.courses;
 
 import utilities.ClassNameSorter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ClassList {
-
+public class ClassList implements Serializable {
     private ArrayList<ClassOfStudents> classList;
     private int currentlySelectedClass;
 
@@ -17,7 +17,7 @@ public class ClassList {
         this.currentlySelectedClass = currentlySelectedClass;
     }
 
-    public ClassList(){
+    public ClassList() {
         this.classList = new ArrayList<>();
     }
 
@@ -29,8 +29,7 @@ public class ClassList {
     public void removeClass(ClassOfStudents _class) {
         try {
             classList.remove(_class);
-        }
-        catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
     }
@@ -39,7 +38,6 @@ public class ClassList {
         classList.sort(new ClassNameSorter());
     }
 
-
     public ArrayList<ClassOfStudents> getClasses() {
         return classList;
     }
@@ -47,7 +45,4 @@ public class ClassList {
     public ArrayList<ClassOfStudents> copyClasses() {
         return new ArrayList<ClassOfStudents>(classList);
     }
-
-
-
 }

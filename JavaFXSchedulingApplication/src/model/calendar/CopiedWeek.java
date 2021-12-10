@@ -1,6 +1,8 @@
 package model.calendar;
 
-public class CopiedWeek
+import java.io.Serializable;
+
+public class CopiedWeek implements Serializable
 {
   private Week copiedWeek;
 

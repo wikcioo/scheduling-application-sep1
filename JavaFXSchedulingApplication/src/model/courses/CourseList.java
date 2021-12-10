@@ -1,13 +1,11 @@
 package model.courses;
 
-import model.rooms.Room;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class CourseList
+public class CourseList implements Serializable
 {
   private ArrayList<Course> courses;
   private int currentSelectedCourse;
@@ -83,7 +81,7 @@ public class CourseList
   }
 
   public void readCourseListFromBinFile() {
-    String filename = "res/saved-data/courseList.bin";
+    String filename = "res/saved-data/saved-lists/courseList.bin";
     ObjectInputStream in = null;
     try {
       File file = new File(filename);
@@ -96,12 +94,12 @@ public class CourseList
       }
 
     } catch (IOException | ClassNotFoundException e) {
-      //e.printStackTrace();
+      e.printStackTrace();
     } finally {
       try {
         in.close();
       } catch (IOException e) {
-        //e.printStackTrace();
+        e.printStackTrace();
       }
     }
   }
@@ -149,7 +147,7 @@ public class CourseList
   }
   public void writeCourseListToBinFile(String _file) {
     String filename;
-    filename = Objects.requireNonNullElse(_file, "res/saved-data/courseList.bin");
+    filename = Objects.requireNonNullElse(_file, "res/saved-data/saved-lists/courseList.bin");
 
     ObjectOutputStream out = null;
     try {
