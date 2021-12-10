@@ -86,6 +86,16 @@ public class Schedule implements Serializable {
         }
     }
 
+    public LocalDate getSemesterStart() {
+        return semesterStart;
+    }
+
+    public void setCurrentWeekIndex(int currentWeekIndex) {
+        if (currentWeekIndex > 0 && currentWeekIndex < this.weekList.size()) {
+            this.currentWeekIndex = currentWeekIndex;
+        }
+    }
+
     public void readData() {
         String filename = "res/saved-data/saved-lists/weekList.bin";
         ObjectInputStream in = null;
