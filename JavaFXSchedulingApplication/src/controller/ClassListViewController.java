@@ -27,6 +27,14 @@ public class ClassListViewController extends ViewController {
     @FXML
     TableView tableView;
     @FXML
+    Button editButton;
+    @FXML
+    Button addButton;
+    @FXML
+    Button removeButton;
+    @FXML
+    Button detailsButton;
+    @FXML
     private Region root;
     private Model model;
     private ViewHandler viewHandler;
@@ -48,6 +56,7 @@ public class ClassListViewController extends ViewController {
         for (ClassOfStudents c : this.model.getClasses()) {
             tableView.getItems().add(c);
         }
+        setDisableCellSpecificButtons(true);
     }
 
     public void reset() {
@@ -55,6 +64,17 @@ public class ClassListViewController extends ViewController {
         for (ClassOfStudents c : this.model.getClasses()) {
             tableView.getItems().add(c);
         }
+    }
+
+    @FXML
+    public void onChosenCell() {
+        setDisableCellSpecificButtons(false);
+    }
+
+    public void setDisableCellSpecificButtons(boolean disable) {
+        editButton.setDisable(disable);
+        removeButton.setDisable(disable);
+        detailsButton.setDisable(disable);
     }
 
     public Region getRoot() {
@@ -105,6 +125,7 @@ public class ClassListViewController extends ViewController {
         if (clickId.equals("edit") && tableView.getSelectionModel().getSelectedItem() == null) {
             //Throw alert for not selecting
         } else {
+            setDisableCellSpecificButtons(true);
             Stage displayWindow = new Stage();
             displayWindow.initModality(Modality.APPLICATION_MODAL);
             displayWindow.setTitle("Display Class");
