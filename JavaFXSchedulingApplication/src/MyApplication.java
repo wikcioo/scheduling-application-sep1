@@ -24,13 +24,6 @@ public class MyApplication extends Application {
         model.getClassList().addClass(new ClassOfStudents("5Z",new StudentList()));
         model.getClassList().addClass(new ClassOfStudents("6Z",new StudentList()));
 
-        Schedule schedule1 = new Schedule(
-            LocalDate.of(2021, 8, 30),
-            LocalDate.of(2021, 12, 17),
-            class1);
-
-        model.getScheduleList().addSchedule(schedule1);
-
         view = new ViewHandler(model);
         view.start(primaryStage);
     }

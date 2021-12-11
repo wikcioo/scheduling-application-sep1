@@ -5,6 +5,11 @@ import java.io.*;
 public class ModelSaverReader {
     private static final String filename = "res/saved-data/models.bin";
 
+    public static void clearModel(Model model) {
+        File file = new File(filename);
+        model = new ModelManager();
+    }
+
     public static void saveModel(Model model) {
         ObjectOutputStream out = null;
         try {
