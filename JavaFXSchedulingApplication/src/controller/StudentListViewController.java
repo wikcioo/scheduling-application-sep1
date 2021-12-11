@@ -16,6 +16,7 @@ import model.students.Student;
 
 import view.ViewHandler;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -156,8 +157,8 @@ public class StudentListViewController extends ViewController{
                     Button btnChange = new Button("Change");
                     Button btnReset = new Button("Reset");
                     hbButtons.getChildren().addAll(btnChange, btnReset, btnCancel);
-                    int index = tableView.getSelectionModel().getFocusedIndex();
-                    Student student = this.model.getStudentList().getStudent(index);
+                    Student student = (Student) tableView.getSelectionModel().getSelectedItem();
+                    int index = this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList().indexOf(student);
                     tfName.setText(student.getName());
                     tfID.setText(Integer.toString(student.getId()));
                     tfClass.setText(student.get_class());
