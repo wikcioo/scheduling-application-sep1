@@ -261,7 +261,7 @@ public class CourseListViewController extends ViewController {
         tableView.getItems().clear();
         for (Course c : this.model.getCourseList().getCourses()) {
             String filter = textField.getText();
-            if(filter!=""&&(c.getTitle().toLowerCase().contains(filter.toLowerCase())||c.getClassName().toLowerCase().contains(filter.toLowerCase())||c.getTeacherName().toLowerCase().contains(filter))){
+            if(filter!=""&&(c.getTitle().toLowerCase().contains(filter.toLowerCase())||c.getClassName().toLowerCase().contains(filter.toLowerCase())||c.getTeacherName().toLowerCase().contains(filter.toLowerCase()))){
                 tableView.getItems().add(c);
             }
 
