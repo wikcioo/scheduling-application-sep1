@@ -207,12 +207,7 @@ public class AnchorPaneNode extends AnchorPane {
             displayWindow.close();
         });
 
-        finalView.getChildren().add(greeting);
-        finalView.getChildren().add(timePeriods);
-        finalView.getChildren().add(date);
-        finalView.getChildren().add(info);
-        finalView.getChildren().add(gridPane);
-        finalView.getChildren().add(submit);
+        finalView.getChildren().addAll(greeting,timePeriods,info,gridPane,submit);
         finalView.setAlignment(Pos.CENTER);
         Scene scene = new Scene(finalView, 300, 500);
         displayWindow.setScene(scene);
