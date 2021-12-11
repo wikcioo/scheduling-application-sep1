@@ -50,6 +50,7 @@ public class MainMenuController extends ViewController {
     @FXML
     public void onLoadButtonClick() {
         this.model = ModelSaverReader.readModel();
-        this.viewHandler.reassignModel(this.model);
+        if (this.model != null)
+            this.viewHandler.reassignModel(this.model);
     }
 }
