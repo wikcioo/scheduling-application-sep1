@@ -12,7 +12,7 @@
         <Button layoutX="470.0" layoutY="48.0" mnemonicParsing="false" onAction="#onAddButtonClick" text="Add" />
         <Button layoutX="460.0" layoutY="167.0" mnemonicParsing="false" onAction="#onRemoveButtonClick" text="Remove" />
         <Button layoutX="471.0" layoutY="112.0" mnemonicParsing="false" onAction="#onEditButtonClick" text="Edit" />
-        <Text layoutX="84.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student List">
+        <Text fx:id="studentListText" layoutX="84.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student List">
             <font>
                 <Font size="35.0" />
             </font>

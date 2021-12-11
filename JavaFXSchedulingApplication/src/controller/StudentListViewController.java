@@ -7,11 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Model;
 import model.students.Student;
+
 import view.ViewHandler;
 import java.io.File;
 import java.util.Optional;
@@ -22,6 +24,8 @@ public class StudentListViewController extends ViewController{
     TextField textField;
     @FXML
     TableView tableView;
+    @FXML
+    Text studentListText;
     @FXML
     private Region root;
     private Model model;
@@ -37,6 +41,7 @@ public class StudentListViewController extends ViewController{
         this.viewHandler = viewHandler;
         this.root = root;
         classIndex = this.model.getClassList().getCurrentlySelectedClass();
+        studentListText.setText("Student List for class "+ this.model.getClassList().getClasses().get(classIndex).getName());
         TableColumn nameColumn = new TableColumn("Name");
         nameColumn.setSortable(false);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -49,7 +54,6 @@ public class StudentListViewController extends ViewController{
         TableColumn semesterColumn = new TableColumn("semester");
         semesterColumn.setSortable(false);
         semesterColumn.setCellValueFactory(new PropertyValueFactory<>("semester"));
-
         tableView.getColumns().addAll(nameColumn, idColumn, _classColumn, semesterColumn);
         for (Student s : this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList()) {
             tableView.getItems().add(s);

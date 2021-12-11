@@ -40,6 +40,8 @@ public class ModelSaverReader {
                 return m;
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
+            } catch (InvalidClassException e) {
+                System.out.println("Couldn't load data: incompatible UID versions, regenerate model.bin");
             }
         } catch (IOException e) {
             e.printStackTrace();
