@@ -198,6 +198,7 @@ public class ClassListViewController extends ViewController {
         tableView.getItems().clear();
         for (ClassOfStudents c : this.model.getClasses()) {
             String filter = textField.getText();
+            setDisableCellSpecificButtons(true);
             if(filter!=""&&(c.getName().toLowerCase().contains(filter.toLowerCase()))){
                 tableView.getItems().add(c);
             }
