@@ -91,6 +91,7 @@ public class BookingController extends ViewController
       Lesson lesson = this.model.getScheduleList().getAllLessons().get(index);
       BookingTime book = new BookingTime(lesson.getDate(),lesson.getStart(),lesson.getEnd());
       lesson.getRoom().unBook(book);
+      if(lesson.getRoom2()!=null)
       lesson.getRoom2().unBook(book);
       lesson.setRoom(null);
       lesson.setRoom2(null);
