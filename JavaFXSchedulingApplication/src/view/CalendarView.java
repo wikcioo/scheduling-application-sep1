@@ -17,6 +17,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+
 //TODO:ADD hours dynamically , separate mvc model ,refactoring, set font to course ,fix jump nav cal, add on click functionality ,
 public class CalendarView extends Node {
     private Model model;
@@ -25,6 +26,7 @@ public class CalendarView extends Node {
     private ArrayList<AnchorPaneNode> lessonBlocks;
     private ArrayList<AnchorPaneNode> emptyBlocks;
     private ArrayList<String> filters;
+
     public CalendarView(Model model) {
         this.model = model;
         Week week = model.getCurrentWeek();
@@ -57,21 +59,20 @@ public class CalendarView extends Node {
         LocalTime fixedStart = LocalTime.of(8, 0);
         LocalTime end = LocalTime.of(23, 0);
         ArrayList<Lesson> currentDayLessons = day.getLessons();
-        if (currentDayLessons.size() == 0)
-             {
-                daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart, end, day));
-                fixedStart = fixedStart.plusHours(1);
-            }
+        if (currentDayLessons.size() == 0) {
+            daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart, end, day));
+            fixedStart = fixedStart.plusHours(1);
+        }
         for (int i = 0; i < currentDayLessons.size(); i++) {
             //Put a break before the lesson if the lesson doesn't start at fixedStart
             Lesson lesson = currentDayLessons.get(i);
             if (i == 0) {
-                Duration dif = Duration.between(fixedStart,lesson.getStart());
+                Duration dif = Duration.between(fixedStart, lesson.getStart());
                 if ((dif.toHoursPart() > 0) || (dif.toMinutesPart() > 0))
-                    daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart, lesson.getStart(),day));
+                    daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(fixedStart, lesson.getStart(), day));
             }
             //Put current lesson on the calendar
-            AnchorPaneNode lessonBlock = getBlockForLesson(lesson.getStart(), lesson.getEnd(),lesson,day);
+            AnchorPaneNode lessonBlock = getBlockForLesson(lesson.getStart(), lesson.getEnd(), lesson, day);
             daysView[day.getIndexForDay()].getChildren().add(lessonBlock);
             lessonBlocks.add(lessonBlock);
             //Check for break
@@ -79,7 +80,7 @@ public class CalendarView extends Node {
                 Lesson nextLesson = currentDayLessons.get(i + 1);
                 Duration dif = Duration.between(lesson.getEnd(), nextLesson.getStart());
                 if ((dif.toHoursPart() >= 0) || (dif.toMinutesPart() >= 0))
-                    daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(lesson.getEnd(), nextLesson.getStart(),day));
+                    daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(lesson.getEnd(), nextLesson.getStart(), day));
             }
         }
         //Add a break after the last lesson
@@ -87,20 +88,22 @@ public class CalendarView extends Node {
             Lesson lastLesson = currentDayLessons.get(currentDayLessons.size() - 1);
             daysView[day.getIndexForDay()].getChildren().add(getBlockForEmpty(lastLesson.getEnd(), end, day));
         }
-        }
+    }
 
-    private AnchorPaneNode getBlockForLesson(LocalTime start, LocalTime finish,Lesson lesson,Day day) {
+    private AnchorPaneNode getBlockForLesson(LocalTime start, LocalTime finish, Lesson lesson, Day day) {
         AnchorPaneNode ap = new AnchorPaneNode(model);
         ap.setPrefWidth(200);
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
         ap.getStyleClass().add(lesson.getCourse().getTitle());
-        ap.getStyleClass().add("lesson");
+        String backgroundColor = String.format("-fx-background-color:%s;", lesson.getCourse().getHexColor());
+        System.out.println(backgroundColor);
+        ap.setStyle(backgroundColor);
         Text text = new Text(lesson.getCourse().getTitle());
         //Set the info for the anchor pane
         ap.setLesson(lesson);
         ap.setDay(day);
         Text description = new Text(start + " -- " + finish);
-        text.setFont(Font.font ("Century Gothic", 25));
+        text.setFont(Font.font("Century Gothic", 25));
         text.setFill(Color.WHITE);
         description.setFill(Color.WHITE);
         ap.getChildren().add(text);
@@ -114,14 +117,14 @@ public class CalendarView extends Node {
         return ap;
     }
 
-    private AnchorPaneNode getBlockForEmpty(LocalTime start, LocalTime finish,Day day) {
+    private AnchorPaneNode getBlockForEmpty(LocalTime start, LocalTime finish, Day day) {
         AnchorPaneNode ap = new AnchorPaneNode(model);
         ap.setPrefWidth(200);
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
         //Set the info for the anchor pane
         ap.setDay(day);
-        ap.setLesson(new Lesson(new Course("Break",null),start,finish));
+        ap.setLesson(new Lesson(new Course("Break", null), start, finish));
         getEmptyBlocks().add(ap);
         return ap;
     }

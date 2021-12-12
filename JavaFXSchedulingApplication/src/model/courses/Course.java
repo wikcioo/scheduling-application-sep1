@@ -11,6 +11,7 @@ public class Course implements Serializable
   private TeacherList teacherList;
   private ClassOfStudents classOfStudents;
   private StudentList participants;
+  private String hexColor = "#FFFFFF";
 
   public Course(String title, ArrayList<Teacher> teacherList, ClassOfStudents classOfStudents)
   {
@@ -86,6 +87,14 @@ public class Course implements Serializable
   public void setParticipants(StudentList participants)
   {
     this.participants = participants;
+  }
+
+  public String getHexColor() {
+    return hexColor;
+  }
+
+  public void setHexColor(String hexColor) {
+    this.hexColor = hexColor;
   }
 
   @Override public String toString()
