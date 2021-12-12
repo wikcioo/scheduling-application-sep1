@@ -16,31 +16,24 @@ public class Lesson implements Serializable {
     private Room room;
     private Room room2;
 
-    public Lesson(Course course, LocalTime time,LocalTime end) {
-        this.course = course;
-        this.start = time;
-        this.end = end;
-        this.room = null;
-        this.date = null;
+    public Lesson(Course course, LocalTime start, LocalTime end) {
+        this(course, null, start, end, null, null);
     }
 
-    public Lesson(Course course, LocalDate date, LocalTime start, LocalTime end, Room room,Room room2)
-    {
+    public Lesson(Course course, LocalDate date, LocalTime start, LocalTime end, Room room, Room room2) {
         this.course = course;
         this.date = date;
         this.start = start;
         this.end = end;
-        this.room = null;
-        this.room2 = null;
+        this.room = room;
+        this.room2 = room2;
     }
 
-    public LocalDate getDate()
-    {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date)
-    {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -56,8 +49,7 @@ public class Lesson implements Serializable {
         return start;
     }
 
-    public Room getRoom()
-    {
+    public Room getRoom() {
         return room;
     }
 
@@ -77,19 +69,15 @@ public class Lesson implements Serializable {
         this.start = time;
     }
 
-    public Room getRoom2()
-    {
+    public Room getRoom2() {
         return room2;
     }
 
-    public void setRoom2(Room room2)
-    {
+    public void setRoom2(Room room2) {
         this.room2 = room2;
     }
 
-    public void setRoom(Room room)
-    {
-
+    public void setRoom(Room room) {
         this.room = room;
     }
 

@@ -13,6 +13,7 @@ public class Util {
             int daysSubtracted = current.getDayOfWeek().getValue() - 1;
             monday = current.minusDays(daysSubtracted);
         } else monday = current;
+
         return monday;
     }
 

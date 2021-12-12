@@ -74,10 +74,10 @@ public class Student extends Person implements Serializable {
     @Override
     public String toString() {
         return "Student{" +
-            "id=" + getId() +
-            ", semester=" + semester +
-            ", _class='" + _class + '\'' +
-            ", name='" + getName() + '\'' +
-            '}';
+                "id=" + getId() +
+                ", semester=" + semester +
+                ", _class='" + _class + '\'' +
+                ", name='" + getName() + '\'' +
+                '}';
     }
 }

@@ -25,15 +25,15 @@ public class Schedule implements Serializable {
         initializeCurrentWeekIndex();
     }
 
-    public ClassOfStudents getClassOfStudents()
-    {
+    public ClassOfStudents getClassOfStudents() {
         return classOfStudents;
     }
 
-    public boolean hasNextWeek(){
-        return weekList.size() - 1 >currentWeekIndex;
+    public boolean hasNextWeek() {
+        return weekList.size() - 1 > currentWeekIndex;
     }
-    public boolean hasPreviousWeek(){
+
+    public boolean hasPreviousWeek() {
         return currentWeekIndex > 0;
     }
 
@@ -105,14 +105,13 @@ public class Schedule implements Serializable {
             in = new ObjectInputStream(fis);
             Week week1;
             int index = 0;
-            while((week1 = (Week) in.readObject())!=null){
+            while ((week1 = (Week) in.readObject()) != null) {
                 this.weekList.set(index, week1);
                 index++;
             }
         } catch (FileNotFoundException e) {
             System.out.println(filename + " not found in the resources");
-        }
-        catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             //e.printStackTrace();
         } finally {
             try {
@@ -132,7 +131,7 @@ public class Schedule implements Serializable {
             File file = new File(filename);
             FileOutputStream fos = new FileOutputStream(file);
             out = new ObjectOutputStream(fos);
-            for(Week week : this.weekList){
+            for (Week week : this.weekList) {
                 out.writeObject(week);
             }
         } catch (IOException e) {
