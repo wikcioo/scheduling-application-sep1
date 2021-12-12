@@ -11,7 +11,7 @@ public class Course implements Serializable
   private TeacherList teacherList;
   private ClassOfStudents classOfStudents;
   private StudentList participants;
-  private String hexColor = "#FFFFFF";
+  private String hexColor = "black";
 
   public Course(String title, ArrayList<Teacher> teacherList, ClassOfStudents classOfStudents)
   {

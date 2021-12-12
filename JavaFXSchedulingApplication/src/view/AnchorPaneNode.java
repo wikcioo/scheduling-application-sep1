@@ -130,7 +130,7 @@ public class AnchorPaneNode extends AnchorPane {
         LocalTime timeStart = LocalTime.of(Integer.parseInt(userInputForStart), Integer.parseInt(userInputForStartMin));
         LocalTime timeEnd = LocalTime.of(Integer.parseInt(userInputForEnd), Integer.parseInt(userInputForEndMin));
         Lesson lesson = new Lesson(userInputForCourse, timeStart, timeEnd);
-        if (day.isValidDataForTime(lesson)) {
+        if ( (day.isValidDataForTime(lesson)) && (timeStart.isBefore(timeEnd)) ) {
             this.lesson = lesson;
             day.addLesson(lesson);
             bookARoom(lesson);
