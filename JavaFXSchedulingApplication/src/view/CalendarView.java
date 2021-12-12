@@ -37,7 +37,7 @@ public class CalendarView extends Node {
         calendar.getStyleClass().add("linearStripes");
 
         for (int i = 0; i < 7; i++) {
-            VBox vb = new VBox();
+            VBox vb = new VBox(0);
             vb.setPrefWidth(200);
             vb.getStyleClass().add("transparent");
             daysView[i] = vb;
@@ -113,7 +113,7 @@ public class CalendarView extends Node {
         description.setLayoutX(10);
         description.setLayoutY(20);
         AnchorPane.setTopAnchor(text, 5.0);
-        AnchorPane.setTopAnchor(description, 50.0);
+        AnchorPane.setTopAnchor(description, 30.0);
         return ap;
     }
 
@@ -134,7 +134,7 @@ public class CalendarView extends Node {
         Duration duration = Duration.between(start, finish);
         long hour = duration.toHoursPart();
         long minute = duration.toMinutesPart();
-        long result = hour * 60 + minute * 1;
+        long result = hour * 60 + minute - 3;
         return result;
     }
 
