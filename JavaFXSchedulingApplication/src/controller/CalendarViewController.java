@@ -1,36 +1,22 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import model.*;
-import model.calendar.Day;
 import model.calendar.Lesson;
 import model.calendar.Week;
-import model.courses.Course;
-import model.courses.CourseList;
 import utilities.Util;
 import view.*;
 
 
 import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -256,7 +242,7 @@ public class CalendarViewController extends ViewController {
             int finalI = i;
             calendarView.getEmptyBlocks().get(i).returnAp().setOnMouseClicked(null);
             calendarView.getEmptyBlocks().get(i).returnAp().setOnMouseClicked(event -> {
-                calendarView.getEmptyBlocks().get(finalI).addALesson();
+                calendarView.getEmptyBlocks().get(finalI).addALessonDisplay();
                 initCalendar();
             });
         }

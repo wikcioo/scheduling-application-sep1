@@ -144,7 +144,7 @@ public class AnchorPaneNode extends AnchorPane {
         day.addLesson(lesson);
     }
 
-    public void addALesson() {
+    public void addALessonDisplay() {
         Stage displayWindow = new Stage();
         displayWindow.initModality(Modality.APPLICATION_MODAL);
         displayWindow.setTitle("Add a lesson");

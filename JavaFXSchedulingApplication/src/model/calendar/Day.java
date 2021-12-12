@@ -6,6 +6,7 @@ import model.rooms.Room;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -26,13 +27,19 @@ public class Day implements Serializable {
 
     public boolean isValidDataForTime(Lesson lesson) {
         for (Lesson l: lessons) {
-            if (overlaps(l,lesson)) return false;
+            if (overlaps(lesson,l)) return false;
         }
         return true;
     }
 
-    private boolean overlaps(Lesson l, Lesson lesson) {
-        return ! (lesson.getStart().isBefore(l.getEnd()) && lesson.getEnd().isBefore(l.getStart()));
+    private boolean overlaps(Lesson lesson, Lesson lesson2) {
+        LocalTime startLesson1 = lesson.getStart();
+        LocalTime endLesson1 = lesson.getEnd();
+        LocalTime startLesson2 = lesson2.getStart();
+        LocalTime endLesson2 = lesson2.getEnd();
+        return ( startLesson1.isBefore( endLesson2 ) ) && ( endLesson1.isAfter( startLesson2 ) );
+
+//        return (lesson.getStart().isBefore(lesson2.getEnd()) && lesson.getEnd().isBefore(lesson2.getStart()));
     }
 
     public void addLesson(Lesson lesson) {
