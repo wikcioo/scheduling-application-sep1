@@ -49,7 +49,6 @@ public class ClassListViewController extends ViewController {
         this.root = root;
 
         TableColumn _classColumn = new TableColumn("Class name");
-        _classColumn.setSortable(false);
         _classColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         tableView.getColumns().addAll( _classColumn);
@@ -151,8 +150,9 @@ public class ClassListViewController extends ViewController {
                     Button btnChange = new Button("Change");
                     Button btnReset = new Button("Reset");
                     hbButtons.getChildren().addAll(btnChange, btnReset, btnCancel);
-                    int index = tableView.getSelectionModel().getFocusedIndex();
-                    ClassOfStudents classOfStudents = this.model.getClasses().get(index);
+
+                    ClassOfStudents classOfStudents = (ClassOfStudents) tableView.getSelectionModel().getSelectedItem();
+                    int index = this.model.getClassList().getClasses().indexOf(classOfStudents);
                     tfClassName.setText(classOfStudents.getName());
 
                     btnChange.setOnAction(e -> {

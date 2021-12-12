@@ -42,13 +42,10 @@ public class RoomListViewController extends ViewController {
         this.root = root;
 
         TableColumn nameColumn = new TableColumn("Name");
-        nameColumn.setSortable(false);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         TableColumn capacityColumn = new TableColumn("Capacity");
-        capacityColumn.setSortable(false);
         capacityColumn.setCellValueFactory(new PropertyValueFactory<>("capacity"));
         TableColumn mergeColumn = new TableColumn("Merge with");
-        mergeColumn.setSortable(false);
         mergeColumn.setCellValueFactory(new PropertyValueFactory<>("mergeWith"));
 
 
@@ -154,8 +151,9 @@ public class RoomListViewController extends ViewController {
                     Button btnChange = new Button("Change");
                     Button btnReset = new Button("Reset");
                     hbButtons.getChildren().addAll(btnChange, btnReset, btnCancel);
-                    int index = tableView.getSelectionModel().getFocusedIndex();
-                    Room room = this.model.getRoomList().getRooms().get(index);
+
+                    Room room = (Room) tableView.getSelectionModel().getSelectedItem();
+                    int index = this.model.getRoomList().getRooms().indexOf(room);
                     tfName.setText(room.getName());
                     tfCapacity.setText(Integer.toString(room.getCapacity()));
                     tfMerge.setText(room.getMergeWith());

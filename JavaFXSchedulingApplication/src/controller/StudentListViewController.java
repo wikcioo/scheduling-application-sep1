@@ -44,16 +44,12 @@ public class StudentListViewController extends ViewController{
         classIndex = this.model.getClassList().getCurrentlySelectedClass();
         studentListText.setText("Student List for class "+ this.model.getClassList().getClasses().get(classIndex).getName());
         TableColumn nameColumn = new TableColumn("Name");
-        nameColumn.setSortable(false);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         TableColumn idColumn = new TableColumn("ID");
-        idColumn.setSortable(false);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn _classColumn = new TableColumn("_class");
-        _classColumn.setSortable(false);
         _classColumn.setCellValueFactory(new PropertyValueFactory<>("_class"));
         TableColumn semesterColumn = new TableColumn("semester");
-        semesterColumn.setSortable(false);
         semesterColumn.setCellValueFactory(new PropertyValueFactory<>("semester"));
         tableView.getColumns().addAll(nameColumn, idColumn, _classColumn, semesterColumn);
         for (Student s : this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList()) {

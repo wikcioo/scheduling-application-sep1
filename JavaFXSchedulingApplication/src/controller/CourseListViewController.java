@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -44,13 +45,10 @@ public class CourseListViewController extends ViewController {
         this.root = root;
 
         TableColumn titleColumn = new TableColumn("Title");
-        titleColumn.setSortable(false);
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         TableColumn _classColumn = new TableColumn("Class name");
-        _classColumn.setSortable(false);
         _classColumn.setCellValueFactory(new PropertyValueFactory<>("ClassName"));
         TableColumn teacherColumn = new TableColumn("Teachers");
-        teacherColumn.setSortable(false);
         teacherColumn.setCellValueFactory(new PropertyValueFactory<>("TeacherName"));
 
 
@@ -140,15 +138,16 @@ public class CourseListViewController extends ViewController {
             ComboBox<ClassOfStudents> cbClassOfStudents = CourseComboBox();
             cbClassOfStudents.getItems().addAll(model.getClasses());
             TextField tfTeacher = new TextField();
-
+            ColorPicker colorPicker = new ColorPicker();
 
             switch (clickId) {
                 case "edit":
                     Button btnChange = new Button("Change");
                     Button btnReset = new Button("Reset");
                     hbButtons.getChildren().addAll(btnChange, btnReset, btnCancel);
-                    int index = tableView.getSelectionModel().getFocusedIndex();
-                    Course course = this.model.getCourseList().getCourses().get(index);
+
+                    Course course = (Course) tableView.getSelectionModel().getSelectedItem();
+                    int index = this.model.getCourseList().getCourses().indexOf(course);
                     tfTitle.setText(course.getTitle());
 
                     //TODO: THIS IS GONNA LOSE ITS SHIT ONCE CLASS BECOMES NULL
@@ -163,6 +162,11 @@ public class CourseListViewController extends ViewController {
                             teacherList.add(new Teacher(s.trim()));
                         }
                         this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), teacherList , cbClassOfStudents.getValue()));
+                        Color color = colorPicker.getValue();
+                        course.setHexColor(String.format( "#%02X%02X%02X",
+                                (int)( color.getRed() * 255 ),
+                                (int)( color.getGreen() * 255 ),
+                                (int)( color.getBlue() * 255 ) ));
                         displayWindow.close();
                     });
                     btnReset.setOnAction(e -> {
@@ -184,7 +188,13 @@ public class CourseListViewController extends ViewController {
                         for (String s: token) {
                             teacherList.add(new Teacher(s.trim()));
                         }
+                        Color color = colorPicker.getValue();
                         this.model.getCourseList().addCourse(new Course(tfTitle.getText(), teacherList,cbClassOfStudents.getValue()));
+                        int lastCourse = this.model.getCourseList().getCourses().size()-1;
+                        this.model.getCourseList().getCourses().get(lastCourse).setHexColor(String.format( "#%02X%02X%02X",
+                                (int)( color.getRed() * 255 ),
+                                (int)( color.getGreen() * 255 ),
+                                (int)( color.getBlue() * 255 ) ));
                         displayWindow.close();
                     });
                     break;
@@ -194,9 +204,10 @@ public class CourseListViewController extends ViewController {
             innerGrid.setAlignment(Pos.CENTER);
             innerGrid.add(hbButtons, 0, 0);
 
-            Label lblTitle = new Label("Course title:");
+            Label lblTitle = new Label("Course Title:");
             Label lblClassName = new Label("Class Name:");
             Label lblTeacher = new Label("Teachers:");
+            Label lblColor = new Label("Pick Course Color:");
 
 
             grid.add(lblTitle, 0, 0);
@@ -205,7 +216,9 @@ public class CourseListViewController extends ViewController {
             grid.add(cbClassOfStudents, 1, 1);
             grid.add(lblTeacher, 0, 2);
             grid.add(tfTeacher, 1, 2);
-            grid.add(innerGrid, 0, 3, 3, 1);
+            grid.add(lblColor, 0, 3);
+            grid.add(colorPicker, 1, 3);
+            grid.add(innerGrid, 0, 4, 3, 1);
             btnCancel.setOnAction(e -> displayWindow.close());
             Scene scene1 = new Scene(grid, 300, 300);
             displayWindow.setScene(scene1);
