@@ -164,7 +164,8 @@ public class ClassListViewController extends ViewController {
                 default://Adding case
                     Button btnAdd = new Button("Add");
                     Button btnClear = new Button("Clear");
-                    hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
+                    hbButtons.getChildren().addAll(btnAdd,btnClear, btnCancel);
+                    btnClear.setOnAction(e -> tfClassName.clear());
                     btnAdd.setOnAction(e -> {
                         this.model.getClasses().add(new ClassOfStudents(tfClassName.getText(),new StudentList()));
                         displayWindow.close();
@@ -189,7 +190,8 @@ public class ClassListViewController extends ViewController {
 
     public void onViewDetailsClick(){
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            this.model.getClassList().setCurrentlySelectedClass(tableView.getSelectionModel().getFocusedIndex());
+            ClassOfStudents classOfStudents = (ClassOfStudents) tableView.getSelectionModel().getSelectedItem();
+            this.model.getClassList().setCurrentlySelectedClass(this.model.getClassList().getClasses().indexOf(classOfStudents));
             this.viewHandler.openView("StudentListView");
         }
     }

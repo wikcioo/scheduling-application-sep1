@@ -6,13 +6,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="bg" prefHeight="486.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageDataController">
+<AnchorPane fx:id="bg" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageDataController">
    <children>
-      <Button layoutX="243.0" layoutY="89.0" mnemonicParsing="false" onAction="#openManageRooms" prefHeight="109.0" prefWidth="118.0" text="MANAGE ROOMS" wrapText="true" />
-      <Button layoutX="384.0" layoutY="243.0" mnemonicParsing="false" onAction="#openManageTeachers" prefHeight="110.0" prefWidth="118.0" text="MANAGE TEACHERS" wrapText="true" />
-      <Button layoutX="384.0" layoutY="88.0" mnemonicParsing="false" onAction="#openManageCourses" prefHeight="110.0" prefWidth="118.0" text="MANAGE COURSES" wrapText="true" />
-      <Button layoutX="243.0" layoutY="243.0" mnemonicParsing="false" onAction="#openMainMenu" prefHeight="110.0" prefWidth="118.0" text="Main Manu" wrapText="true" />
-      <Button layoutX="527.0" layoutY="88.0" mnemonicParsing="false" onAction="#openManageClasses" prefHeight="110.0" prefWidth="118.0" text="MANAGE CLASSES" wrapText="true" />
+      <Button contentDisplay="CENTER" layoutX="243.0" layoutY="89.0" mnemonicParsing="false" onAction="#openManageRooms" prefHeight="109.0" prefWidth="118.0" text="MANAGE ROOMS" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="443.0" layoutY="89.0" mnemonicParsing="false" onAction="#openManageCourses" prefHeight="110.0" prefWidth="118.0" text="MANAGE COURSES" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="243.0" layoutY="243.0" mnemonicParsing="false" onAction="#openMainMenu" prefHeight="110.0" prefWidth="118.0" text="MAIN MENU" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="443.0" layoutY="243.0" mnemonicParsing="false" onAction="#openManageClasses" prefHeight="110.0" prefWidth="118.0" text="MANAGE CLASSES" textAlignment="CENTER" wrapText="true" />
       <Pane fx:id="leftBar" layoutY="26.0" prefHeight="460.0" prefWidth="200.0">
          <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="41.0" prefHeight="54.0" prefWidth="173.0" text="Schedule App">
@@ -22,6 +21,5 @@
             </Label>
          </children>
       </Pane>
-      <Button layoutX="527.0" layoutY="243.0" mnemonicParsing="false" onAction="#openManageStudents" prefHeight="110.0" prefWidth="118.0" text="MANAGE STUDENTS " wrapText="true" />
    </children>
 </AnchorPane>

@@ -18,7 +18,6 @@ public class ViewHandler {
     private MainMenuController mainMenuController;
     private ManageDataController manageDataController;
     private BookingController bookingController;
-    private TeacherListViewController teacherListViewController;
     private ClassListViewController classListViewController;
     private ScheduleListViewController scheduleListViewController;
 
@@ -59,9 +58,6 @@ public class ViewHandler {
                 break;
             case "BookingView":
                 root = loadView("Booking.fxml", bookingController);
-                break;
-            case "TeacherListView":
-                root = loadView("TeacherListView.fxml", teacherListViewController);
                 break;
             case "ClassListView":
                 root = loadView("ClassListView.fxml", classListViewController);

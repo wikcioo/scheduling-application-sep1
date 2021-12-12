@@ -182,6 +182,10 @@ public class CourseListViewController extends ViewController {
                     Button btnAdd = new Button("Add");
                     Button btnClear = new Button("Clear");
                     hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
+                    btnClear.setOnAction(e ->{
+                                tfTitle.clear();
+                                tfTeacher.clear();
+                    } );
                     btnAdd.setOnAction(e -> {
                         ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
                         String[] token = tfTeacher.getText().split(",");

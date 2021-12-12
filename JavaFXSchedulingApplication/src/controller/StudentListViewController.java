@@ -174,6 +174,12 @@ public class StudentListViewController extends ViewController{
                     Button btnAdd = new Button("Add");
                     Button btnClear = new Button("Clear");
                     hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
+                    btnClear.setOnAction(e ->{
+                        tfClass.clear();
+                        tfID.clear();
+                        tfName.clear();
+                        tfSmstr.clear();
+                    } );
                     btnAdd.setOnAction(e -> {
                         this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList().add(new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())));
                         displayWindow.close();

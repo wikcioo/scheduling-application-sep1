@@ -5,22 +5,36 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RoomListViewController">
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RoomListViewController">
     <children>
-        <Button layoutX="470.0" layoutY="48.0" mnemonicParsing="false" onAction="#onAddButtonClick" text="Add" />
-        <Button layoutX="460.0" layoutY="167.0" mnemonicParsing="false" onAction="#onRemoveButtonClick" text="Remove" />
-        <Button layoutX="471.0" layoutY="112.0" mnemonicParsing="false" onAction="#onEditButtonClick" text="Edit" />
         <Text layoutX="84.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room List">
             <font>
                 <Font size="35.0" />
             </font>
         </Text>
-        <Button layoutX="470.0" layoutY="285.0" mnemonicParsing="false" onAction="#onBackButtonClick" text="Back" />
-        <TableView fx:id="tableView" layoutX="23.0" layoutY="54.0" prefHeight="200.0" prefWidth="415.0" />
-        <Button layoutX="464.0" layoutY="216.0" mnemonicParsing="false" onAction="#onImportFileButtonClick" text="Import" />
-      <Button layoutX="465.0" layoutY="254.0" mnemonicParsing="false" onAction="#onResetButtonClick" text="Reset" />
-        <TextField fx:id="textField" onKeyTyped="#onNewFilter" layoutX="434.0" layoutY="325.0" />
+        <TableView fx:id="tableView" layoutX="23.0" layoutY="54.0" prefHeight="312.0" prefWidth="415.0" />
+        <VBox alignment="TOP_CENTER" layoutX="445.0" layoutY="57.0" prefHeight="344.0" prefWidth="154.0" style="-fx-padding: 16;">
+            <children>
+                <Button maxHeight="50.0" maxWidth="150.0" mnemonicParsing="false" onAction="#onAddButtonClick" style="-fx-padding: 10;" text="Add" />
+                <Button maxHeight="50.0" maxWidth="150.0" mnemonicParsing="false" onAction="#onEditButtonClick" style="-fx-padding: 10;" text="Edit" />
+                <Button maxHeight="50.0" maxWidth="150.0" mnemonicParsing="false" onAction="#onRemoveButtonClick" style="-fx-padding: 10;" text="Remove" />
+                <Button maxHeight="50.0" maxWidth="150.0" mnemonicParsing="false" onAction="#onImportFileButtonClick" style="-fx-padding: 10;" text="Import" />
+                <Label maxHeight="50.0" style="-fx-padding: 10;" text="Filtering">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="textField" maxHeight="50.0" maxWidth="150.0" onKeyTyped="#onNewFilter" prefHeight="25.0" prefWidth="93.0" style="-fx-padding: 10;" />
+                <Button maxHeight="50.0" maxWidth="150.0" mnemonicParsing="false" onAction="#onBackButtonClick" style="-fx-padding: 10;" text="Back" />
+            </children>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </VBox>
     </children>
 </AnchorPane>

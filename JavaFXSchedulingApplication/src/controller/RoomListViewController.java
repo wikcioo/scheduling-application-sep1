@@ -171,6 +171,11 @@ public class RoomListViewController extends ViewController {
                     Button btnAdd = new Button("Add");
                     Button btnClear = new Button("Clear");
                     hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
+                    btnClear.setOnAction(e ->{
+                        tfCapacity.setText("");
+                        tfMerge.clear();
+                        tfName.clear();
+                    } );
                     btnAdd.setOnAction(e -> {
                         this.model.getRoomList().getRooms().add(new Room(tfName.getText(), Integer.parseInt(tfCapacity.getText()), tfMerge.getText()));
                         displayWindow.close();
