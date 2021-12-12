@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.courses.Course;
+import utilities.Logger;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -95,7 +96,7 @@ public class CalendarView extends Node {
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
         ap.getStyleClass().add(lesson.getCourse().getTitle());
         String backgroundColor = String.format("-fx-background-color:%s;", lesson.getCourse().getHexColor());
-        System.out.println(backgroundColor);
+        Logger.info(backgroundColor);
         ap.setStyle(backgroundColor);
         Text text = new Text(lesson.getCourse().getTitle());
         //Set the info for the anchor pane

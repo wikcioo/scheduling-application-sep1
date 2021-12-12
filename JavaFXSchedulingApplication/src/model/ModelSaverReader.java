@@ -1,5 +1,7 @@
 package model;
 
+import utilities.Logger;
+
 import java.io.*;
 
 public class ModelSaverReader {
@@ -14,7 +16,7 @@ public class ModelSaverReader {
             out.writeObject(model);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Exception: " + filename);
+            Logger.error("Exception: " + filename);
         } finally {
             try {
                 out.close();
@@ -36,7 +38,7 @@ public class ModelSaverReader {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (InvalidClassException e) {
-                System.out.println("Couldn't load data: incompatible UID versions, regenerate model.bin");
+                Logger.error("Couldn't load data: incompatible UID versions, regenerate model.bin");
             }
         } catch (IOException e) {
             e.printStackTrace();

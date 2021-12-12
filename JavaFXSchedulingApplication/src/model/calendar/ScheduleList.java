@@ -1,6 +1,7 @@
 package model.calendar;
 
 import model.courses.ClassOfStudents;
+import utilities.Logger;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -70,11 +71,11 @@ public class ScheduleList implements Serializable {
             out = new ObjectOutputStream(fos);
             for (Schedule schedule : this.schedules) {
                 out.writeObject(schedule);
-                System.out.println(schedule);
-                System.out.println("Writing schedule to bin file");
+                Logger.info(schedule.toString());
+                Logger.success("Writing schedule to bin file");
             }
         } catch (IOException e) {
-            System.out.println("Exception: " + filename);
+            Logger.error("Exception: " + filename);
         } finally {
             try {
                 out.close();
@@ -105,8 +106,6 @@ public class ScheduleList implements Serializable {
                         e.printStackTrace();
                     }
                     this.schedules.set(index++, schedule1);
-                    System.out.println("Adding...");
-                    System.out.println(schedule1);
                     setCurrentSchedule(schedule1);
                     list.addSchedule(schedule1);
                 } else {
@@ -114,7 +113,7 @@ public class ScheduleList implements Serializable {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println(filename + " not found in the resources");
+            Logger.warn(filename + " not found in the resources");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

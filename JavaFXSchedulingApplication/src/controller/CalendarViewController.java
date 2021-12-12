@@ -10,6 +10,7 @@ import javafx.stage.FileChooser;
 import model.*;
 import model.calendar.Lesson;
 import model.calendar.Week;
+import utilities.Logger;
 import utilities.Util;
 import view.*;
 
@@ -130,7 +131,7 @@ public class CalendarViewController extends ViewController {
             if(showConfirmAlert("Confirm pasting","Confirm pasting to week","Are you sure? This action will override all lessons in this week."))
             {
                 model.getCurrentWeek().setWeekLessons(copiedWeek);
-                System.out.println("Copying successful");
+                Logger.success("Copying successful");
                 initCalendar();
             }
         }
@@ -220,7 +221,7 @@ public class CalendarViewController extends ViewController {
 
     public void initCalendar() {
         scrollpane.setFitToWidth(true);
-        System.out.println(model.getScheduleList().getCurrentSchedule().getClassOfStudents());
+        Logger.info(model.getScheduleList().getCurrentSchedule().getClassOfStudents().toString());
         CalendarView calendarView = new CalendarView(model);
         scrollpane.setContent(calendarView.getFinalView());
         initButtons(calendarView,model.getCurrentWeek());

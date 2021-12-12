@@ -23,6 +23,7 @@ import model.courses.Course;
 import model.courses.Teacher;
 import model.rooms.BookingTime;
 import model.rooms.Room;
+import utilities.Logger;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -352,7 +353,7 @@ public class AnchorPaneNode extends AnchorPane {
                         this.model.getRoomList().getAvailableRoomsAt(book).get(index2));
                 this.model.getRoomList().getAvailableRoomsAt(book).get(index2).Book(book);
                 displayWindow.close();
-                System.out.println(model.getRoomList().getRooms());
+                Logger.info(model.getRoomList().getRooms().toString());
             }
         });
 
@@ -377,7 +378,7 @@ public class AnchorPaneNode extends AnchorPane {
                     error();
                 }
                 displayWindow.close();
-                System.out.println(model.getRoomList().getRooms());
+                Logger.info(model.getRoomList().getRooms().toString());
             } else {
                 error2();
             }

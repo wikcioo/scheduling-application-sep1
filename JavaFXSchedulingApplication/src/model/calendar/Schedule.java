@@ -1,6 +1,7 @@
 package model.calendar;
 
 import model.courses.ClassOfStudents;
+import utilities.Logger;
 import utilities.Util;
 
 import java.io.*;
@@ -110,7 +111,7 @@ public class Schedule implements Serializable {
                 index++;
             }
         } catch (FileNotFoundException e) {
-            System.out.println(filename + " not found in the resources");
+            Logger.warn(filename + " not found in the resources");
         } catch (IOException | ClassNotFoundException e) {
             //e.printStackTrace();
         } finally {
@@ -135,7 +136,7 @@ public class Schedule implements Serializable {
                 out.writeObject(week);
             }
         } catch (IOException e) {
-            System.out.println("Exception: " + filename);
+            Logger.error("Exception: " + filename);
         } finally {
             try {
                 out.close();

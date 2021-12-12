@@ -1,5 +1,7 @@
 package model.rooms;
 
+import utilities.Logger;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -35,7 +37,7 @@ public class RoomList implements Serializable {
 
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Wrong format, skipping...");
+                Logger.error("Wrong format, skipping...");
                 e.printStackTrace();
             }
             rooms.add(new Room(roomName, capacity, mergeWith));
@@ -90,7 +92,7 @@ public class RoomList implements Serializable {
                 out.writeObject(room);
             }
         } catch (IOException e) {
-            System.out.println("Exception: " + filename);
+            Logger.error("Exception: " + filename);
             e.printStackTrace();
         } finally {
             try {
@@ -111,7 +113,7 @@ public class RoomList implements Serializable {
             Room room;
             while ((room = (Room) in.readObject()) != null) {
                 this.rooms.add(room);
-                System.out.println(room);
+                Logger.info(room.toString());
             }
 
         } catch (IOException | ClassNotFoundException e) {

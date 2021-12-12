@@ -1,5 +1,7 @@
 package model.rooms;
 
+import utilities.Logger;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -20,7 +22,7 @@ public class Room implements Serializable {
         if (canBeBookedAt(time))
             intervals.add(time);
         else
-            System.out.println("Room is already booked at that time");
+            Logger.warn("Room is already booked at that time");
     }
 
     public boolean canBeBookedAt(BookingTime time) {

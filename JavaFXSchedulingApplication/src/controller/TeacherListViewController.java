@@ -11,6 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Model;
 import model.courses.Teacher;
+import utilities.Logger;
 import view.ViewHandler;
 
 import java.util.Optional;
@@ -90,7 +91,7 @@ public class TeacherListViewController extends ViewController {
 
     @FXML
     public void onImportFileButtonClick() {
-        System.out.println("Probably no importing here");
+        Logger.warn("Probably no importing here");
     }
 
     public void onClick(String clickId) {

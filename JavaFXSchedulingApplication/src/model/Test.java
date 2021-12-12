@@ -1,6 +1,7 @@
 package model;
 
 import model.rooms.RoomList;
+import utilities.Logger;
 
 import java.io.File;
 import java.time.LocalTime;
@@ -44,7 +45,7 @@ public class Test
 //    list.readRoomsListFromBinFile();
 
     LocalTime time = LocalTime.parse("12:05:00");
-    System.out.println(time);
+    Logger.info(time.toString());
    // list.writeRoomListToBinFile();
 //
   }

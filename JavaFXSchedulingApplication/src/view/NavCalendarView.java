@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.Model;
+import utilities.Logger;
 import utilities.Util;
 
 import java.time.LocalDate;
@@ -122,11 +123,11 @@ public class NavCalendarView {
                     String foo = mouseEvent.getSource().toString();
                     int day_num = Integer.parseInt(foo.substring(foo.indexOf("'") + 1, foo.lastIndexOf("'")));
                     LocalDate date = Util.getMonday(LocalDate.of(calendar.getWeekYear(), Util.monthStringToMonthInt(getCurrentMonth()), day_num));
-                    System.out.println(date);
+                    Logger.info(date.toString());
                     int currentWeekIndex = model.getScheduleList().getCurrentSchedule().getCurrentWeekIndex();
                     int newWeekIndex = (int) ChronoUnit.WEEKS.between(model.getScheduleList().getCurrentSchedule().getSemesterStart(), date);
                     int diff = currentWeekIndex - newWeekIndex;
-                    System.out.println("Diff: " + diff + ", old: " + currentWeekIndex + ", new: " + newWeekIndex);
+                    Logger.info("Diff: " + diff + ", old: " + currentWeekIndex + ", new: " + newWeekIndex);
                     if (diff < 0) {
                         for (int i = 0; i < Math.abs(diff); i++) {
                             calendarViewController.onNextWeekClick();

@@ -1,5 +1,7 @@
 package model.courses;
 
+import utilities.Logger;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -72,7 +74,7 @@ public class CourseList implements Serializable {
             Course course;
             while ((course = (Course) in.readObject()) != null) {
                 this.courses.add(course);
-                System.out.println(course);
+                Logger.info(course.toString());
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -110,7 +112,7 @@ public class CourseList implements Serializable {
 
 
             } catch (NumberFormatException e) {
-                System.out.println("Wrong format, skipping...");
+                Logger.error("Wrong format, skipping...");
                 e.printStackTrace();
             }
             ArrayList<Teacher> teacherList = new ArrayList<>();
@@ -139,8 +141,7 @@ public class CourseList implements Serializable {
                 out.writeObject(course);
             }
         } catch (IOException e) {
-            System.out.println("Exception: " + filename);
-            e.printStackTrace();
+            Logger.error("Exception: " + filename);
         } finally {
             try {
                 out.close();

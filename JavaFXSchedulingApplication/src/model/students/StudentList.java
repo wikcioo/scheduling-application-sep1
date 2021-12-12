@@ -1,5 +1,7 @@
 package model.students;
 
+import utilities.Logger;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -79,11 +81,10 @@ public class StudentList implements Serializable {
             Student student;
             while ((student = (Student) in.readObject()) != null) {
                 this.studentList.add(student);
-                System.out.println(student);
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println(filename + " not found in the resources");
+            Logger.warn(filename + " not found in the resources");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
@@ -108,7 +109,7 @@ public class StudentList implements Serializable {
                 out.writeObject(student);
             }
         } catch (IOException e) {
-            System.out.println("Exception: " + filename);
+            Logger.error("Exception: " + filename);
             e.printStackTrace();
         } finally {
             try {
@@ -139,11 +140,9 @@ public class StudentList implements Serializable {
                 if (!isValidStudent(student)) {
                     throw new NumberFormatException();
                 }
-                System.out.println(student);
                 studentList.add(student);
             } catch (NumberFormatException e) {
-                System.out.println("Wrong format, skipping...");
-                //e.printStackTrace();
+                Logger.error("Wrong format, skipping...");
             }
         }
 
