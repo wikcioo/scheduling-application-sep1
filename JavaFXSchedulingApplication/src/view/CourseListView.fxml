@@ -9,9 +9,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CourseListViewController">
     <children>
-        <Button layoutX="472.0" fx:id="addButton" layoutY="73.0" mnemonicParsing="false" onAction="#onAddButtonClick" text="Add" />
-        <Button layoutX="460.0" fx:id="removeButton" layoutY="167.0" mnemonicParsing="false" onAction="#onRemoveButtonClick" text="Remove" />
-        <Button layoutX="471.0" fx:id="editButton" layoutY="112.0" mnemonicParsing="false" onAction="#onEditButtonClick" text="Edit" />
+        <Button layoutX="472.0" layoutY="73.0" mnemonicParsing="false" onAction="#onAddButtonClick" text="Add" />
+        <Button layoutX="460.0" layoutY="167.0" mnemonicParsing="false" onAction="#onRemoveButtonClick" text="Remove" />
+        <Button layoutX="471.0" layoutY="112.0" mnemonicParsing="false" onAction="#onEditButtonClick" text="Edit" />
         <Text layoutX="84.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course List">
             <font>
                 <Font size="35.0" />

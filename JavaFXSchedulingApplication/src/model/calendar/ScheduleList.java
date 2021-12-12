@@ -73,7 +73,6 @@ public class ScheduleList implements Serializable {
                 System.out.println(schedule);
                 System.out.println("Writing schedule to bin file");
             }
-//            out.writeObject(this);
         } catch (IOException e) {
             System.out.println("Exception: " + filename);
         } finally {

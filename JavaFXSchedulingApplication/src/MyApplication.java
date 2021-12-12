@@ -2,12 +2,9 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import model.Model;
 import model.ModelManager;
-import model.calendar.Schedule;
 import model.courses.ClassOfStudents;
 import model.students.StudentList;
 import view.ViewHandler;
-
-import java.time.LocalDate;
 
 public class MyApplication extends Application {
     private ViewHandler view;
@@ -16,13 +13,13 @@ public class MyApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         Model model = new ModelManager();
 
-        ClassOfStudents class1 = new ClassOfStudents("1Z",new StudentList());
+        ClassOfStudents class1 = new ClassOfStudents("1Z", new StudentList());
         model.getClassList().addClass(class1);
-        model.getClassList().addClass(new ClassOfStudents("Rougue zero",new StudentList()));
-        model.getClassList().addClass(new ClassOfStudents("Danish one",new StudentList()));
-        model.getClassList().addClass(new ClassOfStudents("4Z",new StudentList()));
-        model.getClassList().addClass(new ClassOfStudents("5Z",new StudentList()));
-        model.getClassList().addClass(new ClassOfStudents("6Z",new StudentList()));
+        model.getClassList().addClass(new ClassOfStudents("Rougue zero", new StudentList()));
+        model.getClassList().addClass(new ClassOfStudents("Danish one", new StudentList()));
+        model.getClassList().addClass(new ClassOfStudents("4Z", new StudentList()));
+        model.getClassList().addClass(new ClassOfStudents("5Z", new StudentList()));
+        model.getClassList().addClass(new ClassOfStudents("6Z", new StudentList()));
 
         view = new ViewHandler(model);
         view.start(primaryStage);

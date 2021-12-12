@@ -104,6 +104,7 @@ public class ViewHandler {
         } else {
             viewController.reset();
         }
+
         return viewController.getRoot();
     }
 

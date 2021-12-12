@@ -85,7 +85,6 @@ public class NavCalendarView {
         header.setText(getCurrentMonth() + " " + calendar.get(Calendar.YEAR));
     }
 
-
     public VBox getFinalView() {
         return finalView;
     }
@@ -141,6 +140,7 @@ public class NavCalendarView {
                     model.getScheduleList().getCurrentSchedule().setCurrentWeekIndex(newWeekIndex);
                 }
             });
+
             gridPaneItems.get(i).getStyleClass().remove("white");
             gridPaneItems.get(i).getStyleClass().remove("grey");
             gridPaneItems.get(i).setText(dayCount + "");
@@ -171,7 +171,6 @@ public class NavCalendarView {
         updateMonthHeader();
         initDays();
     }
-
 
     public Calendar getCalendar() {
         return calendar;

@@ -44,20 +44,22 @@ public class ModelManager implements Model, Serializable {
     public ClassList getClassList() {
         return classList;
     }
-    public StudentList getStudentList(){
+
+    public StudentList getStudentList() {
         return this.studentList;
     }
 
-    public CourseList getCourseList(){
+    public CourseList getCourseList() {
         return this.courseList;
     }
-    public RoomList getRoomList(){
+
+    public RoomList getRoomList() {
         return this.roomList;
     }
+
     public void readStudentFromTXTFile(File file) {
         studentList.readStudentFromTXTFile(file);
     }
-
 
     public Week getCurrentWeek() {
         return scheduleList.getCurrentSchedule().getCurrentWeek();
@@ -71,13 +73,13 @@ public class ModelManager implements Model, Serializable {
         scheduleList.getCurrentSchedule().goNextWeek();
     }
 
+    public void goPreviousWeek() {
+        scheduleList.getCurrentSchedule().goPreviousWeek();
+    }
+
     @Override
     public boolean hasNextWeek() {
         return scheduleList.getCurrentSchedule().hasNextWeek();
-    }
-
-    public void goPreviousWeek() {
-        scheduleList.getCurrentSchedule().goPreviousWeek();
     }
 
     @Override
@@ -97,7 +99,9 @@ public class ModelManager implements Model, Serializable {
         scheduleList.getCurrentSchedule().initializeCurrentWeekIndex();
     }
 
-    public ArrayList<ClassOfStudents> getClasses() { return classList.getClasses(); }
+    public ArrayList<ClassOfStudents> getClasses() {
+        return classList.getClasses();
+    }
 
     public int getCurrentYear() {
         return scheduleList.getCurrentSchedule().getCurrentYear();

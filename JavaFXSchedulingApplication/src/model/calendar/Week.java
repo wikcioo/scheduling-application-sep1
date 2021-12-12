@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 public class Week implements Serializable {
-    private Day[] days = new Day[7];
+    private final Day[] days = new Day[7];
     private final LocalDate start;
     private final LocalDate end;
 
@@ -21,17 +21,6 @@ public class Week implements Serializable {
     public void addLesson(Lesson lesson, int index) {
         days[index].addLesson(lesson);
     }
-//    public Week filterBasedOnCourse(String course) {
-//        Week result = new Week(start,end);
-//        for (Day day : this.days) {
-//            for (Lesson lesson :day.getLessons()) {
-//                if (lesson.getCourse().equals(course))
-//                    result.addLesson(lesson,day.getIndexForDay());
-//            }
-//        }
-//        System.out.println(result);
-//        return result;
-//    }
 
     public LocalDate getStart() {
         return start;
@@ -57,7 +46,7 @@ public class Week implements Serializable {
     }
 
     public Week copy() {
-        Week newWeek = new Week(start,end);
+        Week newWeek = new Week(start, end);
         newWeek.setWeekLessons(this);
         return newWeek;
     }

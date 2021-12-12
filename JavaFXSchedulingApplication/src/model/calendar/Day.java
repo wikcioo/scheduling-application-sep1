@@ -1,8 +1,6 @@
 package model.calendar;
 
-import model.calendar.Lesson;
 import model.rooms.BookingTime;
-import model.rooms.Room;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -20,14 +18,13 @@ public class Day implements Serializable {
 
     public void setLessons(ArrayList<Lesson> lessons) {
         this.lessons = lessons;
-        //add date to each lesson
-        for (Lesson l: this.lessons)
+        for (Lesson l : this.lessons)
             l.setDate(date);
     }
 
     public boolean isValidDataForTime(Lesson lesson) {
-        for (Lesson l: lessons) {
-            if (overlaps(lesson,l)) return false;
+        for (Lesson l : lessons) {
+            if (overlaps(lesson, l)) return false;
         }
         return true;
     }
@@ -37,9 +34,7 @@ public class Day implements Serializable {
         LocalTime endLesson1 = lesson.getEnd();
         LocalTime startLesson2 = lesson2.getStart();
         LocalTime endLesson2 = lesson2.getEnd();
-        return ( startLesson1.isBefore( endLesson2 ) ) && ( endLesson1.isAfter( startLesson2 ) );
-
-//        return (lesson.getStart().isBefore(lesson2.getEnd()) && lesson.getEnd().isBefore(lesson2.getStart()));
+        return (startLesson1.isBefore(endLesson2)) && (endLesson1.isAfter(startLesson2));
     }
 
     public void addLesson(Lesson lesson) {
@@ -48,8 +43,7 @@ public class Day implements Serializable {
         sortLessons();
     }
 
-    //Sorts lessons by start date
-    public void sortLessons(){
+    public void sortLessons() {
         lessons.sort(new Comparator<Lesson>() {
             @Override
             public int compare(Lesson o1, Lesson o2) {
@@ -57,17 +51,14 @@ public class Day implements Serializable {
             }
         });
     }
-    public void removeLesson(Lesson lesson){
-        try
-        {
 
-            lesson.getRoom().unBook(
-                new BookingTime(lesson.getDate(), lesson.getStart(), lesson.getEnd()));
-        }
-        catch (Exception e)
-        {
+    public void removeLesson(Lesson lesson) {
+        try {
+            lesson.getRoom().unBook(new BookingTime(lesson.getDate(), lesson.getStart(), lesson.getEnd()));
+        } catch (Exception e) {
 
         }
+
         lessons.remove(lesson);
     }
 
@@ -82,9 +73,10 @@ public class Day implements Serializable {
     public ArrayList<Lesson> copyLessons(LocalDate date) {
         ArrayList<Lesson> lessons = new ArrayList<>();
 
-        for(Lesson lesson : this.lessons) {
-            lessons.add(new Lesson(lesson.getCourse(),date,lesson.getStart(),lesson.getEnd(),lesson.getRoom(),lesson.getRoom2()));
+        for (Lesson lesson : this.lessons) {
+            lessons.add(new Lesson(lesson.getCourse(), date, lesson.getStart(), lesson.getEnd(), lesson.getRoom(), lesson.getRoom2()));
         }
+
         return lessons;
     }
 

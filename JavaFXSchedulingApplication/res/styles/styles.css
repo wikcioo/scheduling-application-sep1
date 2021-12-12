@@ -1,32 +1,37 @@
 .lesson {
-  -fx-background-color: black;
+    -fx-background-color: black;
 }
 
 .SDJ {
     -fx-background-color: #570307;
 }
+
 .RWD {
     -fx-background-color: #3C3D5C;
 }
+
 .SEP {
     -fx-background-color: #370E25;
 }
+
 .linearStripes {
     /* -fx-background-color: linear-gradient(from 0px 0px to 0px 30px, repeat,  white 99%, black 1%); FIXME:This line doesnt work */
 }
+
 .transparent {
     -fx-background-color: transparent;
 }
+
 .mygridStyle Line {
     -fx-stroke: grey;
 }
 
-
 .nav:hover {
--fx-background-color:white;
--fx-text-fill:black;
--fx-background-radius: 30;
+    -fx-background-color:white;
+    -fx-text-fill:black;
+    -fx-background-radius: 30;
 }
+
 .nav {
     -fx-background-color: black;
     -fx-text-fill:white;
@@ -50,18 +55,13 @@
 
 /*FIXME:this is just a placeholder asset" */
 .selected {
- -fx-background-color:red;
+    -fx-background-color:red;
 }
-
 
 #leftBar{
    -fx-background-color: #747474;
-
 }
 
 #bg{
--fx-background-color: #B1B1B1;
+    -fx-background-color: #B1B1B1;
 }
-
-
-

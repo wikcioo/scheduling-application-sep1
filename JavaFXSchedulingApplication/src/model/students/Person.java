@@ -14,9 +14,14 @@ public abstract class Person implements Serializable {
     }
 
     public abstract String getName();
+
     public abstract void setName(String name);
+
     public abstract String getEmail();
+
     public abstract void setEmail(String email);
+
     public abstract int getId();
+
     public abstract void setId(int id);
 }

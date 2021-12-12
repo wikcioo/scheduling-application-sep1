@@ -5,91 +5,76 @@ import model.students.StudentList;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Course implements Serializable
-{
-  private String title;
-  private TeacherList teacherList;
-  private ClassOfStudents classOfStudents;
-  private StudentList participants;
+public class Course implements Serializable {
+    private String title;
+    private TeacherList teacherList;
+    private ClassOfStudents classOfStudents;
+    private StudentList participants;
 
-  public Course(String title, ArrayList<Teacher> teacherList, ClassOfStudents classOfStudents)
-  {
-    this.title = title;
-    this.teacherList = new TeacherList(teacherList);
+    public Course(String title, ArrayList<Teacher> teacherList, ClassOfStudents classOfStudents) {
+        this.title = title;
+        this.teacherList = new TeacherList(teacherList);
 
-    this.classOfStudents = classOfStudents;
-    if(classOfStudents != null) {
-      initStudents();
+        this.classOfStudents = classOfStudents;
+        if (classOfStudents != null) {
+            initStudents();
+        }
     }
-  }
 
-  public Course(String title, ArrayList<Teacher> teacherList)
-  {
-    this(title, teacherList, null);
-  }
-
-  public void setTitle(String title)
-  {
-    this.title = title;
-  }
-
-  public void setClassOfStudents(ClassOfStudents classOfStudents)
-  {
-    this.classOfStudents = classOfStudents;
-  }
-
-  public void initStudents()
-  {
-    try
-    {
-      this.participants = classOfStudents.getStudentList().copy();
+    public Course(String title, ArrayList<Teacher> teacherList) {
+        this(title, teacherList, null);
     }
-    catch (NullPointerException e)
-    {
-      e.printStackTrace();
+
+    public void setClassOfStudents(ClassOfStudents classOfStudents) {
+        this.classOfStudents = classOfStudents;
     }
-  }
 
-  //GETTERS AND SETTERS
+    public void initStudents() {
+        try {
+            this.participants = classOfStudents.getStudentList().copy();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
 
-  public String getTitle()
-  {
-    return title;
-  }
+    public String getTitle() {
+        return title;
+    }
 
-  public TeacherList getTeacherList()
-  {
-    return teacherList;
-  }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-  public void setTeacherList(ArrayList<Teacher> teacherList)
-  {
-    this.teacherList = new TeacherList(teacherList);
-  }
+    public TeacherList getTeacherList() {
+        return teacherList;
+    }
 
-  public ClassOfStudents getClassOfStudents()
-  {
-    return classOfStudents;
-  }
+    public void setTeacherList(ArrayList<Teacher> teacherList) {
+        this.teacherList = new TeacherList(teacherList);
+    }
 
-  public StudentList getParticipants()
-  {
-    return participants;
-  }
+    public ClassOfStudents getClassOfStudents() {
+        return classOfStudents;
+    }
 
-  public String getClassName(){
-    return this.classOfStudents.getName();
-  }
-  public String getTeacherName(){
-    return teacherList.toString();
-  }
-  public void setParticipants(StudentList participants)
-  {
-    this.participants = participants;
-  }
+    public StudentList getParticipants() {
+        return participants;
+    }
 
-  @Override public String toString()
-  {
-    return title;
-  }
+    public String getClassName() {
+        return this.classOfStudents.getName();
+    }
+
+    public String getTeacherName() {
+        return teacherList.toString();
+    }
+
+    public void setParticipants(StudentList participants) {
+        this.participants = participants;
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

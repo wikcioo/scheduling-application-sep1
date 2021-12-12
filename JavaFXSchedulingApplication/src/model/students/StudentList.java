@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class StudentList implements Serializable{
+public class StudentList implements Serializable {
     private ArrayList<Student> studentList;
 
     public StudentList() {
@@ -14,7 +14,7 @@ public class StudentList implements Serializable{
 
     public StudentList(ArrayList<Student> studentList) {
         this.studentList = new ArrayList<>();
-        for(Student student : studentList) {
+        for (Student student : studentList) {
             this.studentList.add(student);
         }
     }
@@ -69,7 +69,6 @@ public class StudentList implements Serializable{
         return s;
     }
 
-
     public void readStudentListFromBinFile() {
         String filename = "res/saved-data/saved-lists/studentList.bin";
         ObjectInputStream in = null;
@@ -78,7 +77,7 @@ public class StudentList implements Serializable{
             FileInputStream fis = new FileInputStream(file);
             in = new ObjectInputStream(fis);
             Student student;
-            while((student = (Student) in.readObject()) != null){
+            while ((student = (Student) in.readObject()) != null) {
                 this.studentList.add(student);
                 System.out.println(student);
             }
@@ -105,7 +104,7 @@ public class StudentList implements Serializable{
             File file = new File(filename);
             FileOutputStream fos = new FileOutputStream(file);
             out = new ObjectOutputStream(fos);
-            for(Student student : this.studentList){
+            for (Student student : this.studentList) {
                 out.writeObject(student);
             }
         } catch (IOException e) {
@@ -127,7 +126,8 @@ public class StudentList implements Serializable{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        while (in.hasNext()){
+
+        while (in.hasNext()) {
             String line = in.nextLine();
             String[] token = line.split(",");
             try {
@@ -146,6 +146,7 @@ public class StudentList implements Serializable{
                 //e.printStackTrace();
             }
         }
+
         in.close();
     }
 
@@ -155,13 +156,14 @@ public class StudentList implements Serializable{
         for (Student s : this.studentList) {
             if (s.getId() == student.getId()) return false;
         }
+
         return true;
     }
 
     @Override
     public String toString() {
         return "StudentList{" +
-            "studentList=" + studentList +
-            '}';
+                "studentList=" + studentList +
+                '}';
     }
 }

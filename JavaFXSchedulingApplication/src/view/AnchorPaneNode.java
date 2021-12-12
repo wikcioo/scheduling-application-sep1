@@ -19,17 +19,14 @@ import javafx.util.Callback;
 import model.Model;
 import model.calendar.Day;
 import model.calendar.Lesson;
-import model.courses.ClassOfStudents;
 import model.courses.Course;
 import model.courses.Teacher;
 import model.rooms.BookingTime;
 import model.rooms.Room;
 
-import java.awt.event.ActionEvent;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.ArrayList;
 import java.util.Optional;
 
 public class AnchorPaneNode extends AnchorPane {
@@ -40,7 +37,6 @@ public class AnchorPaneNode extends AnchorPane {
     private ComboBox<Course> userInputForCourse;
     @FXML
     private ComboBox<Teacher> userInputForTeacher;
-
 
     public AnchorPaneNode(Model model, Node... nodes) {
         super(nodes);
@@ -68,16 +64,19 @@ public class AnchorPaneNode extends AnchorPane {
         finalView.getChildren().add(start);
         finalView.getChildren().add(end);
         finalView.getChildren().add(date);
+
         Label room;
         if (lesson.getRoom() != null) {
             room = new Label("Room : " + lesson.getRoom());
             finalView.getChildren().add(room);
         }
+
         Label room2;
         if (lesson.getRoom2() != null) {
             room2 = new Label("Room : " + lesson.getRoom());
             finalView.getChildren().add(room2);
         }
+
         Button remove = new Button("remove this lesson");
         remove.setOnMouseClicked(event -> {
             displayWindow.close();
@@ -207,7 +206,7 @@ public class AnchorPaneNode extends AnchorPane {
             displayWindow.close();
         });
 
-        finalView.getChildren().addAll(greeting,timePeriods,info,gridPane,submit);
+        finalView.getChildren().addAll(greeting, timePeriods, info, gridPane, submit);
         finalView.setAlignment(Pos.CENTER);
         Scene scene = new Scene(finalView, 300, 500);
         displayWindow.setScene(scene);
@@ -233,6 +232,7 @@ public class AnchorPaneNode extends AnchorPane {
                 return cell;
             }
         });
+
         comboBox.setButtonCell(new ListCell<Course>() {
             @Override
             protected void updateItem(Course item, boolean empty) {
@@ -266,6 +266,7 @@ public class AnchorPaneNode extends AnchorPane {
                 return cell;
             }
         });
+
         comboBox.setButtonCell(new ListCell<Teacher>() {
             @Override
             protected void updateItem(Teacher item, boolean empty) {
@@ -280,7 +281,6 @@ public class AnchorPaneNode extends AnchorPane {
         return comboBox;
     }
 
-
     public void removeLesson() {
         day.removeLesson(this.lesson);
     }
@@ -293,7 +293,6 @@ public class AnchorPaneNode extends AnchorPane {
     }
 
     public void bookARoom(Lesson lesson1) {
-
         Stage displayWindow = new Stage();
 
         displayWindow.setResizable(false);
@@ -318,10 +317,8 @@ public class AnchorPaneNode extends AnchorPane {
         Button btnMerge = new Button("MergeRoom");
         hbButtons.getChildren().addAll(btnBook, btnCancel, btnMerge);
 
-
         GridPane innerGrid = new GridPane();
         innerGrid.setAlignment(Pos.CENTER);
-
 
         Label lblName = new Label("Select room to book for this lesson:");
 
@@ -357,7 +354,6 @@ public class AnchorPaneNode extends AnchorPane {
                 displayWindow.close();
                 System.out.println(model.getRoomList().getRooms());
             }
-
         });
 
         btnMerge.setOnAction(e -> {
@@ -385,14 +381,11 @@ public class AnchorPaneNode extends AnchorPane {
             } else {
                 error2();
             }
-
         });
-
 
         Scene scene1 = new Scene(grid, 400, 400);
         displayWindow.setScene(scene1);
         displayWindow.show();
-
     }
 
     public AnchorPane returnAp() {
@@ -412,9 +405,7 @@ public class AnchorPaneNode extends AnchorPane {
         return (result.isPresent()) && (result.get() == ButtonType.OK);
     }
 
-
     private boolean error2() {
-
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("It cannot be merged. Only one room booked"
