@@ -28,7 +28,12 @@ public class CourseListViewController extends ViewController {
     TextField textField;
     @FXML
     TableView tableView;
-
+    @FXML
+    Button editButton;
+    @FXML
+    Button addButton;
+    @FXML
+    Button removeButton;
     private Region root;
     private Model model;
     private ViewHandler viewHandler;
@@ -50,7 +55,7 @@ public class CourseListViewController extends ViewController {
         for (Course c : this.model.getCourseList().getCourses()) {
             tableView.getItems().add(c);
         }
-
+        setDisableCellSpecificButtons(true);
     }
 
     public void reset() {
@@ -62,6 +67,16 @@ public class CourseListViewController extends ViewController {
 
     public Region getRoot() {
         return root;
+    }
+
+    @FXML
+    public void onChosenCell() {
+        setDisableCellSpecificButtons(false);
+    }
+
+    public void setDisableCellSpecificButtons(boolean disable) {
+        editButton.setDisable(disable);
+        removeButton.setDisable(disable);
     }
 
     @FXML
@@ -82,6 +97,7 @@ public class CourseListViewController extends ViewController {
     @FXML
     private void onRemoveButtonClick() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
+            setDisableCellSpecificButtons(true);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm removing");
             alert.setHeaderText("Confirm removing course");
@@ -107,6 +123,7 @@ public class CourseListViewController extends ViewController {
         if (clickId.equals("edit") && tableView.getSelectionModel().getSelectedItem() == null) {
             //Throw alert for not selecting
         } else {
+            setDisableCellSpecificButtons(true);
             Stage displayWindow = new Stage();
             displayWindow.initModality(Modality.APPLICATION_MODAL);
             displayWindow.setTitle("Display Student");

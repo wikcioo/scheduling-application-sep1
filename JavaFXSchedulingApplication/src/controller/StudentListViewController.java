@@ -26,6 +26,12 @@ public class StudentListViewController extends ViewController {
     @FXML
     TableView tableView;
     @FXML
+    Button editButton;
+    @FXML
+    Button addButton;
+    @FXML
+    Button removeButton;
+    @FXML
     Text studentListText;
     @FXML
     private Region root;
@@ -51,6 +57,7 @@ public class StudentListViewController extends ViewController {
         for (Student s : this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList()) {
             tableView.getItems().add(s);
         }
+        setDisableCellSpecificButtons(true);
     }
 
     public void reset() {
@@ -58,6 +65,16 @@ public class StudentListViewController extends ViewController {
         for (Student s : this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList()) {
             tableView.getItems().add(s);
         }
+    }
+
+    @FXML
+    public void onChosenCell() {
+        setDisableCellSpecificButtons(false);
+    }
+
+    public void setDisableCellSpecificButtons(boolean disable) {
+        editButton.setDisable(disable);
+        removeButton.setDisable(disable);
     }
 
     public Region getRoot() {
@@ -104,6 +121,7 @@ public class StudentListViewController extends ViewController {
     }
 
     public void onNewFilter() {
+        setDisableCellSpecificButtons(true);
         tableView.getItems().clear();
         for (Student s : this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList()) {
             String filter = textField.getText();
@@ -117,6 +135,7 @@ public class StudentListViewController extends ViewController {
         if (clickId.equals("edit") && tableView.getSelectionModel().getSelectedItem() == null) {
             //Throw alert for not selecting
         } else {
+            setDisableCellSpecificButtons(true);
             Stage displayWindow = new Stage();
             displayWindow.initModality(Modality.APPLICATION_MODAL);
             displayWindow.setTitle("Display Student");

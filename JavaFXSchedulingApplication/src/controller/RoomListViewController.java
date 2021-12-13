@@ -27,6 +27,12 @@ public class RoomListViewController extends ViewController {
     @FXML
     TableView tableView;
     @FXML
+    Button editButton;
+    @FXML
+    Button addButton;
+    @FXML
+    Button removeButton;
+    @FXML
     private Region root;
     private Model model;
     private ViewHandler viewHandler;
@@ -47,6 +53,7 @@ public class RoomListViewController extends ViewController {
         for (Room r : this.model.getRoomList().getRooms()) {
             tableView.getItems().add(r);
         }
+        setDisableCellSpecificButtons(true);
     }
 
     public void reset() {
@@ -58,6 +65,16 @@ public class RoomListViewController extends ViewController {
 
     public Region getRoot() {
         return root;
+    }
+
+    @FXML
+    public void onChosenCell() {
+        setDisableCellSpecificButtons(false);
+    }
+
+    public void setDisableCellSpecificButtons(boolean disable) {
+        editButton.setDisable(disable);
+        removeButton.setDisable(disable);
     }
 
     @FXML
@@ -100,6 +117,7 @@ public class RoomListViewController extends ViewController {
     }
 
     public void onNewFilter() {
+        setDisableCellSpecificButtons(true);
         String filter = textField.getText();
         if (filter != "") {
             tableView.getItems().clear();
@@ -115,6 +133,7 @@ public class RoomListViewController extends ViewController {
         if (clickId.equals("edit") && tableView.getSelectionModel().getSelectedItem() == null) {
             //Throw alert for not selecting
         } else {
+            setDisableCellSpecificButtons(true);
             Stage displayWindow = new Stage();
             displayWindow.initModality(Modality.APPLICATION_MODAL);
             displayWindow.setTitle("Display room");
