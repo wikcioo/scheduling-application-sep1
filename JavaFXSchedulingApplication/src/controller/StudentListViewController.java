@@ -15,12 +15,12 @@ import model.Model;
 import model.students.Student;
 
 import view.ViewHandler;
+
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Optional;
 
 
-public class StudentListViewController extends ViewController{
+public class StudentListViewController extends ViewController {
     @FXML
     TextField textField;
     @FXML
@@ -33,16 +33,12 @@ public class StudentListViewController extends ViewController{
     private ViewHandler viewHandler;
     private int classIndex;
 
-    public StudentListViewController() {
-        // called by FXMLLoader
-    }
-
     public void init(ViewHandler viewHandler, Model model, Region root) {
         this.model = model;
         this.viewHandler = viewHandler;
         this.root = root;
         classIndex = this.model.getClassList().getCurrentlySelectedClass();
-        studentListText.setText("Student List for class "+ this.model.getClassList().getClasses().get(classIndex).getName());
+        studentListText.setText("Student List for class " + this.model.getClassList().getClasses().get(classIndex).getName());
         TableColumn nameColumn = new TableColumn("Name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         TableColumn idColumn = new TableColumn("ID");
@@ -55,7 +51,6 @@ public class StudentListViewController extends ViewController{
         for (Student s : this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList()) {
             tableView.getItems().add(s);
         }
-
     }
 
     public void reset() {
@@ -92,7 +87,7 @@ public class StudentListViewController extends ViewController{
             alert.setHeaderText("Confirm removing student");
             alert.setContentText("Are you sure? This action will remove the selected student.");
             Optional<ButtonType> result = alert.showAndWait();
-            if(result.get() == ButtonType.OK) {
+            if (result.get() == ButtonType.OK) {
                 Student student = (Student) tableView.getSelectionModel().getSelectedItem();
                 this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList().remove(student);
                 tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
@@ -108,21 +103,15 @@ public class StudentListViewController extends ViewController{
         reset();
     }
 
-    @FXML
-    public void onResetButtonClick() {
-        reset();
-    }
-    public void onNewFilter(){
+    public void onNewFilter() {
         tableView.getItems().clear();
         for (Student s : this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList()) {
             String filter = textField.getText();
-            if(filter!=""&&(s.getName().toLowerCase().contains(filter.toLowerCase())||s.get_class().toLowerCase().contains(filter.toLowerCase())||Integer.toString(s.getSemester()).contains(filter)||Integer.toString(s.getId()).contains(filter))){
+            if (filter != "" && (s.getName().toLowerCase().contains(filter.toLowerCase()) || s.get_class().toLowerCase().contains(filter.toLowerCase()) || Integer.toString(s.getSemester()).contains(filter) || Integer.toString(s.getId()).contains(filter))) {
                 tableView.getItems().add(s);
             }
-
         }
     }
-
 
     public void onClick(String clickId) {
         if (clickId.equals("edit") && tableView.getSelectionModel().getSelectedItem() == null) {
@@ -174,12 +163,12 @@ public class StudentListViewController extends ViewController{
                     Button btnAdd = new Button("Add");
                     Button btnClear = new Button("Clear");
                     hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
-                    btnClear.setOnAction(e ->{
+                    btnClear.setOnAction(e -> {
                         tfClass.clear();
                         tfID.clear();
                         tfName.clear();
                         tfSmstr.clear();
-                    } );
+                    });
                     btnAdd.setOnAction(e -> {
                         this.model.getClassList().getClasses().get(classIndex).getStudentList().getStudentList().add(new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())));
                         displayWindow.close();

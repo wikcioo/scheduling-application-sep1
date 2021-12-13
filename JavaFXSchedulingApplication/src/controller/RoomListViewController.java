@@ -15,7 +15,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Model;
 import model.rooms.Room;
-import model.students.Student;
 import view.ViewHandler;
 
 import java.io.File;
@@ -32,10 +31,6 @@ public class RoomListViewController extends ViewController {
     private Model model;
     private ViewHandler viewHandler;
 
-    public RoomListViewController() {
-        // called by FXMLLoader
-    }
-
     public void init(ViewHandler viewHandler, Model model, Region root) {
         this.model = model;
         this.viewHandler = viewHandler;
@@ -48,12 +43,10 @@ public class RoomListViewController extends ViewController {
         TableColumn mergeColumn = new TableColumn("Merge with");
         mergeColumn.setCellValueFactory(new PropertyValueFactory<>("mergeWith"));
 
-
         tableView.getColumns().addAll(nameColumn, capacityColumn, mergeColumn);
         for (Room r : this.model.getRoomList().getRooms()) {
             tableView.getItems().add(r);
         }
-
     }
 
     public void reset() {
@@ -90,7 +83,7 @@ public class RoomListViewController extends ViewController {
             alert.setHeaderText("Confirm removing room");
             alert.setContentText("Are you sure? This action will remove the selected room.");
             Optional<ButtonType> result = alert.showAndWait();
-            if(result.get() == ButtonType.OK){
+            if (result.get() == ButtonType.OK) {
                 Room room = (Room) tableView.getSelectionModel().getSelectedItem();
                 this.model.getRoomList().removeRoom(room);
                 tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
@@ -116,11 +109,6 @@ public class RoomListViewController extends ViewController {
                 }
             }
         }
-    }
-
-    @FXML
-    public void onResetButtonClick() {
-        reset();
     }
 
     public void onClick(String clickId) {
@@ -171,11 +159,11 @@ public class RoomListViewController extends ViewController {
                     Button btnAdd = new Button("Add");
                     Button btnClear = new Button("Clear");
                     hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
-                    btnClear.setOnAction(e ->{
+                    btnClear.setOnAction(e -> {
                         tfCapacity.setText("");
                         tfMerge.clear();
                         tfName.clear();
-                    } );
+                    });
                     btnAdd.setOnAction(e -> {
                         this.model.getRoomList().getRooms().add(new Room(tfName.getText(), Integer.parseInt(tfCapacity.getText()), tfMerge.getText()));
                         displayWindow.close();

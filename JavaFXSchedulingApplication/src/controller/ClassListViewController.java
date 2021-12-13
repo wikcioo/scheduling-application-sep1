@@ -12,9 +12,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Model;
 import model.courses.ClassOfStudents;
-import model.courses.Course;
-import model.courses.Teacher;
-import model.students.Student;
 import model.students.StudentList;
 import view.ViewHandler;
 
@@ -39,10 +36,6 @@ public class ClassListViewController extends ViewController {
     private Model model;
     private ViewHandler viewHandler;
 
-    public ClassListViewController() {
-        // called by FXMLLoader
-    }
-
     public void init(ViewHandler viewHandler, Model model, Region root) {
         this.model = model;
         this.viewHandler = viewHandler;
@@ -51,7 +44,7 @@ public class ClassListViewController extends ViewController {
         TableColumn _classColumn = new TableColumn("Class name");
         _classColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        tableView.getColumns().addAll( _classColumn);
+        tableView.getColumns().addAll(_classColumn);
         for (ClassOfStudents c : this.model.getClasses()) {
             tableView.getItems().add(c);
         }
@@ -103,7 +96,7 @@ public class ClassListViewController extends ViewController {
             alert.setHeaderText("Confirm removing class");
             alert.setContentText("Are you sure? This action will remove the selected class.");
             Optional<ButtonType> result = alert.showAndWait();
-            if(result.get() == ButtonType.OK) {
+            if (result.get() == ButtonType.OK) {
                 ClassOfStudents classOfStudents = (ClassOfStudents) tableView.getSelectionModel().getSelectedItem();
                 this.model.getClassList().removeClass(classOfStudents);
                 tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
@@ -144,7 +137,6 @@ public class ClassListViewController extends ViewController {
             TextField tfClassName = new TextField();
 
 
-
             switch (clickId) {
                 case "edit":
                     Button btnChange = new Button("Change");
@@ -156,7 +148,7 @@ public class ClassListViewController extends ViewController {
                     tfClassName.setText(classOfStudents.getName());
 
                     btnChange.setOnAction(e -> {
-                        this.model.getClasses().set(index,new ClassOfStudents(tfClassName.getText(),classOfStudents.getStudentList()));
+                        this.model.getClasses().set(index, new ClassOfStudents(tfClassName.getText(), classOfStudents.getStudentList()));
                         displayWindow.close();
                     });
                     btnReset.setOnAction(e -> tfClassName.setText(classOfStudents.getName()));
@@ -164,10 +156,10 @@ public class ClassListViewController extends ViewController {
                 default://Adding case
                     Button btnAdd = new Button("Add");
                     Button btnClear = new Button("Clear");
-                    hbButtons.getChildren().addAll(btnAdd,btnClear, btnCancel);
+                    hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
                     btnClear.setOnAction(e -> tfClassName.clear());
                     btnAdd.setOnAction(e -> {
-                        this.model.getClasses().add(new ClassOfStudents(tfClassName.getText(),new StudentList()));
+                        this.model.getClasses().add(new ClassOfStudents(tfClassName.getText(), new StudentList()));
                         displayWindow.close();
                     });
                     break;
@@ -188,7 +180,7 @@ public class ClassListViewController extends ViewController {
         }
     }
 
-    public void onViewDetailsClick(){
+    public void onViewDetailsClick() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             ClassOfStudents classOfStudents = (ClassOfStudents) tableView.getSelectionModel().getSelectedItem();
             this.model.getClassList().setCurrentlySelectedClass(this.model.getClassList().getClasses().indexOf(classOfStudents));
@@ -196,12 +188,12 @@ public class ClassListViewController extends ViewController {
         }
     }
 
-    public void onNewFilter(){
+    public void onNewFilter() {
         tableView.getItems().clear();
         for (ClassOfStudents c : this.model.getClasses()) {
             String filter = textField.getText();
             setDisableCellSpecificButtons(true);
-            if(filter!=""&&(c.getName().toLowerCase().contains(filter.toLowerCase()))){
+            if (filter != "" && (c.getName().toLowerCase().contains(filter.toLowerCase()))) {
                 tableView.getItems().add(c);
             }
 

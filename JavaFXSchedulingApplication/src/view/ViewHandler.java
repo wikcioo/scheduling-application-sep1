@@ -62,9 +62,6 @@ public class ViewHandler {
             case "ClassListView":
                 root = loadView("ClassListView.fxml", classListViewController);
                 break;
-            case "ShowLesson":
-                root = loadView("ShowLesson.fxml", classListViewController);
-                break;
             default:
                 root = new Region();
         }
@@ -102,10 +99,6 @@ public class ViewHandler {
         }
 
         return viewController.getRoot();
-    }
-
-    private Region loadAddLessonView() {
-        return null;
     }
 
     public void closeView() {

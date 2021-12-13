@@ -64,30 +64,6 @@ public class CourseList implements Serializable {
         return courses;
     }
 
-    public void readCourseListFromBinFile() {
-        String filename = "res/saved-data/saved-lists/courseList.bin";
-        ObjectInputStream in = null;
-        try {
-            File file = new File(filename);
-            FileInputStream fis = new FileInputStream(file);
-            in = new ObjectInputStream(fis);
-            Course course;
-            while ((course = (Course) in.readObject()) != null) {
-                this.courses.add(course);
-                Logger.info(course.toString());
-            }
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                in.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public void readCoursesFromTXTFile(File file) {
         Scanner in = null;
         try {
@@ -126,29 +102,6 @@ public class CourseList implements Serializable {
         teach.add(new Teacher("t3"));
         courses.get(0).setTeacherList(teach);
         in.close();
-    }
-
-    public void writeCourseListToBinFile(String _file) {
-        String filename;
-        filename = Objects.requireNonNullElse(_file, "res/saved-data/saved-lists/courseList.bin");
-
-        ObjectOutputStream out = null;
-        try {
-            File file = new File(filename);
-            FileOutputStream fos = new FileOutputStream(file);
-            out = new ObjectOutputStream(fos);
-            for (Course course : this.courses) {
-                out.writeObject(course);
-            }
-        } catch (IOException e) {
-            Logger.error("Exception: " + filename);
-        } finally {
-            try {
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public void setCurrentSelectedCourse(int currentSelectedCourse) {

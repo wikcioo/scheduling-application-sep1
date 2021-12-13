@@ -4,7 +4,6 @@ import utilities.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class RoomList implements Serializable {
@@ -79,29 +78,6 @@ public class RoomList implements Serializable {
         return available;
     }
 
-    public void writeRoomListToBinFile(String _file) {
-        String filename;
-        filename = Objects.requireNonNullElse(_file, "res/saved-data/saved-lists/roomList.bin");
-
-        ObjectOutputStream out = null;
-        try {
-            File file = new File(filename);
-            FileOutputStream fos = new FileOutputStream(file);
-            out = new ObjectOutputStream(fos);
-            for (Room room : this.rooms) {
-                out.writeObject(room);
-            }
-        } catch (IOException e) {
-            Logger.error("Exception: " + filename);
-            e.printStackTrace();
-        } finally {
-            try {
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     public void readRoomsListFromBinFile() {
         String filename = "res/saved-data/saved-lists/roomList.bin";

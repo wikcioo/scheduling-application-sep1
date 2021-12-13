@@ -20,7 +20,6 @@ public class ModelManager implements Model, Serializable {
     private RoomList roomList;
     private CourseList courseList;
     private ClassList classList;
-    private TeacherList teacherList;
     private CopiedWeek copiedWeek;
 
     public ModelManager() {
@@ -29,7 +28,6 @@ public class ModelManager implements Model, Serializable {
         this.roomList = new RoomList();
         this.courseList = new CourseList();
         this.classList = new ClassList();
-        this.teacherList = new TeacherList();
         this.copiedWeek = new CopiedWeek();
     }
 
@@ -109,14 +107,6 @@ public class ModelManager implements Model, Serializable {
 
     public void initializeAllWeeks() {
         scheduleList.getCurrentSchedule().initializeAllWeeks();
-    }
-
-    public void readSemesterData() {
-        scheduleList.getCurrentSchedule().readData();
-    }
-
-    public void saveSemesterData() {
-        scheduleList.getCurrentSchedule().saveData();
     }
 
     public void exportScheduleAsXML() {

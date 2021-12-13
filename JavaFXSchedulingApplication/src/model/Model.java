@@ -43,10 +43,6 @@ public interface Model {
 
     void initializeAllWeeks();
 
-    void readSemesterData();
-
-    void saveSemesterData();
-
     RoomList getRoomList();
 
     StudentList getStudentList();

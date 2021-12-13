@@ -4,7 +4,6 @@ import utilities.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class StudentList implements Serializable {
@@ -69,55 +68,6 @@ public class StudentList implements Serializable {
         }
 
         return s;
-    }
-
-    public void readStudentListFromBinFile() {
-        String filename = "res/saved-data/saved-lists/studentList.bin";
-        ObjectInputStream in = null;
-        try {
-            File file = new File(filename);
-            FileInputStream fis = new FileInputStream(file);
-            in = new ObjectInputStream(fis);
-            Student student;
-            while ((student = (Student) in.readObject()) != null) {
-                this.studentList.add(student);
-            }
-
-        } catch (FileNotFoundException e) {
-            Logger.warn(filename + " not found in the resources");
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                in.close();
-            } catch (IOException | NullPointerException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void writeStudentListToBinFile(String _file) {
-        String filename;
-        filename = Objects.requireNonNullElse(_file, "res/saved-data/saved-lists/studentList.bin");
-
-        ObjectOutputStream out = null;
-        try {
-            File file = new File(filename);
-            FileOutputStream fos = new FileOutputStream(file);
-            out = new ObjectOutputStream(fos);
-            for (Student student : this.studentList) {
-                out.writeObject(student);
-            }
-        } catch (IOException e) {
-            Logger.error("Exception: " + filename);
-            e.printStackTrace();
-        } finally {
-            try {
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public void readStudentFromTXTFile(File file) {

@@ -25,7 +25,6 @@ public class CalendarView extends Node {
     private VBox[] daysView = new VBox[7];
     private ArrayList<AnchorPaneNode> lessonBlocks;
     private ArrayList<AnchorPaneNode> emptyBlocks;
-    private ArrayList<String> filters;
 
     public CalendarView(Model model) {
         this.model = model;
@@ -136,10 +135,6 @@ public class CalendarView extends Node {
         long minute = duration.toMinutesPart();
         long result = hour * 60 + minute - 3;
         return result;
-    }
-
-    public ArrayList<String> getFilters() {
-        return filters;
     }
 
     public VBox getFinalView() {

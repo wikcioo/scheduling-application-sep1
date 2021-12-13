@@ -2,11 +2,9 @@ package view;
 
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -91,7 +89,7 @@ public class AnchorPaneNode extends AnchorPane {
         displayWindow.showAndWait();
     }
 
-    public void editlesson() {
+    public void editLesson() {
         Stage displayWindow = new Stage();
         displayWindow.initModality(Modality.APPLICATION_MODAL);
         displayWindow.setTitle("Edit a lesson");
@@ -130,18 +128,11 @@ public class AnchorPaneNode extends AnchorPane {
         LocalTime timeStart = LocalTime.of(Integer.parseInt(userInputForStart), Integer.parseInt(userInputForStartMin));
         LocalTime timeEnd = LocalTime.of(Integer.parseInt(userInputForEnd), Integer.parseInt(userInputForEndMin));
         Lesson lesson = new Lesson(userInputForCourse, timeStart, timeEnd);
-        if ( (day.isValidDataForTime(lesson)) && (timeStart.isBefore(timeEnd)) ) {
+        if ((day.isValidDataForTime(lesson)) && (timeStart.isBefore(timeEnd))) {
             this.lesson = lesson;
             day.addLesson(lesson);
             bookARoom(lesson);
         } else error3();
-    }
-
-    public void editALesson(Course userInputForCourse) {
-        Lesson lesson = new Lesson(userInputForCourse, this.lesson.getStart(), this.lesson.getEnd());
-        this.lesson = lesson;
-        day.removeLesson(lesson);
-        day.addLesson(lesson);
     }
 
     public void addALessonDisplay() {

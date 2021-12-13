@@ -1,8 +1,6 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import model.Model;
 import model.ModelSaverReader;
@@ -12,10 +10,6 @@ public class MainMenuController extends ViewController {
     private Region root;
     private Model model;
     private ViewHandler viewHandler;
-    @FXML
-    private Pane leftBar;
-    @FXML
-    private AnchorPane bg;
 
     public void init(ViewHandler viewHandler, Model model, Region root) {
         this.model = model;

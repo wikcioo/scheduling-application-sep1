@@ -16,8 +16,6 @@ import model.Model;
 import model.courses.ClassOfStudents;
 import model.courses.Course;
 import model.courses.Teacher;
-import model.courses.TeacherList;
-import model.students.Student;
 import view.ViewHandler;
 
 import java.io.File;
@@ -30,14 +28,10 @@ public class CourseListViewController extends ViewController {
     TextField textField;
     @FXML
     TableView tableView;
-    @FXML
+
     private Region root;
     private Model model;
     private ViewHandler viewHandler;
-
-    public CourseListViewController() {
-        // called by FXMLLoader
-    }
 
     public void init(ViewHandler viewHandler, Model model, Region root) {
         this.model = model;
@@ -93,7 +87,7 @@ public class CourseListViewController extends ViewController {
             alert.setHeaderText("Confirm removing course");
             alert.setContentText("Are you sure? This action will remove the selected course.");
             Optional<ButtonType> result = alert.showAndWait();
-            if(result.get() == ButtonType.OK) {
+            if (result.get() == ButtonType.OK) {
                 Course course = (Course) tableView.getSelectionModel().getSelectedItem();
                 this.model.getCourseList().removeCourse(course);
                 tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
@@ -106,11 +100,6 @@ public class CourseListViewController extends ViewController {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(viewHandler.getPrimaryStage());
         this.model.getCourseList().readCoursesFromTXTFile(file);
-        reset();
-    }
-
-    @FXML
-    public void onResetButtonClick() {
         reset();
     }
 
@@ -158,15 +147,15 @@ public class CourseListViewController extends ViewController {
                     btnChange.setOnAction(e -> {
                         ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
                         String[] token = tfTeacher.getText().split(",");
-                        for (String s: token) {
+                        for (String s : token) {
                             teacherList.add(new Teacher(s.trim()));
                         }
-                        this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), teacherList , cbClassOfStudents.getValue()));
+                        this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), teacherList, cbClassOfStudents.getValue()));
                         Color color = colorPicker.getValue();
-                        course.setHexColor(String.format( "#%02X%02X%02X",
-                                (int)( color.getRed() * 255 ),
-                                (int)( color.getGreen() * 255 ),
-                                (int)( color.getBlue() * 255 ) ));
+                        course.setHexColor(String.format("#%02X%02X%02X",
+                                (int) (color.getRed() * 255),
+                                (int) (color.getGreen() * 255),
+                                (int) (color.getBlue() * 255)));
                         displayWindow.close();
                     });
                     btnReset.setOnAction(e -> {
@@ -182,23 +171,23 @@ public class CourseListViewController extends ViewController {
                     Button btnAdd = new Button("Add");
                     Button btnClear = new Button("Clear");
                     hbButtons.getChildren().addAll(btnAdd, btnClear, btnCancel);
-                    btnClear.setOnAction(e ->{
-                                tfTitle.clear();
-                                tfTeacher.clear();
-                    } );
+                    btnClear.setOnAction(e -> {
+                        tfTitle.clear();
+                        tfTeacher.clear();
+                    });
                     btnAdd.setOnAction(e -> {
                         ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
                         String[] token = tfTeacher.getText().split(",");
-                        for (String s: token) {
+                        for (String s : token) {
                             teacherList.add(new Teacher(s.trim()));
                         }
                         Color color = colorPicker.getValue();
-                        this.model.getCourseList().addCourse(new Course(tfTitle.getText(), teacherList,cbClassOfStudents.getValue()));
-                        int lastCourse = this.model.getCourseList().getCourses().size()-1;
-                        this.model.getCourseList().getCourses().get(lastCourse).setHexColor(String.format( "#%02X%02X%02X",
-                                (int)( color.getRed() * 255 ),
-                                (int)( color.getGreen() * 255 ),
-                                (int)( color.getBlue() * 255 ) ));
+                        this.model.getCourseList().addCourse(new Course(tfTitle.getText(), teacherList, cbClassOfStudents.getValue()));
+                        int lastCourse = this.model.getCourseList().getCourses().size() - 1;
+                        this.model.getCourseList().getCourses().get(lastCourse).setHexColor(String.format("#%02X%02X%02X",
+                                (int) (color.getRed() * 255),
+                                (int) (color.getGreen() * 255),
+                                (int) (color.getBlue() * 255)));
                         displayWindow.close();
                     });
                     break;
@@ -212,7 +201,6 @@ public class CourseListViewController extends ViewController {
             Label lblClassName = new Label("Class Name:");
             Label lblTeacher = new Label("Teachers:");
             Label lblColor = new Label("Pick Course Color:");
-
 
             grid.add(lblTitle, 0, 0);
             grid.add(tfTitle, 1, 0);
@@ -240,7 +228,7 @@ public class CourseListViewController extends ViewController {
                     @Override
                     protected void updateItem(ClassOfStudents item, boolean empty) {
                         super.updateItem(item, empty);
-                        if(item != null) {
+                        if (item != null) {
                             setText(item.getName());
                         } else {
                             setText(null);
@@ -252,14 +240,11 @@ public class CourseListViewController extends ViewController {
         });
         comboBox.setButtonCell(new ListCell<ClassOfStudents>() {
             @Override
-            protected void updateItem(ClassOfStudents item, boolean empty){
+            protected void updateItem(ClassOfStudents item, boolean empty) {
                 super.updateItem(item, empty);
-                if (item != null)
-                {
+                if (item != null) {
                     setText(item.getName());
-                }
-                else
-                {
+                } else {
                     setText(null);
                 }
             }
@@ -267,18 +252,11 @@ public class CourseListViewController extends ViewController {
         return comboBox;
     }
 
-    public void onViewDetailsClick(){
-        if (tableView.getSelectionModel().getSelectedItem() != null) {
-            this.model.getCourseList().setCurrentSelectedCourse(tableView.getSelectionModel().getFocusedIndex());
-            this.viewHandler.openView("TeacherListView");
-        }
-    }
-
-    public void onNewFilter(){
+    public void onNewFilter() {
         tableView.getItems().clear();
         for (Course c : this.model.getCourseList().getCourses()) {
             String filter = textField.getText();
-            if(filter!=""&&(c.getTitle().toLowerCase().contains(filter.toLowerCase())||c.getClassName().toLowerCase().contains(filter.toLowerCase())||c.getTeacherName().toLowerCase().contains(filter.toLowerCase()))){
+            if (filter != "" && (c.getTitle().toLowerCase().contains(filter.toLowerCase()) || c.getClassName().toLowerCase().contains(filter.toLowerCase()) || c.getTeacherName().toLowerCase().contains(filter.toLowerCase()))) {
                 tableView.getItems().add(c);
             }
 

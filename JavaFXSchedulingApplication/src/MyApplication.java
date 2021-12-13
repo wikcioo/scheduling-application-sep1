@@ -3,7 +3,6 @@ import javafx.stage.Stage;
 import model.Model;
 import model.ModelManager;
 import model.courses.ClassOfStudents;
-import model.courses.Course;
 import model.students.StudentList;
 import view.ViewHandler;
 

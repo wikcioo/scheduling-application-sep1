@@ -8,7 +8,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import model.*;
-import model.calendar.Lesson;
 import model.calendar.Week;
 import utilities.Logger;
 import utilities.Util;
@@ -45,34 +44,20 @@ public class CalendarViewController extends ViewController {
     @FXML
     private Text copiedWeekNumber;
     @FXML
-    private TextField day;
-    @FXML
-    private TextField start;
-    @FXML
-    private TextField end;
-    @FXML
     private AnchorPane navCalendar;
     @FXML
     private Button previousWeekButton;
     @FXML
     private Button nextWeekButton;
     @FXML
-    private Button copyButton;
-    @FXML
     private Button pasteButton;
     @FXML
     private Button pasteToAllButton;
-    @FXML
-    private AnchorPane filter;
 
     private Region root;
     private Model model;
     private ViewHandler viewHandler;
     private NavCalendarView navCalendarView;
-
-    public void CreateCalendarViewController() {
-
-    }
 
     public void init(ViewHandler viewHandler, Model model, Region root) {
         this.model = model;
@@ -82,9 +67,8 @@ public class CalendarViewController extends ViewController {
         initDates();
         initCopyPaste();
         initCalendar();
-        initNavCallendar();
+        initNavCalendar();
         initDayForAll();
-        initCourseListView();
     }
 
     public void reset() {
@@ -127,9 +111,8 @@ public class CalendarViewController extends ViewController {
     @FXML
     public void pasteCopiedWeek() {
         Week copiedWeek = model.getCopiedWeekWrapper().getCopiedWeek();
-        if(copiedWeek != null) {
-            if(showConfirmAlert("Confirm pasting","Confirm pasting to week","Are you sure? This action will override all lessons in this week."))
-            {
+        if (copiedWeek != null) {
+            if (showConfirmAlert("Confirm pasting", "Confirm pasting to week", "Are you sure? This action will override all lessons in this week.")) {
                 model.getCurrentWeek().setWeekLessons(copiedWeek);
                 Logger.success("Copying successful");
                 initCalendar();
@@ -137,22 +120,22 @@ public class CalendarViewController extends ViewController {
         }
     }
 
-    public static boolean showConfirmAlert(String title,String header, String content) {
+    public static boolean showConfirmAlert(String title, String header, String content) {
         //        https://code.makery.ch/blog/javafx-dialogs-official/
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
         Optional<ButtonType> result = alert.showAndWait();
-        return  result.get() == ButtonType.OK;
+        return result.get() == ButtonType.OK;
     }
 
     @FXML
     public void pasteCopiedWeekToAll() {
         Week copiedWeek = model.getCopiedWeekWrapper().getCopiedWeek();
-        if(copiedWeek != null){
-            if(showConfirmAlert("Confirm pasting","Confirm pasting to all weeks","Are you sure? This action will override ALL other lessons in this semester!")) {
-                for(Week week : model.getScheduleList().getCurrentSchedule().getWeekList()) {
+        if (copiedWeek != null) {
+            if (showConfirmAlert("Confirm pasting", "Confirm pasting to all weeks", "Are you sure? This action will override ALL other lessons in this semester!")) {
+                for (Week week : model.getScheduleList().getCurrentSchedule().getWeekList()) {
                     week.setWeekLessons(copiedWeek);
                 }
                 initCalendar();
@@ -162,7 +145,7 @@ public class CalendarViewController extends ViewController {
 
     @FXML
     public void onNextWeekClick() {
-        if(model.hasNextWeek()){
+        if (model.hasNextWeek()) {
             nextWeekButton.setDisable(false);
             previousWeekButton.setDisable(false);
             currentDayOfWeek = currentDayOfWeek.plusDays(7);
@@ -171,16 +154,15 @@ public class CalendarViewController extends ViewController {
             initDates();
             initCalendar();
             initDayForAll();
-            initCourseListView();
         }
-        if (!model.hasNextWeek()){
+        if (!model.hasNextWeek()) {
             nextWeekButton.setDisable(true);
         }
     }
 
     @FXML
     public void onPreviousWeekClick() {
-        if(model.hasPreviousWeek()){
+        if (model.hasPreviousWeek()) {
             nextWeekButton.setDisable(false);
             previousWeekButton.setDisable(false);
             currentDayOfWeek = currentDayOfWeek.minusDays(7);
@@ -189,7 +171,6 @@ public class CalendarViewController extends ViewController {
             initDates();
             initCalendar();
             initDayForAll();
-            initCourseListView();
         }
         if (!model.hasPreviousWeek()) {
             previousWeekButton.setDisable(true);
@@ -204,14 +185,6 @@ public class CalendarViewController extends ViewController {
         alert.show();
     }
 
-//    @FXML
-//    public void onAddLessonClick() {
-//        int _start = Integer.parseInt(start.getText());
-//        int _end = Integer.parseInt(end.getText());
-//        addLesson(new Lesson(course.getText(), LocalTime.of(_start, 0), LocalTime.of(_end, 0)), Integer.parseInt(day.getText()));
-//        initCalendar();
-//    }
-
     @FXML
     public void onChooseFileButton() {
         FileChooser fileChooser = new FileChooser();
@@ -224,22 +197,23 @@ public class CalendarViewController extends ViewController {
         Logger.info(model.getScheduleList().getCurrentSchedule().getClassOfStudents().toString());
         CalendarView calendarView = new CalendarView(model);
         scrollpane.setContent(calendarView.getFinalView());
-        initButtons(calendarView,model.getCurrentWeek());
+        initButtons(calendarView, model.getCurrentWeek());
     }
 
-    public void initButtons(CalendarView calendarView,Week week) {
+    public void initButtons(CalendarView calendarView, Week week) {
         ArrayList<AnchorPaneNode> allEmptyBlocks = calendarView.getEmptyBlocks();
         ArrayList<AnchorPaneNode> allLessonBlocks = calendarView.getLessonBlocks();
-        for (int i=0;i<allLessonBlocks.size();i++) {
+        for (int i = 0; i < allLessonBlocks.size(); i++) {
             int finalI = i;
             calendarView.getLessonBlocks().get(i).returnAp().setOnMouseClicked(null);
             calendarView.getLessonBlocks().get(i).returnAp().setOnMouseClicked(event -> {
-                if (event.getButton() == MouseButton.PRIMARY) calendarView.getLessonBlocks().get(finalI).displayLesson();
-                else calendarView.getLessonBlocks().get(finalI).editlesson();
+                if (event.getButton() == MouseButton.PRIMARY)
+                    calendarView.getLessonBlocks().get(finalI).displayLesson();
+                else calendarView.getLessonBlocks().get(finalI).editLesson();
                 initCalendar();
             });
         }
-        for (int i=0;i<allEmptyBlocks.size();i++) {
+        for (int i = 0; i < allEmptyBlocks.size(); i++) {
             int finalI = i;
             calendarView.getEmptyBlocks().get(i).returnAp().setOnMouseClicked(null);
             calendarView.getEmptyBlocks().get(i).returnAp().setOnMouseClicked(event -> {
@@ -250,24 +224,21 @@ public class CalendarViewController extends ViewController {
 
     }
 
-    public void initDayText(Text day,int forward) {
+    public void initDayText(Text day, int forward) {
         day.setText(String.valueOf(currentDayOfWeek.plusDays(forward).getDayOfMonth()));
     }
+
     public void initDayForAll() {
-        initDayText(day1,0);
-        initDayText(day2,1);
-        initDayText(day3,2);
-        initDayText(day4,3);
-        initDayText(day5,4);
-        initDayText(day6,5);
-        initDayText(day7,6);
-    }
-    public void addLesson(Lesson lesson, int index) {
-        this.model.getCurrentWeek().addLesson(lesson, index);
+        initDayText(day1, 0);
+        initDayText(day2, 1);
+        initDayText(day3, 2);
+        initDayText(day4, 3);
+        initDayText(day5, 4);
+        initDayText(day6, 5);
+        initDayText(day7, 6);
     }
 
-    //NAV CALENDAR
-    public void initNavCallendar() {
+    public void initNavCalendar() {
         navCalendar.getChildren().add(navCalendarView.getFinalView());
     }
 
@@ -279,21 +250,8 @@ public class CalendarViewController extends ViewController {
         navCalendarView.navPrevWeek();
     }
 
-    public void back(){
+    public void back() {
         this.model.getScheduleList().getCurrentSchedule().initializeCurrentWeekIndex();
         viewHandler.openView("MainMenu");
     }
-
-    //FILTER FOR MAIN CALENDAR
-    public void initCourseListView() {
-//        CoursesListView coursesListView = new CoursesListView(this.model.getCurrentWeek());
-//        filter.getChildren().add(coursesListView.getFinalView());
-//        for (Button button:coursesListView.getButtonsForEachCourse()) {
-//            button.setOnMouseClicked(event -> {
-//                initCalendar(this.model.getCurrentWeek().filterBasedOnCourse(button.getText()));
-//            });
-//        }
-    }
-    // Previously from from anchor pane node
-
 }

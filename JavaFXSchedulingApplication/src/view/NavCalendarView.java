@@ -94,7 +94,8 @@ public class NavCalendarView {
         // FIXME: 12/2/2021 //Test solution
         //Get first day in the month
         int startDay = calendar.get(Calendar.DAY_OF_WEEK) - 3;
-        if (startDay <= 0) startDay = 7 + startDay; // Get startDay if it starts before the row for months that start on Sunday,Saturday,etc.
+        if (startDay <= 0)
+            startDay = 7 + startDay; // Get startDay if it starts before the row for months that start on Sunday,Saturday,etc.
         //Get the max number of days in a mounth
         int maxNumberOfDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         //Calculate how much you need to substract and set previous week

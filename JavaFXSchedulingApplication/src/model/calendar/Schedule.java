@@ -1,7 +1,6 @@
 package model.calendar;
 
 import model.courses.ClassOfStudents;
-import utilities.Logger;
 import utilities.Util;
 
 import java.io.*;
@@ -96,56 +95,6 @@ public class Schedule implements Serializable {
             this.currentWeekIndex = currentWeekIndex;
         }
     }
-
-    public void readData() {
-        String filename = "res/saved-data/saved-lists/weekList.bin";
-        ObjectInputStream in = null;
-        try {
-            File file = new File(filename);
-            FileInputStream fis = new FileInputStream(file);
-            in = new ObjectInputStream(fis);
-            Week week1;
-            int index = 0;
-            while ((week1 = (Week) in.readObject()) != null) {
-                this.weekList.set(index, week1);
-                index++;
-            }
-        } catch (FileNotFoundException e) {
-            Logger.warn(filename + " not found in the resources");
-        } catch (IOException | ClassNotFoundException e) {
-            //e.printStackTrace();
-        } finally {
-            try {
-                in.close();
-            } catch (IOException | NullPointerException e) {
-                //e.printStackTrace();
-            }
-        }
-    }
-
-    //Saves data about weeks to binary file
-    public void saveData() {
-        String filename = "res/saved-data/saved-lists/weekList.bin";
-
-        ObjectOutputStream out = null;
-        try {
-            File file = new File(filename);
-            FileOutputStream fos = new FileOutputStream(file);
-            out = new ObjectOutputStream(fos);
-            for (Week week : this.weekList) {
-                out.writeObject(week);
-            }
-        } catch (IOException e) {
-            Logger.error("Exception: " + filename);
-        } finally {
-            try {
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
 
     public void exportScheduleAsXML() {
         File file = new File("res/saved-data/schedule.xml");
