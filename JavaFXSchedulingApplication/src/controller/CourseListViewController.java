@@ -128,6 +128,7 @@ public class CourseListViewController extends ViewController {
             cbClassOfStudents.getItems().addAll(model.getClasses());
             TextField tfTeacher = new TextField();
             ColorPicker colorPicker = new ColorPicker();
+            Label lblColor = new Label("Pick Course Color:");
 
             switch (clickId) {
                 case "edit":
@@ -151,12 +152,6 @@ public class CourseListViewController extends ViewController {
                             teacherList.add(new Teacher(s.trim()));
                         }
                         this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), teacherList, cbClassOfStudents.getValue()));
-                        Color color = colorPicker.getValue();
-                        course.setHexColor(String.format("#%02X%02X%02X",
-                                (int) (color.getRed() * 255),
-                                (int) (color.getGreen() * 255),
-                                (int) (color.getBlue() * 255)));
-                        displayWindow.close();
                     });
                     btnReset.setOnAction(e -> {
                         tfTitle.setText(course.getTitle());
@@ -200,7 +195,7 @@ public class CourseListViewController extends ViewController {
             Label lblTitle = new Label("Course Title:");
             Label lblClassName = new Label("Class Name:");
             Label lblTeacher = new Label("Teachers:");
-            Label lblColor = new Label("Pick Course Color:");
+
 
             grid.add(lblTitle, 0, 0);
             grid.add(tfTitle, 1, 0);
@@ -208,9 +203,15 @@ public class CourseListViewController extends ViewController {
             grid.add(cbClassOfStudents, 1, 1);
             grid.add(lblTeacher, 0, 2);
             grid.add(tfTeacher, 1, 2);
-            grid.add(lblColor, 0, 3);
-            grid.add(colorPicker, 1, 3);
-            grid.add(innerGrid, 0, 4, 3, 1);
+            if(clickId!="edit"){
+                grid.add(lblColor, 0, 3);
+                grid.add(colorPicker, 1, 3);
+                grid.add(innerGrid, 0, 4, 3, 1);
+            }
+            else{
+                grid.add(innerGrid, 0, 3, 3, 1);
+            }
+
             btnCancel.setOnAction(e -> displayWindow.close());
             Scene scene1 = new Scene(grid, 300, 300);
             displayWindow.setScene(scene1);
