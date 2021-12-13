@@ -1,9 +1,8 @@
 package model.courses;
 
-import utilities.ClassNameSorter;
-
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ClassList implements Serializable {
     private ArrayList<ClassOfStudents> classList;
@@ -23,7 +22,12 @@ public class ClassList implements Serializable {
 
     public void addClass(ClassOfStudents _class) {
         classList.add(_class);
-        classList.sort(new ClassNameSorter());
+        classList.sort(new Comparator<ClassOfStudents>() {
+            @Override
+            public int compare(ClassOfStudents class1, ClassOfStudents class2) {
+                return class1.getName().compareTo(class2.getName());
+            }
+        });
     }
 
     public void removeClass(ClassOfStudents _class) {
@@ -32,10 +36,6 @@ public class ClassList implements Serializable {
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
-    }
-
-    public void sortClassesByName() {
-        classList.sort(new ClassNameSorter());
     }
 
     public ArrayList<ClassOfStudents> getClasses() {
