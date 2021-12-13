@@ -106,7 +106,7 @@ public class Schedule implements Serializable {
         }
 
         String xml = "";
-        xml += "<schedule startTime=\"9:00\" endTime=\"22:00\">";
+        xml += "<schedule>";
         for (Week week : this.weekList) {
             xml += "\n" + weekToXML(week);
         }
@@ -127,7 +127,7 @@ public class Schedule implements Serializable {
         }
 
         String xml = "";
-        xml += "<schedule startTime=\"9:00\" endTime=\"22:00\">";
+        xml += "<schedule>";
         xml += weekToXML(week);
         xml += "\n</schedule>";
 
@@ -142,7 +142,7 @@ public class Schedule implements Serializable {
         for (Day day : week.getDays()) {
             xml += "\n\t<day date=\"" + day.getDate() + "\">";
             for (Lesson lesson : day.getLessons()) {
-                xml += "\n\t\t<lesson>";
+                xml += "\n\t\t<lesson colour='"+lesson.getCourse().getHexColor()+"'>";
                 xml += "\n\t\t\t<course>" + lesson.getCourse() + "</course>";
                 xml += "\n\t\t\t<startTime>" + lesson.getStart() + "</startTime>";
                 xml += "\n\t\t\t<endTime>" + lesson.getEnd() + "</endTime>";
