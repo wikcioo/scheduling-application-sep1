@@ -169,7 +169,16 @@ public class StudentListViewController extends ViewController {
                     tfClass.setText(student.get_class());
                     tfSmstr.setText(Integer.toString(student.getSemester()));
                     btnChange.setOnAction(e -> {
-                        this.model.getClasses().get(classIndex).getStudentList().getStudentList().set(index, new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())));
+                        if(this.model.isValidStudent(new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())))) {
+                            this.model.getClasses().get(classIndex).getStudentList().getStudentList().set(index, new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())));
+                        }
+                        else{
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Error");
+                            alert.setHeaderText("Wrong student info");
+                            alert.setContentText("Input student info was wrong");
+                            Optional<ButtonType> result = alert.showAndWait();
+                        }
                         displayWindow.close();
                     });
                     btnReset.setOnAction(e -> {
@@ -190,7 +199,15 @@ public class StudentListViewController extends ViewController {
                         tfSmstr.clear();
                     });
                     btnAdd.setOnAction(e -> {
+                        if(this.model.isValidStudent(new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText()))))
                         this.model.getClasses().get(classIndex).getStudentList().getStudentList().add(new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())));
+                        else{
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Error");
+                            alert.setHeaderText("Wrong student info");
+                            alert.setContentText("Input student info was wrong");
+                            Optional<ButtonType> result = alert.showAndWait();
+                        }
                         displayWindow.close();
                     });
                     break;

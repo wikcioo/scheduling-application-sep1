@@ -105,6 +105,7 @@ public class StudentList implements Serializable {
         for (Student s : this.studentList) {
             if (s.getId() == student.getId()) return false;
         }
+        if(student.getId()<=0) return false;
 
         return true;
     }
