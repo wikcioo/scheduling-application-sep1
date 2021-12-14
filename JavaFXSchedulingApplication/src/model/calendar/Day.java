@@ -27,14 +27,7 @@ public class Day implements Serializable {
         }
         return true;
     }
-
-    public boolean isValidDataForTimeExceptItself(Lesson lesson) {
-        for (Lesson l : lessons) {
-            if ( (!lesson.equals(l)) && (overlaps(lesson, l)) ) return false;
-        }
-        return true;
-    }
-
+    
     private boolean overlaps(Lesson lesson, Lesson lesson2) {
         LocalTime startLesson1 = lesson.getStart();
         LocalTime endLesson1 = lesson.getEnd();
