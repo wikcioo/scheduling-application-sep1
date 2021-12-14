@@ -130,8 +130,10 @@ public class CalendarView {
     private AnchorPaneNode getBlockForLesson(LocalTime start, LocalTime finish, Lesson lesson, Day day) {
         AnchorPaneNode ap = new AnchorPaneNode(model);
         ap.setPrefWidth(200);
+        ap.setMaxWidth(200);
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
         ap.getStyleClass().add(lesson.getCourse().getTitle());
+        ap.setMaxHeight(calculateHeightForBlock(start,finish));
         String backgroundColor = String.format("-fx-background-color:%s;", lesson.getCourse().getHexColor());
         Logger.info(backgroundColor);
         ap.setStyle(backgroundColor);
@@ -140,10 +142,11 @@ public class CalendarView {
         ap.setDay(day);
         Text text = new Text(lesson.getCourse().getTitle());
         Text description = new Text(start + " -- " + finish);
-        text.setFont(Font.font("Century Gothic", 25));
+        text.setFont(Font.font("Century Gothic", 9));
         Text teacher = new Text(lesson.getCourse().getTeacherName());
-        teacher.setFont(Font.font("Century Gothic", 15));
+        teacher.setFont(Font.font("Century Gothic", 7));
         text.setFill(Color.WHITE);
+        text.setWrappingWidth(75);
         description.setFill(Color.WHITE);
         teacher.setFill(Color.WHITE);
         ap.getChildren().add(text);
@@ -157,7 +160,7 @@ public class CalendarView {
         teacher.setLayoutY(20);
         AnchorPane.setTopAnchor(text, 5.0);
         AnchorPane.setRightAnchor(teacher, 5.0);
-        AnchorPane.setTopAnchor(description, 30.0);
+        AnchorPane.setBottomAnchor(description, 7.0);
         return ap;
     }
 
@@ -194,6 +197,15 @@ public class CalendarView {
      * @return a long representing the length of a lesson
      */
     public long calculateHeightForBlock(LocalTime start, LocalTime finish) {
+        //One unit is 60 --> 1 hr ,1 minute is 1 pixel
+        Duration duration = Duration.between(start, finish);
+        long hour = duration.toHoursPart();
+        long minute = duration.toMinutesPart();
+        long result = hour * 60 + minute - 1;
+        return result;
+    }
+
+    public long calculateHeightForFonts(LocalTime start, LocalTime finish) {
         //One unit is 60 --> 1 hr ,1 minute is 1 pixel
         Duration duration = Duration.between(start, finish);
         long hour = duration.toHoursPart();
