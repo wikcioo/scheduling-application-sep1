@@ -15,8 +15,6 @@ public class MyApplication extends Application {
 
         ClassOfStudents class1 = new ClassOfStudents("1Z", new StudentList());
         model.addClass(class1);
-        model.addClass(new ClassOfStudents("Rougue zero", new StudentList()));
-        model.addClass(new ClassOfStudents("Danish one", new StudentList()));
         model.addClass(new ClassOfStudents("4Z", new StudentList()));
         model.addClass(new ClassOfStudents("5Z", new StudentList()));
         model.addClass(new ClassOfStudents("6Z", new StudentList()));

@@ -151,9 +151,9 @@ public class CalendarView {
         text.setWrappingWidth(75);
         description.setFill(Color.WHITE);
         teacher.setFill(Color.WHITE);
-//        ap.getChildren().add(text);
-//        ap.getChildren().add(description);
-//        ap.getChildren().add(teacher);
+        ap.getChildren().add(text);
+        ap.getChildren().add(description);
+        ap.getChildren().add(teacher);
         text.setLayoutX(10);
         text.setLayoutY(20);
         description.setLayoutX(10);
