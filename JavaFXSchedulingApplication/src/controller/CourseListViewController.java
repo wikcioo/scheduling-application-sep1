@@ -160,7 +160,7 @@ public class CourseListViewController extends ViewController {
                     //TODO: THIS IS GONNA LOSE ITS SHIT ONCE CLASS BECOMES NULL
                     cbClassOfStudents.getSelectionModel().select(course.getClassOfStudents());
 
-                    tfTeacher.setText(course.getTeacherList().getTeacherByIndex(0).getName());
+                    tfTeacher.setText(course.getTeacherList().toString());
 
                     btnChange.setOnAction(e -> {
                         ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
@@ -169,13 +169,14 @@ public class CourseListViewController extends ViewController {
                             teacherList.add(new Teacher(s.trim()));
                         }
                         this.model.getCourses().set(index, new Course(tfTitle.getText(), teacherList, cbClassOfStudents.getValue()));
+                        displayWindow.close();
                     });
                     btnReset.setOnAction(e -> {
                         tfTitle.setText(course.getTitle());
                         cbClassOfStudents.getSelectionModel().select(course.getClassOfStudents());
 
 
-                        tfTeacher.setText(course.getTeacherList().getTeacherByIndex(0).toString());
+                        tfTeacher.setText(course.getTeacherList().toString());
 
                     });
                     break;
