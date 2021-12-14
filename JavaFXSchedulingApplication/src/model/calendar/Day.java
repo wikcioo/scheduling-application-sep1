@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class Day implements Serializable {
     private ArrayList<Lesson> lessons = new ArrayList<>();
@@ -43,13 +42,24 @@ public class Day implements Serializable {
         sortLessons();
     }
 
-    public void sortLessons() {
-        lessons.sort(new Comparator<Lesson>() {
-            @Override
-            public int compare(Lesson o1, Lesson o2) {
-                return o1.getStart().compareTo(o2.getStart());
+    private void sortLessons() {
+        for (int i = 0; i < lessons.size() - 1; i++) {
+            boolean wasChanged = false;
+            for (int j = 0; j < lessons.size() - i - 1; j++) {
+                if (lessons.get(j).getStart().isAfter(lessons.get(j + 1).getStart())) {
+                    swapElements(j, j + 1);
+                    wasChanged = true;
+                }
             }
-        });
+
+            if (!wasChanged) break;
+        }
+    }
+
+    private void swapElements(int a, int b) {
+        Lesson temp = lessons.get(a);
+        lessons.set(a, lessons.get(b));
+        lessons.set(b, temp);
     }
 
     public void removeLesson(Lesson lesson) {
