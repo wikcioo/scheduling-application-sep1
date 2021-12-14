@@ -127,21 +127,28 @@ public class CalendarView  {
         String backgroundColor = String.format("-fx-background-color:%s;", lesson.getCourse().getHexColor());
         Logger.info(backgroundColor);
         ap.setStyle(backgroundColor);
-        Text text = new Text(lesson.getCourse().getTitle());
         //Set the info for the anchor pane
         ap.setLesson(lesson);
         ap.setDay(day);
+        Text text = new Text(lesson.getCourse().getTitle());
         Text description = new Text(start + " -- " + finish);
         text.setFont(Font.font("Century Gothic", 25));
+        Text teacher = new Text(lesson.getCourse().getTeacherName());
+        teacher.setFont(Font.font("Century Gothic", 15));
         text.setFill(Color.WHITE);
         description.setFill(Color.WHITE);
+        teacher.setFill(Color.WHITE);
         ap.getChildren().add(text);
         ap.getChildren().add(description);
+        ap.getChildren().add(teacher);
         text.setLayoutX(10);
         text.setLayoutY(20);
         description.setLayoutX(10);
         description.setLayoutY(20);
+        teacher.setLayoutX(40);
+        teacher.setLayoutY(20);
         AnchorPane.setTopAnchor(text, 5.0);
+        AnchorPane.setRightAnchor(teacher,5.0);
         AnchorPane.setTopAnchor(description, 30.0);
         return ap;
     }
