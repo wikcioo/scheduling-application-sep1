@@ -2,26 +2,59 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
    <children>
-      <Pane fx:id="leftBar" prefHeight="486.0" prefWidth="200.0">
+      <Pane fx:id="leftBar" layoutY="-1.0" prefHeight="494.0" prefWidth="200.0">
          <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="68.0" prefHeight="54.0" prefWidth="173.0" text="Schedule App">
+            <Button layoutX="86.0" layoutY="372.0" mnemonicParsing="false" onAction="#onSaveButtonClick" style="-fx-background-radius: 10;" text="Save" />
+            <Button layoutX="86.0" layoutY="410.0" mnemonicParsing="false" onAction="#onLoadButtonClick" style="-fx-background-radius: 10;" text="Load" />
+            <Button layoutX="38.0" layoutY="327.0" mnemonicParsing="false" onAction="#OpenCreateSemester" style="-fx-background-radius: 10;" text="Create a new semester" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="49.0" prefHeight="54.0" prefWidth="173.0" text="Schedule App" textFill="#c7c5c5">
                <font>
-                  <Font size="22.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Button layoutX="67.0" layoutY="357.0" mnemonicParsing="false" onAction="#onSaveButtonClick" text="Save" />
-            <Button layoutX="68.0" layoutY="404.0" mnemonicParsing="false" onAction="#onLoadButtonClick" text="Load" />
-            <Button layoutX="21.0" layoutY="307.0" mnemonicParsing="false" onAction="#OpenCreateSemester" text="Create a new semester" />
+            <Ellipse fill="#717171" layoutX="100.0" layoutY="146.0" radiusX="57.0" radiusY="14.0" stroke="#6c6a6a" strokeType="INSIDE" />
+            <Ellipse fill="#717171" layoutX="100.0" layoutY="185.0" radiusX="84.0" radiusY="14.0" stroke="#6c6a6a" strokeType="INSIDE" />
+            <Ellipse fill="#717171" layoutX="101.0" layoutY="222.0" radiusX="57.0" radiusY="14.0" stroke="#6c6a6a" strokeType="INSIDE" />
+            <Ellipse fill="#717171" layoutX="101.0" layoutY="257.0" radiusX="84.0" radiusY="14.0" stroke="#6c6a6a" strokeType="INSIDE" />
+            <Ellipse fill="#717171" layoutX="101.0" layoutY="293.0" radiusX="57.0" radiusY="14.0" stroke="#6c6a6a" strokeType="INSIDE" />
          </children>
       </Pane>
-      <Button layoutX="265.0" layoutY="89.0" mnemonicParsing="false" onAction="#OpenCalendar" prefHeight="140.0" prefWidth="140.0" text="SCHEDULE" />
-      <Button layoutX="373.0" layoutY="271.0" mnemonicParsing="false" onAction="#OpenBooking" prefHeight="140.0" prefWidth="140.0" text="BOOK A ROOM" wrapText="true" />
-      <Button layoutX="468.0" layoutY="89.0" mnemonicParsing="false" onAction="#OpenManageData" prefHeight="140.0" prefWidth="140.0" text="MANAGE DATA" />
+      <Polygon fill="#939699" layoutX="303.0" layoutY="37.0" opacity="0.11" points="-50.0, 40.0, 85.79998779296875, 146.0, 74.19998168945312, -6.800018310546875" stroke="WHITE" strokeType="INSIDE" />
+      <Polygon fill="#939699" layoutX="499.0" layoutY="29.0" opacity="0.11" points="7.39996337890625, 148.39999389648438, 118.60000610351562, 70.39998626708984, -31.79998779296875, -13.999994277954102" stroke="WHITE" strokeType="INSIDE" />
+      <Polygon fill="#939699" layoutX="385.0" layoutY="214.0" opacity="0.11" points="-50.0, 40.0, 118.60000610351562, 70.39998626708984, 74.19998168945312, -6.800018310546875" stroke="WHITE" strokeType="INSIDE" />
+      <Polygon fill="#939699" layoutX="586.0" layoutY="237.0" opacity="0.11" points="-50.0, 40.0, 87.60003662109375, 197.39999389648438, 74.19998168945312, -6.800018310546875" stroke="WHITE" strokeType="INSIDE" />
+      <Polygon fill="#939699" layoutX="278.0" layoutY="283.0" opacity="0.11" points="-50.0, 40.0, 118.60000610351562, 70.39998626708984, -8.4000244140625, -71.20001220703125" stroke="WHITE" strokeType="INSIDE" />
+      <Polygon fill="#939699" layoutX="316.0" layoutY="394.0" opacity="0.11" points="-50.0, 40.0, 118.60000610351562, 70.39998626708984, -4.79998779296875, -6.199981689453125" stroke="WHITE" strokeType="INSIDE" />
+      <Polygon fill="#939699" layoutX="517.0" layoutY="448.0" opacity="0.11" points="-50.0, 40.0, 40.99993896484375, 30.199981689453125, 74.19998168945312, -6.800018310546875" stroke="WHITE" strokeType="INSIDE" />
+      <Polygon fill="#939699" layoutX="469.0" layoutY="321.0" opacity="0.11" points="-10.60003662109375, 78.80001831054688, 118.60000610351562, 70.39998626708984, -10.60003662109375, -2.800018310546875" stroke="WHITE" strokeType="INSIDE" />
+      <Button alignment="BOTTOM_CENTER" layoutX="383.0" layoutY="263.0" mnemonicParsing="false" onAction="#OpenBooking" prefHeight="140.0" prefWidth="140.0" style="-fx-background-radius: 15;" text="BOOK A ROOM" wrapText="true" />
+      <Button alignment="BOTTOM_CENTER" layoutX="484.0" layoutY="80.0" mnemonicParsing="false" onAction="#OpenManageData" prefHeight="140.0" prefWidth="140.0" style="-fx-background-radius: 15;" text="MANAGE DATA" />
+      <Button alignment="BOTTOM_CENTER" layoutX="265.0" layoutY="80.0" mnemonicParsing="false" onAction="#OpenCalendar" prefHeight="140.0" prefWidth="140.0" style="-fx-background-radius: 15;" text="SCHEDULE" />
+      <Polygon fill="#939699" layoutX="656.0" layoutY="-52.0" opacity="0.11" points="7.39996337890625, 148.39999389648438, 118.60000610351562, 70.39998626708984, -31.79998779296875, -13.999994277954102" stroke="WHITE" strokeType="INSIDE" />
+      <ImageView fitHeight="82.0" fitWidth="86.0" layoutX="292.0" layoutY="96.0">
+         <image>
+            <Image url="@../images/icons8-calendar-50.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="82.0" fitWidth="86.0" layoutX="511.0" layoutY="96.0">
+         <image>
+            <Image url="@../images/icons8-admin-settings-male-50.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="77.0" fitWidth="76.0" layoutX="415.0" layoutY="280.0">
+         <image>
+            <Image url="@../images/icons8-add-bookmark-50.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
