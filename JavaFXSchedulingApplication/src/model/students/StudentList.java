@@ -107,6 +107,15 @@ public class StudentList implements Serializable {
         }
         if(student.getId()<=0) return false;
 
+        int number = student.getId();
+        int numDigits = 0;
+        while (number != 0) {
+            number /= 10;
+            numDigits++;
+        }
+
+        if (numDigits != 6) return false;
+
         return true;
     }
 
