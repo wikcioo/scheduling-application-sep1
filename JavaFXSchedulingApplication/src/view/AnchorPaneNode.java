@@ -358,8 +358,8 @@ public class AnchorPaneNode extends AnchorPane {
         grid.setAlignment(Pos.CENTER);
         Button btnCancel = new Button("Cancel");
         Button btnBook = new Button("Book");
-        Button btnMerge = new Button("MergeRoom");
-        hbButtons.getChildren().addAll(btnBook, btnCancel, btnMerge);
+        Button btnMerge = new Button("Book Merged");
+        hbButtons.getChildren().addAll(btnBook, btnMerge, btnCancel);
 
         GridPane innerGrid = new GridPane();
         innerGrid.setAlignment(Pos.CENTER);

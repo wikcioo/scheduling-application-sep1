@@ -116,8 +116,8 @@ public class BookingController extends ViewController {
             grid.setAlignment(Pos.CENTER);
             Button btnCancel = new Button("Cancel");
             Button btnBook = new Button("Book");
-            Button btnMerge = new Button("Merge");
-            hbButtons.getChildren().addAll(btnBook, btnCancel, btnMerge);
+            Button btnMerge = new Button("Book merged");
+            hbButtons.getChildren().addAll(btnBook, btnMerge, btnCancel);
             switch (clickId) {
                 case "BookRoom":
                     int index = tableView.getSelectionModel().getFocusedIndex();
