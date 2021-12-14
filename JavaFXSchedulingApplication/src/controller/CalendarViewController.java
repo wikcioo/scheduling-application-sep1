@@ -93,7 +93,7 @@ public class CalendarViewController extends ViewController {
 
     private void initCopyPaste() {
         disablePasteButtons(true);
-        model.getCopiedWeekWrapper().removeCopiedWeek();
+        model.removeCopiedWeek();
     }
 
     private void disablePasteButtons(boolean disable) {
@@ -103,14 +103,14 @@ public class CalendarViewController extends ViewController {
 
     @FXML
     public void copyWeek() {
-        model.getCopiedWeekWrapper().setCopiedWeek(model.getCurrentWeek().copy());
+        model.setCopiedWeek(model.getCurrentWeek().copy());
         copiedWeekNumber.setText(model.getCurrentWeek().getStart() + " " + model.getCurrentWeek().getEnd());
         disablePasteButtons(false);
     }
 
     @FXML
     public void pasteCopiedWeek() {
-        Week copiedWeek = model.getCopiedWeekWrapper().getCopiedWeek();
+        Week copiedWeek = model.getCopiedWeek();
         if (copiedWeek != null) {
             if (showConfirmAlert("Confirm pasting", "Confirm pasting to week", "Are you sure? This action will override all lessons in this week.")) {
                 model.getCurrentWeek().setWeekLessons(copiedWeek);
@@ -132,10 +132,10 @@ public class CalendarViewController extends ViewController {
 
     @FXML
     public void pasteCopiedWeekToAll() {
-        Week copiedWeek = model.getCopiedWeekWrapper().getCopiedWeek();
+        Week copiedWeek = model.getCopiedWeek();
         if (copiedWeek != null) {
             if (showConfirmAlert("Confirm pasting", "Confirm pasting to all weeks", "Are you sure? This action will override ALL other lessons in this semester!")) {
-                for (Week week : model.getScheduleList().getCurrentSchedule().getWeekList()) {
+                for (Week week : model.getCurrentSchedule().getWeekList()) {
                     week.setWeekLessons(copiedWeek);
                 }
                 initCalendar();
@@ -194,7 +194,7 @@ public class CalendarViewController extends ViewController {
 
     public void initCalendar() {
         scrollpane.setFitToWidth(true);
-        Logger.info(model.getScheduleList().getCurrentSchedule().getClassOfStudents().toString());
+        Logger.info(model.getCurrentSchedule().getClassOfStudents().toString());
         CalendarView calendarView = new CalendarView(model);
         scrollpane.setContent(calendarView.getFinalView());
         initButtons(calendarView, model.getCurrentWeek());
@@ -251,7 +251,7 @@ public class CalendarViewController extends ViewController {
     }
 
     public void back() {
-        this.model.getScheduleList().getCurrentSchedule().initializeCurrentWeekIndex();
+        this.model.getCurrentSchedule().initializeCurrentWeekIndex();
         viewHandler.openView("MainMenu");
     }
 }

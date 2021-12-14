@@ -98,7 +98,7 @@ public class ClassListViewController extends ViewController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 ClassOfStudents classOfStudents = (ClassOfStudents) tableView.getSelectionModel().getSelectedItem();
-                this.model.getClassList().removeClass(classOfStudents);
+                this.model.removeClass(classOfStudents);
                 tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
             }
         }
@@ -108,7 +108,7 @@ public class ClassListViewController extends ViewController {
     public void onImportFileButtonClick() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(viewHandler.getPrimaryStage());
-        this.model.getStudentList().readStudentFromTXTFile(file);
+        this.model.readStudentFromTXTFile(file);
         reset();
     }
 
@@ -144,7 +144,7 @@ public class ClassListViewController extends ViewController {
                     hbButtons.getChildren().addAll(btnChange, btnReset, btnCancel);
 
                     ClassOfStudents classOfStudents = (ClassOfStudents) tableView.getSelectionModel().getSelectedItem();
-                    int index = this.model.getClassList().getClasses().indexOf(classOfStudents);
+                    int index = this.model.getClasses().indexOf(classOfStudents);
                     tfClassName.setText(classOfStudents.getName());
 
                     btnChange.setOnAction(e -> {
@@ -183,7 +183,7 @@ public class ClassListViewController extends ViewController {
     public void onViewDetailsClick() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             ClassOfStudents classOfStudents = (ClassOfStudents) tableView.getSelectionModel().getSelectedItem();
-            this.model.getClassList().setCurrentlySelectedClass(this.model.getClassList().getClasses().indexOf(classOfStudents));
+            this.model.setCurrentlySelectedClass(this.model.getClasses().indexOf(classOfStudents));
             this.viewHandler.openView("StudentListView");
         }
     }

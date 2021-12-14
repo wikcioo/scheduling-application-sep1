@@ -46,7 +46,7 @@ public class BookingController extends ViewController {
         room2Column.setCellValueFactory(new PropertyValueFactory<>("room2"));
 
         tableView.getColumns().addAll(nameColumn, capacityColumn, mergeColumn, endColumn, roomColumn, room2Column);
-        for (Lesson r : this.model.getScheduleList().getAllLessons()) {
+        for (Lesson r : this.model.getAllLessons()) {
             tableView.getItems().add(r);
             Logger.info(r.toString());
         }
@@ -56,7 +56,7 @@ public class BookingController extends ViewController {
 
     public void reset() {
         tableView.getItems().clear();
-        for (Lesson r : this.model.getScheduleList().getAllLessons()) {
+        for (Lesson r : this.model.getAllLessons()) {
             tableView.getItems().add(r);
         }
     }
@@ -85,7 +85,7 @@ public class BookingController extends ViewController {
         } else if (clickId.equals("UnBookRoom") && tableView.getSelectionModel().getSelectedItem() != null) {
 
             int index = tableView.getSelectionModel().getFocusedIndex();
-            Lesson lesson = this.model.getScheduleList().getAllLessons().get(index);
+            Lesson lesson = this.model.getAllLessons().get(index);
             BookingTime book = new BookingTime(lesson.getDate(), lesson.getStart(), lesson.getEnd());
             lesson.getRoom().unBook(book);
             if (lesson.getRoom2() != null)
@@ -121,7 +121,7 @@ public class BookingController extends ViewController {
             switch (clickId) {
                 case "BookRoom":
                     int index = tableView.getSelectionModel().getFocusedIndex();
-                    ArrayList<Lesson> allLessons = this.model.getScheduleList().getAllLessons();
+                    ArrayList<Lesson> allLessons = this.model.getAllLessons();
                     lesson = allLessons.get(index);
                     break;
                 default:
@@ -144,7 +144,7 @@ public class BookingController extends ViewController {
             t.setPrefHeight(200);
             t.getColumns().addAll(nameColumn, capacityColumn, mergeColumn);
             BookingTime book = new BookingTime(lesson.getDate(), lesson.getStart(), lesson.getEnd());
-            for (Room r : this.model.getRoomList().getAvailableRoomsAt(book)) {
+            for (Room r : this.model.getAvailableRoomsAt(book)) {
                 t.getItems().add(r);
             }
 
@@ -159,10 +159,10 @@ public class BookingController extends ViewController {
                 int index2 = t.getSelectionModel().getFocusedIndex();
                 if (finalLesson.getRoom() == null) {
                     finalLesson.setRoom(
-                            this.model.getRoomList().getAvailableRoomsAt(book).get(index2));
-                    this.model.getRoomList().getAvailableRoomsAt(book).get(index2).Book(book);
+                            this.model.getAvailableRoomsAt(book).get(index2));
+                    this.model.getAvailableRoomsAt(book).get(index2).Book(book);
                     displayWindow.close();
-                    Logger.info(model.getRoomList().getRooms().toString());
+                    Logger.info(model.getRooms().toString());
                 }
 
             });
@@ -171,11 +171,11 @@ public class BookingController extends ViewController {
                 int index3 = t.getSelectionModel().getFocusedIndex();
 
                 if (finalLesson.getRoom() == null && index3 >= 0) {
-                    Room room = this.model.getRoomList().getAvailableRoomsAt(book).get(index3);
+                    Room room = this.model.getAvailableRoomsAt(book).get(index3);
                     finalLesson.setRoom(room);
                     room.Book(book);
                     if (room.getMergeWith() != null) {
-                        Room room2 = this.model.getRoomList().getRoomByString(room.getMergeWith());
+                        Room room2 = this.model.getRoomByString(room.getMergeWith());
                         if (room2.canBeBookedAt(book)) {
                             finalLesson.setRoom2(room2);
                             room2.Book(book);

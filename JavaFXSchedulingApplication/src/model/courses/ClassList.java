@@ -8,16 +8,16 @@ public class ClassList implements Serializable {
     private ArrayList<ClassOfStudents> classList;
     private int currentlySelectedClass;
 
+    public ClassList() {
+        this.classList = new ArrayList<>();
+    }
+
     public int getCurrentlySelectedClass() {
         return currentlySelectedClass;
     }
 
     public void setCurrentlySelectedClass(int currentlySelectedClass) {
         this.currentlySelectedClass = currentlySelectedClass;
-    }
-
-    public ClassList() {
-        this.classList = new ArrayList<>();
     }
 
     public void addClass(ClassOfStudents _class) {

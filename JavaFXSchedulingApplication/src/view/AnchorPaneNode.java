@@ -150,7 +150,7 @@ public class AnchorPaneNode extends AnchorPane {
 
         Label labelForCourse = new Label("Course:  ");
         userInputForCourse = CourseComboBox();
-        userInputForCourse.getItems().addAll(model.getCourseList().getCoursesByClass(model.getScheduleList().getCurrentSchedule().getClassOfStudents()));
+        userInputForCourse.getItems().addAll(model.getCoursesByClass(model.getCurrentSchedule().getClassOfStudents()));
         gridPane.add(labelForCourse, 0, gridRow);
         gridPane.add(userInputForCourse, 1, gridRow);
         userInputForCourse.setOnAction(event -> {
@@ -325,7 +325,7 @@ public class AnchorPaneNode extends AnchorPane {
         t.setPrefHeight(200);
         t.getColumns().addAll(nameColumn, capacityColumn, mergeColumn);
         BookingTime book = new BookingTime(lesson.getDate(), lesson.getStart(), lesson.getEnd());
-        for (Room r : this.model.getRoomList().getAvailableRoomsAt(book)) {
+        for (Room r : this.model.getAvailableRoomsAt(book)) {
             t.getItems().add(r);
         }
 
@@ -341,10 +341,10 @@ public class AnchorPaneNode extends AnchorPane {
             int index2 = t.getSelectionModel().getFocusedIndex();
             if (finalLesson.getRoom() == null && index2 >= 0) {
                 finalLesson.setRoom(
-                        this.model.getRoomList().getAvailableRoomsAt(book).get(index2));
-                this.model.getRoomList().getAvailableRoomsAt(book).get(index2).Book(book);
+                        this.model.getAvailableRoomsAt(book).get(index2));
+                this.model.getAvailableRoomsAt(book).get(index2).Book(book);
                 displayWindow.close();
-                Logger.info(model.getRoomList().getRooms().toString());
+                Logger.info(model.getRooms().toString());
             }
         });
 
@@ -352,11 +352,11 @@ public class AnchorPaneNode extends AnchorPane {
             int index3 = t.getSelectionModel().getFocusedIndex();
 
             if (finalLesson.getRoom() == null && index3 >= 0) {
-                Room room = this.model.getRoomList().getAvailableRoomsAt(book).get(index3);
+                Room room = this.model.getAvailableRoomsAt(book).get(index3);
                 finalLesson.setRoom(room);
                 room.Book(book);
                 if (room.getMergeWith() != null) {
-                    Room room2 = this.model.getRoomList().getRoomByString(room.getMergeWith());
+                    Room room2 = this.model.getRoomByString(room.getMergeWith());
                     try {
                         if (room2.canBeBookedAt(book)) {
                             finalLesson.setRoom2(room2);
@@ -369,7 +369,7 @@ public class AnchorPaneNode extends AnchorPane {
                     error();
                 }
                 displayWindow.close();
-                Logger.info(model.getRoomList().getRooms().toString());
+                Logger.info(model.getRooms().toString());
             } else {
                 error2();
             }

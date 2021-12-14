@@ -11,17 +11,17 @@ public class ScheduleList implements Serializable {
     private ArrayList<Schedule> schedules;
     private Schedule currentSchedule;
 
+    public ScheduleList() {
+        schedules = new ArrayList<>();
+        currentSchedule = null;
+    }
+
     public Schedule getCurrentSchedule() {
         return currentSchedule;
     }
 
     public void setCurrentSchedule(Schedule currentSchedule) {
         this.currentSchedule = currentSchedule;
-    }
-
-    public ScheduleList() {
-        schedules = new ArrayList<>();
-        currentSchedule = null;
     }
 
     public void addSchedule(Schedule schedule) {

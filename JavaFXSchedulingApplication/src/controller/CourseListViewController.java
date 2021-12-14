@@ -52,7 +52,7 @@ public class CourseListViewController extends ViewController {
 
 
         tableView.getColumns().addAll(titleColumn, _classColumn, teacherColumn);
-        for (Course c : this.model.getCourseList().getCourses()) {
+        for (Course c : this.model.getCourses()) {
             tableView.getItems().add(c);
         }
         setDisableCellSpecificButtons(true);
@@ -60,7 +60,7 @@ public class CourseListViewController extends ViewController {
 
     public void reset() {
         tableView.getItems().clear();
-        for (Course c : this.model.getCourseList().getCourses()) {
+        for (Course c : this.model.getCourses()) {
             tableView.getItems().add(c);
         }
     }
@@ -105,7 +105,7 @@ public class CourseListViewController extends ViewController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 Course course = (Course) tableView.getSelectionModel().getSelectedItem();
-                this.model.getCourseList().removeCourse(course);
+                this.model.removeCourse(course);
                 tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
             }
         }
@@ -115,7 +115,7 @@ public class CourseListViewController extends ViewController {
     public void onImportFileButtonClick() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(viewHandler.getPrimaryStage());
-        this.model.getCourseList().readCoursesFromTXTFile(file);
+        this.model.readCoursesFromTXTFile(file);
         reset();
     }
 
@@ -154,7 +154,7 @@ public class CourseListViewController extends ViewController {
                     hbButtons.getChildren().addAll(btnChange, btnReset, btnCancel);
 
                     Course course = (Course) tableView.getSelectionModel().getSelectedItem();
-                    int index = this.model.getCourseList().getCourses().indexOf(course);
+                    int index = this.model.getCourses().indexOf(course);
                     tfTitle.setText(course.getTitle());
 
                     //TODO: THIS IS GONNA LOSE ITS SHIT ONCE CLASS BECOMES NULL
@@ -168,7 +168,7 @@ public class CourseListViewController extends ViewController {
                         for (String s : token) {
                             teacherList.add(new Teacher(s.trim()));
                         }
-                        this.model.getCourseList().getCourses().set(index, new Course(tfTitle.getText(), teacherList, cbClassOfStudents.getValue()));
+                        this.model.getCourses().set(index, new Course(tfTitle.getText(), teacherList, cbClassOfStudents.getValue()));
                     });
                     btnReset.setOnAction(e -> {
                         tfTitle.setText(course.getTitle());
@@ -194,9 +194,9 @@ public class CourseListViewController extends ViewController {
                             teacherList.add(new Teacher(s.trim()));
                         }
                         Color color = colorPicker.getValue();
-                        this.model.getCourseList().addCourse(new Course(tfTitle.getText(), teacherList, cbClassOfStudents.getValue()));
-                        int lastCourse = this.model.getCourseList().getCourses().size() - 1;
-                        this.model.getCourseList().getCourses().get(lastCourse).setHexColor(String.format("#%02X%02X%02X",
+                        this.model.addCourse(new Course(tfTitle.getText(), teacherList, cbClassOfStudents.getValue()));
+                        int lastCourse = this.model.getCourses().size() - 1;
+                        this.model.getCourses().get(lastCourse).setHexColor(String.format("#%02X%02X%02X",
                                 (int) (color.getRed() * 255),
                                 (int) (color.getGreen() * 255),
                                 (int) (color.getBlue() * 255)));
@@ -272,7 +272,7 @@ public class CourseListViewController extends ViewController {
 
     public void onNewFilter() {
         tableView.getItems().clear();
-        for (Course c : this.model.getCourseList().getCourses()) {
+        for (Course c : this.model.getCourses()) {
             String filter = textField.getText();
             if (filter != "" && (c.getTitle().toLowerCase().contains(filter.toLowerCase()) || c.getClassName().toLowerCase().contains(filter.toLowerCase()) || c.getTeacherName().toLowerCase().contains(filter.toLowerCase()))) {
                 tableView.getItems().add(c);

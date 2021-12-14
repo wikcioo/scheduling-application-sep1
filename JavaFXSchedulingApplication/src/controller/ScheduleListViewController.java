@@ -57,14 +57,13 @@ public class ScheduleListViewController extends ViewController {
             }
         });
 
-        ObservableList<ClassOfStudents> observableClasses = FXCollections.observableArrayList(model.getClassList()
-                .getClasses());
+        ObservableList<ClassOfStudents> observableClasses = FXCollections.observableArrayList(model.getClasses());
         listView.setItems(observableClasses);
     }
 
     @FXML
     public void handleMouseClick(MouseEvent e) {
-        model.getScheduleList().setCurrentSchedule(model.getScheduleList().getScheduleByClass(listView.getSelectionModel().getSelectedItem(), true));
+        model.setCurrentSchedule(model.getScheduleByClass(listView.getSelectionModel().getSelectedItem(), true));
         confirmButton.setDisable(false);
     }
 

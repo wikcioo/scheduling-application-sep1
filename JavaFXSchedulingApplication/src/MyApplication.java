@@ -14,12 +14,12 @@ public class MyApplication extends Application {
         Model model = new ModelManager();
 
         ClassOfStudents class1 = new ClassOfStudents("1Z", new StudentList());
-        model.getClassList().addClass(class1);
-        model.getClassList().addClass(new ClassOfStudents("Rougue zero", new StudentList()));
-        model.getClassList().addClass(new ClassOfStudents("Danish one", new StudentList()));
-        model.getClassList().addClass(new ClassOfStudents("4Z", new StudentList()));
-        model.getClassList().addClass(new ClassOfStudents("5Z", new StudentList()));
-        model.getClassList().addClass(new ClassOfStudents("6Z", new StudentList()));
+        model.addClass(class1);
+        model.addClass(new ClassOfStudents("Rougue zero", new StudentList()));
+        model.addClass(new ClassOfStudents("Danish one", new StudentList()));
+        model.addClass(new ClassOfStudents("4Z", new StudentList()));
+        model.addClass(new ClassOfStudents("5Z", new StudentList()));
+        model.addClass(new ClassOfStudents("6Z", new StudentList()));
 
         view = new ViewHandler(model);
         view.start(primaryStage);

@@ -126,8 +126,8 @@ public class NavCalendarView {
                     int day_num = Integer.parseInt(foo.substring(foo.indexOf("'") + 1, foo.lastIndexOf("'")));
                     LocalDate date = Util.getMonday(LocalDate.of(calendar.getWeekYear(), Util.monthStringToMonthInt(getCurrentMonth()), day_num));
                     Logger.info(date.toString());
-                    int currentWeekIndex = model.getScheduleList().getCurrentSchedule().getCurrentWeekIndex();
-                    int newWeekIndex = (int) ChronoUnit.WEEKS.between(model.getScheduleList().getCurrentSchedule().getSemesterStart(), date);
+                    int currentWeekIndex = model.getCurrentSchedule().getCurrentWeekIndex();
+                    int newWeekIndex = (int) ChronoUnit.WEEKS.between(model.getCurrentSchedule().getSemesterStart(), date);
                     int diff = currentWeekIndex - newWeekIndex;
                     Logger.info("Diff: " + diff + ", old: " + currentWeekIndex + ", new: " + newWeekIndex);
                     if (diff < 0) {
@@ -140,7 +140,7 @@ public class NavCalendarView {
                         }
                     }
 
-                    model.getScheduleList().getCurrentSchedule().setCurrentWeekIndex(newWeekIndex);
+                    model.getCurrentSchedule().setCurrentWeekIndex(newWeekIndex);
                 }
             });
 

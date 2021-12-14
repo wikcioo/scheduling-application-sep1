@@ -50,7 +50,7 @@ public class RoomListViewController extends ViewController {
         mergeColumn.setCellValueFactory(new PropertyValueFactory<>("mergeWith"));
 
         tableView.getColumns().addAll(nameColumn, capacityColumn, mergeColumn);
-        for (Room r : this.model.getRoomList().getRooms()) {
+        for (Room r : this.model.getRooms()) {
             tableView.getItems().add(r);
         }
         setDisableCellSpecificButtons(true);
@@ -58,7 +58,7 @@ public class RoomListViewController extends ViewController {
 
     public void reset() {
         tableView.getItems().clear();
-        for (Room r : this.model.getRoomList().getRooms()) {
+        for (Room r : this.model.getRooms()) {
             tableView.getItems().add(r);
         }
     }
@@ -102,7 +102,7 @@ public class RoomListViewController extends ViewController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 Room room = (Room) tableView.getSelectionModel().getSelectedItem();
-                this.model.getRoomList().removeRoom(room);
+                this.model.removeRoom(room);
                 tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
             }
         }
@@ -112,7 +112,7 @@ public class RoomListViewController extends ViewController {
     public void onImportFileButtonClick() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(viewHandler.getPrimaryStage());
-        this.model.getRoomList().readRoomsFromTXTFile(file);
+        this.model.readRoomsFromTXTFile(file);
         reset();
     }
 
@@ -121,7 +121,7 @@ public class RoomListViewController extends ViewController {
         String filter = textField.getText();
         if (filter != "") {
             tableView.getItems().clear();
-            for (Room r : this.model.getRoomList().getRooms()) {
+            for (Room r : this.model.getRooms()) {
                 if (r.getName().toLowerCase().contains(filter.toLowerCase()) || r.getMergeWith().toLowerCase().contains(filter.toLowerCase()) || Integer.toString(r.getCapacity()).contains(filter)) {
                     tableView.getItems().add(r);
                 }
@@ -160,12 +160,12 @@ public class RoomListViewController extends ViewController {
                     hbButtons.getChildren().addAll(btnChange, btnReset, btnCancel);
 
                     Room room = (Room) tableView.getSelectionModel().getSelectedItem();
-                    int index = this.model.getRoomList().getRooms().indexOf(room);
+                    int index = this.model.getRooms().indexOf(room);
                     tfName.setText(room.getName());
                     tfCapacity.setText(Integer.toString(room.getCapacity()));
                     tfMerge.setText(room.getMergeWith());
                     btnChange.setOnAction(e -> {
-                        this.model.getRoomList().getRooms().set(index, new Room(tfName.getText(), Integer.parseInt(tfCapacity.getText()), tfMerge.getText()));
+                        this.model.getRooms().set(index, new Room(tfName.getText(), Integer.parseInt(tfCapacity.getText()), tfMerge.getText()));
                         displayWindow.close();
                     });
                     btnReset.setOnAction(e -> {
@@ -184,7 +184,7 @@ public class RoomListViewController extends ViewController {
                         tfName.clear();
                     });
                     btnAdd.setOnAction(e -> {
-                        this.model.getRoomList().getRooms().add(new Room(tfName.getText(), Integer.parseInt(tfCapacity.getText()), tfMerge.getText()));
+                        this.model.getRooms().add(new Room(tfName.getText(), Integer.parseInt(tfCapacity.getText()), tfMerge.getText()));
                         displayWindow.close();
                     });
                     break;
