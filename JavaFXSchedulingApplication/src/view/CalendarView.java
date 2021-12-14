@@ -133,7 +133,7 @@ public class CalendarView {
         ap.setMaxWidth(200);
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
         ap.getStyleClass().add(lesson.getCourse().getTitle());
-        ap.setMaxHeight(calculateHeightForBlock(start,finish));
+        ap.setMaxHeight(calculateHeightForBlock(start, finish));
         String backgroundColor = String.format("-fx-background-color:%s;", lesson.getCourse().getHexColor());
         Logger.info(backgroundColor);
         ap.setStyle(backgroundColor);
@@ -142,26 +142,24 @@ public class CalendarView {
         ap.setDay(day);
         Text text = new Text(lesson.getCourse().getTitle());
         Text description = new Text(start + " -- " + finish);
-        Long textFont = calculateHeightForFonts(start,finish);
+        Long textFont = calculateHeightForFonts(start, finish);
         text.setFont(Font.font("Century Gothic", textFont + 2));
-        Text teacher = new Text(lesson.getCourse().getTeacherName());
-        teacher.setFont(Font.font("Century Gothic", textFont));
-        description.setFont(Font.font("Century Gothic",textFont - 1));
+
+        description.setFont(Font.font("Century Gothic", textFont - 1));
         text.setFill(Color.WHITE);
         text.setWrappingWidth(75);
         description.setFill(Color.WHITE);
-        teacher.setFill(Color.WHITE);
+
         ap.getChildren().add(text);
         ap.getChildren().add(description);
-        ap.getChildren().add(teacher);
+
         text.setLayoutX(10);
         text.setLayoutY(20);
         description.setLayoutX(10);
         description.setLayoutY(20);
-        teacher.setLayoutX(40);
-        teacher.setLayoutY(20);
+
         AnchorPane.setTopAnchor(text, 5.0);
-        AnchorPane.setRightAnchor(teacher, 5.0);
+        
         AnchorPane.setBottomAnchor(description, 7.0);
         return ap;
     }
@@ -212,7 +210,7 @@ public class CalendarView {
         Duration duration = Duration.between(start, finish);
         long hour = duration.toHoursPart();
         long result = 7;
-        for (int i=0;i<hour;i++) result+=2;
+        for (int i = 0; i < hour; i++) result += 2;
         return result;
     }
 
