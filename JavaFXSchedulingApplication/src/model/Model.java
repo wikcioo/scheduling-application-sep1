@@ -52,30 +52,6 @@ public interface Model {
     void exportWeekAsXML(Week week);
     // scheduleList END
 
-    // studentList BEGIN
-    StudentList copy();
-
-    void setStudentList(ArrayList<Student> studentList);
-
-    ArrayList<Student> getStudentList();
-
-    Student getStudent(int index);
-
-    void addStudent(Student student);
-
-    void removeStudent(Student student);
-
-    void removeStudent(int index);
-
-    ArrayList<Student> getStudentsByClass(String _class);
-
-    ArrayList<Student> getStudentsByName(String name);
-
-    void readStudentFromTXTFile(File file);
-
-    boolean isValidStudent(Student student);
-    // studentList END
-
     // roomList BEGIN
     ArrayList<Room> getRooms();
 

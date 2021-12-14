@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class ModelManager implements Model, Serializable {
     private ScheduleList scheduleList;
-    private StudentList studentList;
     private RoomList roomList;
     private CourseList courseList;
     private ClassList classList;
@@ -22,7 +21,6 @@ public class ModelManager implements Model, Serializable {
 
     public ModelManager() {
         this.scheduleList = new ScheduleList(LocalDate.now(),LocalDate.now().plusMonths(6));
-        this.studentList = new StudentList();
         this.roomList = new RoomList();
         this.courseList = new CourseList();
         this.classList = new ClassList();
@@ -113,51 +111,6 @@ public class ModelManager implements Model, Serializable {
     }
     // scheduleList END
 
-    // studentList BEGIN
-    public StudentList copy() {
-        return studentList.copy();
-    }
-
-    public void setStudentList(ArrayList<Student> list) {
-        studentList.setStudentList(list);
-    }
-
-    public ArrayList<Student> getStudentList() {
-        return studentList.getStudentList();
-    }
-
-    public Student getStudent(int index) {
-        return studentList.getStudent(index);
-    }
-
-    public void addStudent(Student student) {
-        studentList.addStudent(student);
-    }
-
-    public void removeStudent(Student student) {
-        studentList.removeStudent(student);
-    }
-
-    public void removeStudent(int index) {
-        studentList.removeStudent(index);
-    }
-
-    public ArrayList<Student> getStudentsByClass(String _class) {
-        return studentList.getStudentsByClass(_class);
-    }
-
-    public ArrayList<Student> getStudentsByName(String name) {
-        return studentList.getStudentsByName(name);
-    }
-
-    public void readStudentFromTXTFile(File file) {
-        studentList.readStudentFromTXTFile(file);
-    }
-
-    public boolean isValidStudent(Student student) {
-        return studentList.isValidStudent(student);
-    }
-    // studentList END
 
     // roomList BEGIN
     public ArrayList<Room> getRooms() {

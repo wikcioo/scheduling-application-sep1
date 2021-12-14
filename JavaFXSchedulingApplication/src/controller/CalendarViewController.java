@@ -189,7 +189,7 @@ public class CalendarViewController extends ViewController {
     public void onChooseFileButton() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(viewHandler.getPrimaryStage());
-        this.model.readStudentFromTXTFile(file);
+        this.model.getClasses().get(this.model.getCurrentlySelectedClass()).getStudentList().readStudentFromTXTFile(file);
     }
 
     public void initCalendar() {

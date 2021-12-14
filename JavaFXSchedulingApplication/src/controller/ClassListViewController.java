@@ -109,7 +109,7 @@ public class ClassListViewController extends ViewController {
     public void onImportFileButtonClick() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(viewHandler.getPrimaryStage());
-        this.model.readStudentFromTXTFile(file);
+        this.model.getClasses().get(this.model.getCurrentlySelectedClass()).getStudentList().readStudentFromTXTFile(file);
         reset();
     }
 

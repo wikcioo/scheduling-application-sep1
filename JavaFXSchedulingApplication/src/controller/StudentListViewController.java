@@ -169,7 +169,7 @@ public class StudentListViewController extends ViewController {
                     tfClass.setText(student.get_class());
                     tfSmstr.setText(Integer.toString(student.getSemester()));
                     btnChange.setOnAction(e -> {
-                        if(this.model.isValidStudent(new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())))) {
+                        if(this.model.getClasses().get(classIndex).getStudentList().isValidStudent(new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())))) {
                             this.model.getClasses().get(classIndex).getStudentList().getStudentList().set(index, new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())));
                         }
                         else{
@@ -199,7 +199,7 @@ public class StudentListViewController extends ViewController {
                         tfSmstr.clear();
                     });
                     btnAdd.setOnAction(e -> {
-                        if(this.model.isValidStudent(new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText()))))
+                        if(this.model.getClasses().get(classIndex).getStudentList().isValidStudent(new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText()))))
                         this.model.getClasses().get(classIndex).getStudentList().getStudentList().add(new Student(tfName.getText(), Integer.parseInt(tfID.getText()), tfClass.getText(), Integer.parseInt(tfSmstr.getText())));
                         else{
                             Alert alert = new Alert(Alert.AlertType.ERROR);
