@@ -71,7 +71,8 @@ public class CourseListViewController extends ViewController {
 
     @FXML
     public void onChosenCell() {
-        setDisableCellSpecificButtons(false);
+        if(tableView.getSelectionModel().getSelectedItem() != null)
+            setDisableCellSpecificButtons(false);
     }
 
     public void setDisableCellSpecificButtons(boolean disable) {

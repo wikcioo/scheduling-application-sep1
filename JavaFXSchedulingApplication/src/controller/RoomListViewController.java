@@ -69,6 +69,7 @@ public class RoomListViewController extends ViewController {
 
     @FXML
     public void onChosenCell() {
+        if(tableView.getSelectionModel().getSelectedItem() != null)
         setDisableCellSpecificButtons(false);
     }
 
