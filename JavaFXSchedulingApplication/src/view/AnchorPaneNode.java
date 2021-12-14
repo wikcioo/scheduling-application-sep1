@@ -89,33 +89,68 @@ public class AnchorPaneNode extends AnchorPane {
         displayWindow.showAndWait();
     }
 
-    public void editLesson() {
+    public void editLessonDisplay() {
+        //Current Lesson info
         Stage displayWindow = new Stage();
         displayWindow.initModality(Modality.APPLICATION_MODAL);
         displayWindow.setTitle("Edit a lesson");
         Text text = new Text("Edit a lesson");
         Label course = new Label("Course : " + lesson.getCourse());
-        Label newCourse = new Label("New course is : ");
-        TextField newCourseInput = new TextField();
         Label start = new Label("Lesson starts at : " + lesson.getStart());
-        Label newStart = new Label("New lesson starts at:");
-        TextField newStartInput = new TextField();
         Label end = new Label("Lesson ends at : " + lesson.getEnd());
-        Label newEnd = new Label("New lesson ends at:");
-        TextField newEndInput = new TextField();
+        //GridPane Info
+        int gridRow = 0;
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        //Course combo
+        Label labelForCourse = new Label("Course:  ");
+        userInputForCourse = CourseComboBox();
+        userInputForCourse.getItems().addAll(model.getCoursesByClass(model.getCurrentSchedule().getClassOfStudents()));
+        gridPane.add(labelForCourse, 0, gridRow);
+        gridPane.add(userInputForCourse, 1, gridRow);
+
+        userInputForCourse.setOnAction(event -> {
+            userInputForTeacher.setDisable(false);
+            userInputForTeacher.getItems().clear();
+            if (userInputForCourse.getValue() != null)
+                userInputForTeacher.getItems().addAll(userInputForCourse.getValue().getTeacherList().getTeacherList());
+        });
+
+        gridRow++;
+        Label labelForStart = new Label("Start Hour:  ");
+        TextField userInputForStart = new TextField();
+        gridPane.add(labelForStart, 0, gridRow);
+        gridPane.add(userInputForStart, 1, gridRow);
+
+        gridRow++;
+        Label labelForStartMin = new Label("Start Min:  ");
+        TextField userInputForStartMin = new TextField();
+        gridPane.add(labelForStartMin, 0, gridRow);
+        gridPane.add(userInputForStartMin, 1, gridRow);
+
+        gridRow++;
+        Label labelForEnd = new Label("End Hour:  ");
+        TextField userInputForEnd = new TextField();
+        gridPane.add(labelForEnd, 0, gridRow);
+        gridPane.add(userInputForEnd, 1, gridRow);
+
+        gridRow++;
+        Label labelForEndMin = new Label("End Min:  ");
+        TextField userInputForEndMin = new TextField();
+        gridPane.add(labelForEndMin, 0, gridRow);
+        gridPane.add(userInputForEndMin, 1, gridRow);
+
         Button submit = new Button("Submit");
         submit.setOnMouseClicked(event -> {
+            editLesson(userInputForCourse.getValue(), userInputForStart.getText(), userInputForStartMin.getText(), userInputForEnd.getText(), userInputForEndMin.getText());
             displayWindow.close();
         });
         VBox finalView = new VBox(25);
         finalView.getChildren().add(text);
         finalView.getChildren().add(course);
         finalView.getChildren().add(start);
-        finalView.getChildren().add(newStart);
-        finalView.getChildren().add(newStartInput);
         finalView.getChildren().add(end);
-        finalView.getChildren().add(newEnd);
-        finalView.getChildren().add(newEndInput);
+        finalView.getChildren().add(gridPane);
         finalView.getChildren().add(submit);
         finalView.setAlignment(Pos.CENTER);
         Scene scene = new Scene(finalView, 300, 600);
@@ -133,6 +168,23 @@ public class AnchorPaneNode extends AnchorPane {
             day.addLesson(lesson);
             bookARoom(lesson);
         } else error3();
+    }
+
+    public void editLesson(Course userInputForCourse, String userInputForStart, String userInputForStartMin, String userInputForEnd, String userInputForEndMin) {
+        //Convert all data to int
+        LocalTime timeStart = LocalTime.of(Integer.parseInt(userInputForStart), Integer.parseInt(userInputForStartMin));
+        LocalTime timeEnd = LocalTime.of(Integer.parseInt(userInputForEnd), Integer.parseInt(userInputForEndMin));
+        Lesson lesson = new Lesson(userInputForCourse, timeStart, timeEnd);
+        day.removeLesson(this.lesson);
+        if ((day.isValidDataForTime(lesson)) && (timeStart.isBefore(timeEnd))) {
+            this.lesson.setStart(timeStart);
+            this.lesson.setEnd(timeEnd);
+            this.lesson.setCourse(userInputForCourse);
+            day.addLesson(this.lesson);
+        } else {
+            day.addLesson(this.lesson);
+            error3();
+        }
     }
 
     public void addALessonDisplay() {

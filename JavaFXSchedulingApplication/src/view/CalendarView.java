@@ -159,7 +159,7 @@ public class CalendarView {
         description.setLayoutY(20);
 
         AnchorPane.setTopAnchor(text, 5.0);
-        
+
         AnchorPane.setBottomAnchor(description, 7.0);
         return ap;
     }

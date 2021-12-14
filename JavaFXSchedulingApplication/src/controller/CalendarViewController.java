@@ -209,7 +209,7 @@ public class CalendarViewController extends ViewController {
             calendarView.getLessonBlocks().get(i).returnAp().setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.PRIMARY)
                     calendarView.getLessonBlocks().get(finalI).displayLesson();
-                else calendarView.getLessonBlocks().get(finalI).editLesson();
+                else calendarView.getLessonBlocks().get(finalI).editLessonDisplay();
                 initCalendar();
             });
         }

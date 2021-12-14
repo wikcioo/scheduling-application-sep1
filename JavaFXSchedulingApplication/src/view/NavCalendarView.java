@@ -19,6 +19,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/** Navigation calendar with month view.Using the gregorian calendar we put the days of the current month as buttons and
+ * you can call previous week and next week
+ *
+ */
 public class NavCalendarView {
     private VBox finalView;
     private ArrayList<Button> gridPaneItems = new ArrayList<>();
