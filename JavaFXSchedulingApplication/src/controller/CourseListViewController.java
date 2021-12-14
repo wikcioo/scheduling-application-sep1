@@ -126,7 +126,7 @@ public class CourseListViewController extends ViewController {
             setDisableCellSpecificButtons(true);
             Stage displayWindow = new Stage();
             displayWindow.initModality(Modality.APPLICATION_MODAL);
-            displayWindow.setTitle("Display Student");
+            displayWindow.setTitle("Display Course");
             GridPane grid = new GridPane();
             grid.setHgap(10);
             grid.setVgap(12);
