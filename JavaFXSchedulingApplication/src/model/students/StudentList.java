@@ -99,7 +99,7 @@ public class StudentList implements Serializable {
         in.close();
     }
 
-    private boolean isValidStudent(Student student) {
+    public boolean isValidStudent(Student student) {
         if (!student.getName().matches("[A-Za-z ]+")) return false;
         if (!student.get_class().matches("[A-Za-z]")) return false;
         for (Student s : this.studentList) {

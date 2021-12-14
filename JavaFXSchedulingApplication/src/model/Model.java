@@ -69,6 +69,8 @@ public interface Model {
     ArrayList<Student> getStudentsByName(String name);
 
     void readStudentFromTXTFile(File file);
+
+    boolean isValidStudent(Student student);
     // studentList END
 
     // roomList BEGIN

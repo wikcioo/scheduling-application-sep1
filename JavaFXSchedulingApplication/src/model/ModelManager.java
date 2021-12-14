@@ -142,6 +142,10 @@ public class ModelManager implements Model, Serializable {
     public void readStudentFromTXTFile(File file) {
         studentList.readStudentFromTXTFile(file);
     }
+
+    public boolean isValidStudent(Student student) {
+        return studentList.isValidStudent(student);
+    }
     // studentList END
 
     // roomList BEGIN
