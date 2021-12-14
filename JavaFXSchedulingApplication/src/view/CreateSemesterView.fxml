@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateSemesterViewController">
+   <children>
+      <DatePicker fx:id="startDatePicker" onAction="#onDateClick" layoutX="213.0" layoutY="118.0" />
+      <Text layoutX="34.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a new semester">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="endDatePicker" onAction="#onDateClick" layoutX="213.0" layoutY="194.0" prefHeight="25.0" prefWidth="174.0" />
+      <Button fx:id="confirmButton" layoutX="499.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#confirm" text="Confirm" />
+      <Button fx:id="cancelButton" layoutX="42.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#cancel" text="Cancel" />
+      <Text layoutX="213.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start of the semester" />
+      <Text layoutX="213.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End of the semester" />
+   </children>
+</AnchorPane>

@@ -29,16 +29,20 @@ public class MainMenuController extends ViewController {
         return root;
     }
 
-    public void OpenManageData() {
+    @FXML public void OpenManageData() {
         viewHandler.openView("ManageDataView");
     }
 
-    public void OpenCalendar() {
+    @FXML public void OpenCalendar() {
         viewHandler.openView("ScheduleListView");
     }
 
-    public void OpenBooking() {
+    @FXML public void OpenBooking() {
         viewHandler.openView("BookingView");
+    }
+
+    @FXML public void OpenCreateSemester() {
+        viewHandler.openView("CreateSemesterView");
     }
 
     @FXML

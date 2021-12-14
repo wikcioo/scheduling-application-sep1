@@ -10,6 +10,8 @@ import java.util.Objects;
 public class ScheduleList implements Serializable {
     private ArrayList<Schedule> schedules;
     private Schedule currentSchedule;
+    private LocalDate semesterStart;
+    private LocalDate semesterEnd;
 
     public ScheduleList() {
         schedules = new ArrayList<>();
@@ -24,10 +26,11 @@ public class ScheduleList implements Serializable {
         this.currentSchedule = currentSchedule;
     }
 
-    public void addSchedule(Schedule schedule) {
-        if (getScheduleByClass(schedule.getClassOfStudents(), false) != null) {
-            throw new IllegalArgumentException("Class already has a schedule");
-        } else schedules.add(schedule);
+    public ScheduleList(LocalDate semesterStart, LocalDate semesterEnd) {
+        this.semesterStart = semesterStart;
+        this.semesterEnd = semesterEnd;
+        schedules = new ArrayList<>();
+        currentSchedule = null;
     }
 
     public ArrayList<Lesson> getAllLessons() {
@@ -49,10 +52,7 @@ public class ScheduleList implements Serializable {
         //If schedule doesn't exist for certain class, create a new one schedule
 
         if (createIfNoScheduleFound) {
-            Schedule schedule = new Schedule(LocalDate.of(2021, 8, 30),
-                    LocalDate.of(2021, 12, 17),
-                    class1);
-
+            Schedule schedule = new Schedule(semesterStart, semesterEnd, class1);
             schedules.add(schedule);
             return schedule;
         }

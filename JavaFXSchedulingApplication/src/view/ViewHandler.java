@@ -20,6 +20,7 @@ public class ViewHandler {
     private BookingController bookingController;
     private ClassListViewController classListViewController;
     private ScheduleListViewController scheduleListViewController;
+    private CreateSemesterViewController createSemesterViewController;
 
     public ViewHandler(Model model) {
         this.model = model;
@@ -49,6 +50,9 @@ public class ViewHandler {
                 break;
             case "CourseListView":
                 root = loadView("CourseListView.fxml", courseListViewController);
+                break;
+            case "CreateSemesterView":
+                root = loadView("CreateSemesterView.fxml", createSemesterViewController);
                 break;
             case "MainMenu":
                 root = loadView("MainMenu.fxml", mainMenuController);

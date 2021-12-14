@@ -142,7 +142,7 @@ public class Schedule implements Serializable {
         for (Day day : week.getDays()) {
             xml += "\n\t<day date=\"" + day.getDate() + "\">";
             for (Lesson lesson : day.getLessons()) {
-                xml += "\n\t\t<lesson colour='"+lesson.getCourse().getHexColor()+"'>";
+                xml += "\n\t\t<lesson colour=\""+lesson.getCourse().getHexColor()+"\">";
                 xml += "\n\t\t\t<course>" + lesson.getCourse() + "</course>";
                 xml += "\n\t\t\t<startTime>" + lesson.getStart() + "</startTime>";
                 xml += "\n\t\t\t<endTime>" + lesson.getEnd() + "</endTime>";

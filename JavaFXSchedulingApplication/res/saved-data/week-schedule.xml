@@ -1,45 +1,73 @@
 <schedule><week>
-	<day date="2021-12-13">
-	</day>
 	<day date="2021-12-14">
-	</day>
-	<day date="2021-12-15">
-	</day>
-	<day date="2021-12-16">
-		<lesson colour='#FF9966'>
-			<course>SDJ</course>
-			<startTime>08:00</startTime>
-			<endTime>10:30</endTime>
-			<teacher>KLAS</teacher>
-			<room>HOLY</room>
-		</lesson>
-		<lesson colour='#FF9966'>
-			<course>SDJ</course>
+		<lesson colour="#008080">
+			<course>Fuck Emanuel</course>
 			<startTime>10:30</startTime>
 			<endTime>12:30</endTime>
-			<teacher>KLAS</teacher>
-			<room>ROOM ONE</room>
+			<teacher>KLAV</teacher>
+			<room></room>
+		</lesson>
+	</day>
+	<day date="2021-12-15">
+		<lesson colour="#6680E6">
+			<course>SD</course>
+			<startTime>08:00</startTime>
+			<endTime>10:00</endTime>
+			<teacher>FUCK</teacher>
+			<room></room>
+		</lesson>
+		<lesson colour="#008080">
+			<course>Fuck Emanuel</course>
+			<startTime>10:30</startTime>
+			<endTime>12:30</endTime>
+			<teacher>KLAV</teacher>
+			<room></room>
+		</lesson>
+	</day>
+	<day date="2021-12-16">
+		<lesson colour="#008080">
+			<course>Fuck Emanuel</course>
+			<startTime>10:30</startTime>
+			<endTime>12:30</endTime>
+			<teacher>KLAV</teacher>
+			<room></room>
 		</lesson>
 	</day>
 	<day date="2021-12-17">
-		<lesson colour='#FF9966'>
-			<course>SDJ</course>
-			<startTime>01:00</startTime>
-			<endTime>03:02</endTime>
-			<teacher>KLAS</teacher>
-			<room>ROOM ONE</room>
-		</lesson>
-		<lesson colour='#FF9966'>
-			<course>SDJ</course>
-			<startTime>05:30</startTime>
-			<endTime>07:30</endTime>
-			<teacher>KLAS</teacher>
-			<room>ROOM ONE</room>
+		<lesson colour="#008080">
+			<course>Fuck Emanuel</course>
+			<startTime>10:30</startTime>
+			<endTime>12:30</endTime>
+			<teacher>KLAV</teacher>
+			<room></room>
 		</lesson>
 	</day>
 	<day date="2021-12-18">
+		<lesson colour="#008080">
+			<course>Fuck Emanuel</course>
+			<startTime>10:30</startTime>
+			<endTime>12:30</endTime>
+			<teacher>KLAV</teacher>
+			<room></room>
+		</lesson>
 	</day>
 	<day date="2021-12-19">
+		<lesson colour="#008080">
+			<course>Fuck Emanuel</course>
+			<startTime>10:30</startTime>
+			<endTime>12:30</endTime>
+			<teacher>KLAV</teacher>
+			<room></room>
+		</lesson>
+	</day>
+	<day date="2021-12-20">
+		<lesson colour="#008080">
+			<course>Fuck Emanuel</course>
+			<startTime>10:30</startTime>
+			<endTime>12:30</endTime>
+			<teacher>KLAV</teacher>
+			<room></room>
+		</lesson>
 	</day>
 </week>
 </schedule>

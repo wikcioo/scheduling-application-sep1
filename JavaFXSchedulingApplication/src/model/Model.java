@@ -8,6 +8,7 @@ import model.students.Student;
 import model.students.StudentList;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface Model {
@@ -15,8 +16,6 @@ public interface Model {
     Schedule getCurrentSchedule();
 
     void setCurrentSchedule(Schedule currentSchedule);
-
-    void addSchedule(Schedule schedule);
 
     ArrayList<Lesson> getAllLessons();
 
@@ -37,6 +36,10 @@ public interface Model {
     ArrayList<Week> getWeekList();
 
     int getNumberOfWeeksBetween();
+
+    ScheduleList getScheduleList();
+
+    void initSemester(LocalDate startTime, LocalDate endTime);
 
     void initializeCurrentWeekIndex();
 

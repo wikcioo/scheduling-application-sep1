@@ -3,7 +3,7 @@
 }
 
 .linearStripes {
-    /* -fx-background-color: linear-gradient(from 0px 0px to 0px 30px, repeat,  white 99%, black 1%); FIXME:This line doesnt work */
+    -fx-background-color: linear-gradient(from 0px 0px to 0px 60px, repeat,  white 99%, black 1%);
 }
 .transparent {
     -fx-background-color: transparent;

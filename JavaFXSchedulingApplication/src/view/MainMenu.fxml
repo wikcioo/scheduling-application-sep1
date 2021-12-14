@@ -17,7 +17,7 @@
             </Label>
             <Button layoutX="67.0" layoutY="357.0" mnemonicParsing="false" onAction="#onSaveButtonClick" text="Save" />
             <Button layoutX="68.0" layoutY="404.0" mnemonicParsing="false" onAction="#onLoadButtonClick" text="Load" />
-            <Button layoutX="21.0" layoutY="307.0" mnemonicParsing="false" text="Create a new semester" />
+            <Button layoutX="21.0" layoutY="307.0" mnemonicParsing="false" onAction="#OpenCreateSemester" text="Create a new semester" />
          </children>
       </Pane>
       <Button layoutX="265.0" layoutY="89.0" mnemonicParsing="false" onAction="#OpenCalendar" prefHeight="140.0" prefWidth="140.0" text="SCHEDULE" />

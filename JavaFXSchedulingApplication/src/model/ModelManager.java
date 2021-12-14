@@ -7,8 +7,9 @@ import model.rooms.Room;
 import model.rooms.RoomList;
 import model.students.Student;
 import model.students.StudentList;
-
-import java.io.*;
+import java.io.File;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ModelManager implements Model, Serializable {
@@ -20,7 +21,7 @@ public class ModelManager implements Model, Serializable {
     private CopiedWeek copiedWeek;
 
     public ModelManager() {
-        this.scheduleList = new ScheduleList();
+        this.scheduleList = new ScheduleList(LocalDate.now(),LocalDate.now().plusMonths(6));
         this.studentList = new StudentList();
         this.roomList = new RoomList();
         this.courseList = new CourseList();
@@ -33,12 +34,22 @@ public class ModelManager implements Model, Serializable {
         return scheduleList.getCurrentSchedule();
     }
 
-    public void setCurrentSchedule(Schedule currentSchedule) {
+
+    public void setCurrentSchedule(Schedule currentSchedule)
+    {
         scheduleList.setCurrentSchedule(currentSchedule);
+
+    }
+    public void initSemester(LocalDate startTime, LocalDate endTime) {
+        if(startTime.isBefore(endTime)) {
+            this.scheduleList = new ScheduleList(startTime,endTime);
+        }
+        else
+            this.scheduleList = new ScheduleList(endTime,startTime);
     }
 
-    public void addSchedule(Schedule schedule) {
-        scheduleList.addSchedule(schedule);
+    public ScheduleList getScheduleList() {
+        return scheduleList;
     }
 
     public ArrayList<Lesson> getAllLessons() {
