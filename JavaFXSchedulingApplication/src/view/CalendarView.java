@@ -142,16 +142,18 @@ public class CalendarView {
         ap.setDay(day);
         Text text = new Text(lesson.getCourse().getTitle());
         Text description = new Text(start + " -- " + finish);
-        text.setFont(Font.font("Century Gothic", 9));
+        Long textFont = calculateHeightForFonts(start,finish);
+        text.setFont(Font.font("Century Gothic", textFont + 2));
         Text teacher = new Text(lesson.getCourse().getTeacherName());
-        teacher.setFont(Font.font("Century Gothic", 7));
+        teacher.setFont(Font.font("Century Gothic", textFont));
+        description.setFont(Font.font("Century Gothic",textFont - 1));
         text.setFill(Color.WHITE);
         text.setWrappingWidth(75);
         description.setFill(Color.WHITE);
         teacher.setFill(Color.WHITE);
-        ap.getChildren().add(text);
-        ap.getChildren().add(description);
-        ap.getChildren().add(teacher);
+//        ap.getChildren().add(text);
+//        ap.getChildren().add(description);
+//        ap.getChildren().add(teacher);
         text.setLayoutX(10);
         text.setLayoutY(20);
         description.setLayoutX(10);
@@ -209,8 +211,8 @@ public class CalendarView {
         //One unit is 60 --> 1 hr ,1 minute is 1 pixel
         Duration duration = Duration.between(start, finish);
         long hour = duration.toHoursPart();
-        long minute = duration.toMinutesPart();
-        long result = hour * 60 + minute - 1;
+        long result = 7;
+        for (int i=0;i<hour;i++) result+=2;
         return result;
     }
 
