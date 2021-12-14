@@ -5,7 +5,6 @@ import model.Model;
 import model.calendar.Day;
 import model.calendar.Lesson;
 import model.calendar.Week;
-import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -27,11 +26,11 @@ import java.util.ArrayList;
  */
 
 public class CalendarView {
-    private Model model;
-    private VBox[] daysView = new VBox[7];
+    private Model model; // Data from the model
+    private VBox[] daysView = new VBox[7]; //Vbox representing each column of the calendar
     private VBox finalView; //Final view needed to put the calendar in the scrollPane
-    private ArrayList<AnchorPaneNode> lessonBlocks;
-    private ArrayList<AnchorPaneNode> emptyBlocks;
+    private ArrayList<AnchorPaneNode> lessonBlocks; //Array list needed to initialize buttons for lessons
+    private ArrayList<AnchorPaneNode> emptyBlocks; //Array list needed to initialize buttons for breaks
 
     /**
      * This is the constructor for the calendar view.You need to pass in the information from the model so the view can
@@ -45,7 +44,6 @@ public class CalendarView {
         Week week = model.getCurrentWeek();
         lessonBlocks = new ArrayList<>();
         emptyBlocks = new ArrayList<>();
-        int hour = 7;
         HBox calendar = new HBox(5);
         calendar.getStyleClass().add("linearStripes");
 
@@ -142,10 +140,10 @@ public class CalendarView {
         ap.setDay(day);
         Text text = new Text(lesson.getCourse().getTitle());
         Text description = new Text(start + " -- " + finish);
-        Long textFont = calculateHeightForFonts(start, finish);
-        text.setFont(Font.font("Century Gothic", textFont + 2));
+        long textFont = calculateHeightForFonts(start, finish);
+        text.setFont(Font.font("Century Gothic", textFont));
 
-        description.setFont(Font.font("Century Gothic", textFont - 1));
+        description.setFont(Font.font("Century Gothic", textFont));
         text.setFill(Color.WHITE);
         text.setWrappingWidth(75);
         description.setFill(Color.WHITE);
@@ -159,8 +157,9 @@ public class CalendarView {
         description.setLayoutY(20);
 
         AnchorPane.setTopAnchor(text, 5.0);
-
-        AnchorPane.setBottomAnchor(description, 7.0);
+        if (calculateHeightForBlock(start,finish) < 30)
+            AnchorPane.setRightAnchor(description, 6.0);
+        AnchorPane.setBottomAnchor(description, 6.0);
         return ap;
     }
 
@@ -189,7 +188,7 @@ public class CalendarView {
     /**
      * This method calculates the necessary height for a block based on the lesson/break length.Each minute represents
      * a pixel on the schedule. First it calculates the difference between the start of a lesson and the end of a lesson
-     * in minutes and hours,then calculates the result.After that it subtracts 3 to account for the surplus
+     * in minutes and hours,then calculates the result.After that it subtracts 1 to account for the surplus
      * padding of the blocks.
      *
      * @param start  representing the start of a lesson
@@ -205,12 +204,24 @@ public class CalendarView {
         return result;
     }
 
+    /** This method calculates the necessary font for a text inside a lesson.After the initial value is set this method
+     * adds 2 units for each hour.
+     *
+     * @param start representing the start of a lesson
+     * @param finish representing the end of a lesson
+     * @return a long representing the necessary font size for a lesson
+     */
     public long calculateHeightForFonts(LocalTime start, LocalTime finish) {
-        //One unit is 60 --> 1 hr ,1 minute is 1 pixel
         Duration duration = Duration.between(start, finish);
         long hour = duration.toHoursPart();
-        long result = 7;
-        for (int i = 0; i < hour; i++) result += 2;
+        long result;
+        //If the lesson block is too small to contain text set the initial font size to something smaller
+        result = 10;
+        //Add 2 units for each hour
+        for (int i = 0; i < hour; i++) {
+            if (result > 20) break;
+            else result += 2;
+        }
         return result;
     }
 
