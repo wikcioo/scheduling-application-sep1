@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Region;
 import model.Model;
@@ -15,6 +16,11 @@ public class MainMenuController extends ViewController {
     private Region root;
     private Model model;
     private ViewHandler viewHandler;
+    @FXML Button bt1;
+    @FXML
+    Button bt2;
+    @FXML
+    Button bt3;
 
     public void init(ViewHandler viewHandler, Model model, Region root) {
         this.model = model;
