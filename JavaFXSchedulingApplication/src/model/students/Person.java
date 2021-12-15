@@ -12,6 +12,9 @@ public abstract class Person implements Serializable {
 
     /**
      The purpose of this constructor is to initialize all the instance variable
+     @param name the name of the person
+     @param id   the id of the person
+     @param email  the email of the person
      */
     public Person(String name, String email, int id) {
         this.name = name;
@@ -20,32 +23,35 @@ public abstract class Person implements Serializable {
     }
 
     /**
-     * Returns the name of the person
+     * @return the name of the person
      */
     public abstract String getName();
 
     /**
      * The purpose of this method is to set the name of the person
+     * @param name  name of the person
      */
     public abstract void setName(String name);
 
     /**
-     * Returns the email of the person
+     * @returns the email of the person
      */
     public abstract String getEmail();
 
     /**
      * The purpose of this method is to set the email of the person
+     * @param email the email of the person
      */
     public abstract void setEmail(String email);
 
     /**
-     * Returns the id of the person
+     * @return  the id of the person
      */
     public abstract int getId();
 
     /**
      * The purpose of this method is to set the id of the person
+     * @param id the id of the person
      */
     public abstract void setId(int id);
 }

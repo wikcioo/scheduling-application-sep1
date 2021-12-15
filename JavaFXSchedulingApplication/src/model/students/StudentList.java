@@ -22,7 +22,8 @@ public class StudentList implements Serializable {
 
     /**
      * The purpose of this constructor is to initialize an ArrayList of students
-     * with an existing ArrayList
+     * with an existing ArrayList2
+     * @param studentList a list of all students
      */
     public StudentList(ArrayList<Student> studentList) {
         this.studentList = new ArrayList<>();
@@ -32,7 +33,7 @@ public class StudentList implements Serializable {
     }
 
     /**
-     * Return a copy of all the students
+     * @return a copy of all the students
      */
     public StudentList copy() {
         return new StudentList(this.studentList);
@@ -41,20 +42,21 @@ public class StudentList implements Serializable {
     /**
      * The purpose of this method is to set the ArrayList of Students to an
      * existing one
+     * @param studentList a list of all students
      */
     public void setStudentList(ArrayList<Student> studentList) {
         this.studentList = studentList;
     }
 
     /**
-     Returns all the students
+     @return all the students
      */
     public ArrayList<Student> getStudentList() {
         return studentList;
     }
 
     /**
-     * Returns a student with a specific index
+     * @return a student with a specific index
      */
     public Student getStudent(int index) {
         return studentList.get(index);
@@ -62,6 +64,7 @@ public class StudentList implements Serializable {
 
     /**
      * The purpose of this method is to add a student to the studentList ArrayList
+     * @param student a student object
      */
     public void addStudent(Student student) {
         studentList.add(student);
@@ -70,6 +73,7 @@ public class StudentList implements Serializable {
     /**
      * The purpose of this method is to remove a student from the studentList ArrayList
      * using its name
+     * @param student  a student object
      */
     public void removeStudent(Student student) {
         studentList.remove(student);
@@ -78,6 +82,7 @@ public class StudentList implements Serializable {
     /**
      * The purpose of this method is to remove a student from the studentList ArrayList
      *      * using its index
+     * @param index the index of a student in the list
      */
     public void removeStudent(int index) {
         studentList.remove(index);
@@ -86,6 +91,8 @@ public class StudentList implements Serializable {
     /**
      * The purpose of this method is to return all the students which belongs to
      * a specific class
+     * @param _class the class of a student
+     * @return all the students from that class
      */
     public ArrayList<Student> getStudentsByClass(String _class) {
         ArrayList<Student> s = new ArrayList<>();
@@ -101,6 +108,8 @@ public class StudentList implements Serializable {
     /**
      The purpose of this method is to return all the students which has a specific
      name
+     @param name the name of the student
+     @return all students with that specific name
      */
     public ArrayList<Student> getStudentsByName(String name) {
         ArrayList<Student> s = new ArrayList<>();
@@ -115,7 +124,9 @@ public class StudentList implements Serializable {
 
     /**
      * The purpose of this method is to read the student data from the txt file
+     * @param file the file we read from, all the students data
      */
+
     public void readStudentFromTXTFile(File file) {
         Scanner in = null;
         try {
@@ -148,6 +159,8 @@ public class StudentList implements Serializable {
     /**
      * The purpose of this method is to check if the data from a student is correct
      * If the data is correct it will return true, otherwise false
+     * @param student  a student object
+     * @return true if the student data is correct, false otherwise
      */
     public boolean isValidStudent(Student student) {
         if (!student.getName().matches("[A-Za-z ]+")) return false;
@@ -170,7 +183,7 @@ public class StudentList implements Serializable {
     }
 
     /**
-     * Return a list of all students
+     * @return a list of all students
      */
     @Override
     public String toString() {

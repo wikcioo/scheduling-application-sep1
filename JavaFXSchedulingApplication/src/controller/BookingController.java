@@ -27,6 +27,13 @@ public class BookingController extends ViewController {
     private Model model;
     private ViewHandler viewHandler;
 
+    /**
+     * The purpose of this method is to lunch the window and initialize all
+     controls of the window
+     * @param viewHandler;
+     * @param model;
+     * @param root;
+     */
     public void init(ViewHandler viewHandler, Model model, Region root) {
         this.model = model;
         this.viewHandler = viewHandler;
@@ -54,6 +61,10 @@ public class BookingController extends ViewController {
 
     }
 
+    /**
+     * The purpose of this method is to clear all the lessons from table and
+     * repopulate the table with the saved lessons
+     */
     public void reset() {
         tableView.getItems().clear();
         for (Lesson r : this.model.getAllLessons()) {
@@ -61,24 +72,47 @@ public class BookingController extends ViewController {
         }
     }
 
+    /**
+     * @return the root of the window
+     */
     public Region getRoot() {
         return root;
     }
 
+    /**
+     * The purpose of this method is to open the Main Menu window when it is called
+     */
     public void back() {
         viewHandler.openView("MainMenu");
     }
 
+    /**
+     * The purpose of this method is to open a new window when it is called
+     * In the new window there will be a label with available rooms from where
+     * one or two can be selected to be booked
+     */
     @FXML
     private void onBookButtonClick() {
         onClick("BookRoom");
     }
 
+    /**
+     * The purpose of this method is to cancel the booking of the selected
+     * lesson
+     */
     @FXML
     private void onUnbookButtonClick() {
         onClick("UnBookRoom");
     }
 
+    /**
+     *  The purpose of this method is to make assure the functionality of all the buttons
+     *  Once a button is clicked, depending on its id, different actions will occur
+     *  When pressed, some buttons will display a pop-up window where other buttons will have
+     *  their own functionality
+     *
+     * @param clickId the id of the button
+     */
     public void onClick(String clickId) {
         if (clickId.equals("BookRoom") && tableView.getSelectionModel().getSelectedItem() == null) {
             //Throw alert for not selecting

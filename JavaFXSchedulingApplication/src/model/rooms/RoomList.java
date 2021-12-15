@@ -21,7 +21,7 @@ public class RoomList implements Serializable {
     }
 
     /**
-     * Returns a list of all the rooms
+     * @return a list of all the rooms
      */
     public ArrayList<Room> getRooms() {
         return rooms;
@@ -29,6 +29,7 @@ public class RoomList implements Serializable {
 
     /**
      * The purpose of this method is to add a new room to the rooms ArrayList
+     * @param room a room object
      */
     public void addRoom(Room room) {
         rooms.add(room);
@@ -36,6 +37,7 @@ public class RoomList implements Serializable {
 
     /**
      * The purpose of this method is to remove a new room from the rooms ArrayList
+     * @param room a room object
      */
     public void removeRoom(Room room) {
         rooms.remove(room);
@@ -44,6 +46,7 @@ public class RoomList implements Serializable {
     /**
      * The purpose of this method is to initialize the rooms ArrayList with an
      * existing ArrayList of rooms
+     * @param rooms a list of rooms
      */
     public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
@@ -52,6 +55,8 @@ public class RoomList implements Serializable {
     /**
      * The purpose of this method is to return all available rooms at a given time
      * interval
+     * @param time the time when a room is booked
+     * @return returns all available rooms during that time
      */
     public ArrayList<Room> getAvailableRoomsAt(BookingTime time) {
         ArrayList<Room> available = new ArrayList<>();
@@ -64,6 +69,8 @@ public class RoomList implements Serializable {
     /**
      * The purpose of this method is to return all  rooms which have the
      * capacity bigger than the one specified
+     * @param minCapacity minimum number of students a room can hold
+     * @return all rooms with a capacity bigger or equal to the one specified
      */
     public ArrayList<Room> getRoomsByMinimumCapacity(int minCapacity) {
         ArrayList<Room> result = new ArrayList<>();
@@ -77,6 +84,7 @@ public class RoomList implements Serializable {
     /**
      * The purpose of this method is to return all  rooms which can merge
      * with another room
+     * @return all rooms which can merge
      */
     public ArrayList<Room> getMergeableRooms() {
         ArrayList<Room> result = new ArrayList<>();
@@ -90,6 +98,7 @@ public class RoomList implements Serializable {
     /**
      * The purpose of this method is to return all  rooms which can not merge
      * with another room
+     * @return all rooms which can not merge
      */
     public ArrayList<Room> getUnMergeableRooms() {
         ArrayList<Room> result = new ArrayList<>();
@@ -103,6 +112,10 @@ public class RoomList implements Serializable {
     /**
      * The purpose of this method is to return all available rooms which have the
      * capacity bigger than the one specified
+     * @param minCapacity minimum number of students a room can hold
+     * @param time
+     * @return all the rooms which are available and have capacity bigger then the
+     * specified one
      */
     public ArrayList<Room> getAvailableRoomsByMinimumCapacity(int minCapacity, BookingTime time) {
         ArrayList<Room> result = new ArrayList<>();
@@ -116,6 +129,8 @@ public class RoomList implements Serializable {
     /**
      * The purpose of this method is to return all available rooms which can merge
      * with another room
+     * @param time the time when room is booked
+     * @return  all available rooms which can merge
      */
     public ArrayList<Room> getAvailableAndMergeableRooms(BookingTime time) {
         ArrayList<Room> result = new ArrayList<>();
@@ -129,6 +144,8 @@ public class RoomList implements Serializable {
     /**
      * The purpose of this method is to return all available rooms which can not merge
      * with another room
+     * @param time the time when room is booked
+     * @return all available rooms which can not merge
      */
     public ArrayList<Room> getAvailableAndUnMergeableRooms(BookingTime time) {
         ArrayList<Room> result = new ArrayList<>();
@@ -142,6 +159,8 @@ public class RoomList implements Serializable {
     /**
      * The purpose of this method is to return all rooms which have the same name
      * as the one specified
+     * @param name the name of the room
+     * @return a room if it is found by the name or null if it is not
      */
     public Room getRoomByString(String name) {
         for (Room room : rooms) {
@@ -182,6 +201,7 @@ public class RoomList implements Serializable {
     /**
      * The purpose of this method is to read all the rooms' information from a
      * txt file
+     * @param file the file we read from, all the courses data
      */
     public void readRoomsFromTXTFile(File file) {
         Scanner in = null;
@@ -217,6 +237,7 @@ public class RoomList implements Serializable {
 
     /**
      * Returns all the information about the rooms
+     * @return room list
      */
     @Override
     public String toString() {

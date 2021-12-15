@@ -17,6 +17,8 @@ public class ClassOfStudents implements Serializable
   /**
    * The purpose of this constructor is to initialize values for the name
    * and the student list
+   * @param  name name of the class
+   * @param studentList list of the students
    */
   public ClassOfStudents(String name, StudentList studentList)
   {
@@ -27,6 +29,7 @@ public class ClassOfStudents implements Serializable
   /**
    * The purpose of this constructor is to initialize the value for the name
    * and create a new StudentList object
+   * @param  name the name of the class
    */
   public ClassOfStudents(String name)
   {
@@ -35,7 +38,7 @@ public class ClassOfStudents implements Serializable
   }
 
   /**
-   * Return a studentList object
+   * @return a studentList object
    */
   public StudentList getStudentList()
   {
@@ -43,7 +46,7 @@ public class ClassOfStudents implements Serializable
   }
 
   /**
-   * Return a String of the name
+   * @return a String of the name
    */
   public String getName()
   {
@@ -52,6 +55,7 @@ public class ClassOfStudents implements Serializable
 
   /**
    * The purpose of this method is to set the name of the class
+   * @param  name the name of the class
    */
   public void setName(String name)
   {
@@ -62,6 +66,8 @@ public class ClassOfStudents implements Serializable
    * The purpose of this method is to compare two ClassOfStudents objects
    * and returns true if they have the same name and the same Student List,
    * otherwise false
+   * @param o the object which will be compared to ClassOfStudents object
+   * @return true if they are the same, false otherwise
    */
   @Override public boolean equals(Object o)
   {
@@ -75,7 +81,7 @@ public class ClassOfStudents implements Serializable
   }
 
   /**
-   * Return all the information about a ClassOfStudents object
+   * @return all the information about a ClassOfStudents object
    */
   @Override public String toString()
   {

@@ -24,6 +24,8 @@ public class ClassList implements Serializable
   /**
    * The purpose of this method is set the int value of currentlySelectedClass
    * when a class is clicked/selected
+   *
+   * @param currentlySelectedClass index of the class in the array
    */
   public void setCurrentlySelectedClass(int currentlySelectedClass)
   {
@@ -31,7 +33,7 @@ public class ClassList implements Serializable
   }
 
   /**
-   * Return the int value of currentlySelectedClass
+   * @return the int value of currentlySelectedClass
    */
   public int getCurrentlySelectedClass()
   {
@@ -42,6 +44,7 @@ public class ClassList implements Serializable
    * The purpose of this method is to add a class to the
    * classList ArrayList and then sort the classes by their name using a
    * compare method
+   * @param  _class the class object which will be added
    */
   public void addClass(ClassOfStudents _class)
   {
@@ -59,6 +62,8 @@ public class ClassList implements Serializable
   /**
    * The purpose of this method is to remove a class from the
    * classList ArrayList
+   * @param _class the class object which will be removed
+   *
    */
   public void removeClass(ClassOfStudents _class)
   {
@@ -73,7 +78,7 @@ public class ClassList implements Serializable
   }
 
   /**
-   * Returns a list ClassOfStudents objects
+   * @return a list of ClassOfStudents objects
    */
   public ArrayList<ClassOfStudents> getClasses()
   {
@@ -81,7 +86,7 @@ public class ClassList implements Serializable
   }
 
   /**
-   *  Returns a copy of the list of all the classes of the classList ArrayList
+   *  @return a copy of the list of ClassOfStudents objects
    */
   public ArrayList<ClassOfStudents> copyClasses()
   {

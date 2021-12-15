@@ -20,6 +20,9 @@ public class Course implements Serializable
   /**
    * The purpose os this constructor is to initialize the title, a class of
    * students and create a new TeacherList object
+   * @param title the title of the course
+   * @param teacherList a list of teachers
+   * @param classOfStudents a ClassOfStudents objects
    */
   public Course(String title, ArrayList<Teacher> teacherList,
       ClassOfStudents classOfStudents)
@@ -37,6 +40,8 @@ public class Course implements Serializable
   /**
    * The purpose os this constructor is to initialize the title
    * and a teacherList and create a null object of classOfStudents
+   * @param title the title of the course
+   * @param teacherList the list of teachers
    */
   public Course(String title, ArrayList<Teacher> teacherList)
   {
@@ -45,6 +50,7 @@ public class Course implements Serializable
 
   /**
    * The purpose of this method is to set the title of the course
+   * @param title the title of the course
    */
   public void setTitle(String title)
   {
@@ -53,7 +59,9 @@ public class Course implements Serializable
 
   /**
    * The purpose of this method is to appoint a class of students to a course
+   * @param classOfStudents
    */
+
   public void setClassOfStudents(ClassOfStudents classOfStudents)
   {
     this.classOfStudents = classOfStudents;
@@ -76,7 +84,7 @@ public class Course implements Serializable
   }
 
   /**
-   * Returns the title of the course
+   * @return  the title of the course
    */
   public String getTitle()
   {
@@ -84,7 +92,7 @@ public class Course implements Serializable
   }
 
   /**
-   * Returns a teacherList object
+   * @return  a teacherList object
    */
   public TeacherList getTeacherList()
   {
@@ -93,6 +101,7 @@ public class Course implements Serializable
 
   /**
    * The purpose of this method is to appoint new teachers to the course
+   * @param teacherList a list of the teachers
    */
   public void setTeacherList(ArrayList<Teacher> teacherList)
   {
@@ -100,7 +109,7 @@ public class Course implements Serializable
   }
 
   /**
-   * Returns a classOfStudents object
+   * @return  a classOfStudents object
    */
   public ClassOfStudents getClassOfStudents()
   {
@@ -108,7 +117,7 @@ public class Course implements Serializable
   }
 
   /**
-   * Return a StudentList object
+   * @return  a StudentList object
    */
   public StudentList getParticipants()
   {
@@ -116,7 +125,7 @@ public class Course implements Serializable
   }
 
   /**
-   * Returns the name of the ClassOfStudents object
+   * @return  the name of the ClassOfStudents object
    */
   public String getClassName()
   {
@@ -124,7 +133,7 @@ public class Course implements Serializable
   }
 
   /**
-   * Return a list of all teachers of the course
+   * @return  a list of all teachers of the course
    */
   public String getTeacherName()
   {
@@ -133,6 +142,7 @@ public class Course implements Serializable
 
   /**
    * The purpose of this method is to set participants to the course
+   * @param participants a list of students
    */
   public void setParticipants(StudentList participants)
   {
@@ -140,7 +150,7 @@ public class Course implements Serializable
   }
 
   /**
-   * Return the color of the course
+   * @return the color of the course
    */
   public String getHexColor()
   {
@@ -149,6 +159,7 @@ public class Course implements Serializable
 
   /**
    * The purpose of this method is to set the color of the course
+   * @param hexColor the color of the course
    */
   public void setHexColor(String hexColor)
   {
@@ -156,7 +167,7 @@ public class Course implements Serializable
   }
 
   /**
-   * Return the title of the course
+   * @return  the title of the course
    */
   @Override public String toString()
   {

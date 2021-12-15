@@ -20,20 +20,23 @@ public class TeacherList implements Serializable {
     /**
      * The purpose of this constructor is to initialize the teacherList ArrayList
      * with a given arrayList of teacher objects
+     * @param teacherList a list of teachers
      */
     public TeacherList(ArrayList<Teacher> teacherList) {
         this.teacherList = teacherList;
     }
 
     /**
-     * Returns the number of teachers
+     * @return  the number of teachers
      */
     public int size() {
         return teacherList.size();
     }
 
     /**
-     * Return the teacher with a specific index
+     * The purpose of this method is to get a teacher by its index
+     * @param index the index of the teachers in the list
+     * @return the teacher with a specific index
      */
     public Teacher getTeacherByIndex(int index) {
         return teacherList.get(index);
@@ -41,13 +44,14 @@ public class TeacherList implements Serializable {
 
     /**
      * The purpose of this method is to add a new teacher to the teacherList ArrayList
+     * @param teacher a teacher object
      */
     public void addTeacher(Teacher teacher) {
         this.teacherList.add(teacher);
     }
 
     /**
-     * Returns a list of all teacher object
+     * @return a list of all teacher object
      */
     public ArrayList<Teacher> getTeacherList() {
         return teacherList;
@@ -55,13 +59,15 @@ public class TeacherList implements Serializable {
 
     /**
      * The purpose of this method is to remove a new teacher from the teacherList ArrayList
+     * @param teacher a teacher object
      */
     public void removeTeacher(Teacher teacher) {
         teacherList.remove(teacher);
     }
 
     /**
-     * Returns all teachers from a course
+     * Getting all teachers from a course iterating thorough the teacher list
+     * @return a string with all teachers from that course
      */
     @Override
     public String toString() {

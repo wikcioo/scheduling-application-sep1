@@ -26,6 +26,7 @@ public class CourseList implements Serializable
 
   /**
    * The purpose of this method is to add a course to the courses ArrayList
+   * @param course a list of all courses
    */
   public void addCourse(Course course)
   {
@@ -34,6 +35,7 @@ public class CourseList implements Serializable
 
   /**
    * The purpose of this method is to remove a course from the courses ArrayList
+   * @param course a list of all courses
    */
   public void removeCourse(Course course)
   {
@@ -42,6 +44,8 @@ public class CourseList implements Serializable
 
   /**
    * The purpose of this method is to return a list of courses with a specific name
+   * @param  title the title of the course
+   * @return all the courses with that title
    */
   public ArrayList<Course> getCoursesByTitle(String title)
   {
@@ -56,6 +60,8 @@ public class CourseList implements Serializable
 
   /**
    * The purpose of this method is to return a list of courses with a specific teacher
+   * @param teacher a teacher object
+   * @return  a list of courses where that teacher belongs to
    */
   public ArrayList<Course> getCoursesByTeachers(Teacher teacher)
   {
@@ -71,6 +77,8 @@ public class CourseList implements Serializable
 
   /**
    * The purpose of this method is to return a list of courses which belong to a specific class of students
+   * @param classOfStudents a class of students
+   * @return a list of courses which have a specific class of students
    */
   public ArrayList<Course> getCoursesByClass(ClassOfStudents classOfStudents)
   {
@@ -85,6 +93,8 @@ public class CourseList implements Serializable
 
   /**
    * The purpose of this method is to return a list of courses which belongs to a specific class
+   * @param className  the name of the class
+   * @return a list of courses which belongs to a specific class
    */
   public ArrayList<Course> getCoursesByClassName(ClassOfStudents className)
   {
@@ -98,7 +108,7 @@ public class CourseList implements Serializable
   }
 
   /**
-   * Returns a list of all the courses
+   * @return  list of all the courses
    */
   public ArrayList<Course> getCourses()
   {
@@ -108,6 +118,7 @@ public class CourseList implements Serializable
   /**
    * The purpose of this method is to read all the course information from a
    * txt file
+   * @param file the file we read from, all the courses data
    */
   public void readCoursesFromTXTFile(File file)
   {
@@ -161,6 +172,7 @@ public class CourseList implements Serializable
   /**
    * The purpose of this method is set the int value of currentlySelectedClass
    * when a class is clicked/selected
+   * @param currentSelectedCourse
    */
   public void setCurrentSelectedCourse(int currentSelectedCourse)
   {
@@ -169,7 +181,7 @@ public class CourseList implements Serializable
   }
 
   /**
-   * Return the int value of currentSelectedCourse
+   * @return  the int value of currentSelectedCourse
    */
   public int getCurrentSelectedCourse()
   {
