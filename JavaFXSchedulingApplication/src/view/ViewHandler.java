@@ -11,16 +11,7 @@ public class ViewHandler {
     private Scene currentScene;
     private Stage primaryStage;
     private Model model;
-    private CalendarViewController calendarViewController;
-    private StudentListViewController studentListViewController;
-    private RoomListViewController roomListViewController;
-    private CourseListViewController courseListViewController;
-    private MainMenuController mainMenuController;
-    private ManageDataController manageDataController;
-    private BookingController bookingController;
-    private ClassListViewController classListViewController;
-    private ScheduleListViewController scheduleListViewController;
-    private CreateSemesterViewController createSemesterViewController;
+    private ViewController viewController;
 
     public ViewHandler(Model model) {
         this.model = model;
@@ -36,35 +27,35 @@ public class ViewHandler {
         Region root;
         switch (id) {
             case "CalendarView":
-                root = loadView("CalendarView.fxml", calendarViewController);
+                root = loadView("CalendarView.fxml", viewController);
                 break;
             case "ScheduleListView":
-                root = loadView("ScheduleList.fxml", scheduleListViewController);
+                root = loadView("ScheduleList.fxml", viewController);
                 break;
 
             case "StudentListView":
-                root = loadView("StudentListView.fxml", studentListViewController);
+                root = loadView("StudentListView.fxml", viewController);
                 break;
             case "RoomListView":
-                root = loadView("RoomListView.fxml", roomListViewController);
+                root = loadView("RoomListView.fxml", viewController);
                 break;
             case "CourseListView":
-                root = loadView("CourseListView.fxml", courseListViewController);
+                root = loadView("CourseListView.fxml", viewController);
                 break;
             case "CreateSemesterView":
-                root = loadView("CreateSemesterView.fxml", createSemesterViewController);
+                root = loadView("CreateSemesterView.fxml", viewController);
                 break;
             case "MainMenu":
-                root = loadView("MainMenu.fxml", mainMenuController);
+                root = loadView("MainMenu.fxml", viewController);
                 break;
             case "ManageDataView":
-                root = loadView("Manage.fxml", manageDataController);
+                root = loadView("Manage.fxml", viewController);
                 break;
             case "BookingView":
-                root = loadView("Booking.fxml", bookingController);
+                root = loadView("Booking.fxml", viewController);
                 break;
             case "ClassListView":
-                root = loadView("ClassListView.fxml", classListViewController);
+                root = loadView("ClassListView.fxml", viewController);
                 break;
             default:
                 root = new Region();
