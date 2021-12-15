@@ -414,6 +414,8 @@ public class AnchorPaneNode extends AnchorPane {
                             finalLesson.setRoom2(room2);
                             room2.Book(book);
                         }
+                        else
+                            error2();
                     } catch (NullPointerException E) {
 
                     }
@@ -422,8 +424,6 @@ public class AnchorPaneNode extends AnchorPane {
                 }
                 displayWindow.close();
                 Logger.info(model.getRooms().toString());
-            } else {
-                error2();
             }
         });
 
@@ -443,7 +443,7 @@ public class AnchorPaneNode extends AnchorPane {
     private boolean error() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText("Cannot booked merged rooms.Only one room booked"
+        alert.setHeaderText("Cannot book merged rooms. Only one room booked"
         );
         Optional<ButtonType> result = alert.showAndWait();
         return (result.isPresent()) && (result.get() == ButtonType.OK);
@@ -452,7 +452,7 @@ public class AnchorPaneNode extends AnchorPane {
     private boolean error2() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText("It cannot be merged. Only one room booked"
+        alert.setHeaderText("No room to merge with. Only one room booked"
         );
         Optional<ButtonType> result = alert.showAndWait();
         return (result.isPresent()) && (result.get() == ButtonType.OK);

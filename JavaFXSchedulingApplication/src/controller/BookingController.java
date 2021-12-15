@@ -179,13 +179,13 @@ public class BookingController extends ViewController {
                         if (room2.canBeBookedAt(book)) {
                             finalLesson.setRoom2(room2);
                             room2.Book(book);
+                        } else {
+                            error2();
                         }
                     } else {
                         error();
                     }
                     displayWindow.close();
-                } else {
-                    error2();
                 }
 
             });
@@ -200,7 +200,7 @@ public class BookingController extends ViewController {
     private boolean error() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText("Cannot booked merged rooms.Only one room booked"
+        alert.setHeaderText("Cannot book merged rooms. Only one room booked"
         );
         Optional<ButtonType> result = alert.showAndWait();
         return (result.isPresent()) && (result.get() == ButtonType.OK);
@@ -209,7 +209,7 @@ public class BookingController extends ViewController {
     private boolean error2() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText("It cannot be merged. Only one room booked"
+        alert.setHeaderText("No room to merge with. Only one room booked"
         );
         Optional<ButtonType> result = alert.showAndWait();
         return (result.isPresent()) && (result.get() == ButtonType.OK);
