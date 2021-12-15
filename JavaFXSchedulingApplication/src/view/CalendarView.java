@@ -158,8 +158,8 @@ public class CalendarView {
 
         AnchorPane.setTopAnchor(text, 5.0);
         if (calculateHeightForBlock(start,finish) < 30)
-            AnchorPane.setRightAnchor(description, 6.0);
-        AnchorPane.setBottomAnchor(description, 6.0);
+            AnchorPane.setRightAnchor(description, 2.0);
+        else AnchorPane.setBottomAnchor(description, 3.0);
         return ap;
     }
 
