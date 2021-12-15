@@ -146,7 +146,7 @@ public class Schedule implements Serializable {
                 xml += "\n\t\t\t<course>" + lesson.getCourse() + "</course>";
                 xml += "\n\t\t\t<startTime>" + lesson.getStart() + "</startTime>";
                 xml += "\n\t\t\t<endTime>" + lesson.getEnd() + "</endTime>";
-                xml += "\n\t\t\t<teacher>" + lesson.getCourse().getTeacherName() + "</teacher>";
+                xml += "\n\t\t\t<teacher>" + lesson.getTeacher() + "</teacher>";
                 xml += "\n\t\t\t<room>" + (lesson.getRoom() != null ? lesson.getRoom() : "") + (lesson.getRoom2() != null ? " " + lesson.getRoom2() : "") + "</room>";
                 xml += "\n\t\t</lesson>";
             }

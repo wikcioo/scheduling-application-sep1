@@ -142,7 +142,7 @@ public class AnchorPaneNode extends AnchorPane {
 
         Button submit = new Button("Submit");
         submit.setOnMouseClicked(event -> {
-            editLesson(userInputForCourse.getValue(), userInputForStart.getText(), userInputForStartMin.getText(), userInputForEnd.getText(), userInputForEndMin.getText());
+            editLesson(userInputForCourse.getValue(),userInputForTeacher.getValue(), userInputForStart.getText(), userInputForStartMin.getText(), userInputForEnd.getText(), userInputForEndMin.getText());
             displayWindow.close();
         });
         VBox finalView = new VBox(25);
@@ -158,11 +158,11 @@ public class AnchorPaneNode extends AnchorPane {
         displayWindow.showAndWait();
     }
 
-    public void addALesson(Course userInputForCourse, String userInputForStart, String userInputForStartMin, String userInputForEnd, String userInputForEndMin) {
+    public void addALesson(Course userInputForCourse,Teacher userInputForTeacher, String userInputForStart, String userInputForStartMin, String userInputForEnd, String userInputForEndMin) {
         //Convert all data to int
         LocalTime timeStart = LocalTime.of(Integer.parseInt(userInputForStart), Integer.parseInt(userInputForStartMin));
         LocalTime timeEnd = LocalTime.of(Integer.parseInt(userInputForEnd), Integer.parseInt(userInputForEndMin));
-        Lesson lesson = new Lesson(userInputForCourse, timeStart, timeEnd);
+        Lesson lesson = new Lesson(userInputForCourse,userInputForTeacher, timeStart, timeEnd);
         if ((day.isValidDataForTime(lesson)) && (timeStart.isBefore(timeEnd))) {
             this.lesson = lesson;
             day.addLesson(lesson);
@@ -170,11 +170,11 @@ public class AnchorPaneNode extends AnchorPane {
         } else error3();
     }
 
-    public void editLesson(Course userInputForCourse, String userInputForStart, String userInputForStartMin, String userInputForEnd, String userInputForEndMin) {
+    public void editLesson(Course userInputForCourse,Teacher userInputForTeacher, String userInputForStart, String userInputForStartMin, String userInputForEnd, String userInputForEndMin) {
         //Convert all data to int
         LocalTime timeStart = LocalTime.of(Integer.parseInt(userInputForStart), Integer.parseInt(userInputForStartMin));
         LocalTime timeEnd = LocalTime.of(Integer.parseInt(userInputForEnd), Integer.parseInt(userInputForEndMin));
-        Lesson lesson = new Lesson(userInputForCourse, timeStart, timeEnd);
+        Lesson lesson = new Lesson(userInputForCourse,userInputForTeacher, timeStart, timeEnd);
         day.removeLesson(this.lesson);
         if ((day.isValidDataForTime(lesson)) && (timeStart.isBefore(timeEnd))) {
             this.lesson.setStart(timeStart);
@@ -246,7 +246,7 @@ public class AnchorPaneNode extends AnchorPane {
         Button submit = new Button("Submit");
 
         submit.setOnMouseClicked(event -> {
-            addALesson(userInputForCourse.getValue(), userInputForStart.getText(), userInputForStartMin.getText(), userInputForEnd.getText(), userInputForEndMin.getText());
+            addALesson(userInputForCourse.getValue(), userInputForTeacher.getValue(), userInputForStart.getText(), userInputForStartMin.getText(), userInputForEnd.getText(), userInputForEndMin.getText());
             displayWindow.close();
         });
 

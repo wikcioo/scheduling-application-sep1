@@ -180,7 +180,7 @@ public class CalendarView {
         ap.setPrefHeight(calculateHeightForBlock(start, finish));
         //Set the info for the anchor pane
         ap.setDay(day);
-        ap.setLesson(new Lesson(new Course("Break", null), start, finish));
+        ap.setLesson(new Lesson(new Course("Break", null),null, start, finish));
         getEmptyBlocks().add(ap);
         return ap;
     }
