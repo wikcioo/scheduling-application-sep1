@@ -6,29 +6,53 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The purpose of this class is to store an arrayList of Room Objects in order
+ * to manage them
+ */
 public class RoomList implements Serializable {
     private ArrayList<Room> rooms;
 
+    /**
+     * The purpose of this constructor is to initialize the ArrayList of Rooms
+     */
     public RoomList() {
         rooms = new ArrayList<>();
     }
 
+    /**
+     * Returns a list of all the rooms
+     */
     public ArrayList<Room> getRooms() {
         return rooms;
     }
 
+    /**
+     * The purpose of this method is to add a new room to the rooms ArrayList
+     */
     public void addRoom(Room room) {
         rooms.add(room);
     }
 
+    /**
+     * The purpose of this method is to remove a new room from the rooms ArrayList
+     */
     public void removeRoom(Room room) {
         rooms.remove(room);
     }
 
+    /**
+     * The purpose of this method is to initialize the rooms ArrayList with an
+     * existing ArrayList of rooms
+     */
     public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
     }
 
+    /**
+     * The purpose of this method is to return all available rooms at a given time
+     * interval
+     */
     public ArrayList<Room> getAvailableRoomsAt(BookingTime time) {
         ArrayList<Room> available = new ArrayList<>();
         for (Room room : rooms)
@@ -37,6 +61,10 @@ public class RoomList implements Serializable {
         return available;
     }
 
+    /**
+     * The purpose of this method is to return all  rooms which have the
+     * capacity bigger than the one specified
+     */
     public ArrayList<Room> getRoomsByMinimumCapacity(int minCapacity) {
         ArrayList<Room> result = new ArrayList<>();
         for (Room room : rooms) {
@@ -46,6 +74,10 @@ public class RoomList implements Serializable {
         return result;
     }
 
+    /**
+     * The purpose of this method is to return all  rooms which can merge
+     * with another room
+     */
     public ArrayList<Room> getMergeableRooms() {
         ArrayList<Room> result = new ArrayList<>();
         for (Room room : rooms) {
@@ -55,6 +87,10 @@ public class RoomList implements Serializable {
         return result;
     }
 
+    /**
+     * The purpose of this method is to return all  rooms which can not merge
+     * with another room
+     */
     public ArrayList<Room> getUnMergeableRooms() {
         ArrayList<Room> result = new ArrayList<>();
         for (Room room : rooms) {
@@ -64,6 +100,10 @@ public class RoomList implements Serializable {
         return result;
     }
 
+    /**
+     * The purpose of this method is to return all available rooms which have the
+     * capacity bigger than the one specified
+     */
     public ArrayList<Room> getAvailableRoomsByMinimumCapacity(int minCapacity, BookingTime time) {
         ArrayList<Room> result = new ArrayList<>();
         for (Room room : rooms) {
@@ -73,6 +113,10 @@ public class RoomList implements Serializable {
         return result;
     }
 
+    /**
+     * The purpose of this method is to return all available rooms which can merge
+     * with another room
+     */
     public ArrayList<Room> getAvailableAndMergeableRooms(BookingTime time) {
         ArrayList<Room> result = new ArrayList<>();
         for (Room room : rooms) {
@@ -82,6 +126,10 @@ public class RoomList implements Serializable {
         return result;
     }
 
+    /**
+     * The purpose of this method is to return all available rooms which can not merge
+     * with another room
+     */
     public ArrayList<Room> getAvailableAndUnMergeableRooms(BookingTime time) {
         ArrayList<Room> result = new ArrayList<>();
         for (Room room : rooms) {
@@ -91,6 +139,10 @@ public class RoomList implements Serializable {
         return result;
     }
 
+    /**
+     * The purpose of this method is to return all rooms which have the same name
+     * as the one specified
+     */
     public Room getRoomByString(String name) {
         for (Room room : rooms) {
             if (room.getName().equals(name))
@@ -99,6 +151,10 @@ public class RoomList implements Serializable {
         return null;
     }
 
+    /**
+     * The purpose of this method is to read all the rooms' information from a
+     * binary file
+     */
     public void readRoomsListFromBinFile() {
         String filename = "res/saved-data/saved-lists/roomList.bin";
         ObjectInputStream in = null;
@@ -123,6 +179,10 @@ public class RoomList implements Serializable {
         }
     }
 
+    /**
+     * The purpose of this method is to read all the rooms' information from a
+     * txt file
+     */
     public void readRoomsFromTXTFile(File file) {
         Scanner in = null;
         try {
@@ -155,6 +215,9 @@ public class RoomList implements Serializable {
         in.close();
     }
 
+    /**
+     * Returns all the information about the rooms
+     */
     @Override
     public String toString() {
         String str = "roomList: ";

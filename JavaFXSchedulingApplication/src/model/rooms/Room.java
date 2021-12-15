@@ -5,12 +5,20 @@ import utilities.Logger;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * The purpose of this class is to store the information about the room and
+ * about the time intervals when the room is booked
+ */
 public class Room implements Serializable {
     private String name;
     private int capacity;
     private String mergeWith;
     private ArrayList<BookingTime> intervals;
 
+    /**
+     * The purpose of this constructor is to initialize all the instance variable
+     * of the class
+     */
     public Room(String name, int capacity, String mergeWith) {
         this.name = name;
         this.capacity = capacity;
@@ -18,6 +26,10 @@ public class Room implements Serializable {
         intervals = new ArrayList<>();
     }
 
+    /**
+     * The purpose of this method is to book a room at a given time interval
+     * only if the room is free during that time
+     */
     public void Book(BookingTime time) {
         if (canBeBookedAt(time))
             intervals.add(time);
@@ -25,6 +37,10 @@ public class Room implements Serializable {
             Logger.warn("Room is already booked at that time");
     }
 
+    /**
+     * The purpose of this method is to check if a room is free during a given
+     * time interval
+     */
     public boolean canBeBookedAt(BookingTime time) {
         for (BookingTime t : intervals)
             if (t.collideWith(time))
@@ -32,48 +48,84 @@ public class Room implements Serializable {
         return true;
     }
 
+    /**
+     * The purpose of this method is to un-book a room at a given time interval
+     * in order to cancel the reservation so that it can be booked again by
+     * someone else
+     */
     public void unBook(BookingTime time) {
         intervals.remove(time);
     }
 
+    /**
+     * Returns a list of all the intervals when the room is booked
+     */
     public ArrayList<BookingTime> getIntervals() {
         return intervals;
     }
 
+    /**
+     * Return all the information about a room
+     */
     public String roomData() {
         return "Room name :" + name + " ,capacity: " + capacity
                 + " ,The room can merge with: " + mergeWith + " ,Is booked at" + intervals + "\n";
     }
 
+    /**
+     * Returns the name of the room
+     */
     @Override
     public String toString() {
         return name;
     }
 
+    /**
+     * Returns the name of the room
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the capacity of the room
+     */
     public int getCapacity() {
         return capacity;
     }
 
+    /**
+     * Return a string that contains a name of a room, if the room can be merged
+     */
     public String getMergeWith() {
         return mergeWith;
     }
 
+    /**
+     * The purpose of this method is to set the room's name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * The purpose of this method is to set the capacity of the room
+     */
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
+    /**
+     * The purpose of this method is to give a room the possibility to merge
+     * with another one by giving the other room's name
+     */
     public void setMergeWith(String mergeWith) {
         this.mergeWith = mergeWith;
     }
 
+    /**
+     * The purpose of this method is  to appoint a booking time intervals to a room
+     */
     public void setIntervals(ArrayList<BookingTime> intervals) {
         this.intervals = intervals;
     }

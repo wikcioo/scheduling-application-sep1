@@ -5,85 +5,161 @@ import model.students.StudentList;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Course implements Serializable {
-    private String title;
-    private TeacherList teacherList;
-    private ClassOfStudents classOfStudents;
-    private StudentList participants;
-    private String hexColor = "black";
+/**
+ * The purpose of this class is to store a title, a teacherList, a classOfStudents
+ * participants and a hexColor in order to create a course
+ */
+public class Course implements Serializable
+{
+  private String title;
+  private TeacherList teacherList;
+  private ClassOfStudents classOfStudents;
+  private StudentList participants;
+  private String hexColor = "black";
 
-    public Course(String title, ArrayList<Teacher> teacherList, ClassOfStudents classOfStudents) {
-        this.title = title;
-        this.teacherList = new TeacherList(teacherList);
+  /**
+   * The purpose os this constructor is to initialize the title, a class of
+   * students and create a new TeacherList object
+   */
+  public Course(String title, ArrayList<Teacher> teacherList,
+      ClassOfStudents classOfStudents)
+  {
+    this.title = title;
+    this.teacherList = new TeacherList(teacherList);
 
-        this.classOfStudents = classOfStudents;
-        if (classOfStudents != null) {
-            initStudents();
-        }
+    this.classOfStudents = classOfStudents;
+    if (classOfStudents != null)
+    {
+      initStudents();
     }
+  }
 
-    public Course(String title, ArrayList<Teacher> teacherList) {
-        this(title, teacherList, null);
-    }
+  /**
+   * The purpose os this constructor is to initialize the title
+   * and a teacherList and create a null object of classOfStudents
+   */
+  public Course(String title, ArrayList<Teacher> teacherList)
+  {
+    this(title, teacherList, null);
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  /**
+   * The purpose of this method is to set the title of the course
+   */
+  public void setTitle(String title)
+  {
+    this.title = title;
+  }
 
-    public void setClassOfStudents(ClassOfStudents classOfStudents) {
-        this.classOfStudents = classOfStudents;
-    }
+  /**
+   * The purpose of this method is to appoint a class of students to a course
+   */
+  public void setClassOfStudents(ClassOfStudents classOfStudents)
+  {
+    this.classOfStudents = classOfStudents;
+  }
 
-    public void initStudents() {
-        try {
-            this.participants = classOfStudents.getStudentList().copy();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
+  /**
+   * The purpose of this method is to store in participants a copy of the
+   * students of the course
+   */
+  public void initStudents()
+  {
+    try
+    {
+      this.participants = classOfStudents.getStudentList().copy();
     }
+    catch (NullPointerException e)
+    {
+      e.printStackTrace();
+    }
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  /**
+   * Returns the title of the course
+   */
+  public String getTitle()
+  {
+    return title;
+  }
 
-    public TeacherList getTeacherList() {
-        return teacherList;
-    }
+  /**
+   * Returns a teacherList object
+   */
+  public TeacherList getTeacherList()
+  {
+    return teacherList;
+  }
 
-    public void setTeacherList(ArrayList<Teacher> teacherList) {
-        this.teacherList = new TeacherList(teacherList);
-    }
+  /**
+   * The purpose of this method is to appoint new teachers to the course
+   */
+  public void setTeacherList(ArrayList<Teacher> teacherList)
+  {
+    this.teacherList = new TeacherList(teacherList);
+  }
 
-    public ClassOfStudents getClassOfStudents() {
-        return classOfStudents;
-    }
+  /**
+   * Returns a classOfStudents object
+   */
+  public ClassOfStudents getClassOfStudents()
+  {
+    return classOfStudents;
+  }
 
-    public StudentList getParticipants() {
-        return participants;
-    }
+  /**
+   * Return a StudentList object
+   */
+  public StudentList getParticipants()
+  {
+    return participants;
+  }
 
-    public String getClassName() {
-        return this.classOfStudents.getName();
-    }
+  /**
+   * Returns the name of the ClassOfStudents object
+   */
+  public String getClassName()
+  {
+    return this.classOfStudents.getName();
+  }
 
-    public String getTeacherName() {
-        return teacherList.toString();
-    }
+  /**
+   * Return a list of all teachers of the course
+   */
+  public String getTeacherName()
+  {
+    return teacherList.toString();
+  }
 
-    public void setParticipants(StudentList participants) {
-        this.participants = participants;
-    }
+  /**
+   * The purpose of this method is to set participants to the course
+   */
+  public void setParticipants(StudentList participants)
+  {
+    this.participants = participants;
+  }
 
-    public String getHexColor() {
-        return hexColor;
-    }
+  /**
+   * Return the color of the course
+   */
+  public String getHexColor()
+  {
+    return hexColor;
+  }
 
-    public void setHexColor(String hexColor) {
-        this.hexColor = hexColor;
-    }
+  /**
+   * The purpose of this method is to set the color of the course
+   */
+  public void setHexColor(String hexColor)
+  {
+    this.hexColor = hexColor;
+  }
 
-    @Override
-    public String toString() {
-        return title;
-    }
+  /**
+   * Return the title of the course
+   */
+  @Override public String toString()
+  {
+    return title;
+  }
 }
