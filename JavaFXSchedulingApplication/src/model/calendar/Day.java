@@ -8,8 +8,13 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Day implements Serializable {
-    private ArrayList<Lesson> lessons = new ArrayList<>();
+    private ArrayList<Lesson> lessons;
     private LocalDate date;
+
+    public Day() {
+        this.lessons = new ArrayList<>(); // 2 time units
+        this.date = null; // 1 time unit
+    }
 
     public ArrayList<Lesson> getLessons() {
         return lessons;

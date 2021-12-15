@@ -9,12 +9,12 @@ public class Week implements Serializable {
     private final LocalDate start;
     private final LocalDate end;
 
-    public Week(LocalDate start, LocalDate end) {
-        this.start = start;
-        this.end = end;
-        for (int i = 0; i < 7; i++) {
-            days[i] = new Day();
-            days[i].setDate(start.plusDays(i));
+    public Week(LocalDate start, LocalDate end) { // Takes 19 + 28 + 14 = 40 + 17 + 4 = 61 time units
+        this.start = start; // 1 time unit
+        this.end = end; // 1 time unit
+        for (int i = 0 /* 2 time units */; i < 7 /* 8 time units */; i++ /* 7 time units */) { // This takes 17 time units
+            days[i] = new Day(); // 7 * 4 time units
+            days[i].setDate(start.plusDays(i)); // 7 * 2 time units
         }
     }
 

@@ -80,10 +80,24 @@ public class Schedule implements Serializable {
         return LocalDate.now().getYear();
     }
 
+    /**
+     *  This method initializes all weeks in a semester
+     */
     public void initializeAllWeeks() {
-        for (int i = 0; i < this.numberOfWeeksInSemester; i++) {
-            weekList.add(new Week(semesterStart.plusWeeks(i), semesterStart.plusWeeks(i).plusDays(6)));
+        // Iterate through all weeks in a semester
+        for (int i = 0; i < this.numberOfWeeksInSemester; i++) { // This loop will run n times
+            // Create a new week and initialize it with the appropriate start and end date
+            Week week = new Week(semesterStart.plusWeeks(i), semesterStart.plusWeeks(i).plusDays(6)); // This takes 61 + 2 time units
+            weekList.add(week); // Time takes constant time (1) in average case and linear time (n) in worst case
         }
+
+        // We have no recursion, so we do not need a base case
+        //
+        // T(n) = n * (61 + 2 + 1)
+        // T(n) = O(n)   - best case scenario
+        //
+        // T(n) = n * (61 + 2 + n)
+        // T(n) = O(n^2) - worst case scenario
     }
 
     public LocalDate getSemesterStart() {
