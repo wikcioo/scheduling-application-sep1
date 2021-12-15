@@ -31,6 +31,23 @@ public class Room implements Serializable {
     }
 
     /**
+     *
+     * The purpose of this constructor is to initialize all the instance variable
+     * of the class except the merge with in case of adding a room which can not be
+     * merged
+     *
+     * @param name the name of the room
+     * @param capacity the capacity of the room
+     */
+    public Room(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+        mergeWith = null;
+        intervals = new ArrayList<>();
+    }
+
+
+    /**
      * The purpose of this method is to book a room at a given time interval
      * only if the room is free during that time
      *

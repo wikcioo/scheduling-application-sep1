@@ -11,7 +11,9 @@ import model.rooms.Room;
 import view.ViewHandler;
 
 import java.util.Optional;
-
+/**
+ * The purpose of this class is used to initialize the UI elements of MainMenu.fxml
+ */
 public class MainMenuController extends ViewController {
     private Region root;
     private Model model;
@@ -22,6 +24,14 @@ public class MainMenuController extends ViewController {
     @FXML
     Button bt3;
 
+    /**
+     * The purpose of this method is to lunch the window and initialize all
+     * controls of the window
+     *
+     * @param viewHandler;
+     * @param model;
+     * @param root;
+     */
     public void init(ViewHandler viewHandler, Model model, Region root) {
         this.model = model;
         this.viewHandler = viewHandler;
@@ -31,22 +41,37 @@ public class MainMenuController extends ViewController {
     public void reset() {
     }
 
+    /**
+     * @return the root of the controller
+     */
     public Region getRoot() {
         return root;
     }
 
+    /**
+     * The purpose of this method is to open up the ManageDataView window
+     */
     @FXML public void OpenManageData() {
         viewHandler.openView("ManageDataView");
     }
 
+    /**
+     * The purpose of this method is to open up the ScheduleListView window
+     */
     @FXML public void OpenCalendar() {
         viewHandler.openView("ScheduleListView");
     }
 
+    /**
+     * The purpose of this method is to open up the BookingView window
+     */
     @FXML public void OpenBooking() {
         viewHandler.openView("BookingView");
     }
 
+    /**
+     * The purpose of this method is to open up the CreateSemesterView window
+     */
     @FXML public void OpenCreateSemester() {
         viewHandler.openView("CreateSemesterView");
     }

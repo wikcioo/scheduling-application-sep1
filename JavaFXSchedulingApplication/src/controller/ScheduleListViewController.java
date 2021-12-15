@@ -11,76 +11,121 @@ import model.*;
 import model.courses.ClassOfStudents;
 import view.ViewHandler;
 
-public class ScheduleListViewController extends ViewController {
+/**
+ * The purpose of this class is used to initialize the UI elements of ScheduleList.fxml
+ */
+public class ScheduleListViewController extends ViewController
+{
 
-    @FXML
-    private ListView<ClassOfStudents> listView;
-    @FXML
-    private Button confirmButton;
+  @FXML private ListView<ClassOfStudents> listView;
+  @FXML private Button confirmButton;
 
-    private Region root;
-    private Model model;
-    private ViewHandler viewHandler;
+  private Region root;
+  private Model model;
+  private ViewHandler viewHandler;
 
-    public void init(ViewHandler viewHandler, Model model, Region root) {
-        this.model = model;
-        this.viewHandler = viewHandler;
-        this.root = root;
+  /**
+   * The purpose of this method is to lunch the window and initialize all
+   * controls of the window
+   *
+   * @param viewHandler;
+   * @param model;
+   * @param root;
+   */
+  public void init(ViewHandler viewHandler, Model model, Region root)
+  {
+    this.model = model;
+    this.viewHandler = viewHandler;
+    this.root = root;
 
-        initListOfClasses();
-        initConfirmButton();
-    }
+    initListOfClasses();
+    initConfirmButton();
+  }
 
-    private void initConfirmButton() {
-        confirmButton.setDisable(true);
-    }
+  /**
+   * The purpose of this method is to initialize the confirmation button
+   */
+  private void initConfirmButton()
+  {
+    confirmButton.setDisable(true);
+  }
 
-    private void initListOfClasses() {
+  /**
+   * The purpose of this method is to initialize a listView of classes
+   */
+  private void initListOfClasses()
+  {
 
-        //https://stackoverflow.com/questions/41070454/how-can-i-change-the-text-on-a-listview-that-is-holding-an-object-of-type-accoun?rq=1
+    //https://stackoverflow.com/questions/41070454/how-can-i-change-the-text-on-a-listview-that-is-holding-an-object-of-type-accoun?rq=1
 
-        listView.setCellFactory(new Callback<ListView<ClassOfStudents>, ListCell<ClassOfStudents>>() {
-            @Override
-            public ListCell<ClassOfStudents> call(ListView<ClassOfStudents> param) {
-                ListCell<ClassOfStudents> cell = new ListCell<ClassOfStudents>() {
-                    @Override
-                    protected void updateItem(ClassOfStudents item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item != null) {
-                            setText(item.getName());
-                        } else {
-                            setText(null);
-                        }
-                    }
-                };
-                return cell;
-            }
+    listView.setCellFactory(
+        new Callback<ListView<ClassOfStudents>, ListCell<ClassOfStudents>>()
+        {
+          @Override public ListCell<ClassOfStudents> call(
+              ListView<ClassOfStudents> param)
+          {
+            ListCell<ClassOfStudents> cell = new ListCell<ClassOfStudents>()
+            {
+              @Override protected void updateItem(ClassOfStudents item,
+                  boolean empty)
+              {
+                super.updateItem(item, empty);
+                if (item != null)
+                {
+                  setText(item.getName());
+                }
+                else
+                {
+                  setText(null);
+                }
+              }
+            };
+            return cell;
+          }
         });
 
-        ObservableList<ClassOfStudents> observableClasses = FXCollections.observableArrayList(model.getClasses());
-        listView.setItems(observableClasses);
-    }
+    ObservableList<ClassOfStudents> observableClasses = FXCollections.observableArrayList(
+        model.getClasses());
+    listView.setItems(observableClasses);
+  }
 
-    @FXML
-    public void handleMouseClick(MouseEvent e) {
-        model.setCurrentSchedule(model.getScheduleByClass(listView.getSelectionModel().getSelectedItem(), true));
-        confirmButton.setDisable(false);
-    }
+  /**
+   * The purpose of this method is to open the schedule of the selected class
+   * If the selected class does not have a schedule then it just creates one
+   */
+  @FXML public void handleMouseClick(MouseEvent e)
+  {
+    model.setCurrentSchedule(
+        model.getScheduleByClass(listView.getSelectionModel().getSelectedItem(),
+            true));
+    confirmButton.setDisable(false);
+  }
 
-    @FXML
-    public void switchToCalendar() {
-        viewHandler.openView("CalendarView");
-    }
+  /**
+   * The purpose of this method is to open up the CalendarView window
+   */
+  @FXML public void switchToCalendar()
+  {
+    viewHandler.openView("CalendarView");
+  }
 
-    @FXML
-    public void switchToMenu() {
-        viewHandler.openView("MainMenu");
-    }
+  /**
+   * The purpose of this method is to open up the MainMenu window
+   */
+  @FXML public void switchToMenu()
+  {
+    viewHandler.openView("MainMenu");
+  }
 
-    public void reset() {
-    }
+  public void reset()
+  {
+  }
 
-    public Region getRoot() {
-        return root;
-    }
+  /**
+   * @return the root of the controller
+   */
+  public Region getRoot()
+  {
+    return root;
+  }
 }
