@@ -34,7 +34,7 @@ public abstract class Person implements Serializable {
     public abstract void setName(String name);
 
     /**
-     * @returns the email of the person
+     * @return the email of the person
      */
     public abstract String getEmail();
 
