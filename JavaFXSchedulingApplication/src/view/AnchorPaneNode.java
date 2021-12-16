@@ -136,6 +136,13 @@ public class AnchorPaneNode extends AnchorPane {
         });
 
         gridRow++;
+        Label labelForTeacher = new Label("Teacher:  ");
+        userInputForTeacher = TeacherComboBox();
+        userInputForTeacher.setDisable(true);
+        gridPane.add(labelForTeacher, 0, gridRow);
+        gridPane.add(userInputForTeacher, 1, gridRow);
+
+        gridRow++;
         Label labelForStart = new Label("Start Hour:  ");
         TextField userInputForStart = new TextField();
         gridPane.add(labelForStart, 0, gridRow);

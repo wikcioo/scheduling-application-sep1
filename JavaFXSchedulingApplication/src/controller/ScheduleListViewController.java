@@ -52,11 +52,14 @@ public class ScheduleListViewController extends ViewController
 
   /**
    * The purpose of this method is to initialize a listView of classes
+   *
+   * Snippets of code inserted from stackOverFlow (Accessed on December 2021)
+   * https://stackoverflow.com/questions/41070454/how-can-i-change-the-text-on-a-listview-that-is-holding-an-object-of-type-accoun?rq=1
    */
   private void initListOfClasses()
   {
 
-    //https://stackoverflow.com/questions/41070454/how-can-i-change-the-text-on-a-listview-that-is-holding-an-object-of-type-accoun?rq=1
+
 
     listView.setCellFactory(
         new Callback<ListView<ClassOfStudents>, ListCell<ClassOfStudents>>()
