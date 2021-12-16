@@ -7,22 +7,40 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import model.Model;
 
+/**
+ * This class manages the views. It keeps track of the current scene, the primary stage and the model.
+ */
 public class ViewHandler {
     private Scene currentScene;
     private Stage primaryStage;
     private Model model;
     private ViewController viewController;
 
+    /**
+     * Initializes the model and creates a new Scene with an empty Region.
+     *
+     * @param model the Model instance
+     */
     public ViewHandler(Model model) {
         this.model = model;
         this.currentScene = new Scene(new Region());
     }
 
+    /**
+     * Assigns the Stage and opens default view ("MainMenu").
+     *
+     * @param primaryStage javaFX stage
+     */
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         openView("MainMenu");
     }
 
+    /**
+     * Calls loadView method based on the provided id. Next, it sets scene and stage properties.
+     *
+     * @param id view id in String format
+     */
     public void openView(String id) {
         Region root;
         switch (id) {
@@ -77,6 +95,14 @@ public class ViewHandler {
         primaryStage.show();
     }
 
+    /**
+     * This method loads the fxml file and initializes view controller. At the end it returns the Region that is
+     * then assigned to the scene.
+     *
+     * @param fxmlFile the name of the fxml file to be loaded
+     * @param viewController the view controller
+     * @return javaFX Region data structure
+     */
     private Region loadView(String fxmlFile, ViewController viewController) {
         if (viewController == null) {
             try {
@@ -96,14 +122,23 @@ public class ViewHandler {
         return viewController.getRoot();
     }
 
+    /**
+     * Closes the stage.
+     */
     public void closeView() {
         primaryStage.close();
     }
 
+    /**
+     * @return the Stage
+     */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
+    /**
+     * @param model the Model to be assigned to the current Model field
+     */
     public void reassignModel(Model model) {
         this.model = model;
     }
