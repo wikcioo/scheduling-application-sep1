@@ -4,13 +4,14 @@ import model.calendar.*;
 import model.courses.*;
 import model.rooms.BookingTime;
 import model.rooms.Room;
-import model.students.Student;
-import model.students.StudentList;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * This interface specifies which methods the class implementing it must define.
+ */
 public interface Model {
     // scheduleList BEGIN
     Schedule getCurrentSchedule();

@@ -5,13 +5,18 @@ import model.courses.*;
 import model.rooms.BookingTime;
 import model.rooms.Room;
 import model.rooms.RoomList;
-import model.students.Student;
-import model.students.StudentList;
+
 import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * The class is a representation of the manager that has access to all data and acts as a handler for other classes to use.
+ * All the methods redirect the method call to the appropriate list objects. The exception is the InitSemester that
+ * initializes the scheduleList based on the start and end time. It implements the Model interface as well as Serializable
+ * interface for persistence purposes.
+ */
 public class ModelManager implements Model, Serializable {
     private ScheduleList scheduleList;
     private RoomList roomList;
@@ -19,12 +24,28 @@ public class ModelManager implements Model, Serializable {
     private ClassList classList;
     private CopiedWeek copiedWeek;
 
+    /**
+     * Initializes all the lists. The schedule list is initialized based on current date.
+     */
     public ModelManager() {
-        this.scheduleList = new ScheduleList(LocalDate.now(),LocalDate.now().plusMonths(6));
+        this.scheduleList = new ScheduleList(LocalDate.now(), LocalDate.now().plusMonths(6));
         this.roomList = new RoomList();
         this.courseList = new CourseList();
         this.classList = new ClassList();
         this.copiedWeek = new CopiedWeek();
+    }
+
+    /**
+     * Re-initializes the schedule list with the given start and end date.
+     *
+     * @param startTime the start time of the schedule list
+     * @param endTime the end time of the schedule list
+     */
+    public void initSemester(LocalDate startTime, LocalDate endTime) {
+        if (startTime.isBefore(endTime)) {
+            this.scheduleList = new ScheduleList(startTime, endTime);
+        } else
+            this.scheduleList = new ScheduleList(endTime, startTime);
     }
 
     // scheduleList BEGIN
@@ -32,18 +53,8 @@ public class ModelManager implements Model, Serializable {
         return scheduleList.getCurrentSchedule();
     }
 
-
-    public void setCurrentSchedule(Schedule currentSchedule)
-    {
+    public void setCurrentSchedule(Schedule currentSchedule) {
         scheduleList.setCurrentSchedule(currentSchedule);
-
-    }
-    public void initSemester(LocalDate startTime, LocalDate endTime) {
-        if(startTime.isBefore(endTime)) {
-            this.scheduleList = new ScheduleList(startTime,endTime);
-        }
-        else
-            this.scheduleList = new ScheduleList(endTime,startTime);
     }
 
     public ScheduleList getScheduleList() {
@@ -169,7 +180,6 @@ public class ModelManager implements Model, Serializable {
         roomList.readRoomsFromTXTFile(file);
     }
     // roomList END
-
 
     // courseList BEGIN
     public void addCourse(Course course) {

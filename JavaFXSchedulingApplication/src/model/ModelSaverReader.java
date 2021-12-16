@@ -4,9 +4,18 @@ import utilities.Logger;
 
 import java.io.*;
 
+/**
+ * This class is used to read and write the Model to the binary file for persistence purposes.
+ * It saves it in res/saved-data/models.bin.
+ */
 public class ModelSaverReader {
     private static final String filename = "res/saved-data/models.bin";
 
+    /**
+     * Writes the model to the memory in a binary format.
+     *
+     * @param model the model to be saved to the memory
+     */
     public static void saveModel(Model model) {
         ObjectOutputStream out = null;
         try {
@@ -26,6 +35,11 @@ public class ModelSaverReader {
         }
     }
 
+    /**
+     * Reads the Model from the memory.
+     *
+     * @return the model that was read from the memory
+     */
     public static Model readModel() {
         ObjectInputStream in = null;
         try {
