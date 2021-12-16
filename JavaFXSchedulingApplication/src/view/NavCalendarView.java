@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /** Navigation calendar with month view.Using the gregorian calendar we put the days of the current month as buttons and
- * you can call previous week and next week
- *
+ * you can call previous week and next week.The final view will be a 7x6 GridPane containing all the days of the month as
+ * well as some days behind and after the month with the option to navigate through this day's.
  */
 public class NavCalendarView {
     private VBox finalView;
@@ -31,22 +31,24 @@ public class NavCalendarView {
     private Model model;
     private CalendarViewController calendarViewController;
 
+    /** Constructor of NavCalendarView.The view is generated inside the constructor, and then you can get the final
+     * view to display it dynamically.
+     * @param model information from the model
+     * @param calendarViewController the controller is needed to link necessary methods to day buttons
+     */
     public NavCalendarView(Model model, CalendarViewController calendarViewController) {
         this.model = model;
         this.calendarViewController = calendarViewController;
-        //Make GridPane for day label
 
         GridPane dayGrid = new GridPane();
-
-        //Set the width of Gridpane
-        dayGrid.setPrefWidth(235);
-        //Array with day labels
+        //Settings for day grid
         dayGrid.setHgap(5);
         dayGrid.setVgap(5);
-
+        dayGrid.setPrefWidth(235);
+        //Array with day labels
         header.setFill(Color.WHITE);
         String[] dayText = {"M", "T", "W", "T", "F", "S", "S"};
-        //Set day labels in NavCalendarView
+        //Set day labels in NavCalendarView.They are vertically aligned
         for (int i = 0; i < 7; i++) {
             Button day = new Button(dayText[i]);
             day.setTextAlignment(TextAlignment.CENTER);
@@ -54,8 +56,7 @@ public class NavCalendarView {
             GridPane.setHalignment(day, HPos.RIGHT);
             dayGrid.add(day, i, 0);
         }
-
-        //Make Gridpane for days
+        //Add the days to the pane
         int count = 1;
         for (int i = 1; i < 7; i++) /* Row */
             for (int j = 0; j < 7; j++) /* Column */ {
@@ -67,35 +68,43 @@ public class NavCalendarView {
                 dayGrid.add(text, j, i);
                 count++;
             }
-        initDays();
+        initDays(); //Get the value of the days.
         //Set spacing for vbox and send the final view
+        //Update the title with the month
         this.finalView = new VBox(20);
         this.finalView.getChildren().add(header);
         updateMonthHeader();
         this.finalView.getChildren().add(dayGrid);
     }
 
-    public void initCalendar() {
-        for (Button text : gridPaneItems) {
-            text.setText("");
-        }
-    }
-
+    /** This method creates an array with all the months and then assigns the current month to a string
+     * @return a string representing the current month taken from the gregorian calendar
+     */
     public String getCurrentMonth() {
         String[] month = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         return month[calendar.get(Calendar.MONTH)];
     }
 
+    /** This method sets the text of the header , so it can be accurate.
+     *
+     */
     public void updateMonthHeader() {
         header.setText(getCurrentMonth() + " " + calendar.get(Calendar.YEAR));
     }
 
+    /** Get the final view of the calendar to display it dynamically
+     * @return Vbox (header and day buttons) representing the final view
+     */
     public VBox getFinalView() {
         return finalView;
     }
 
+    /** This method initializes the text and the functionality of the buttons inside. Using the gregorian calendar inside
+     * of this class we first find the position of the first day in the month.After that this method sets all the days
+     * behind the first day.Then we set the days that are actually in the month and the functionality of them.
+     *
+     */
     public void initDays() {
-        // FIXME: 12/2/2021 //Test solution
         //Get first day in the month
         calendar.set(Calendar.DAY_OF_MONTH,1);
         int startDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;
@@ -167,18 +176,27 @@ public class NavCalendarView {
         }
     }
 
+    /** This method adds one month to the calendar and update the days as well as the header
+     *
+     */
     public void navNextWeek() {
         calendar.add(Calendar.MONTH, 1);
         updateMonthHeader();
         initDays();
     }
 
+    /** This method subtracts one month to the calendar and update the days as well as the header
+     *
+     */
     public void navPrevWeek() {
         calendar.add(Calendar.MONTH, -1);
         updateMonthHeader();
         initDays();
     }
 
+    /** This method returns the gregorian calendar(the brain of the view) from the class
+     * @return the gregorian calendar
+     */
     public Calendar getCalendar() {
         return calendar;
     }

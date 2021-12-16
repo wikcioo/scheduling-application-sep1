@@ -28,6 +28,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Optional;
 
+/** AnchorPaneNode holds the information of the lesson.This is the brain of the lesson being capable to add ,edit as well
+ * as book on click.This is a class that extends AnchorPane, so it can hold information.This AnchorPane will contain
+ * text as well as a certain styling when it's set by the view to visualize a lesson.
+ */
 public class AnchorPaneNode extends AnchorPane {
     private Lesson lesson;
     private Day day;
@@ -37,19 +41,31 @@ public class AnchorPaneNode extends AnchorPane {
     @FXML
     private ComboBox<Teacher> userInputForTeacher;
 
-    public AnchorPaneNode(Model model, Node... nodes) {
-        super(nodes);
+
+    /** The constructor initializes the model.
+     * @param model The model needed to update information
+     */
+    public AnchorPaneNode(Model model) {
         this.model = model;
     }
 
+    /** This method sets the lesson information inside the AnchorPaneNode
+     * @param lesson set a lesson
+     */
     public void setLesson(Lesson lesson) {
         this.lesson = lesson;
     }
 
+    /** This method sets the day information inside the AnchorPaneNode
+     * @param day day needed to set
+     */
     public void setDay(Day day) {
         this.day = day;
     }
 
+    /** This method generates a popup to display the information of the lesson.This method is called when you left-click
+     * a lesson or an AnchorPaneNode inside the schedule
+     */
     public void displayLesson() {
         Stage displayWindow = new Stage();
         displayWindow.initModality(Modality.APPLICATION_MODAL);
@@ -89,6 +105,9 @@ public class AnchorPaneNode extends AnchorPane {
         displayWindow.showAndWait();
     }
 
+    /** This method generates a popup to edit the lesson.This method is called when you right-click on an AnchorPaneNode
+     * on the schedule.
+     */
     public void editLessonDisplay() {
         //Current Lesson info
         Stage displayWindow = new Stage();
@@ -158,6 +177,14 @@ public class AnchorPaneNode extends AnchorPane {
         displayWindow.showAndWait();
     }
 
+    /** This method validates the user input and if the user input is correct then it adds the lesson to the schedule
+     * @param userInputForCourse user input for course
+     * @param userInputForTeacher user input for teacher
+     * @param userInputForStart user input for the start hour of the lesson
+     * @param userInputForStartMin user input for the start minutes of the lesson
+     * @param userInputForEnd user input for the end hour of the lesson
+     * @param userInputForEndMin user input for the end minutes of the lesson
+     */
     public void addALesson(Course userInputForCourse,Teacher userInputForTeacher, String userInputForStart, String userInputForStartMin, String userInputForEnd, String userInputForEndMin) {
         //Convert all data to int
         LocalTime timeStart = LocalTime.of(Integer.parseInt(userInputForStart), Integer.parseInt(userInputForStartMin));
@@ -170,6 +197,14 @@ public class AnchorPaneNode extends AnchorPane {
         } else error3();
     }
 
+    /** This method validates the user input and if the user input is correct then it edits the lesson 
+     * @param userInputForCourse user input for course
+     * @param userInputForTeacher user input for teacher
+     * @param userInputForStart user input for the start hour of the lesson
+     * @param userInputForStartMin user input for the start minutes of the lesson
+     * @param userInputForEnd user input for the end hour of the lesson
+     * @param userInputForEndMin user input for the end minutes of the lesson
+     */
     public void editLesson(Course userInputForCourse,Teacher userInputForTeacher, String userInputForStart, String userInputForStartMin, String userInputForEnd, String userInputForEndMin) {
         //Convert all data to int
         LocalTime timeStart = LocalTime.of(Integer.parseInt(userInputForStart), Integer.parseInt(userInputForStartMin));
@@ -187,6 +222,9 @@ public class AnchorPaneNode extends AnchorPane {
         }
     }
 
+    /** This method generates a popup to add the lesson.This method is called when you right-click on an AnchorPaneNode
+     *
+     */
     public void addALessonDisplay() {
         Stage displayWindow = new Stage();
         displayWindow.initModality(Modality.APPLICATION_MODAL);
@@ -257,6 +295,9 @@ public class AnchorPaneNode extends AnchorPane {
         displayWindow.showAndWait();
     }
 
+    /** This is a comboBox that contains all the courses.You can select one course to add to a lesson.
+     * @return A comboBox view containing all the courses
+     */
     public ComboBox<Course> CourseComboBox() {
         ComboBox<Course> comboBox = new ComboBox<>();
         comboBox.setCellFactory(new Callback<ListView<Course>, ListCell<Course>>() {
@@ -291,6 +332,9 @@ public class AnchorPaneNode extends AnchorPane {
         return comboBox;
     }
 
+    /** This is a comboBox that contains all the teachers.You can select one teacher to add to a lesson.
+     * @return A comboBox view containing all the teachers
+     */
     public ComboBox<Teacher> TeacherComboBox() {
         ComboBox<Teacher> comboBox = new ComboBox<>();
         comboBox.setCellFactory(new Callback<ListView<Teacher>, ListCell<Teacher>>() {
@@ -329,13 +373,23 @@ public class AnchorPaneNode extends AnchorPane {
         day.removeLesson(this.lesson);
     }
 
+    /**
+     * @return A string containing the information held in the AnchorPaneNode
+     */
     @Override
     public String toString() {
         return "AnchorPaneNode{" +
                 "lesson=" + lesson +
+                ", day=" + day +
+                ", model=" + model +
+                ", userInputForCourse=" + userInputForCourse +
+                ", userInputForTeacher=" + userInputForTeacher +
                 '}';
     }
 
+    /** This is the display and functionality for booking a room for a lesson
+     * @param lesson1 you need the lesson
+     */
     public void bookARoom(Lesson lesson1) {
         Stage displayWindow = new Stage();
 
@@ -432,14 +486,23 @@ public class AnchorPaneNode extends AnchorPane {
         displayWindow.show();
     }
 
+    /** Returns the AnchorPane
+     * @return this AnchorPane
+     */
     public AnchorPane returnAp() {
         return this;
     }
 
+    /** Getter for a lesson
+     * @return lesson
+     */
     public Lesson getLesson() {
         return lesson;
     }
 
+    /** Error when the user tries to merge a room with no room booked
+     * @return this popup will close when the user click a button
+     */
     private boolean error() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -449,6 +512,9 @@ public class AnchorPaneNode extends AnchorPane {
         return (result.isPresent()) && (result.get() == ButtonType.OK);
     }
 
+    /** Error when the user tries to merge a room with no pair
+     * @return this popup will close when the user click a button
+     */
     private boolean error2() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -458,6 +524,9 @@ public class AnchorPaneNode extends AnchorPane {
         return (result.isPresent()) && (result.get() == ButtonType.OK);
     }
 
+    /** Error for a lesson that is overlapping
+     * @return this popup will close when the user click a button
+     */
     private boolean error3() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
