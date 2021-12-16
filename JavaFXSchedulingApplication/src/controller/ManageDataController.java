@@ -65,10 +65,10 @@ public class ManageDataController extends ViewController
   }
 
   /**
-   * The purpose of this method is to open up the ScheduleListView window
+   * The purpose of this method is to open up the MainMenu window
    */
   public void openMainMenu()
   {
-    viewHandler.openView("ScheduleListView");
+    viewHandler.openView("MainMenu");
   }
 }
