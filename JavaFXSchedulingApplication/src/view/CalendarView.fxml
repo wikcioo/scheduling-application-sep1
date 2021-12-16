@@ -100,20 +100,6 @@
             <Button layoutX="209.0" layoutY="166.0" mnemonicParsing="false" onAction="#navViewNextWeek" style="-fx-background-color: black;" text="&gt;&gt;" textFill="WHITE" />
             <Accordion layoutX="7.0" layoutY="468.0" prefHeight="53.0" prefWidth="264.0">
               <panes>
-                <TitledPane animated="false" text="Edit a lesson" textFill="WHITE">
-                     <content>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="Add a lesson" />
-                              <Button mnemonicParsing="false" text="Remove a lesson" />
-                           </children>
-                        </VBox>
-                     </content></TitledPane>
-                <TitledPane animated="false" prefHeight="54.0" prefWidth="214.0" text="Import" textFill="WHITE">
-                     <content>
-                        <Button mnemonicParsing="false" onAction="#onChooseFileButton" text="Choose files" />
-                     </content>
-                  </TitledPane>
                   <TitledPane animated="false" text="Copy/Paste Week" textFill="WHITE">
                      <content>
                         <HBox alignment="BASELINE_CENTER" prefHeight="100.0" prefWidth="200.0">

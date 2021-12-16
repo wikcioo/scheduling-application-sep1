@@ -197,7 +197,7 @@ public class AnchorPaneNode extends AnchorPane {
         } else error3();
     }
 
-    /** This method validates the user input and if the user input is correct then it edits the lesson 
+    /** This method validates the user input and if the user input is correct then it edits the lesson
      * @param userInputForCourse user input for course
      * @param userInputForTeacher user input for teacher
      * @param userInputForStart user input for the start hour of the lesson
@@ -501,7 +501,7 @@ public class AnchorPaneNode extends AnchorPane {
     }
 
     /** Error when the user tries to merge a room with no room booked
-     * @return this popup will close when the user click a button
+     * @return this popup will close when the user clicks a button
      */
     private boolean error() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -513,7 +513,7 @@ public class AnchorPaneNode extends AnchorPane {
     }
 
     /** Error when the user tries to merge a room with no pair
-     * @return this popup will close when the user click a button
+     * @return this popup will close when the user clicks a button
      */
     private boolean error2() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -525,7 +525,7 @@ public class AnchorPaneNode extends AnchorPane {
     }
 
     /** Error for a lesson that is overlapping
-     * @return this popup will close when the user click a button
+     * @return this popup will close when the user clicks a button
      */
     private boolean error3() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
