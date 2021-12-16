@@ -59,7 +59,7 @@ public class Course implements Serializable
 
   /**
    * The purpose of this method is to appoint a class of students to a course
-   * @param classOfStudents
+   * @param classOfStudents a list of students;
    */
 
   public void setClassOfStudents(ClassOfStudents classOfStudents)

@@ -95,6 +95,7 @@ public class ScheduleListViewController extends ViewController
   /**
    * The purpose of this method is to open the schedule of the selected class
    * If the selected class does not have a schedule then it just creates one
+   * @param e;
    */
   @FXML public void handleMouseClick(MouseEvent e)
   {

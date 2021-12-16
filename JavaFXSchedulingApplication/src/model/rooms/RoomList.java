@@ -113,7 +113,7 @@ public class RoomList implements Serializable {
      * The purpose of this method is to return all available rooms which have the
      * capacity bigger than the one specified
      * @param minCapacity minimum number of students a room can hold
-     * @param time
+     * @param time the time of booking
      * @return all the rooms which are available and have capacity bigger then the
      * specified one
      */

@@ -17,6 +17,7 @@ public class Student extends Person implements Serializable {
      * @param id the id of the student
      * @param name the name of the student
      * @param _class the class of the student
+     * @param semester the semester in which the student is
      */
     public Student(String name, int id, String _class, int semester) {
         super(name, id + "@via.dk", id);
@@ -30,6 +31,8 @@ public class Student extends Person implements Serializable {
      * @param _class the class of the student
      * @param name the name of the student
      * @param id the id of the student
+     * @param semester the semester in which the student is
+     * @param email  the email of the student
      */
     public Student(String name, String email, int id, String _class, int semester) {
         super(name, email, id);

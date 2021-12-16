@@ -56,6 +56,7 @@ public class StudentList implements Serializable {
     }
 
     /**
+     * @param index the index of the student
      * @return a student with a specific index
      */
     public Student getStudent(int index) {

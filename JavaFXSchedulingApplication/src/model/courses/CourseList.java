@@ -172,7 +172,7 @@ public class CourseList implements Serializable
   /**
    * The purpose of this method is set the int value of currentlySelectedClass
    * when a class is clicked/selected
-   * @param currentSelectedCourse
+   * @param currentSelectedCourse the selected course;
    */
   public void setCurrentSelectedCourse(int currentSelectedCourse)
   {

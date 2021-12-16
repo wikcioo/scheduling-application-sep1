@@ -63,7 +63,9 @@ public class Room implements Serializable {
     /**
      * The purpose of this method is to check if a room is free during a given
      * time interval
+     * @param time the time of booking
      * @return true if the room is free, false otherwise
+     *
      *
      */
     public boolean canBeBookedAt(BookingTime time) {
