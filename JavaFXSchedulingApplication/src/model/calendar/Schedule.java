@@ -179,9 +179,9 @@ public class Schedule implements Serializable {
         String xml = "";
         xml += "<schedule>";
         for (Week week : this.weekList) {
-            xml += "\n" + weekToXML(week);
+            xml += "" + weekToXML(week);
         }
-        xml += "\n</schedule>";
+        xml += "</schedule>";
 
         assert (out != null);
         out.println(xml);
@@ -205,7 +205,7 @@ public class Schedule implements Serializable {
         String xml = "";
         xml += "<schedule>";
         xml += weekToXML(week);
-        xml += "\n</schedule>";
+        xml += "</schedule>";
 
         assert (out != null);
         out.println(xml);
@@ -222,19 +222,19 @@ public class Schedule implements Serializable {
         String xml = "";
         xml += "<week>";
         for (Day day : week.getDays()) {
-            xml += "\n\t<day date=\"" + day.getDate() + "\">";
+            xml += "<day date=\"" + day.getDate() + "\">";
             for (Lesson lesson : day.getLessons()) {
-                xml += "\n\t\t<lesson colour=\""+lesson.getCourse().getHexColor()+"\">";
-                xml += "\n\t\t\t<course>" + lesson.getCourse() + "</course>";
-                xml += "\n\t\t\t<startTime>" + lesson.getStart() + "</startTime>";
-                xml += "\n\t\t\t<endTime>" + lesson.getEnd() + "</endTime>";
-                xml += "\n\t\t\t<teacher>" + lesson.getTeacher().getName() + "</teacher>";
-                xml += "\n\t\t\t<room>" + (lesson.getRoom() != null ? lesson.getRoom() : "") + (lesson.getRoom2() != null ? " " + lesson.getRoom2() : "") + "</room>";
-                xml += "\n\t\t</lesson>";
+                xml += "<lesson colour=\""+lesson.getCourse().getHexColor()+"\">";
+                xml += "<course>" + lesson.getCourse() + "</course>";
+                xml += "<startTime>" + lesson.getStart() + "</startTime>";
+                xml += "<endTime>" + lesson.getEnd() + "</endTime>";
+                xml += "<teacher>" + lesson.getTeacher().getName() + "</teacher>";
+                xml += "<room>" + (lesson.getRoom() != null ? lesson.getRoom() : "") + (lesson.getRoom2() != null ? " " + lesson.getRoom2() : "") + "</room>";
+                xml += "</lesson>";
             }
-            xml += "\n\t</day>";
+            xml += "</day>";
         }
-        xml += "\n</week>";
+        xml += "</week>";
 
         return xml;
     }
